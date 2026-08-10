@@ -192,50 +192,106 @@
         </div>
     </div>
 
-    <!-- PROJECTS SECTION -->
-    <div id="projects" class="projects-section">
-        <h2>Personal Work</h2>
-        <p style="margin-bottom: 40px; color: #888;">Click on the tiles to learn more about each project.</p>
-        
-        <div class="project-grid">
+    <div class="project-grid">
 
             <!-- PROJECT 1: KNUCKLE -->
-            <!-- Note: The link wraps the entire card and points to the individual project page -->
             <a href="project-knuckle.html" class="project-card">
                 <div class="card-image-container">
-                    <img src="knuckle_square.jpg" alt="Knuckle Gameplay">
-                    <h3 class="card-title-overlay">Knuckle - Combat Engine</h3>
+                    <!-- Replace with your actual image name -->
+                    <img src="knuckle_square.jpg" alt="Knuckle Tool Graph">
+                    <h3 class="card-title-overlay">Knuckle - Combat & Tools</h3>
                 </div>
                 <div class="card-details">
                     <div class="tech-tags">
-                        <span class="tag blue">technical</span>
-                        <span class="tag purple">Unity C#</span>
+                        <span class="tag blue">Pipeline Tools</span>
+                        <span class="tag purple">VFX Graph</span>
+                        <span class="tag red">Shaders</span>
                     </div>
-                    <p>A 3D fighting game prototype built with a heavy focus on frame-perfect input buffering and modular combat architecture.</p>
+                    <p>A custom node-based graph pipeline allowing designers to rapidly create combat combos, supported by custom impact, lava, and Sobel outline shaders.</p>
                     <ul class="feature-list">
-                        <li>Custom Finite State Machine (FSM)</li>
-                        <li>Responsive input buffering</li>
-                        <li>Modular combat logic</li>
+                        <li>Node-based combo creation tool</li>
+                        <li>Custom Shader Graph materials</li>
+                        <li>Unity VFX Graph integration</li>
                     </ul>
                 </div>
             </a>
 
-            <!-- PROJECT 2: SHADER / TOOL -->
-            <a href="project-tool.html" class="project-card">
+            <!-- PROJECT 2: HELI (ROTOR STRIKE) -->
+            <a href="project-heli.html" class="project-card">
                 <div class="card-image-container">
-                    <img src="tool_square.jpg" alt="Unity Editor Tool">
-                    <h3 class="card-title-overlay">Auto-Material Assigner</h3>
+                    <img src="heli_square.jpg" alt="Heli Android Game">
+                    <h3 class="card-title-overlay">Project Heli</h3>
+                </div>
+                <div class="card-details">
+                    <div class="tech-tags">
+                        <span class="tag blue">Android / PC</span>
+                        <span class="tag red">Custom Shaders</span>
+                    </div>
+                    <p>An asymmetric cross-platform multiplayer game utilizing mobile gyroscope controls. Features a custom full-screen thermal vision shader and optimized particle systems.</p>
+                    <ul class="feature-list">
+                        <li>PC to Android networking</li>
+                        <li>Gyroscope input integration</li>
+                        <li>Thermal vision screen shader</li>
+                    </ul>
+                </div>
+            </a>
+
+            <!-- PROJECT 3: CINEMATIC FILM -->
+            <a href="project-film.html" class="project-card">
+                <div class="card-image-container">
+                    <img src="film_square.jpg" alt="Cinematic Lighting">
+                    <h3 class="card-title-overlay">Cinematic Lighting Supervision</h3>
+                </div>
+                <div class="card-details">
+                    <div class="tech-tags">
+                        <span class="tag purple">Lighting</span>
+                        <span class="tag blue">Art Direction</span>
+                    </div>
+                    <p>Supervised the lighting, value, and overall visual vibe for a cinematic short film, ensuring a cohesive and high-fidelity final render.</p>
+                    <ul class="feature-list">
+                        <li>Lighting and shadow supervision</li>
+                        <li>Value and color grading</li>
+                        <li>Visual mood direction</li>
+                    </ul>
+                </div>
+            </a>
+
+            <!-- PROJECT 4: LETHAL LUDO -->
+            <a href="project-ludo.html" class="project-card">
+                <div class="card-image-container">
+                    <img src="ludo_square.jpg" alt="Lethal Ludo Pathfinding">
+                    <h3 class="card-title-overlay">Lethal Ludo (A* Pathfinding)</h3>
                 </div>
                 <div class="card-details">
                     <div class="tech-tags">
                         <span class="tag red">C#</span>
-                        <span class="tag blue">technical</span>
+                        <span class="tag purple">AI Logic</span>
                     </div>
-                    <p>A custom Unity Editor tool designed to automate the pipeline workflow for artists, batch assigning materials based on mesh names.</p>
+                    <p>Developed custom A* pathfinding logic from scratch and implemented it as the core movement mechanic for a fast-paced game jam project.</p>
                     <ul class="feature-list">
-                        <li>Built custom Unity Inspector GUI</li>
-                        <li>Saves hours of pipeline time</li>
-                        <li>Optimized batch processing</li>
+                        <li>Custom A* algorithm in C#</li>
+                        <li>Grid-based movement logic</li>
+                        <li>Rapid game jam execution</li>
+                    </ul>
+                </div>
+            </a>
+
+            <!-- PROJECT 5: LUMEN -->
+            <a href="project-lumen.html" class="project-card">
+                <div class="card-image-container">
+                    <img src="lumen_square.jpg" alt="Lumen API Integration">
+                    <h3 class="card-title-overlay">Lumen - Systems & API</h3>
+                </div>
+                <div class="card-details">
+                    <div class="tech-tags">
+                        <span class="tag blue">Systems Engineering</span>
+                        <span class="tag red">API Integration</span>
+                    </div>
+                    <p>Integrated the Gemini API to power dynamic narrative systems, creating a seamless pipeline between the backend logic and the game's UI.</p>
+                    <ul class="feature-list">
+                        <li>Real-time LLM API integration</li>
+                        <li>Dynamic UI systems</li>
+                        <li>IGDC "Best Group" Award</li>
                     </ul>
                 </div>
             </a>
