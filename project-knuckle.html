@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knuckle - Project Details</title>
+    <title>Knuckle-House - Project Details</title>
     <style>
         /* ITCH.IO STYLE THEME */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #111; /* Very dark background */
+            background-color: #111; 
             color: #ddd;
         }
         
-        /* Centered column for the game/project details */
         .project-container {
             max-width: 800px;
             margin: 40px auto;
-            background-color: #222; /* Slightly lighter container */
+            background-color: #222; 
             border-radius: 8px;
             padding: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.8);
@@ -43,22 +42,18 @@
             background: #000;
         }
 
-        h2 { color: #fff; margin-top: 30px; }
+        h2 { color: #fff; margin-top: 35px; font-size: 1.5rem; border-bottom: 1px solid #444; padding-bottom: 5px; }
+        h3 { color: #ff4757; margin-top: 25px; font-size: 1.2rem; }
         
-        p { line-height: 1.6; }
+        p { line-height: 1.6; font-size: 1.05rem; }
 
-        .image-gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .image-gallery img {
+        .image-full {
             width: 100%;
             border-radius: 4px;
+            margin: 15px 0;
+            background-color: #000;
         }
 
-        /* Itch.io style download/view button */
         .action-button {
             display: block;
             width: 100%;
@@ -79,30 +74,45 @@
 <body>
 
     <div class="project-container">
-        <!-- Link to go back to the main portfolio -->
+        <!-- Back Link -->
         <a href="index.html" class="back-link">← Back to Portfolio</a>
 
-        <h1>Knuckle: Combat Architecture</h1>
+        <h1>Knuckle-House: Combat & Tools</h1>
 
-        <!-- Add your main gameplay video or GIF here -->
+        <!-- 1. GAMEPLAY TRAILER -->
         <video class="showcase-media" controls autoplay loop muted>
-            <source src="knuckle_gameplay.mp4" type="video/mp4">
+            <source src="knuckle_trailer.mp4" type="video/mp4">
+            Your browser does not support the video tag.
         </video>
 
-        <h2>The Challenge</h2>
-        <p>Building a tight, responsive 3D fighting game required frame-perfect input buffering. If a player presses an attack button a few frames before their current animation finishes, the game needs to remember that input and execute it immediately on the next available frame.</p>
+        <!-- 2. ABOUT THE GAME -->
+        <h2>About The Game</h2>
+        <p>Knuckle-House is a 3D roguelike brawler that blends intense arena combat with tactical, run-based progression[cite: 1]. Fight your way through a branching map of challenging encounters, taking on groups of intelligent enemies in brutal, martial-arts-style brawls[cite: 1]. Every fight tests your reflexes and crowd-control skills as you survive waves of attackers[cite: 1]. Manage your persistent health between rounds, spend your rewards to grow stronger, and see how far you can survive the gauntlet[cite: 1].</p>
+        <a href="https://cccdeadpool-xd.itch.io/knuckle" class="action-button" target="_blank">Play the Prototype on Itch.io</a>
 
-        <h2>The Technical Solution</h2>
-        <p>To solve this, I architected a custom Finite State Machine (FSM) in C#. This allowed me to decouple the animation states from the core logic, creating a highly modular combat loop. The input buffer holds commands for a maximum of 10 frames, syncing seamlessly with the Unity Animator.</p>
+        <!-- 3. FIGHTING ACTION GIF -->
+        <img src="combat_action.gif" alt="Knuckle-House Combat Action" class="image-full">
 
-        <!-- Gallery for additional screenshots or tool views -->
-        <h2>Technical Breakdown</h2>
-        <div class="image-gallery">
-            <img src="fsm_code_snippet.jpg" alt="C# Code Snippet">
-            <img src="animator_state.jpg" alt="Unity Animator View">
-        </div>
+        <!-- 4. COMBAT MECHANICS INFO -->
+        <h2>Systems: Frame-Precise Combat & AI</h2>
+        <p>The moment-to-moment combat is built on traditional 3D fighting game fundamentals, emphasizing strict frame data, precise parry windows, and heavy hit-stop[cite: 1]. Fights initiate with a strategic Rock-Paper-Scissors phase that dictates the opening momentum[cite: 1]. To handle the chaos of group fights, I engineered a central director AI that coordinates 1 vs Many encounters, ensuring one enemy attacks while others dynamically flank and stall[cite: 1].</p>
 
-        <a href="https://github.com/yourusername/knuckle" class="action-button" target="_blank">View Source Code on GitHub</a>
+        <!-- 5. COMBO GRAPH SCREENSHOT -->
+        <img src="combo_graph.jpg" alt="Node-based Combo Graph Pipeline" class="image-full">
+
+        <!-- 6. COMBO GRAPH EXPLANATION -->
+        <h3>The "Combat Deck" Pipeline Tool</h3>
+        <p>To allow for rapid iteration and deep customization, I built a modular pipeline tool. Players build and modify their own attack sequences using a customizable "Combat Deck"[cite: 1]. This node-based system allows players (and designers) to mix and match martial arts techniques to create highly personalized, stance-based fighting styles without touching hardcoded logic[cite: 1].</p>
+
+        <!-- 7. GAMEPLAY SCREENSHOT -->
+        <img src="knuckle_gameplay_ss.jpg" alt="Knuckle-House Gameplay" class="image-full">
+
+        <!-- 8. SHADERS AND VISUALS -->
+        <h2>Tech Art: Myth-Tech Shaders & Visuals</h2>
+        <p>The visual identity utilizes simple, low-poly graphics enhanced by a custom Sobel shader to create thick, comic-book-style outlines[cite: 1]. This cel-shaded approach maximizes visual readability during fast-paced combat, pairing perfectly with the stylized 2D hit-sparks, impact frames, and slow-mo KO pings[cite: 1].</p>
+        
+        <img src="sobel_shader.jpg" alt="Custom Sobel Outline Shader" class="image-full">
+
     </div>
 
 </body>
