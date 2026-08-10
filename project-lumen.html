@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumen - Project Details</title>
+    <style>
+        /* ITCH.IO STYLE THEME */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111;
+            color: #ddd;
+        }
+        
+        .project-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #222;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #ff4757;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        h1 { color: #fff; margin-top: 0; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        
+        /* Main showcase video/image */
+        .showcase-media {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            background: #000;
+        }
+
+        h2 { color: #fff; margin-top: 30px; font-size: 1.5rem; }
+        h3 { color: #ff4757; margin-top: 25px; font-size: 1.2rem; }
+        
+        p { line-height: 1.6; font-size: 1.05rem; }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .image-gallery img {
+            width: 100%;
+            border-radius: 4px;
+            background-color: #000;
+        }
+
+        .action-button {
+            display: block;
+            width: 100%;
+            background-color: #ff4757;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-top: 30px;
+            transition: background 0.2s;
+        }
+        .action-button:hover { background-color: #e03e4d; }
+
+        /* Award Badge Style */
+        .award-badge {
+            background-color: #ffd700;
+            color: #000;
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="project-container">
+        <!-- Link to go back to the main portfolio -->
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+
+        <h1>Lumen: Systems & API Integration</h1>
+        <div class="award-badge">🏆 IGDC Showcase - Best Group Award</div>
+
+        <!-- Add your main gameplay or UI video here -->
+        <video class="showcase-media" controls autoplay loop muted>
+            <!-- Change 'lumen_showcase.mp4' to your actual video file name -->
+            <source src="lumen_showcase.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <h2>Project Overview</h2>
+        <p>Lumen is an award-winning project showcased at the India Game Developer Conference (IGDC). The core technical challenge was developing a robust, real-time pipeline to handle dynamic narrative generation, allowing the game to adapt its text and UI based on advanced backend logic.</p>
+
+        <h2>Technical Systems & Pipeline</h2>
+        
+        <h3>LLM API Integration</h3>
+        <p>I spearheaded the backend architecture by directly integrating the Gemini API into Unity. I wrote asynchronous C# networking scripts to handle API requests and parse the JSON responses efficiently, ensuring the game maintained optimal frame rates without hitching during network calls.</p>
+
+        <h3>Designer-Friendly Workflow Tools</h3>
+        <p>Instead of hardcoding prompt logic, I built a modular pipeline tool for the narrative designers. This allowed non-technical team members to input data, adjust narrative weights, and seamlessly populate the dynamic in-game UI without needing to touch the underlying C# scripts.</p>
+
+        <!-- Gallery for UI and code screenshots -->
+        <h2>Technical Breakdown</h2>
+        <div class="image-gallery">
+            <!-- Replace with actual images of your UI or API code -->
+            <img src="lumen_ui.jpg" alt="Dynamic Narrative UI">
+            <img src="lumen_api_code.jpg" alt="C# API Integration Snippet">
+        </div>
+
+        <a href="https://github.com/yourusername/lumen" class="action-button" target="_blank">View Source Code on GitHub</a>
+    </div>
+
+</body>
+</html>
