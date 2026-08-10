@@ -14,10 +14,25 @@
             color: #e0e0e0;
         }
 
+        /* DEV BANNER */
+        .dev-banner {
+            background-color: #ffaa00;
+            color: #000;
+            text-align: center;
+            padding: 8px 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1002;
+            box-sizing: border-box;
+        }
+
         /* NAVIGATION BAR */
         nav {
             position: fixed;
-            top: 0;
+            top: 34px; /* Sits below the dev banner */
             width: 100%;
             background-color: rgba(0, 0, 0, 0.9);
             padding: 15px 0;
@@ -72,6 +87,54 @@
             font-size: 1.1rem;
         }
         .about-section h2 { font-size: 2.5rem; margin-top: 0; font-weight: normal; }
+
+        /* SKILLS SECTION (GAMIFIED) */
+        .skills-section {
+            padding: 80px 20px;
+            text-align: center;
+            background-color: #151515;
+        }
+        .skills-section h2 { font-size: 2.5rem; margin-top: 0; font-weight: normal; margin-bottom: 10px; }
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            max-width: 900px;
+            margin: 30px auto 0;
+        }
+        
+        /* The Click-to-Unlock Skill Box */
+        .skill-box {
+            background-color: #222;
+            border: 2px dashed #555;
+            border-radius: 8px;
+            padding: 20px;
+            width: 140px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+        }
+        .skill-box:hover { border-color: #ff4757; }
+        
+        /* States */
+        .locked-content { color: #888; font-size: 0.95rem; }
+        .unlocked-content { display: none; font-size: 1.1rem; }
+        
+        .skill-box.unlocked {
+            background-color: #ff4757;
+            border: 2px solid #ff4757;
+            color: #fff;
+            transform: scale(1.05);
+            cursor: default;
+        }
+        .skill-box.unlocked .locked-content { display: none; }
+        .skill-box.unlocked .unlocked-content { display: block; }
 
         /* PROJECTS SECTION */
         .projects-section {
@@ -199,9 +262,15 @@
 </head>
 <body>
 
+    <!-- DEVELOPMENT BANNER -->
+    <div class="dev-banner">
+        ⚠️ Website is currently in development. Some information or links may be incorrect or incomplete.
+    </div>
+
     <!-- NAVIGATION -->
     <nav>
         <a href="#about">About</a>
+        <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
         <a href="resume.pdf" target="_blank">Resume</a>
@@ -227,13 +296,54 @@
         </div>
     </div>
 
+    <!-- SKILLS SECTION -->
+    <div id="skills" class="skills-section">
+        <h2>Technical Skills</h2>
+        <p style="color: #888;">Click the locked boxes below to reveal my tech stack.</p>
+        
+        <div class="skills-grid">
+            <!-- Simply add 'unlocked' to the classList via JavaScript when clicked -->
+            <div class="skill-box" onclick="this.classList.add('unlocked')">
+                <span class="locked-content">🔒 Click to Unlock</span>
+                <span class="unlocked-content">Unity Engine</span>
+            </div>
+            <div class="skill-box" onclick="this.classList.add('unlocked')">
+                <span class="locked-content">🔒 Click to Unlock</span>
+                <span class="unlocked-content">C# & .NET</span>
+            </div>
+            <div class="skill-box" onclick="this.classList.add('unlocked')">
+                <span class="locked-content">🔒 Click to Unlock</span>
+                <span class="unlocked-content">Shader Graph</span>
+            </div>
+            <div class="skill-box" onclick="this.classList.add('unlocked')">
+                <span class="locked-content">🔒 Click to Unlock</span>
+                <span class="unlocked-content">VFX Graph</span>
+            </div>
+            <div class="skill-box" onclick="this.classList.add('unlocked')">
+                <span class="locked-content">🔒 Click to Unlock</span>
+                <span class="unlocked-content">Maya (Rigging)</span>
+            </div>
+            <div class="skill-box" onclick="this.classList.add('unlocked')">
+                <span class="locked-content">🔒 Click to Unlock</span>
+                <span class="unlocked-content">Mobile Optimizing</span>
+            </div>
+            <div class="skill-box" onclick="this.classList.add('unlocked')">
+                <span class="locked-content">🔒 Click to Unlock</span>
+                <span class="unlocked-content">HLSL / GLSL</span>
+            </div>
+            <div class="skill-box" onclick="this.classList.add('unlocked')">
+                <span class="locked-content">🔒 Click to Unlock</span>
+                <span class="unlocked-content">Git / Perforce</span>
+            </div>
+        </div>
+    </div>
+
     <!-- PROJECTS SECTION -->
     <div id="projects" class="projects-section">
         <h2>Personal Projects</h2>
         <p style="margin-bottom: 40px; color: #888;">Click on the tiles to learn more about each project.</p>
         
         <div class="project-grid">
-
             <!-- PROJECT 1: KNUCKLE -->
             <a href="project-knuckle.html" class="project-card">
                 <div class="card-image-container">
@@ -334,19 +444,17 @@
                     </ul>
                 </div>
             </a>
-
         </div>
     </div>
 
     <!-- CONTACT SECTION -->
     <div id="contact" class="contact-section">
         <h2>Contact Me</h2>
-        <p>Some information might not be correct as i am making this website right now.</p>
+        <p>Currently seeking Tech Art & Engineering roles. Let's build something optimized and beautiful.</p>
         <div class="contact-links">
-            <!-- Replace these with your actual links -->
             <a href="mailto:nitantnamdeo03@gmail.com" class="contact-btn">Email Me</a>
-            <a href="https://www.linkedin.com/in/nitant-namdeo-a04566270/" target="_blank" class="contact-btn secondary">LinkedIn</a>
-            <a href="https://github.com/CCCDEADPOOLXD" target="_blank" class="contact-btn secondary">GitHub</a>
+            <a href="https://www.linkedin.com/in/nitant-namdeo-a04566270/" target="_blank" class="contact-btn secondary">LinkedIn</a>
+            <a href="https://github.com/CCCDEADPOOLXD" target="_blank" class="contact-btn secondary">GitHub</a>
         </div>
     </div>
 
