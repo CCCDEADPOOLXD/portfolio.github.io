@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- THIS IS THE TITLE THAT APPEARS IN THE BROWSER TAB -->
+    <title>Nitant Namdeo | Technical Artist & Designer</title>
+    
+    <style>
+        /* --- STYLING (CSS) --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #1a1a1a;
+            border-bottom: 2px solid #ff4757;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #ffffff;
+        }
+        h2 {
+            color: #ff4757;
+            font-weight: 400;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        /* Grid layout for your projects */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        /* Styling for individual project cards */
+        .card {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            transition: transform 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-media {
+            width: 100%;
+            height: 200px;
+            background-color: #2a2a2a;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .card-title {
+            margin-top: 0;
+            color: #ffffff;
+        }
+        .tech-tags {
+            color: #ff4757;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .links {
+            text-align: center;
+            margin-top: 40px;
+        }
+        a {
+            color: #ff4757;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- --- HEADER SECTION --- -->
+    <header>
+        <!-- CHANGE YOUR NAME AND TITLE BELOW -->
+        <h1>Nitant Namdeo</h1>
+        <h2>Technical Artist & Systems Programmer</h2>
+        <p>Bridging the gap between engineering and art. Specializing in Unity, C# Tools, and Mobile Optimization.</p>
+    </header>
+
+    <!-- --- MAIN CONTENT SECTION --- -->
+    <div class="container">
+        
+        <h2 style="color: #fff; border-bottom: 1px solid #333; padding-bottom: 10px;">Featured Tech Art Projects</h2>
+        
+        <div class="project-grid">
+
+            <!-- PROJECT 1: CUSTOM TOOL (GIF EXAMPLE) -->
+            <div class="card">
+                <!-- PUT YOUR GIF LINK IN THE 'src' ATTRIBUTE -->
+                <img src="https://via.placeholder.com/400x200.gif?text=Your+Tool+GIF+Here" alt="Custom Unity Tool" class="card-media">
+                <div class="card-content">
+                    <h3 class="card-title">Auto-Material Assigner Tool</h3>
+                    <div class="tech-tags">Unity • C# • Editor Scripting</div>
+                    <p><strong>The Problem:</strong> Artists were spending too much time manually assigning materials to imported 3D models.</p>
+                    <p><strong>The Solution:</strong> I wrote a custom Unity Editor script that reads naming conventions and batch-assigns materials in one click, saving hours of pipeline time.</p>
+                </div>
+            </div>
+
+            <!-- PROJECT 2: SHADER (IMAGE EXAMPLE) -->
+            <div class="card">
+                <!-- PUT YOUR IMAGE LINK IN THE 'src' ATTRIBUTE -->
+                <img src="https://via.placeholder.com/400x200.png?text=Your+Shader+Screenshot" alt="Mobile Shader" class="card-media">
+                <div class="card-content">
+                    <h3 class="card-title">Mobile-Optimized Water Shader</h3>
+                    <div class="tech-tags">Unity Shader Graph • HLSL • Mobile Profiling</div>
+                    <p><strong>The Problem:</strong> The default water shader was too heavy for low-end mobile devices, dropping frame rates.</p>
+                    <p><strong>The Solution:</strong> Created a custom stylized water shader that reduced draw calls from 12 to 2, maintaining visual fidelity while hitting a stable 60FPS on mobile.</p>
+                </div>
+            </div>
+
+            <!-- PROJECT 3: VIDEO EXAMPLE (KNUCKLE/LUMIN) -->
+            <div class="card">
+                <!-- YOU CAN USE A VIDEO TAG FOR GAMEPLAY -->
+                <video class="card-media" controls muted loop>
+                    <source src="your_video_file.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="card-content">
+                    <h3 class="card-title">Knuckle - Combat Architecture</h3>
+                    <div class="tech-tags">Unity • C# • Animation State Machines</div>
+                    <p><strong>The Problem:</strong> Building a tight, responsive 3D fighting game required frame-perfect input buffering.</p>
+                    <p><strong>The Solution:</strong> Architected a custom Finite State Machine (FSM) to sync 3D combat animations seamlessly with core gameplay logic and VFX.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- --- LINKS & CONTACT SECTION --- -->
+        <div class="links">
+            <p>Ready to talk? Reach out below.</p>
+            <!-- ADD YOUR REAL LINKS HERE -->
+            <p>
+                <a href="mailto:your.email@example.com">Email Me</a> | 
+                <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a> | 
+                <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+            </p>
+        </div>
+
+    </div>
+
+</body>
+</html>
