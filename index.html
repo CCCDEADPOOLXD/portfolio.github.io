@@ -38,7 +38,7 @@
         .hero {
             position: relative;
             width: 100%;
-            height: 100vh; /* Full screen height */
+            height: 100vh;
             overflow: hidden;
             background-color: #000;
         }
@@ -46,7 +46,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.6; /* Dims the video slightly */
+            opacity: 0.6;
         }
         .hero-text {
             position: absolute;
@@ -58,9 +58,9 @@
         }
         .hero-text h1 { font-size: 3rem; margin: 0; }
 
-        /* ABOUT ME SECTION (Blue Banner) */
+        /* ABOUT ME SECTION */
         .about-section {
-            background-color: #103b5a; /* Blue from your reference */
+            background-color: #103b5a;
             color: #fff;
             padding: 80px 20px;
             text-align: center;
@@ -80,7 +80,7 @@
         }
         .projects-section h2 {
             font-size: 2.5rem;
-            margin-bottom: 50px;
+            margin-bottom: 10px;
             font-weight: normal;
         }
         .project-grid {
@@ -92,7 +92,7 @@
             text-align: left;
         }
 
-        /* PROJECT CARDS (Square like the reference) */
+        /* PROJECT CARDS */
         .project-card {
             background-color: transparent;
             text-decoration: none;
@@ -101,7 +101,7 @@
         .card-image-container {
             position: relative;
             width: 100%;
-            aspect-ratio: 1 / 1; /* Makes it a perfect square */
+            aspect-ratio: 1 / 1;
             background-color: #333;
             border-radius: 4px;
             overflow: hidden;
@@ -127,7 +127,7 @@
             font-size: 1.2rem;
         }
 
-        /* CARD DETAILS (Below the image) */
+        /* CARD DETAILS */
         .card-details { padding: 15px 0; }
         .tech-tags { margin-bottom: 15px; }
         .tag {
@@ -152,12 +152,48 @@
             font-size: 0.9rem;
         }
         .feature-list li { margin-bottom: 8px; }
-        /* Checkmark bullets */
         .feature-list li::before {
             content: '✔ ';
             color: #fff;
             font-weight: bold;
             margin-right: 5px;
+        }
+
+        /* CONTACT SECTION */
+        .contact-section {
+            background-color: #111;
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+        .contact-section h2 { font-size: 2.5rem; margin-top: 0; font-weight: normal; color: #fff; }
+        .contact-section p { color: #aaa; margin-bottom: 30px; font-size: 1.1rem; }
+        
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .contact-btn {
+            background-color: #ff4757;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .contact-btn:hover { background-color: #e03e4d; }
+        .contact-btn.secondary {
+            background-color: transparent;
+            border: 2px solid #555;
+            color: #ddd;
+        }
+        .contact-btn.secondary:hover {
+            border-color: #fff;
+            color: #fff;
         }
     </style>
 </head>
@@ -167,13 +203,12 @@
     <nav>
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
         <a href="resume.pdf" target="_blank">Resume</a>
-        <a href="mailto:your.email@example.com">Contact</a>
     </nav>
 
     <!-- TOP VIDEO HEADER -->
     <div class="hero">
-        <!-- REPLACE 'background_video.mp4' WITH YOUR VIDEO FILENAME -->
         <video autoplay loop muted playsinline>
             <source src="background_video.mp4" type="video/mp4">
         </video>
@@ -188,16 +223,20 @@
         <div class="about-content">
             <h2>About Me</h2>
             <p>Hi! I am Nitant, a Technical Artist and Game Programmer. I specialize in bridging the gap between engineering and art, heavily focusing on Unity, custom C# tool development, and mobile optimization.</p>
-            <p>Currently pursuing a B.Design in Game Design and Development and serving as a GDAI Student Ambassador. I have a strong perseverance for learning new rendering techniques and building frame-perfect combat systems.</p>
+            <p>Currently pursuing a B.Design in Game Design and Development and serving as a GDAI Student Ambassador. I have a strong perseverance for learning new rendering techniques and building tight, optimized systems for both visual fidelity and gameplay performance.</p>
         </div>
     </div>
 
-    <div class="project-grid">
+    <!-- PROJECTS SECTION -->
+    <div id="projects" class="projects-section">
+        <h2>Personal Projects</h2>
+        <p style="margin-bottom: 40px; color: #888;">Click on the tiles to learn more about each project.</p>
+        
+        <div class="project-grid">
 
             <!-- PROJECT 1: KNUCKLE -->
             <a href="project-knuckle.html" class="project-card">
                 <div class="card-image-container">
-                    <!-- Replace with your actual image name -->
                     <img src="knuckle_square.jpg" alt="Knuckle Tool Graph">
                     <h3 class="card-title-overlay">Knuckle - Combat & Tools</h3>
                 </div>
@@ -256,27 +295,7 @@
                 </div>
             </a>
 
-            <!-- PROJECT 4: LETHAL LUDO -->
-            <a href="project-ludo.html" class="project-card">
-                <div class="card-image-container">
-                    <img src="ludo_square.jpg" alt="Lethal Ludo Pathfinding">
-                    <h3 class="card-title-overlay">Lethal Ludo (A* Pathfinding)</h3>
-                </div>
-                <div class="card-details">
-                    <div class="tech-tags">
-                        <span class="tag red">C#</span>
-                        <span class="tag purple">AI Logic</span>
-                    </div>
-                    <p>Developed custom A* pathfinding logic from scratch and implemented it as the core movement mechanic for a fast-paced game jam project.</p>
-                    <ul class="feature-list">
-                        <li>Custom A* algorithm in C#</li>
-                        <li>Grid-based movement logic</li>
-                        <li>Rapid game jam execution</li>
-                    </ul>
-                </div>
-            </a>
-
-            <!-- PROJECT 5: LUMEN -->
+            <!-- PROJECT 4: LUMEN -->
             <a href="project-lumen.html" class="project-card">
                 <div class="card-image-container">
                     <img src="lumen_square.jpg" alt="Lumen API Integration">
@@ -296,6 +315,38 @@
                 </div>
             </a>
 
+            <!-- PROJECT 5: LETHAL LUDO -->
+            <a href="project-ludo.html" class="project-card">
+                <div class="card-image-container">
+                    <img src="ludo_square.jpg" alt="Lethal Ludo Pathfinding">
+                    <h3 class="card-title-overlay">Lethal Ludo (A* Pathfinding)</h3>
+                </div>
+                <div class="card-details">
+                    <div class="tech-tags">
+                        <span class="tag red">C#</span>
+                        <span class="tag purple">AI Logic</span>
+                    </div>
+                    <p>Developed custom A* pathfinding logic from scratch and implemented it as the core movement mechanic for a fast-paced game jam project.</p>
+                    <ul class="feature-list">
+                        <li>Custom A* algorithm in C#</li>
+                        <li>Grid-based movement logic</li>
+                        <li>Rapid game jam execution</li>
+                    </ul>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- CONTACT SECTION -->
+    <div id="contact" class="contact-section">
+        <h2>Contact Me</h2>
+        <p>Currently seeking Tech Art & Engineering roles. Let's build something optimized and beautiful.</p>
+        <div class="contact-links">
+            <!-- Replace these with your actual links -->
+            <a href="mailto:your.email@example.com" class="contact-btn">Email Me</a>
+            <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-btn secondary">LinkedIn</a>
+            <a href="https://github.com/yourusername" target="_blank" class="contact-btn secondary">GitHub</a>
         </div>
     </div>
 
