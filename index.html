@@ -3,159 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- THIS IS THE TITLE THAT APPEARS IN THE BROWSER TAB -->
-    <title>Nitant Namdeo | Technical Artist & Designer</title>
-    
+    <title>Nitant Namdeo | Technical Artist</title>
     <style>
-        /* --- STYLING (CSS) --- */
+        /* GLOBAL STYLES */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
-            line-height: 1.6;
             margin: 0;
             padding: 0;
-        }
-        header {
-            text-align: center;
-            padding: 60px 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #1a1a1a;
-            border-bottom: 2px solid #ff4757;
+            color: #e0e0e0;
         }
-        h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            color: #ffffff;
+
+        /* NAVIGATION BAR */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 15px 0;
+            text-align: center;
+            z-index: 1000;
         }
-        h2 {
-            color: #ff4757;
-            font-weight: 400;
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .container {
-            max-width: 1100px;
+        nav a:hover { color: #ff4757; }
+
+        /* HERO VIDEO SECTION */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Full screen height */
+            overflow: hidden;
+            background-color: #000;
+        }
+        .hero video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6; /* Dims the video slightly */
+        }
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+        }
+        .hero-text h1 { font-size: 3rem; margin: 0; }
+
+        /* ABOUT ME SECTION (Blue Banner) */
+        .about-section {
+            background-color: #103b5a; /* Blue from your reference */
+            color: #fff;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .about-content {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
+            line-height: 1.8;
+            font-size: 1.1rem;
         }
-        /* Grid layout for your projects */
+        .about-section h2 { font-size: 2.5rem; margin-top: 0; font-weight: normal; }
+
+        /* PROJECTS SECTION */
+        .projects-section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .projects-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            font-weight: normal;
+        }
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: left;
         }
-        /* Styling for individual project cards */
-        .card {
-            background-color: #1e1e1e;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            transition: transform 0.2s ease-in-out;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        .card-media {
-            width: 100%;
-            height: 200px;
-            background-color: #2a2a2a;
-            object-fit: cover;
-        }
-        .card-content {
-            padding: 20px;
-        }
-        .card-title {
-            margin-top: 0;
-            color: #ffffff;
-        }
-        .tech-tags {
-            color: #ff4757;
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .links {
-            text-align: center;
-            margin-top: 40px;
-        }
-        a {
-            color: #ff4757;
+
+        /* PROJECT CARDS (Square like the reference) */
+        .project-card {
+            background-color: transparent;
             text-decoration: none;
-            font-weight: bold;
+            color: #e0e0e0;
         }
-        a:hover {
-            text-decoration: underline;
+        .card-image-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1; /* Makes it a perfect square */
+            background-color: #333;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .card-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .project-card:hover .card-image-container img {
+            transform: scale(1.05);
+        }
+        .card-title-overlay {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        /* CARD DETAILS (Below the image) */
+        .card-details { padding: 15px 0; }
+        .tech-tags { margin-bottom: 15px; }
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-right: 5px;
+            color: white;
+        }
+        .tag.blue { background-color: #4a69bd; }
+        .tag.red { background-color: #e55039; }
+        .tag.purple { background-color: #8e44ad; }
+        
+        .card-details p { font-size: 0.95rem; line-height: 1.5; color: #ccc; }
+        
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 15px 0 0 0;
+            font-size: 0.9rem;
+        }
+        .feature-list li { margin-bottom: 8px; }
+        /* Checkmark bullets */
+        .feature-list li::before {
+            content: '✔ ';
+            color: #fff;
+            font-weight: bold;
+            margin-right: 5px;
         }
     </style>
 </head>
 <body>
 
-    <!-- --- HEADER SECTION --- -->
-    <header>
-        <!-- CHANGE YOUR NAME AND TITLE BELOW -->
-        <h1>Nitant Namdeo</h1>
-        <h2>Technical Artist & Systems Programmer</h2>
-        <p>Bridging the gap between engineering and art. Specializing in Unity, C# Tools, and Mobile Optimization.</p>
-    </header>
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="resume.pdf" target="_blank">Resume</a>
+        <a href="mailto:your.email@example.com">Contact</a>
+    </nav>
 
-    <!-- --- MAIN CONTENT SECTION --- -->
-    <div class="container">
-        
-        <h2 style="color: #fff; border-bottom: 1px solid #333; padding-bottom: 10px;">Featured Tech Art Projects</h2>
+    <!-- TOP VIDEO HEADER -->
+    <div class="hero">
+        <!-- REPLACE 'background_video.mp4' WITH YOUR VIDEO FILENAME -->
+        <video autoplay loop muted playsinline>
+            <source src="background_video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-text">
+            <h1>Nitant Namdeo</h1>
+            <p>Technical Artist & Systems Programmer</p>
+        </div>
+    </div>
+
+    <!-- ABOUT ME SECTION -->
+    <div id="about" class="about-section">
+        <div class="about-content">
+            <h2>About Me</h2>
+            <p>Hi! I am Nitant, a Technical Artist and Game Programmer. I specialize in bridging the gap between engineering and art, heavily focusing on Unity, custom C# tool development, and mobile optimization.</p>
+            <p>Currently pursuing a B.Design in Game Design and Development and serving as a GDAI Student Ambassador. I have a strong perseverance for learning new rendering techniques and building frame-perfect combat systems.</p>
+        </div>
+    </div>
+
+    <!-- PROJECTS SECTION -->
+    <div id="projects" class="projects-section">
+        <h2>Personal Work</h2>
+        <p style="margin-bottom: 40px; color: #888;">Click on the tiles to learn more about each project.</p>
         
         <div class="project-grid">
 
-            <!-- PROJECT 1: CUSTOM TOOL (GIF EXAMPLE) -->
-            <div class="card">
-                <!-- PUT YOUR GIF LINK IN THE 'src' ATTRIBUTE -->
-                <img src="https://via.placeholder.com/400x200.gif?text=Your+Tool+GIF+Here" alt="Custom Unity Tool" class="card-media">
-                <div class="card-content">
-                    <h3 class="card-title">Auto-Material Assigner Tool</h3>
-                    <div class="tech-tags">Unity • C# • Editor Scripting</div>
-                    <p><strong>The Problem:</strong> Artists were spending too much time manually assigning materials to imported 3D models.</p>
-                    <p><strong>The Solution:</strong> I wrote a custom Unity Editor script that reads naming conventions and batch-assigns materials in one click, saving hours of pipeline time.</p>
+            <!-- PROJECT 1: KNUCKLE -->
+            <!-- Note: The link wraps the entire card and points to the individual project page -->
+            <a href="project-knuckle.html" class="project-card">
+                <div class="card-image-container">
+                    <img src="knuckle_square.jpg" alt="Knuckle Gameplay">
+                    <h3 class="card-title-overlay">Knuckle - Combat Engine</h3>
                 </div>
-            </div>
+                <div class="card-details">
+                    <div class="tech-tags">
+                        <span class="tag blue">technical</span>
+                        <span class="tag purple">Unity C#</span>
+                    </div>
+                    <p>A 3D fighting game prototype built with a heavy focus on frame-perfect input buffering and modular combat architecture.</p>
+                    <ul class="feature-list">
+                        <li>Custom Finite State Machine (FSM)</li>
+                        <li>Responsive input buffering</li>
+                        <li>Modular combat logic</li>
+                    </ul>
+                </div>
+            </a>
 
-            <!-- PROJECT 2: SHADER (IMAGE EXAMPLE) -->
-            <div class="card">
-                <!-- PUT YOUR IMAGE LINK IN THE 'src' ATTRIBUTE -->
-                <img src="https://via.placeholder.com/400x200.png?text=Your+Shader+Screenshot" alt="Mobile Shader" class="card-media">
-                <div class="card-content">
-                    <h3 class="card-title">Mobile-Optimized Water Shader</h3>
-                    <div class="tech-tags">Unity Shader Graph • HLSL • Mobile Profiling</div>
-                    <p><strong>The Problem:</strong> The default water shader was too heavy for low-end mobile devices, dropping frame rates.</p>
-                    <p><strong>The Solution:</strong> Created a custom stylized water shader that reduced draw calls from 12 to 2, maintaining visual fidelity while hitting a stable 60FPS on mobile.</p>
+            <!-- PROJECT 2: SHADER / TOOL -->
+            <a href="project-tool.html" class="project-card">
+                <div class="card-image-container">
+                    <img src="tool_square.jpg" alt="Unity Editor Tool">
+                    <h3 class="card-title-overlay">Auto-Material Assigner</h3>
                 </div>
-            </div>
-
-            <!-- PROJECT 3: VIDEO EXAMPLE (KNUCKLE/LUMIN) -->
-            <div class="card">
-                <!-- YOU CAN USE A VIDEO TAG FOR GAMEPLAY -->
-                <video class="card-media" controls muted loop>
-                    <source src="your_video_file.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="card-content">
-                    <h3 class="card-title">Knuckle - Combat Architecture</h3>
-                    <div class="tech-tags">Unity • C# • Animation State Machines</div>
-                    <p><strong>The Problem:</strong> Building a tight, responsive 3D fighting game required frame-perfect input buffering.</p>
-                    <p><strong>The Solution:</strong> Architected a custom Finite State Machine (FSM) to sync 3D combat animations seamlessly with core gameplay logic and VFX.</p>
+                <div class="card-details">
+                    <div class="tech-tags">
+                        <span class="tag red">C#</span>
+                        <span class="tag blue">technical</span>
+                    </div>
+                    <p>A custom Unity Editor tool designed to automate the pipeline workflow for artists, batch assigning materials based on mesh names.</p>
+                    <ul class="feature-list">
+                        <li>Built custom Unity Inspector GUI</li>
+                        <li>Saves hours of pipeline time</li>
+                        <li>Optimized batch processing</li>
+                    </ul>
                 </div>
-            </div>
+            </a>
 
         </div>
-
-        <!-- --- LINKS & CONTACT SECTION --- -->
-        <div class="links">
-            <p>Ready to talk? Reach out below.</p>
-            <!-- ADD YOUR REAL LINKS HERE -->
-            <p>
-                <a href="mailto:your.email@example.com">Email Me</a> | 
-                <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a> | 
-                <a href="https://github.com/yourusername" target="_blank">GitHub</a>
-            </p>
-        </div>
-
     </div>
 
 </body>
