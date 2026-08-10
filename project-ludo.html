@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lethal Ludo - Project Details</title>
+    <style>
+        /* ITCH.IO STYLE THEME */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111;
+            color: #ddd;
+        }
+        
+        .project-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #222;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #ff4757;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        h1 { color: #fff; margin-top: 0; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        
+        /* Main showcase video/image */
+        .showcase-media {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            background: #000;
+        }
+
+        h2 { color: #fff; margin-top: 30px; font-size: 1.5rem; }
+        h3 { color: #ff4757; margin-top: 25px; font-size: 1.2rem; }
+        
+        p { line-height: 1.6; font-size: 1.05rem; }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .image-gallery img {
+            width: 100%;
+            border-radius: 4px;
+            background-color: #000;
+        }
+
+        .action-button {
+            display: block;
+            width: 100%;
+            background-color: #ff4757;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-top: 30px;
+            transition: background 0.2s;
+        }
+        .action-button:hover { background-color: #e03e4d; }
+    </style>
+</head>
+<body>
+
+    <div class="project-container">
+        <!-- Link to go back to the main portfolio -->
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+
+        <h1>Lethal Ludo: AI & Custom Pathfinding</h1>
+
+        <!-- Add your main gameplay video here -->
+        <video class="showcase-media" controls autoplay loop muted>
+            <!-- Change 'ludo_gameplay.mp4' to your actual video file name -->
+            <source src="ludo_gameplay.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <h2>Project Overview</h2>
+        <p>Lethal Ludo is a fast-paced game jam project built under a strict deadline. Instead of relying on out-of-the-box engine solutions, I used this project as an opportunity to build custom AI logic and grid-based movement systems from scratch to power the core mechanics.</p>
+
+        <h2>Technical Systems & AI</h2>
+        
+        <h3>Custom A* Pathfinding Algorithm</h3>
+        <p>Because traditional Unity NavMesh systems do not translate well to strict, grid-based board game logic, I wrote a custom A* pathfinding algorithm in C#. This system calculates the optimal route across the board by evaluating node costs and grid constraints, ensuring precise, predictable entity movement.</p>
+
+        <h3>Rapid Game Jam Execution</h3>
+        <p>Prototyping complex logic under a tight deadline requires extremely clean, modular code. I structured the pathfinding logic to be highly decoupled, allowing me to quickly iterate on the rules of the Ludo board without breaking the underlying movement mechanics.</p>
+
+        <!-- Gallery for grid visualizer and code screenshots -->
+        <h2>Technical Breakdown</h2>
+        <div class="image-gallery">
+            <!-- Replace with actual images of your pathfinding grid or code -->
+            <img src="astar_grid.jpg" alt="A* Node Grid Debug Visualization">
+            <img src="pathfinding_code.jpg" alt="C# Pathfinding Algorithm Snippet">
+        </div>
+
+        <a href="https://github.com/yourusername/lethal-ludo" class="action-button" target="_blank">View Source Code on GitHub</a>
+    </div>
+
+</body>
+</html>
