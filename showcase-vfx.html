@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VFX & Particles - Featured Tech Art</title>
+    <style>
+        /* ITCH.IO STYLE THEME */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111;
+            color: #ddd;
+        }
+        
+        .project-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #222;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #ff4757;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        h1 { color: #fff; margin-top: 0; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        
+        h2 { color: #ff4757; margin-top: 40px; font-size: 1.8rem; }
+        
+        p { line-height: 1.6; font-size: 1.05rem; margin-bottom: 15px; }
+
+        /* Media styling */
+        .showcase-media {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            background: #000;
+        }
+
+        .image-full {
+            width: 100%;
+            border-radius: 4px;
+            margin: 10px 0;
+            background-color: #000;
+            border: 1px solid #333;
+        }
+
+        .section-divider {
+            margin: 60px auto;
+            border: 0;
+            border-top: 2px dashed #444;
+        }
+
+        /* Project Link Button */
+        .project-link {
+            display: inline-block;
+            background-color: #333;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: bold;
+            transition: background 0.2s;
+            margin-bottom: 20px;
+        }
+        .project-link:hover {
+            background-color: #ff4757;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="project-container">
+        <!-- Back Link -->
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+
+        <h1>VFX & Particles Showcase</h1>
+        <p>Focusing on combat "juice" and game feel, these systems tie together Unity's particle engines, custom shaders, and C# state machines to deliver satisfying and highly optimized visual feedback.</p>
+
+        <!-- VFX 1: HIT SYSTEM -->
+        <h2>Combat Hit Feedback System</h2>
+        
+        <video class="showcase-media" controls autoplay loop muted>
+            <!-- Change to your actual video file name -->
+            <source src="hit_vfx_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <p>Creating satisfying melee combat requires more than just a particle pop. I engineered a unified hit-reaction system that triggers multiple synchronized events the exact frame a hitbox connects. This includes directional hit sparks, physical mesh vibrations on the enemy, weapon joint trails, camera hit-stop (time freezing), haptic controller feedback, and UI reactions (health bar glowing and bleeding).</p>
+        
+        <a href="project-knuckle.html" class="project-link">🎮 See it in action: Knuckle</a>
+
+        <img src="hit_system_breakdown.jpg" alt="Hit System Logic Breakdown" class="image-full">
+
+        <hr class="section-divider">
+
+        <!-- VFX 2: EXPLOSIONS -->
+        <h2>Optimized Battlefield Explosions</h2>
+        
+        <video class="showcase-media" controls autoplay loop muted>
+            <source src="explosion_vfx_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <p>Because Rotor Warfare requires smooth performance across both PC and mobile Android devices simultaneously, environmental VFX had to be highly optimized. These explosion systems utilize layered particle emitters for smoke and fire, tuned to maintain low overdraw and minimal texture memory footprint while still providing clear tactical feedback on the battlefield.</p>
+        
+        <a href="project-heli.html" class="project-link">🎮 See it in action: Rotor Warfare</a>
+
+        <img src="explosion_particle_setup.jpg" alt="Explosion Particle System Inspector" class="image-full">
+
+        <hr class="section-divider">
+
+        <!-- VFX 3: DYNAMIC TRAILS -->
+        <h2>Dynamic Weapon Trails</h2>
+        
+        <video class="showcase-media" controls autoplay loop muted>
+            <source src="trails_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <p>To help players read attack arcs and understand hitboxes during fast-paced encounters, I implemented a dynamic trail system. These trails are cast directly from the attacking character's weapon joints, strictly bound to the active frames of the attack animation to ensure the visual effect matches the underlying collision logic perfectly.</p>
+
+        <img src="trail_setup.jpg" alt="Weapon Trail Setup" class="image-full">
+
+    </div>
+
+</body>
+</html>
