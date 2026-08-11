@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Editor Tools - Featured Tech Art</title>
+    <style>
+        /* ITCH.IO STYLE THEME */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111;
+            color: #ddd;
+        }
+        
+        .project-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #222;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #ff4757;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        h1 { color: #fff; margin-top: 0; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        
+        h2 { color: #ff4757; margin-top: 40px; font-size: 1.8rem; }
+        
+        p { line-height: 1.6; font-size: 1.05rem; margin-bottom: 15px; }
+
+        /* Media styling */
+        .showcase-media {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            background: #000;
+        }
+
+        .image-full {
+            width: 100%;
+            border-radius: 4px;
+            margin: 10px 0;
+            background-color: #000;
+            border: 1px solid #333;
+        }
+
+        .section-divider {
+            margin: 60px auto;
+            border: 0;
+            border-top: 2px dashed #444;
+        }
+
+        /* Project Link Button */
+        .project-link {
+            display: inline-block;
+            background-color: #333;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: bold;
+            transition: background 0.2s;
+            margin-bottom: 20px;
+        }
+        .project-link:hover {
+            background-color: #ff4757;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="project-container">
+        <!-- Back Link -->
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+
+        <h1>Custom Editor Tools & Pipelines</h1>
+        <p>A Technical Artist's job is to remove friction. These tools were engineered to empower designers to rapidly iterate on complex systems without needing to touch the underlying C# codebase.</p>
+
+        <!-- TOOL 1: COMBO GRAPH -->
+        <h2>Node-Based Combat Graph Pipeline</h2>
+        
+        <video class="showcase-media" controls autoplay loop muted>
+            <source src="combo_graph_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <p>Hardcoding combo logic is a nightmare for iteration. To solve this, I engineered a highly modular, node-based graph editor inside Unity. This tool allows game designers to visually map out complex, stance-based attack sequences, branch combo paths, and adjust frame data purely through a drag-and-drop UI interface. It translates visual node connections directly into the game's underlying Finite State Machine, cutting down iteration time from hours to seconds.</p>
+        
+        <a href="project-knuckle.html" class="project-link">🎮 See it in action: Knuckle</a>
+
+        <hr class="section-divider">
+
+        <!-- TOOL 2: LLM CHAT SYSTEM -->
+        <h2>Dynamic LLM Chat & Prompt System</h2>
+        
+        <img src="chat_system_tool.jpg" alt="Dynamic Chat System Editor Interface" class="image-full">
+
+        <p>To create fully dynamic, AI-powered NPC behaviors, I built a robust pipeline to integrate Google's Gemini API directly into the engine. Instead of a hardcoded text box, I created a custom designer-facing tool where narrative designers can input system prompts, manage API keys, and define NPC personality weights. The backend system handles the asynchronous web requests, parses the JSON response data without stalling the main thread, and seamlessly dynamically populates the in-game UI.</p>
+        
+        <a href="project-lumen.html" class="project-link">🎮 See it in action: Lumen</a>
+
+    </div>
+
+</body>
+</html>
