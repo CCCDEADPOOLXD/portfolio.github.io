@@ -10,14 +10,14 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #111;
+            background-color: #111; 
             color: #ddd;
         }
         
         .project-container {
             max-width: 800px;
             margin: 40px auto;
-            background-color: #222;
+            background-color: #222; 
             border-radius: 8px;
             padding: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.8);
@@ -42,88 +42,46 @@
             background: #000;
         }
 
-        h2 { color: #fff; margin-top: 30px; font-size: 1.5rem; }
-        h3 { color: #ff4757; margin-top: 25px; font-size: 1.2rem; }
+        h2 { color: #fff; margin-top: 35px; font-size: 1.5rem; border-bottom: 1px solid #444; padding-bottom: 5px; }
         
         p { line-height: 1.6; font-size: 1.05rem; }
 
-        .image-gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .image-gallery img {
-            width: 100%;
-            border-radius: 4px;
-            background-color: #000;
-        }
-
-        .action-button {
-            display: block;
-            width: 100%;
-            background-color: #ff4757;
-            color: white;
-            text-align: center;
+        .award-banner {
+            background-color: rgba(255, 71, 87, 0.1);
+            border-left: 4px solid #ff4757;
             padding: 15px;
-            text-decoration: none;
-            font-size: 1.2rem;
+            margin: 20px 0;
             font-weight: bold;
-            border-radius: 4px;
-            margin-top: 30px;
-            transition: background 0.2s;
-        }
-        .action-button:hover { background-color: #e03e4d; }
-
-        /* Award Badge Style */
-        .award-badge {
-            background-color: #ffd700;
-            color: #000;
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
+            color: #fff;
         }
     </style>
 </head>
 <body>
 
     <div class="project-container">
-        <!-- Link to go back to the main portfolio -->
+        <!-- Back Link -->
         <a href="index.html" class="back-link">← Back to Portfolio</a>
 
-        <h1>Lumen: Systems & API Integration</h1>
-        <div class="award-badge">🏆 IGDC Showcase - Best Group Award</div>
+        <h1>Lumen: API Integration & Systems</h1>
 
-        <!-- Add your main gameplay or UI video here -->
+        <!-- Reusing the Lumen Chat Video from the Tools page -->
         <video class="showcase-media" controls autoplay loop muted>
-            <!-- Change 'lumen_showcase.mp4' to your actual video file name -->
-            <source src="lumen_showcase.mp4" type="video/mp4">
+            <source src="lumen_chat_video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-
-        <h2>Project Overview</h2>
-        <p>Lumen is an award-winning project showcased at the India Game Developer Conference (IGDC). The core technical challenge was developing a robust, real-time pipeline to handle dynamic narrative generation, allowing the game to adapt its text and UI based on advanced backend logic.</p>
-
-        <h2>Technical Systems & Pipeline</h2>
         
-        <h3>LLM API Integration</h3>
-        <p>I spearheaded the backend architecture by directly integrating the Gemini API into Unity. I wrote asynchronous C# networking scripts to handle API requests and parse the JSON responses efficiently, ensuring the game maintained optimal frame rates without hitching during network calls.</p>
-
-        <h3>Designer-Friendly Workflow Tools</h3>
-        <p>Instead of hardcoding prompt logic, I built a modular pipeline tool for the narrative designers. This allowed non-technical team members to input data, adjust narrative weights, and seamlessly populate the dynamic in-game UI without needing to touch the underlying C# scripts.</p>
-
-        <!-- Gallery for UI and code screenshots -->
-        <h2>Technical Breakdown</h2>
-        <div class="image-gallery">
-            <!-- Replace with actual images of your UI or API code -->
-            <img src="lumen_ui.jpg" alt="Dynamic Narrative UI">
-            <img src="lumen_api_code.jpg" alt="C# API Integration Snippet">
+        <div class="award-banner">
+            🏆 IGDC 2025: Selected as one of the "Best Groups" to represent Artemesia College of Art and Design.
         </div>
 
-        <a href="https://github.com/yourusername/lumen" class="action-button" target="_blank">View Source Code on GitHub</a>
+        <!-- ABOUT THE GAME & AI NPC SYSTEM -->
+        <h2>AI-Powered NPC Interactions</h2>
+        <p>Lumen was a deep dive into systems engineering and API management. I served as the core gameplay programmer, handling 80% of the game's logic. The primary technical achievement was building a fully interactive NPC chat system from scratch.</p>
+        <p>Instead of relying on pre-written dialogue trees, I integrated Google's Gemini API directly into the game. By securely handling web requests, processing the JSON data, and feeding it into the UI in real-time, the NPCs can dynamically respond to the player based on predefined personality traits and narrative prompts, vastly enhancing player immersion.</p>
+        
+        <h2>Journal & Narrative Systems</h2>
+        <p>Alongside the AI integration, I engineered the underlying systems that support the narrative, including a dynamic journal system that tracks player progress and updates real-time mission logs without frame-drops or memory leaks during serialization.</p>
+
     </div>
 
 </body>
