@@ -62,6 +62,7 @@
             height: 100%;
             object-fit: cover;
             opacity: 0.6;
+            transition: opacity 0.3s ease;
         }
         .hero-text {
             position: absolute;
@@ -70,6 +71,7 @@
             transform: translate(-50%, -50%);
             text-align: center;
             color: white;
+            pointer-events: none;
         }
         .hero-text h1 { font-size: 3rem; margin: 0; }
 
@@ -297,11 +299,9 @@
         <a href="resume.pdf" target="_blank">Resume</a>
     </nav>
 
-    <!-- TOP VIDEO HEADER -->
+    <!-- TOP VIDEO HEADER WITH DYNAMIC RANDOMIZER -->
     <div class="hero">
-        <video autoplay loop muted playsinline>
-            <source src="background_video.mp4" type="video/mp4">
-        </video>
+        <video id="hero-video" autoplay muted playsinline></video>
         <div class="hero-text">
             <h1>Nitant Namdeo</h1>
             <p>Technical Artist & Systems Programmer</p>
@@ -447,47 +447,27 @@
                 </div>
             </a>
 
-            <!-- PROJECT 2: ROTOR WARFARE -->
-            <a href="project-heli.html" class="project-card">
+            <!-- PROJECT 2: LUMEN -->
+            <a href="project-lumen.html" class="project-card">
                 <div class="card-image-container">
-                    <img src="heli_square.jpg" alt="Rotor Warfare Game">
-                    <h3 class="card-title-overlay">Rotor Warfare</h3>
+                    <img src="lumen_square.jpg" alt="Lumen API Integration">
+                    <h3 class="card-title-overlay">Lumen</h3>
                 </div>
                 <div class="card-details">
                     <div class="tech-tags">
-                        <span class="tag blue">Android / PC</span>
-                        <span class="tag red">Custom Shaders</span>
+                        <span class="tag blue">Systems Engineering</span>
+                        <span class="tag red">API Integration</span>
                     </div>
-                    <p>An asymmetric cross-platform multiplayer game utilizing mobile gyroscope controls. Features a custom full-screen thermal vision shader and optimized particle systems.</p>
+                    <p>Integrated the Gemini API to power dynamic narrative systems, creating a seamless pipeline between the backend logic and the game's UI.</p>
                     <ul class="feature-list">
-                        <li>PC to Android networking</li>
-                        <li>Gyroscope input integration</li>
-                        <li>Thermal vision screen shader</li>
+                        <li>Real-time LLM API integration</li>
+                        <li>Created interactive NPC chat system from scratch</li>
+                        <li>IGDC "Best Group" Award</li>
                     </ul>
                 </div>
             </a>
 
-            <!-- PROJECT 3: CINEMATIC FILM -->
-            <a href="project-film.html" class="project-card">
-                <div class="card-image-container">
-                    <img src="film_square.jpg" alt="Cinematic Lighting">
-                    <h3 class="card-title-overlay">Cinematic Lighting Supervision</h3>
-                </div>
-                <div class="card-details">
-                    <div class="tech-tags">
-                        <span class="tag purple">Lighting</span>
-                        <span class="tag blue">Art Direction</span>
-                    </div>
-                    <p>Supervised the lighting and overall visual vibe for a cinematic short film, ensuring a cohesive and high-fidelity final render.</p>
-                    <ul class="feature-list">
-                        <li>Lighting and shadow supervision</li>
-                        <li>Directed scene composition and shadow placement</li>
-                        <li>Visual mood direction</li>
-                    </ul>
-                </div>
-            </a>
-
-            <!-- PROJECT 4: UNREAL ENVIRONMENT -->
+            <!-- PROJECT 3: UNREAL ENVIRONMENT -->
             <a href="project-unreal.html" class="project-card">
                 <div class="card-image-container">
                     <img src="unreal_square.jpg" alt="Unreal PCG Environment">
@@ -508,42 +488,42 @@
                 </div>
             </a>
 
-            <!-- PROJECT 5: LUMEN -->
-            <a href="project-lumen.html" class="project-card">
+            <!-- PROJECT 4: CINEMATIC FILM -->
+            <a href="project-film.html" class="project-card">
                 <div class="card-image-container">
-                    <img src="lumen_square.jpg" alt="Lumen API Integration">
-                    <h3 class="card-title-overlay">Lumen</h3>
+                    <img src="film_square.jpg" alt="Cinematic Lighting">
+                    <h3 class="card-title-overlay">Cinematic Lighting Supervision</h3>
                 </div>
                 <div class="card-details">
                     <div class="tech-tags">
-                        <span class="tag blue">Systems Engineering</span>
-                        <span class="tag red">API Integration</span>
+                        <span class="tag purple">Lighting</span>
+                        <span class="tag blue">Art Direction</span>
                     </div>
-                    <p>Integrated the Gemini API to power dynamic narrative systems, creating a seamless pipeline between the backend logic and the game's UI.</p>
+                    <p>Supervised the lighting and overall visual vibe for a cinematic short film, ensuring a cohesive and high-fidelity final render.</p>
                     <ul class="feature-list">
-                        <li>Real-time LLM API integration</li>
-                        <li>Created interactive NPC chat system from scratch</li>
-                        <li>IGDC "Best Group" Award</li>
+                        <li>Lighting and shadow supervision</li>
+                        <li>Directed scene composition and shadow placement</li>
+                        <li>Visual mood direction</li>
                     </ul>
                 </div>
             </a>
 
-            <!-- PROJECT 6: LETHAL LUDO -->
-            <a href="project-ludo.html" class="project-card">
+            <!-- PROJECT 5: ROTOR WARFARE -->
+            <a href="project-heli.html" class="project-card">
                 <div class="card-image-container">
-                    <img src="ludo_square.jpg" alt="Lethal Ludo">
-                    <h3 class="card-title-overlay">Lethal Ludo</h3>
+                    <img src="heli_square.jpg" alt="Rotor Warfare Game">
+                    <h3 class="card-title-overlay">Rotor Warfare</h3>
                 </div>
                 <div class="card-details">
                     <div class="tech-tags">
-                        <span class="tag red">C#</span>
-                        <span class="tag purple">AI Logic</span>
+                        <span class="tag blue">Android / PC</span>
+                        <span class="tag red">Custom Shaders</span>
                     </div>
-                    <p>Developed custom A* pathfinding logic from scratch and implemented it as the core movement mechanic for a fast-paced game jam project.</p>
+                    <p>An asymmetric cross-platform multiplayer game utilizing mobile gyroscope controls. Features a custom full-screen thermal vision shader and optimized particle systems.</p>
                     <ul class="feature-list">
-                        <li>Custom A* algorithm in C#</li>
-                        <li>Grid-based movement logic</li>
-                        <li>Rapid game jam execution</li>
+                        <li>PC to Android networking</li>
+                        <li>Gyroscope input integration</li>
+                        <li>Thermal vision screen shader</li>
                     </ul>
                 </div>
             </a>
@@ -556,11 +536,42 @@
         <h2>Contact Me</h2>
         <p>Currently seeking Tech Art & Engineering roles. Let's build something optimized and beautiful.</p>
         <div class="contact-links">
-            <a href="mailto:your.email@example.com" class="contact-btn">Email Me</a>
+            <a href="mailto:nitantnamdeo03@gmail.com" class="contact-btn">Email Me</a>
+            <a href="https://cccdeadpool-xd.itch.io/" target="_blank" class="contact-btn secondary">Itch.io</a>
             <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-btn secondary">LinkedIn</a>
-            <a href="https://github.com/yourusername" target="_blank" class="contact-btn secondary">GitHub</a>
         </div>
     </div>
 
+    <!-- BACKGROUND VIDEO RANDOMIZER SCRIPT -->
+    <script>
+        // List all your background videos here
+        const bgVideos = [
+            'knuckle_trailer.mp4',
+            'lumen_showcase.mp4',
+            'film_trailer.mp4',
+            'heli_gameplay.mp4'
+        ];
+
+        const heroVideoElement = document.getElementById('hero-video');
+
+        function playRandomVideo() {
+            // Pick a random index
+            const randomIndex = Math.floor(Math.random() * bgVideos.length);
+            
+            // Set the source to the random video
+            heroVideoElement.src = bgVideos[randomIndex];
+            
+            // Play it (catching errors if browser blocks autoplay initially)
+            heroVideoElement.play().catch(error => {
+                console.log("Autoplay was prevented by the browser.", error);
+            });
+        }
+
+        // When the current video finishes, load and play another one
+        heroVideoElement.addEventListener('ended', playRandomVideo);
+
+        // Start the first random video immediately on load
+        playRandomVideo();
+    </script>
 </body>
 </html>
