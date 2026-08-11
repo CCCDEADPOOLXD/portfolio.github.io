@@ -32,7 +32,7 @@
         /* NAVIGATION BAR */
         nav {
             position: fixed;
-            top: 34px; /* Sits below the dev banner */
+            top: 34px;
             width: 100%;
             background-color: rgba(0, 0, 0, 0.9);
             padding: 15px 0;
@@ -88,55 +88,65 @@
         }
         .about-section h2 { font-size: 2.5rem; margin-top: 0; font-weight: normal; }
 
-        /* SKILLS SECTION (GAMIFIED) */
+        /* SKILLS BUBBLE SECTION */
         .skills-section {
             padding: 80px 20px;
-            text-align: center;
             background-color: #151515;
+            text-align: center;
         }
-        .skills-section h2 { font-size: 2.5rem; margin-top: 0; font-weight: normal; margin-bottom: 10px; }
-        .skills-grid {
+        .skills-section h2 { font-size: 2.5rem; margin-top: 0; margin-bottom: 10px; font-weight: normal; }
+        .skill-category {
+            max-width: 900px;
+            margin: 30px auto;
+            text-align: center;
+        }
+        .skill-category h3 { color: #ff4757; font-size: 1.2rem; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        .bubble-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
-            max-width: 900px;
-            margin: 30px auto 0;
         }
-        
-        /* The Click-to-Unlock Skill Box */
-        .skill-box {
-            background-color: #222;
-            border: 2px dashed #555;
-            border-radius: 8px;
-            padding: 20px;
-            width: 140px;
+
+        /* Bubble Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); opacity: 0.5; }
+            100% { transform: scale(1); }
+        }
+
+        .bubble {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid #555;
+            border-radius: 30px;
+            padding: 10px 20px;
             cursor: pointer;
             user-select: none;
             transition: all 0.3s ease;
             font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 40px;
+            color: #ccc;
+            animation: float 4s ease-in-out infinite;
         }
-        .skill-box:hover { border-color: #ff4757; }
+        .bubble:nth-child(even) { animation-delay: 1s; animation-duration: 3.5s; }
+        .bubble:nth-child(3n) { animation-delay: 2s; animation-duration: 4.5s; }
         
-        /* States */
-        .locked-content { color: #888; font-size: 0.95rem; }
-        .unlocked-content { display: none; font-size: 1.1rem; }
+        .bubble:hover { border-color: #ff4757; color: #fff; }
         
-        .skill-box.unlocked {
+        .bubble.popped {
+            animation: pop 0.4s ease-out forwards;
             background-color: #ff4757;
-            border: 2px solid #ff4757;
+            border-color: #ff4757;
             color: #fff;
-            transform: scale(1.05);
-            cursor: default;
+            box-shadow: 0 4px 10px rgba(255, 71, 87, 0.4);
+            pointer-events: none; /* Disables further clicking */
         }
-        .skill-box.unlocked .locked-content { display: none; }
-        .skill-box.unlocked .unlocked-content { display: block; }
 
-        /* PROJECTS SECTION */
+        /* FEATURED & PROJECTS SECTION */
         .projects-section {
             padding: 80px 20px;
             text-align: center;
@@ -145,6 +155,12 @@
             font-size: 2.5rem;
             margin-bottom: 10px;
             font-weight: normal;
+        }
+        .section-divider {
+            margin: 60px auto;
+            width: 80%;
+            border: 0;
+            border-top: 1px solid #333;
         }
         .project-grid {
             display: grid;
@@ -160,6 +176,7 @@
             background-color: transparent;
             text-decoration: none;
             color: #e0e0e0;
+            display: block;
         }
         .card-image-container {
             position: relative;
@@ -200,11 +217,13 @@
             font-size: 11px;
             font-weight: bold;
             margin-right: 5px;
+            margin-bottom: 5px;
             color: white;
         }
         .tag.blue { background-color: #4a69bd; }
         .tag.red { background-color: #e55039; }
         .tag.purple { background-color: #8e44ad; }
+        .tag.gold { background-color: #f39c12; }
         
         .card-details p { font-size: 0.95rem; line-height: 1.5; color: #ccc; }
         
@@ -217,7 +236,7 @@
         .feature-list li { margin-bottom: 8px; }
         .feature-list li::before {
             content: '✔ ';
-            color: #fff;
+            color: #ff4757;
             font-weight: bold;
             margin-right: 5px;
         }
@@ -271,6 +290,7 @@
     <nav>
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
+        <a href="#featured">Tech Art</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
         <a href="resume.pdf" target="_blank">Resume</a>
@@ -296,59 +316,120 @@
         </div>
     </div>
 
-    <!-- SKILLS SECTION -->
+    <!-- SKILLS BUBBLE SECTION -->
     <div id="skills" class="skills-section">
-        <h2>Technical Skills</h2>
-        <p style="color: #888;">Click the locked boxes below to reveal my tech stack.</p>
+        <h2>Technical Arsenal</h2>
+        <p style="color: #888; margin-bottom: 40px;">Tap the bubbles to lock them in.</p>
         
-        <div class="skills-grid">
-            <!-- Simply add 'unlocked' to the classList via JavaScript when clicked -->
-            <div class="skill-box" onclick="this.classList.add('unlocked')">
-                <span class="locked-content">🔒 Click to Unlock</span>
-                <span class="unlocked-content">Unity Engine</span>
+        <div class="skill-category">
+            <h3>Engines & Tools</h3>
+            <div class="bubble-container">
+                <div class="bubble" onclick="this.classList.add('popped')">Unity Game Engine</div>
+                <div class="bubble" onclick="this.classList.add('popped')">Unreal Engine</div>
+                <div class="bubble" onclick="this.classList.add('popped')">Maya</div>
+                <div class="bubble" onclick="this.classList.add('popped')">Visual Scripting</div>
             </div>
-            <div class="skill-box" onclick="this.classList.add('unlocked')">
-                <span class="locked-content">🔒 Click to Unlock</span>
-                <span class="unlocked-content">C# & .NET</span>
+        </div>
+
+        <div class="skill-category">
+            <h3>Technical Art</h3>
+            <div class="bubble-container">
+                <div class="bubble" onclick="this.classList.add('popped')">Shader Development</div>
+                <div class="bubble" onclick="this.classList.add('popped')">Environment Lighting</div>
+                <div class="bubble" onclick="this.classList.add('popped')">Particle Systems</div>
+                <div class="bubble" onclick="this.classList.add('popped')">VFX Graph</div>
+                <div class="bubble" onclick="this.classList.add('popped')">Game Optimization</div>
+                <div class="bubble" onclick="this.classList.add('popped')">XR Development</div>
             </div>
-            <div class="skill-box" onclick="this.classList.add('unlocked')">
-                <span class="locked-content">🔒 Click to Unlock</span>
-                <span class="unlocked-content">Shader Graph</span>
+        </div>
+
+        <div class="skill-category">
+            <h3>Programming & Systems</h3>
+            <div class="bubble-container">
+                <div class="bubble" onclick="this.classList.add('popped')">OOP in C#</div>
+                <div class="bubble" onclick="this.classList.add('popped')">AI Implementation</div>
+                <div class="bubble" onclick="this.classList.add('popped')">Modular Architecture</div>
+                <div class="bubble" onclick="this.classList.add('popped')">Finite State Machines</div>
             </div>
-            <div class="skill-box" onclick="this.classList.add('unlocked')">
-                <span class="locked-content">🔒 Click to Unlock</span>
-                <span class="unlocked-content">VFX Graph</span>
-            </div>
-            <div class="skill-box" onclick="this.classList.add('unlocked')">
-                <span class="locked-content">🔒 Click to Unlock</span>
-                <span class="unlocked-content">Maya (Rigging)</span>
-            </div>
-            <div class="skill-box" onclick="this.classList.add('unlocked')">
-                <span class="locked-content">🔒 Click to Unlock</span>
-                <span class="unlocked-content">Mobile Optimizing</span>
-            </div>
-            <div class="skill-box" onclick="this.classList.add('unlocked')">
-                <span class="locked-content">🔒 Click to Unlock</span>
-                <span class="unlocked-content">HLSL / GLSL</span>
-            </div>
-            <div class="skill-box" onclick="this.classList.add('unlocked')">
-                <span class="locked-content">🔒 Click to Unlock</span>
-                <span class="unlocked-content">Git / Perforce</span>
+        </div>
+
+        <div class="skill-category">
+            <h3>Methodologies & Languages</h3>
+            <div class="bubble-container">
+                <div class="bubble" onclick="this.classList.add('popped')">Project Management</div>
+                <div class="bubble" onclick="this.classList.add('popped')">Rapid Prototyping</div>
+                <div class="bubble" onclick="this.classList.add('popped')">English / Hindi / German</div>
             </div>
         </div>
     </div>
 
-    <!-- PROJECTS SECTION -->
-    <div id="projects" class="projects-section">
-        <h2>Personal Projects</h2>
-        <p style="margin-bottom: 40px; color: #888;">Click on the tiles to learn more about each project.</p>
+    <!-- FEATURED TECH ART SECTION -->
+    <div id="featured" class="projects-section">
+        <h2>Featured Tech Art</h2>
+        <p style="margin-bottom: 40px; color: #888;">Core capabilities tailored for technical art production pipelines.</p>
         
         <div class="project-grid">
+            <!-- SHADERS -->
+            <a href="showcase-shaders.html" class="project-card">
+                <div class="card-image-container">
+                    <img src="showcase_shader.jpg" alt="Shader Showcase">
+                    <h3 class="card-title-overlay">Shader Development</h3>
+                </div>
+                <div class="card-details">
+                    <div class="tech-tags">
+                        <span class="tag red">HLSL</span>
+                        <span class="tag gold">Shader Graph</span>
+                    </div>
+                    <p>Custom rendering solutions including thermal vision, stylized Sobel outlines, and interactive environmental materials.</p>
+                </div>
+            </a>
+
+            <!-- VFX -->
+            <a href="showcase-vfx.html" class="project-card">
+                <div class="card-image-container">
+                    <img src="showcase_vfx.jpg" alt="VFX Showcase">
+                    <h3 class="card-title-overlay">VFX & Particles</h3>
+                </div>
+                <div class="card-details">
+                    <div class="tech-tags">
+                        <span class="tag purple">VFX Graph</span>
+                        <span class="tag blue">Shuriken</span>
+                    </div>
+                    <p>Dynamic combat impact frames, lava simulations, and optimized particle systems for mobile and PC.</p>
+                </div>
+            </a>
+
+            <!-- EDITOR TOOLS -->
+            <a href="showcase-tools.html" class="project-card">
+                <div class="card-image-container">
+                    <img src="showcase_tools.jpg" alt="Tools Showcase">
+                    <h3 class="card-title-overlay">Custom Editor Tools</h3>
+                </div>
+                <div class="card-details">
+                    <div class="tech-tags">
+                        <span class="tag blue">C#</span>
+                        <span class="tag red">Pipelines</span>
+                    </div>
+                    <p>Node-based graph editors and modular pipelines designed to accelerate workflows for designers and artists.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- PROJECTS SECTION -->
+    <div id="projects" class="projects-section" style="padding-top: 0;">
+        <h2>Personal Projects</h2>
+        <p style="margin-bottom: 40px; color: #888;">Deep dives into game logic, systems engineering, and full project development.</p>
+        
+        <div class="project-grid">
+
             <!-- PROJECT 1: KNUCKLE -->
             <a href="project-knuckle.html" class="project-card">
                 <div class="card-image-container">
-                    <img src="knuckle_square.jpg" alt="Knuckle Tool Graph">
-                    <h3 class="card-title-overlay">Knuckle - Combat & Tools</h3>
+                    <img src="knuckle_square.jpg" alt="Knuckle">
+                    <h3 class="card-title-overlay">Knuckle</h3>
                 </div>
                 <div class="card-details">
                     <div class="tech-tags">
@@ -365,11 +446,11 @@
                 </div>
             </a>
 
-            <!-- PROJECT 2: HELI (ROTOR STRIKE) -->
+            <!-- PROJECT 2: ROTOR WARFARE -->
             <a href="project-heli.html" class="project-card">
                 <div class="card-image-container">
-                    <img src="heli_square.jpg" alt="Heli Android Game">
-                    <h3 class="card-title-overlay">Project Heli</h3>
+                    <img src="heli_square.jpg" alt="Rotor Warfare Game">
+                    <h3 class="card-title-overlay">Rotor Warfare</h3>
                 </div>
                 <div class="card-details">
                     <div class="tech-tags">
@@ -396,10 +477,10 @@
                         <span class="tag purple">Lighting</span>
                         <span class="tag blue">Art Direction</span>
                     </div>
-                    <p>Supervised the lighting, value, and overall visual vibe for a cinematic short film, ensuring a cohesive and high-fidelity final render.</p>
+                    <p>Supervised the lighting and overall visual vibe for a cinematic short film, ensuring a cohesive and high-fidelity final render.</p>
                     <ul class="feature-list">
                         <li>Lighting and shadow supervision</li>
-                        <li>Value and color grading</li>
+                        <li>Directed scene composition and shadow placement</li>
                         <li>Visual mood direction</li>
                     </ul>
                 </div>
@@ -409,7 +490,7 @@
             <a href="project-lumen.html" class="project-card">
                 <div class="card-image-container">
                     <img src="lumen_square.jpg" alt="Lumen API Integration">
-                    <h3 class="card-title-overlay">Lumen - Systems & API</h3>
+                    <h3 class="card-title-overlay">Lumen</h3>
                 </div>
                 <div class="card-details">
                     <div class="tech-tags">
@@ -419,7 +500,7 @@
                     <p>Integrated the Gemini API to power dynamic narrative systems, creating a seamless pipeline between the backend logic and the game's UI.</p>
                     <ul class="feature-list">
                         <li>Real-time LLM API integration</li>
-                        <li>Dynamic UI systems</li>
+                        <li>Created interactive NPC chat system from scratch</li>
                         <li>IGDC "Best Group" Award</li>
                     </ul>
                 </div>
@@ -428,8 +509,8 @@
             <!-- PROJECT 5: LETHAL LUDO -->
             <a href="project-ludo.html" class="project-card">
                 <div class="card-image-container">
-                    <img src="ludo_square.jpg" alt="Lethal Ludo Pathfinding">
-                    <h3 class="card-title-overlay">Lethal Ludo (A* Pathfinding)</h3>
+                    <img src="ludo_square.jpg" alt="Lethal Ludo">
+                    <h3 class="card-title-overlay">Lethal Ludo</h3>
                 </div>
                 <div class="card-details">
                     <div class="tech-tags">
@@ -444,6 +525,7 @@
                     </ul>
                 </div>
             </a>
+
         </div>
     </div>
 
@@ -452,9 +534,9 @@
         <h2>Contact Me</h2>
         <p>Currently seeking Tech Art & Engineering roles. Let's build something optimized and beautiful.</p>
         <div class="contact-links">
-            <a href="mailto:nitantnamdeo03@gmail.com" class="contact-btn">Email Me</a>
-            <a href="https://www.linkedin.com/in/nitant-namdeo-a04566270/" target="_blank" class="contact-btn secondary">LinkedIn</a>
-            <a href="https://github.com/CCCDEADPOOLXD" target="_blank" class="contact-btn secondary">GitHub</a>
+            <a href="mailto:your.email@example.com" class="contact-btn">Email Me</a>
+            <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-btn secondary">LinkedIn</a>
+            <a href="https://github.com/yourusername" target="_blank" class="contact-btn secondary">GitHub</a>
         </div>
     </div>
 
