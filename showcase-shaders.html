@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shader Development - Featured Tech Art</title>
+    <style>
+        /* ITCH.IO STYLE THEME */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111;
+            color: #ddd;
+        }
+        
+        .project-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #222;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #ff4757;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        h1 { color: #fff; margin-top: 0; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        
+        h2 { color: #ff4757; margin-top: 40px; font-size: 1.8rem; }
+        
+        p { line-height: 1.6; font-size: 1.05rem; margin-bottom: 15px; }
+
+        /* Media styling */
+        .showcase-media {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            background: #000;
+        }
+
+        .image-full {
+            width: 100%;
+            border-radius: 4px;
+            margin: 10px 0;
+            background-color: #000;
+            border: 1px solid #333;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        .image-gallery img {
+            width: 100%;
+            border-radius: 4px;
+            background-color: #000;
+            border: 1px solid #333;
+        }
+
+        .section-divider {
+            margin: 60px auto;
+            border: 0;
+            border-top: 2px dashed #444;
+        }
+
+        /* Project Link Button */
+        .project-link {
+            display: inline-block;
+            background-color: #333;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: bold;
+            transition: background 0.2s;
+            margin-bottom: 20px;
+        }
+        .project-link:hover {
+            background-color: #ff4757;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="project-container">
+        <!-- Back Link -->
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+
+        <h1>Shader Development Showcase</h1>
+        <p>A collection of custom rendering solutions and Shader Graph implementations built to enhance visual feedback, optimize performance, and drive core gameplay mechanics.</p>
+
+        <!-- SHADER 1: THERMAL VISION -->
+        <h2>Thermal Vision (X-Ray)</h2>
+        
+        <video class="showcase-media" controls autoplay loop muted>
+            <source src="thermal_vision_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <p>Developed specifically for the gunner role in an asymmetric multiplayer setup. This full-screen post-processing shader translates object tags and world data into a high-contrast thermal image. It features an X-ray effect that allows the player to spot enemy heat signatures dynamically through physical cover and walls, providing a crucial tactical advantage.</p>
+        
+        <a href="project-heli.html" class="project-link">🎮 See it in action: Rotor Warfare</a>
+
+        <img src="thermal_graph.jpg" alt="Thermal Vision Shader Graph" class="image-full">
+
+        <hr class="section-divider">
+
+        <!-- SHADER 2: SOBEL OUTLINE -->
+        <h2>Sobel Outline Shader</h2>
+        
+        <video class="showcase-media" controls autoplay loop muted>
+            <source src="sobel_outline_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <p>To achieve a striking, comic-book aesthetic for intense melee combat, I built a custom Sobel filter edge-detection shader. It analyzes scene depth and normal data to draw thick, stylized outlines around characters and environmental hazards, vastly improving visual readability during chaotic, fast-paced brawls.</p>
+        
+        <a href="project-knuckle.html" class="project-link">🎮 See it in action: Knuckle</a>
+
+        <div class="image-gallery">
+            <img src="sobel_graph_1.jpg" alt="Sobel Outline Shader Graph Part 1">
+            <img src="sobel_graph_2.jpg" alt="Sobel Outline Shader Graph Part 2">
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- SHADER 3: IMPACT FRAMES -->
+        <h2>Impact Frame Shader</h2>
+        
+        <video class="showcase-media" controls autoplay loop muted>
+            <source src="impact_frame_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <p>Designed to give heavy attacks a devastating sense of weight. This shader overrides standard materials during hit-stop (time freeze) moments, flashing the screen with high-contrast, stylized impact colors. It works in tandem with the combat animation state machine to maximize the "punchiness" of physical hits.</p>
+        
+        <a href="project-knuckle.html" class="project-link">🎮 See it in action: Knuckle</a>
+
+        <img src="impact_graph.jpg" alt="Impact Frame Shader Graph" class="image-full">
+
+        <hr class="section-divider">
+
+        <!-- SHADER 4: 2D WIND -->
+        <h2>2D Wind Shader</h2>
+        
+        <video class="showcase-media" controls autoplay loop muted>
+            <source src="wind_shader_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <p>A lightweight vertex displacement shader created to breathe life into 2D environments. By manipulating the vertices of sprite assets using time and noise nodes, this shader simulates organic, rolling wind effects on foliage and cloth without the need for expensive physical simulations or skeletal animations.</p>
+        
+        <a href="project-lumen.html" class="project-link">🎮 See it in action: Lumen</a>
+
+        <img src="wind_graph.jpg" alt="2D Wind Shader Graph" class="image-full">
+
+    </div>
+
+</body>
+</html>
