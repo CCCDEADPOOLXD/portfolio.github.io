@@ -53,15 +53,6 @@
         h2 { color: #fff; margin-top: 35px; font-size: 1.5rem; border-bottom: 1px solid #444; padding-bottom: 5px; }
         
         p { line-height: 1.6; font-size: 1.05rem; }
-
-        .award-banner {
-            background-color: rgba(255, 71, 87, 0.1);
-            border-left: 4px solid #ff4757;
-            padding: 15px;
-            margin: 20px 0;
-            font-weight: bold;
-            color: #fff;
-        }
     </style>
 </head>
 <body>
@@ -72,27 +63,29 @@
 
         <h1>Lumen: API Integration & Systems</h1>
 
-        <!-- Video Showcase -->
+        <!-- Gameplay Trailer Showcase -->
         <video class="showcase-media" controls autoplay loop muted>
-            <source src="lumen_chat_video.mp4" type="video/mp4">
+            <source src="lumen_showcase.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-        
-        <div class="award-banner">
-            🏆 IGDC 2025: Selected as one of the "Best Groups" to represent Artemesia College of Art and Design.
-        </div>
 
-        <!-- ABOUT THE GAME & AI NPC SYSTEM -->
-        <h2>AI-Powered NPC Interactions</h2>
-        <p>Lumen was a deep dive into systems engineering and API management. I served as the core gameplay programmer, handling 80% of the game's logic. The primary technical achievement was building a fully interactive NPC chat system from scratch.</p>
-        <p>Instead of relying on pre-written dialogue trees, I integrated Google's Gemini API directly into the game. By securely handling web requests, processing the JSON data, and feeding it into the UI in real-time, the NPCs can dynamically respond to the player based on predefined personality traits and narrative prompts, vastly enhancing player immersion.</p>
+        <!-- ABOUT THE GAME -->
+        <h2>About The Game</h2>
+        <p>LUMIN is a compelling 2D narrative prototype that casts you as Aquilo, a young man whose college commute turns into an impossible, decades-long journey. A mysterious cryo-disaster overtakes the world, forcing Aquilo into deep sleep only to awaken in a desolate, post-apocalyptic landscape that bears little resemblance to home.</p>
+        <p>The heart of LUMIN lies in its conversational mechanics. Progress is driven by engaging with the environment and its inhabitants to gather clues, uncover deep lore, and unlock mission objectives that directly impact Aquilo’s goal of saving the world.</p>
+
+        <!-- AI NPC SYSTEM -->
+        <h2>Dynamic AI & API Integration</h2>
+        <p>I served as the core gameplay programmer on this project, handling 80% of the game's logic. To support the core clue-gathering mechanics, I engineered a fully interactive, dynamic NPC chat system from scratch.</p>
+        <p>Instead of relying on pre-written dialogue trees, I integrated Google's Gemini API directly into the engine. By securely handling web requests, parsing JSON data, and feeding it into the UI in real-time, the NPCs can dynamically generate unique and unpredictable dialogue based on predefined personality traits. Every conversation is a potential clue, forcing players to actively extract critical historical information.</p>
         
         <!-- Restored Images -->
         <img src="lumen_ui.jpg" alt="Dynamic Chat System UI Interface" class="image-full">
         <img src="lumen_api_code.jpg" alt="API Integration Backend Code" class="image-full">
         
-        <h2>Journal & Narrative Systems</h2>
-        <p>Alongside the AI integration, I engineered the underlying systems that support the narrative, including a dynamic journal system that tracks player progress and updates real-time mission logs without frame-drops or memory leaks during serialization.</p>
+        <!-- NARRATIVE SYSTEMS -->
+        <h2>Journal & Mission Systems</h2>
+        <p>Alongside the AI integration, I engineered the underlying logic that supports the narrative. This includes a dynamic journal system that tracks player progress, organizes gathered clues, and updates real-time mission logs without frame-drops or memory leaks during serialization.</p>
 
     </div>
 
