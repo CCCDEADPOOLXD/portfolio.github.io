@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Heli - Project Details</title>
+    <title>Rotor Warfare - Project Details</title>
     <style>
         /* ITCH.IO STYLE THEME */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #111;
+            background-color: #111; 
             color: #ddd;
         }
         
         .project-container {
             max-width: 800px;
             margin: 40px auto;
-            background-color: #222;
+            background-color: #222; 
             border-radius: 8px;
             padding: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.8);
@@ -34,7 +34,7 @@
 
         h1 { color: #fff; margin-top: 0; border-bottom: 2px solid #333; padding-bottom: 10px; }
         
-        /* Main showcase video/image */
+        /* Main showcase media */
         .showcase-media {
             width: 100%;
             border-radius: 4px;
@@ -42,76 +42,65 @@
             background: #000;
         }
 
-        h2 { color: #fff; margin-top: 30px; font-size: 1.5rem; }
-        h3 { color: #ff4757; margin-top: 25px; font-size: 1.2rem; }
-        
-        p { line-height: 1.6; font-size: 1.05rem; }
-
-        .image-gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .image-gallery img {
+        .image-full {
             width: 100%;
             border-radius: 4px;
+            margin: 15px 0;
             background-color: #000;
+            border: 1px solid #333;
         }
 
-        .action-button {
-            display: block;
-            width: 100%;
-            background-color: #ff4757;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 4px;
-            margin-top: 30px;
-            transition: background 0.2s;
+        h2 { color: #fff; margin-top: 40px; font-size: 1.5rem; border-bottom: 1px solid #444; padding-bottom: 5px; }
+        
+        p { line-height: 1.6; font-size: 1.05rem; margin-bottom: 15px; }
+
+        .section-divider {
+            margin: 40px auto;
+            border: 0;
+            border-top: 2px dashed #444;
         }
-        .action-button:hover { background-color: #e03e4d; }
     </style>
 </head>
 <body>
 
     <div class="project-container">
-        <!-- Link to go back to the main portfolio -->
+        <!-- Back Link -->
         <a href="index.html" class="back-link">← Back to Portfolio</a>
 
-        <h1>Project Heli: Cross-Platform Systems & Shaders</h1>
+        <h1>Rotor Warfare: Systems & Tech Art</h1>
 
-        <!-- Add your main gameplay video here -->
+        <!-- ABOUT THE GAME -->
+        <h2>About The Game</h2>
+        <p>Rotor Warfare is an asymmetric, cross-platform multiplayer game that pits PC players against mobile Android users in intense, real-time tactical combat. One player commands the skies taking on the role of a heavily armed gunner, while the opposing force manages ground defense systems. It requires sharp reflexes, strategic coordination, and a solid understanding of the battlefield layout.</p>
+
+        <!-- TECHNICAL SYSTEMS -->
+        <h2>Technical Architecture & Multiplayer</h2>
+        <p>Building a seamless cross-platform experience required a highly optimized backend. I architected the multiplayer framework using Unity Netcode to support stable, real-time asymmetric co-op and PvP between Windows and Android devices. To prevent desync and cheating, I developed a server-authoritative mission management system alongside AI-driven 3D targeting logic for procedurally generated mission objectives.</p>
+
+        <!-- TECH ART: EXPLOSIONS (Reusing VFX assets) -->
+        <h2>Tech Art: Optimized Battlefield Explosions</h2>
+        <p>Because Rotor Warfare needs to run smoothly on both PC and mobile devices simultaneously, environmental VFX had to be highly optimized. I built explosion systems utilizing layered particle emitters for smoke and fire. These are strictly tuned to maintain low overdraw and a minimal texture memory footprint, ensuring clear tactical feedback without bottlenecking mobile GPUs.</p>
+        
         <video class="showcase-media" controls autoplay loop muted>
-            <!-- Change 'heli_gameplay.mp4' to your actual video file name -->
-            <source src="heli_gameplay.mp4" type="video/mp4">
+            <source src="explosion_vfx_video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
-        <h2>Project Overview</h2>
-        <p>Project Heli is an asymmetric, 2-player co-op experience that bridges PC and mobile platforms. One player pilots a helicopter via PC, while the second player operates the weaponry and camera systems using an Android device. The environment features a dynamic, realistic battlefield where two AI factions fight in the background.</p>
+        <img src="explosion_particle_setup.jpg" alt="Explosion Particle System Inspector" class="image-full">
 
-        <h2>Technical Art & Systems</h2>
+        <hr class="section-divider">
+
+        <!-- TECH ART: WEAPON TRAILS (Reusing VFX assets) -->
+        <h2>Tech Art: Dynamic Weapon Trails</h2>
+        <p>To help players read incoming attacks and understand combat arcs during fast-paced encounters, I implemented a highly performant dynamic trail system. These trails are cast directly from active weapon joints and are strictly bound to the active frames of the combat logic, guaranteeing that the visual effects match the underlying server hitboxes perfectly.</p>
         
-        <h3>Thermal Vision & Post-Processing</h3>
-        <p>To simulate the gunner's targeting system, I developed a custom full-screen Thermal Vision shader. This required rendering the scene data based on object temperatures/tags rather than standard albedo, and layering it with custom particle systems for dynamic smoke and explosions.</p>
+        <video class="showcase-media" controls autoplay loop muted>
+            <source src="trails_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
 
-        <h3>Mobile Gyroscope Integration</h3>
-        <p>A core technical challenge was ensuring smooth and responsive controls across network latency. I engineered a system that captures raw gyroscope and accelerometer data from the Android device, filtering the inputs to provide precise, jitter-free weapon aiming on the PC server.</p>
+        <img src="trail_setup.jpg" alt="Weapon Trail Setup" class="image-full">
 
-        <!-- Gallery for shader and mobile screenshots -->
-        <h2>Visual Breakdown</h2>
-        <div class="image-gallery">
-            <!-- Replace with actual images of your thermal shader and mobile setup -->
-            <img src="thermal_shader.jpg" alt="Thermal Vision Shader Screenshot">
-            <img src="mobile_gyro.jpg" alt="Android Gyroscope Input Debug">
-        </div>
-
-        <!-- Optional: Link to GitHub or Itch.io -->
-        <a href="https://github.com/yourusername/project-heli" class="action-button" target="_blank">View Source Code on GitHub</a>
     </div>
 
 </body>
