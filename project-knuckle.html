@@ -54,6 +54,20 @@
             background-color: #000;
         }
 
+        /* Image Gallery for Side-by-Side Shader Graphs */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .image-gallery img {
+            width: 100%;
+            border-radius: 4px;
+            background-color: #000;
+            border: 1px solid #333;
+        }
+
         .action-button {
             display: block;
             width: 100%;
@@ -79,7 +93,7 @@
 
         <h1>Knuckle-House: Combat & Tools</h1>
 
-        <!-- 1. GAMEPLAY TRAILER (USING YOUR UPLOADED GIF) -->
+        <!-- 1. GAMEPLAY TRAILER (GIF) -->
         <img src="combat_action.gif" alt="Knuckle-House Gameplay Action" class="showcase-media">
 
         <!-- 2. ABOUT THE GAME -->
@@ -101,12 +115,20 @@
         <!-- 6. GAMEPLAY SCREENSHOT -->
         <img src="knuckle_gameplay_ss.jpg" alt="Knuckle-House Gameplay" class="image-full">
 
-        <!-- 7. SHADERS AND VISUALS -->
-        <h2>Tech Art: Myth-Tech Shaders & Visuals</h2>
-        <p>The visual identity utilizes simple, low-poly graphics enhanced by a custom Sobel shader to create thick, comic-book-style outlines. This cel-shaded approach maximizes visual readability during fast-paced combat, pairing perfectly with the stylized 2D hit-sparks, impact frames, and slow-mo KO pings.</p>
+        <!-- 7. SOBEL OUTLINE SHADER REUSE -->
+        <h2>Tech Art: Sobel Outline Shader</h2>
         
-        <!-- Reusing the combat action gif here for the shader showcase -->
-        <img src="combat_action.gif" alt="Custom Sobel Outline Shader Action" class="image-full">
+        <video class="showcase-media" controls autoplay loop muted>
+            <source src="sobel_outline_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <p>To achieve a striking, comic-book aesthetic for intense melee combat, I built a custom Sobel filter edge-detection shader. It analyzes scene depth and normal data to draw thick, stylized outlines around characters and environmental hazards, vastly improving visual readability during chaotic, fast-paced brawls.</p>
+        
+        <div class="image-gallery">
+            <img src="sobel_graph_1.jpg" alt="Sobel Outline Shader Graph Part 1">
+            <img src="sobel_graph_2.jpg" alt="Sobel Outline Shader Graph Part 2">
+        </div>
 
     </div>
 
