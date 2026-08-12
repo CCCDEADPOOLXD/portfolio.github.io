@@ -49,6 +49,7 @@
             height: 100%;
             object-fit: cover;
             opacity: 0.5;
+            transition: opacity 0.3s ease;
         }
         .hero-text {
             position: absolute;
@@ -281,11 +282,10 @@
         <a href="#contact">Contact</a>
     </nav>
 
-    <!-- TOP VIDEO HEADER (BUG PROOF HTML5 NATIVE) -->
+    <!-- TOP VIDEO HEADER WITH STABLE SEQUENCE SCRIPT -->
     <div class="hero">
-        <!-- Replace 'knuckle_trailer.mp4' with whichever video you want to loop on the homepage -->
-        <video autoplay loop muted playsinline>
-            <source src="knuckle_trailer.mp4" type="video/mp4">
+        <video id="hero-video" autoplay muted playsinline>
+            <source src="lumen_showcase.mp4" type="video/mp4">
         </video>
         <div class="hero-text">
             <h1>Nitant Namdeo</h1>
@@ -524,9 +524,46 @@
             <a href="https://github.com/CCCDEADPOOLXD" target="_blank" class="contact-btn secondary">GitHub</a>
             <a href="https://www.linkedin.com/in/nitant-namdeo-a04566270/" target="_blank" class="contact-btn secondary">LinkedIn</a>
             <a href="https://cccdeadpool-xd.itch.io/" target="_blank" class="contact-btn secondary">Itch.io</a>
+            <!-- Will open your resume.pdf natively in a new browser tab -->
             <a href="resume.pdf" target="_blank" class="contact-btn secondary">Resume</a>
         </div>
     </div>
 
+    <!-- STABLE VIDEO SEQUENCE SCRIPT -->
+    <script>
+        // Your requested sequence of videos
+        const videoSequence = [
+            'lumen_showcase.mp4',
+            'explosion_vfx_video.mp4',
+            'wind_shader_video.mp4',
+            'trails_video.mp4',
+            'lumen_chat_video.mp4',
+            'thermal_vision_video.mp4',
+            'sobel_outline_video.mp4',
+            'explosion_vfx_video.mp4',
+            'trails_video.mp4',
+            'combo_graph_video.mp4'
+        ];
+        
+        let currentIndex = 0;
+        const heroVideo = document.getElementById('hero-video');
+
+        function playNextVideo() {
+            currentIndex++;
+            // Loop back to the start if we reach the end of the list
+            if (currentIndex >= videoSequence.length) {
+                currentIndex = 0; 
+            }
+            // Swap the source directly on the same element
+            heroVideo.src = videoSequence[currentIndex];
+            heroVideo.play().catch(err => console.log("Autoplay blocked:", err));
+        }
+
+        // When a video finishes, instantly trigger the next one
+        heroVideo.addEventListener('ended', playNextVideo);
+        
+        // Safety feature: If a video throws an error (like a missing file), skip it so the site doesn't freeze
+        heroVideo.addEventListener('error', playNextVideo);
+    </script>
 </body>
 </html>
