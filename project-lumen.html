@@ -51,8 +51,18 @@
         }
 
         h2 { color: #fff; margin-top: 35px; font-size: 1.5rem; border-bottom: 1px solid #444; padding-bottom: 5px; }
+        h3 { color: #ff4757; margin-top: 20px; font-size: 1.2rem; }
         
-        p { line-height: 1.6; font-size: 1.05rem; }
+        p { line-height: 1.6; font-size: 1.05rem; margin-bottom: 15px; }
+
+        .mechanics-list {
+            list-style-type: disc;
+            margin-left: 20px;
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+        .mechanics-list li { margin-bottom: 10px; }
+        .mechanics-list strong { color: #ff4757; }
     </style>
 </head>
 <body>
@@ -61,9 +71,9 @@
         <!-- Back Link -->
         <a href="index.html" class="back-link">← Back to Portfolio</a>
 
-        <h1>Lumen: API Integration & Systems</h1>
+        <h1>LUMIN: API Integration & Systems</h1>
 
-        <!-- Gameplay Trailer Showcase -->
+        <!-- 1. GAMEPLAY TRAILER (Top Video) -->
         <video class="showcase-media" controls autoplay loop muted>
             <source src="lumen_showcase.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -71,21 +81,31 @@
 
         <!-- ABOUT THE GAME -->
         <h2>About The Game</h2>
-        <p>LUMIN is a compelling 2D narrative prototype that casts you as Aquilo, a young man whose college commute turns into an impossible, decades-long journey. A mysterious cryo-disaster overtakes the world, forcing Aquilo into deep sleep only to awaken in a desolate, post-apocalyptic landscape that bears little resemblance to home.</p>
-        <p>The heart of LUMIN lies in its conversational mechanics. Progress is driven by engaging with the environment and its inhabitants to gather clues, uncover deep lore, and unlock mission objectives that directly impact Aquilo’s goal of saving the world.</p>
+        <p>Playing 1st time in Web might take time. LUMIN is a compelling 2D narrative prototype that casts you as Aquilo, a young man whose college commute turns into an impossible, decades-long journey. A mysterious cryo-disaster overtakes the world, forcing Aquilo into deep sleep only to awaken in a desolate, post-apocalyptic landscape that bears little resemblance to home.</p>
 
-        <!-- AI NPC SYSTEM -->
-        <h2>Dynamic AI & API Integration</h2>
-        <p>I served as the core gameplay programmer on this project, handling 80% of the game's logic. To support the core clue-gathering mechanics, I engineered a fully interactive, dynamic NPC chat system from scratch.</p>
-        <p>Instead of relying on pre-written dialogue trees, I integrated Google's Gemini API directly into the engine. By securely handling web requests, parsing JSON data, and feeding it into the UI in real-time, the NPCs can dynamically generate unique and unpredictable dialogue based on predefined personality traits. Every conversation is a potential clue, forcing players to actively extract critical historical information.</p>
+        <!-- CORE NARRATIVE AND MECHANICS -->
+        <h2>Core Narrative and Mechanics</h2>
+        <p>The heart of LUMIN lies in its conversational mechanics. The player must actively engage with the environment and its inhabitants to drive the story forward.</p>
         
-        <!-- Restored Images -->
+        <ul class="mechanics-list">
+            <li><strong>Dynamic AI Interaction:</strong> Converse with NPCs featuring AI-generated dialogue and voice implementation, ensuring that conversations are unique, responsive, and often unpredictable.</li>
+            <li><strong>Clue Gathering:</strong> Every line of dialogue is a potential clue. Players must focus on extracting critical clues and historical information to piece together the events that destroyed civilization.</li>
+            <li><strong>Mission System:</strong> Progress is driven by conversational outcomes. NPCs provide essential tasks that unlock new areas, reveal deep lore, and directly impact Aquilo’s core objective: saving the world.</li>
+        </ul>
+
+        <!-- AI NPC SYSTEM & TOOLS (Second Video & Images) -->
+        <h2>Dynamic LLM Chat & Prompt System</h2>
+        <p>To support these mechanics, I engineered a fully interactive NPC chat system from scratch by integrating Google's Gemini API directly into the game. This backend pipeline handles secure web requests, parses the JSON responses, and drives the real-time UI without stalling the main thread.</p>
+        
+        <!-- 2. AI CHAT SYSTEM SHOWCASE (Second Video) -->
+        <video class="showcase-media" controls autoplay loop muted>
+            <source src="lumen_chat_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <!-- API & UI Screenshots -->
         <img src="lumen_ui.jpg" alt="Dynamic Chat System UI Interface" class="image-full">
         <img src="lumen_api_code.jpg" alt="API Integration Backend Code" class="image-full">
-        
-        <!-- NARRATIVE SYSTEMS -->
-        <h2>Journal & Mission Systems</h2>
-        <p>Alongside the AI integration, I engineered the underlying logic that supports the narrative. This includes a dynamic journal system that tracks player progress, organizes gathered clues, and updates real-time mission logs without frame-drops or memory leaks during serialization.</p>
 
     </div>
 
