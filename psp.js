@@ -551,12 +551,26 @@ function init() {
       pressLightLife = 1;
     }
 
-    // Start Sequence
+    // Start Sequence with Boot Delay
     if (!isStarted) {
         if (role === 'cross' || role === 'screen' || role === 'start') {
             isStarted = true;
             powerOn();
-            select(0, 0); // Start at Tech Art, First Item
+            
+            // Draw a temporary booting screen directly on the canvas
+            sctx.fillStyle = '#000000';
+            sctx.fillRect(0, 0, 960, 544);
+            sctx.textBaseline = 'middle';
+            sctx.textAlign = 'center';
+            sctx.font = '40px "VT323", monospace';
+            sctx.fillStyle = '#7fe3ff';
+            sctx.fillText("> BOOTING SHUTTERKIF OS...", 480, 272);
+            screenTex.needsUpdate = true;
+
+            // Wait 2 seconds, then load the actual first project
+            setTimeout(() => {
+                select(0, 0); // Start at Tech Art, First Item
+            }, 2000);
         }
         return;
     }
