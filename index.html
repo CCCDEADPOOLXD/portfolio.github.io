@@ -50,126 +50,67 @@
         .hero-text h1 { font-size: 4.5rem; margin: 0; font-weight: 900; letter-spacing: -2px; color: #fff; text-transform: uppercase; }
         .hero-text p { font-size: 1.2rem; color: var(--persona-red); letter-spacing: 4px; text-transform: uppercase; margin-top: 10px; font-weight: 700; }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+        @keyframes fadeIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+
+        /* PERSONA FLASHCARD CSS */
+        .persona-box {
+            position: relative; transform: skewX(-15deg); margin-bottom: 15px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); clear: both;
         }
+        .persona-box::before {
+            content: ''; position: absolute; top: 4px; left: -4px; width: 100%; height: 100%;
+            background-color: #000; transform: skewX(10deg); z-index: -1;
+            transition: all 0.3s ease; box-shadow: 0 0 10px rgba(0,0,0,0.8);
+        }
+        .persona-content {
+            background-color: var(--persona-white); color: var(--persona-black);
+            padding: 8px 20px; font-weight: 900; font-size: 1.2rem; text-transform: uppercase;
+            letter-spacing: 1px; display: inline-block; transition: all 0.3s ease;
+        }
+        
+        /* Applying Persona Style to HTML Headers */
+        .section-header-box { display: inline-block; margin-bottom: 40px; }
+        .section-header-box .persona-content { font-size: 2.5rem; padding: 10px 30px; background: var(--persona-red); color: white;}
+        .section-header-box::before { background: white; transform: skewX(5deg); top: 6px; left: -6px; }
 
         .about-section { background-color: #080808; padding: 80px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .about-content { max-width: 800px; margin: 0 auto; line-height: 1.8; font-size: 1.1rem; color: #ccc; }
         .about-section h2 { font-size: 2.5rem; margin-top: 0; color: #fff; font-weight: 900; margin-bottom: 20px; text-transform: uppercase;}
 
-        /* OPTIMIZED HORIZONTAL SKILLS */
         .skills-section { padding: 60px 20px; background-color: #050505; text-align: center; }
-        .skills-section h2 { font-size: 2.5rem; margin-top: 0; margin-bottom: 30px; font-weight: 900; color: #fff; text-transform: uppercase;}
         .skill-category { max-width: 1100px; margin: 0 auto 30px auto; text-align: left; background: rgba(255,255,255,0.02); padding: 20px; border-radius: 8px; border-left: 4px solid var(--persona-red);}
         .skill-category h3 { color: #fff; font-size: 1.1rem; margin-top: 0; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;}
         .bubble-container { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 12px; }
-
-        .bubble {
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 6px; padding: 8px 12px;
-            transition: all 0.2s ease; color: #bbb;
-            display: flex; align-items: center; gap: 8px;
-            font-weight: 600; font-size: 0.85rem;
-        }
+        .bubble { background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 8px 12px; transition: all 0.2s ease; color: #bbb; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.85rem; }
         .bubble i { font-size: 1.2rem; color: #fff; }
         .bubble:hover { border-color: var(--persona-red); color: #fff; background-color: rgba(230, 0, 18, 0.1); transform: translateY(-2px); }
         .bubble:hover i { color: var(--persona-red); }
 
-        /* PERSONA / XMB UI SHELL */
-        .machine {
-            position: relative; width: 100%; height: 110vh;
-            background-color: #020202; display: flex;
-            align-items: center; justify-content: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            overflow: hidden;
-        }
+        .machine { position: relative; width: 100%; height: 110vh; background-color: #020202; display: flex; align-items: center; justify-content: center; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); overflow: hidden; }
         .machine__stage { position: relative; width: 100%; height: 100%; z-index: 5; }
         #pspCanvas { width: 100%; height: 100%; display: block; outline: none; cursor: grab; }
         #pspCanvas:active { cursor: grabbing; }
 
-        /* PERSONA FLASHCARD CSS (The 2-Color Combine Effect) */
-        .persona-box {
-            position: relative;
-            transform: skewX(-15deg);
-            margin-bottom: 15px;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            clear: both;
-        }
-        /* The Black Background Shadow (Different Shape) */
-        .persona-box::before {
-            content: ''; position: absolute;
-            top: 4px; left: -4px; width: 100%; height: 100%;
-            background-color: #000;
-            transform: skewX(10deg); /* Counter skew creates the jagged offset */
-            z-index: -1;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(0,0,0,0.8);
-        }
-        /* The Foreground Red Box */
-        .persona-content {
-            background-color: var(--persona-white);
-            color: var(--persona-black);
-            padding: 8px 20px;
-            font-weight: 900; font-size: 1.2rem; text-transform: uppercase;
-            letter-spacing: 1px; display: inline-block;
-            transition: all 0.3s ease;
-        }
-
-        /* Left Side Menu */
-        .ui-left-menu {
-            position: absolute; left: 40px; top: 50%; transform: translateY(-50%);
-            z-index: 10; display: flex; flex-direction: column; align-items: flex-start;
-            pointer-events: none;
-        }
-        .ui-left-menu .persona-box {
-            opacity: 0.4; transform: skewX(-15deg) scale(0.8); transform-origin: left center;
-        }
-        .ui-left-menu .persona-box.active {
-            opacity: 1; transform: skewX(-15deg) scale(1.2);
-        }
+        .ui-left-menu { position: absolute; left: 40px; top: 50%; transform: translateY(-50%); z-index: 10; display: flex; flex-direction: column; align-items: flex-start; pointer-events: none; }
+        .ui-left-menu .persona-box { opacity: 0.4; transform: skewX(-15deg) scale(0.8); transform-origin: left center; }
+        .ui-left-menu .persona-box.active { opacity: 1; transform: skewX(-15deg) scale(1.2); }
         .ui-left-menu .persona-box.active .persona-content { background-color: var(--persona-red); color: #fff; }
         .ui-left-menu .persona-box.active::before { top: 8px; left: -8px; transform: skewX(15deg); }
 
-        /* Right Side Instructions */
-        .ui-right-instructions {
-            position: absolute; right: 40px; bottom: 60px;
-            z-index: 10; display: flex; flex-direction: column; align-items: flex-end;
-            pointer-events: none;
-        }
-        .ui-right-instructions .persona-box {
-            opacity: 0; transform: translateX(20px) skewX(-15deg);
-        }
-        .ui-right-instructions .persona-box.visible {
-            opacity: 1; transform: translateX(0) skewX(-15deg);
-        }
-        .ui-right-instructions .persona-box .persona-content {
-            background-color: var(--persona-black); color: #fff; border: 2px solid var(--persona-red);
-            font-size: 0.9rem;
-        }
+        .ui-right-instructions { position: absolute; right: 40px; bottom: 60px; z-index: 10; display: flex; flex-direction: column; align-items: flex-end; pointer-events: none; }
+        .ui-right-instructions .persona-box { opacity: 0; transform: translateX(20px) skewX(-15deg); }
+        .ui-right-instructions .persona-box.visible { opacity: 1; transform: translateX(0) skewX(-15deg); }
+        .ui-right-instructions .persona-box .persona-content { background-color: var(--persona-black); color: #fff; border: 2px solid var(--persona-red); font-size: 0.9rem; }
         .ui-right-instructions .persona-box::before { background-color: var(--persona-red); transform: skewX(5deg); top: 3px; left: -3px;}
         .btn-icon { color: var(--persona-red); font-size: 1.2rem; margin-right: 8px; }
 
-        /* Top Counter */
-        .ui-counter {
-            position: absolute; top: 40px; right: 40px; z-index: 10;
-            font-family: 'VT323', monospace; font-size: 3.5rem; color: var(--persona-red);
-            text-shadow: 2px 2px 0 #000;
-        }
+        .ui-counter { position: absolute; top: 40px; right: 40px; z-index: 10; font-family: 'VT323', monospace; font-size: 3.5rem; color: var(--persona-red); text-shadow: 2px 2px 0 #000; }
         .ui-counter span { color: rgba(255,255,255,0.5); font-size: 2rem; text-shadow: none; }
 
-        .projects-section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; }
-        .section-title { font-size: 2.5rem; text-align: center; margin-bottom: 60px; font-weight: 900; color: #fff; text-transform: uppercase;}
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        .projects-section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; text-align: center;}
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; text-align: left;}
         
-        .project-card {
-            background-color: #0a0a0a; border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 4px; text-decoration: none; color: #ddd;
-            overflow: hidden; transition: transform 0.3s, border-color 0.3s; display: block;
-        }
+        .project-card { background-color: #0a0a0a; border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; text-decoration: none; color: #ddd; overflow: hidden; transition: transform 0.3s, border-color 0.3s; display: block; }
         .project-card:hover { transform: translateY(-5px); border-color: var(--persona-red); }
         .card-image-container { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #000; }
         .card-image-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
@@ -177,17 +118,18 @@
         .card-details { padding: 25px; }
         .card-details h3 { margin: 0 0 10px 0; color: #fff; font-size: 1.4rem; font-weight: 900; text-transform: uppercase;}
         .card-details p { margin: 0 0 15px 0; font-size: 0.95rem; color: #aaa; line-height: 1.6; }
-        
+        .tech-tags { margin-bottom: 15px; display: flex; gap: 5px; flex-wrap: wrap; }
+        .tag { display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; color: #fff; letter-spacing: 1px; text-transform: uppercase; }
+        .tag.blue { background-color: rgba(74, 105, 189, 0.3); border: 1px solid #4a69bd; color: #a2baf5;}
+        .tag.red { background-color: rgba(229, 80, 57, 0.3); border: 1px solid #e55039; color: #ff9f8e;}
+        .tag.purple { background-color: rgba(142, 68, 173, 0.3); border: 1px solid #8e44ad; color: #d69df0;}
+        .tag.gold { background-color: rgba(243, 156, 18, 0.3); border: 1px solid #f39c12; color: #ffc966;}
+        .tag.green { background-color: rgba(39, 174, 96, 0.3); border: 1px solid #27ae60; color: #82cc9f;}
+
         .contact-section { padding: 80px 20px; text-align: center; background-color: #050505; border-top: 1px solid rgba(255,255,255,0.05); }
-        .contact-section h2 { font-weight: 900; margin-bottom: 40px; color: #fff; text-transform: uppercase;}
         .contact-links { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .contact-btn {
-            background-color: transparent; color: #fff; padding: 12px 25px;
-            text-decoration: none; font-size: 1rem; font-weight: 700;
-            border: 2px solid rgba(255,255,255,0.2); transform: skewX(-10deg);
-            transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;
-        }
-        .contact-btn span { transform: skewX(10deg); } /* Unskew text */
+        .contact-btn { background-color: transparent; color: #fff; padding: 12px 25px; text-decoration: none; font-size: 1rem; font-weight: 700; border: 2px solid rgba(255,255,255,0.2); transform: skewX(-10deg); transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; }
+        .contact-btn span { transform: skewX(10deg); }
         .contact-btn:hover { background-color: var(--persona-red); color: #fff; border-color: var(--persona-red); }
     </style>
 </head>
@@ -202,7 +144,7 @@
     </nav>
 
     <div id="hero" class="hero">
-        <video autoplay loop muted playsinline><source src="lumen_showcase.mp4" type="video/mp4"></video>
+        <video id="hero-video" autoplay loop muted playsinline><source src="lumen_showcase.mp4" type="video/mp4"></video>
         <div class="hero-text">
             <h1>NITANT NAMDEO</h1>
             <p>Technical Artist · Systems Programmer</p>
@@ -211,15 +153,14 @@
 
     <div id="about" class="about-section">
         <div class="about-content">
-            <h2>About Me</h2>
+            <div class="persona-box section-header-box"><div class="persona-content">ABOUT ME</div></div>
             <p>Hi! I am Nitant, a Technical Artist and Game Programmer. I specialize in bridging the gap between engineering and art, heavily focusing on Unity, custom C# tool development, and mobile optimization.</p>
             <p>Currently pursuing a B.Design in Game Design and Development and serving as a GDAI Student Ambassador. I have a strong perseverance for learning new rendering techniques and building tight, optimized systems for both visual fidelity and gameplay performance.</p>
         </div>
     </div>
 
-    <!-- HORIZONTAL SKILLS SECTION -->
     <div id="skills" class="skills-section">
-        <h2>Technical Arsenal</h2>
+        <div class="persona-box section-header-box"><div class="persona-content">TECHNICAL ARSENAL</div></div>
         
         <div class="skill-category">
             <h3>Engines & Tools</h3>
@@ -257,8 +198,6 @@
 
     <!-- 3D PSP OS -->
     <div id="psp-os" class="machine">
-        
-        <!-- Left Side Persona Menu -->
         <div class="ui-left-menu" id="uiLeftMenu">
             <div class="persona-box" id="cat-0"><div class="persona-content">01 ABOUT ME</div></div>
             <div class="persona-box" id="cat-1"><div class="persona-content">02 TECH ART</div></div>
@@ -266,31 +205,27 @@
             <div class="persona-box" id="cat-3"><div class="persona-content">04 VIDEOS</div></div>
         </div>
 
-        <!-- Right Side Dynamic Instructions -->
         <div class="ui-right-instructions" id="uiInstructions">
-            <!-- Initial Pre-Boot Instruction -->
             <div class="persona-box visible" id="preboot-inst">
                 <div class="persona-content"><span class="btn-icon"><i class="fa-solid fa-xmark"></i></span> BOOT OS</div>
             </div>
         </div>
 
-        <!-- Top Right Rail Counter -->
         <div class="ui-counter" id="uiCounterWrap" style="opacity: 0;">
             <span id="uiCountIdx">01</span><span id="uiCountTot">/01</span>
         </div>
 
-        <div class="machine__stage">
-            <canvas id="pspCanvas"></canvas>
-        </div>
+        <div class="machine__stage"><canvas id="pspCanvas"></canvas></div>
     </div>
 
     <!-- FEATURED TECH ART -->
     <div id="featured" class="projects-section">
-        <h2 class="section-title">Featured Tech Art</h2>
+        <div class="persona-box section-header-box"><div class="persona-content">FEATURED TECH ART</div></div>
         <div class="project-grid">
             <a href="showcase-shaders.html" class="project-card">
                 <div class="card-image-container"><img src="showcase_shader.jpg" alt="Shader Showcase"></div>
                 <div class="card-details">
+                    <div class="tech-tags"><span class="tag red">HLSL</span><span class="tag gold">Shader Graph</span></div>
                     <h3>Shader Development</h3>
                     <p>Custom rendering solutions including thermal vision, stylized Sobel outlines, and interactive materials.</p>
                 </div>
@@ -298,6 +233,7 @@
             <a href="showcase-vfx.html" class="project-card">
                 <div class="card-image-container"><img src="showcase_vfx.jpg" alt="VFX Showcase"></div>
                 <div class="card-details">
+                    <div class="tech-tags"><span class="tag purple">VFX Graph</span><span class="tag blue">Shuriken</span></div>
                     <h3>VFX & Particles</h3>
                     <p>Dynamic combat impact frames, lava simulations, and optimized particle systems for mobile and PC.</p>
                 </div>
@@ -305,6 +241,7 @@
             <a href="showcase-tools.html" class="project-card">
                 <div class="card-image-container"><img src="showcase_tools.jpg" alt="Tools Showcase"></div>
                 <div class="card-details">
+                    <div class="tech-tags"><span class="tag blue">C#</span><span class="tag red">Pipelines</span></div>
                     <h3>Custom Editor Tools</h3>
                     <p>Node-based graph editors and modular pipelines designed to accelerate workflows.</p>
                 </div>
@@ -314,11 +251,12 @@
 
     <!-- PROJECTS -->
     <div id="projects" class="projects-section" style="padding-top: 0;">
-        <h2 class="section-title">Personal Projects</h2>
+        <div class="persona-box section-header-box"><div class="persona-content">PERSONAL PROJECTS</div></div>
         <div class="project-grid">
             <a href="project-knuckle.html" class="project-card">
                 <div class="card-image-container"><img src="knuckle_square.jpg" alt="Knuckle"></div>
                 <div class="card-details">
+                    <div class="tech-tags"><span class="tag blue">Pipeline Tools</span><span class="tag purple">VFX Graph</span></div>
                     <h3>Knuckle</h3>
                     <p>A custom node-based graph pipeline allowing designers to rapidly create combat combos.</p>
                 </div>
@@ -326,13 +264,31 @@
             <a href="project-lumen.html" class="project-card">
                 <div class="card-image-container"><img src="lumen_square.jpg" alt="Lumen API Integration"></div>
                 <div class="card-details">
-                    <h3>Lumin</h3>
+                    <div class="tech-tags"><span class="tag blue">Systems Engineering</span><span class="tag red">API Integration</span></div>
+                    <h3>Lumen</h3>
                     <p>Integrated the Gemini API to power dynamic narrative systems and real-time NPC UI chat.</p>
+                </div>
+            </a>
+            <a href="project-unreal.html" class="project-card">
+                <div class="card-image-container"><img src="unreal_square.jpg" alt="Unreal PCG Environment"></div>
+                <div class="card-details">
+                    <div class="tech-tags"><span class="tag green">PCG</span><span class="tag purple">Lighting</span></div>
+                    <h3>Unreal Environment Design</h3>
+                    <p>A high-fidelity environment built in Unreal Engine utilizing Procedural Content Generation.</p>
+                </div>
+            </a>
+            <a href="project-film.html" class="project-card">
+                <div class="card-image-container"><img src="film_square.jpg" alt="Cinematic Lighting"></div>
+                <div class="card-details">
+                    <div class="tech-tags"><span class="tag purple">Lighting</span><span class="tag blue">Art Direction</span></div>
+                    <h3>Cinematic Lighting</h3>
+                    <p>Supervised the lighting and visual vibe for a cinematic short film for high-fidelity renders.</p>
                 </div>
             </a>
             <a href="project-heli.html" class="project-card">
                 <div class="card-image-container"><img src="heli_square.jpg" alt="Rotor Warfare Game"></div>
                 <div class="card-details">
+                    <div class="tech-tags"><span class="tag blue">Netcode</span><span class="tag red">Custom Shaders</span></div>
                     <h3>Rotor Warfare</h3>
                     <p>An asymmetric cross-platform multiplayer game featuring thermal vision and optimized VFX.</p>
                 </div>
@@ -342,7 +298,7 @@
 
     <!-- CONTACT -->
     <div id="contact" class="contact-section">
-        <h2>Contact Me</h2>
+        <div class="persona-box section-header-box"><div class="persona-content">CONTACT ME</div></div>
         <div class="contact-links">
             <a href="mailto:nitantnamdeo03@gmail.com" class="contact-btn"><span><i class="fa-solid fa-envelope"></i> EMAIL</span></a>
             <a href="https://github.com/CCCDEADPOOLXD" target="_blank" class="contact-btn"><span><i class="devicon-github-original"></i> GITHUB</span></a>
