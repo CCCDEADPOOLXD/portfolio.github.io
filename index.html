@@ -5,219 +5,191 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nitant Namdeo | Technical Artist</title>
     
-    <!-- Google Fonts for Retro PSP Text and Clean UI Text -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=VT323&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome (Icons) & Devicon (Tech Stack Logos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 
     <style>
-        /* GLOBAL STYLES & CINEMATIC VIBE */
+        /* GLOBAL STYLES */
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             font-family: 'Inter', sans-serif;
-            background-color: #05070a; /* Deep cinematic black/blue */
+            background-color: #05070a;
             color: #e0e0e0;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         /* NAVIGATION BAR */
         nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: rgba(5, 7, 10, 0.8);
+            position: fixed; top: 0; width: 100%;
+            background-color: rgba(5, 7, 10, 0.9);
             backdrop-filter: blur(10px);
-            padding: 15px 0;
-            text-align: center;
+            padding: 15px 0; text-align: center;
             z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 20px;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            color: #fff; text-decoration: none;
+            margin: 0 15px; font-size: 13px;
+            text-transform: uppercase; letter-spacing: 2px;
             transition: color 0.3s;
         }
         nav a:hover { color: #7fe3ff; }
 
         /* HERO SECTION */
         .hero {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #000;
-            overflow: hidden;
+            position: relative; width: 100%; height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            background-color: #000; overflow: hidden;
         }
         .hero video {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.25; /* Dimmed for cinematic text overlay */
-            pointer-events: none;
+            position: absolute; width: 100%; height: 100%;
+            object-fit: cover; opacity: 0.3; pointer-events: none;
         }
-        .hero-text {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            animation: fadeIn 2s ease-out;
-        }
-        .hero-text h1 { 
-            font-size: 4.5rem; 
-            margin: 0; 
-            font-weight: 700;
-            letter-spacing: -2px;
-            color: #fff;
-        }
-        .hero-text p { 
-            font-size: 1.2rem; 
-            color: #7fe3ff; 
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-top: 10px;
-        }
-        
+        .hero-text { position: relative; z-index: 1; text-align: center; animation: fadeIn 2s ease-out; }
+        .hero-text h1 { font-size: 4.5rem; margin: 0; font-weight: 700; letter-spacing: -2px; color: #fff; }
+        .hero-text p { font-size: 1.2rem; color: #7fe3ff; letter-spacing: 4px; text-transform: uppercase; margin-top: 10px; }
+
         @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
+        /* ABOUT SECTION */
+        .about-section {
+            background-color: #080b10; padding: 80px 20px;
+            text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .about-content { max-width: 800px; margin: 0 auto; line-height: 1.8; font-size: 1.1rem; color: #ccc; }
+        .about-section h2 { font-size: 2.5rem; margin-top: 0; color: #fff; font-weight: 300; margin-bottom: 20px;}
+
+        /* SKILLS SECTION */
+        .skills-section {
+            padding: 80px 20px; background-color: #05070a; text-align: center;
+        }
+        .skills-section h2 { font-size: 2.5rem; margin-top: 0; margin-bottom: 10px; font-weight: 300; color: #fff;}
+        .skill-category { max-width: 900px; margin: 30px auto; text-align: center; }
+        .skill-category h3 { color: #7fe3ff; font-size: 1.2rem; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;}
+        .bubble-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+        .bubble {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px; padding: 10px 20px;
+            cursor: pointer; user-select: none;
+            transition: all 0.3s ease; color: #ccc;
+            animation: float 4s ease-in-out infinite;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .bubble i { font-size: 1.2rem; }
+        .bubble:nth-child(even) { animation-delay: 1s; animation-duration: 3.5s; }
+        .bubble:nth-child(3n) { animation-delay: 2s; animation-duration: 4.5s; }
+        .bubble:hover { border-color: #7fe3ff; color: #fff; background-color: rgba(127, 227, 255, 0.1); transform: translateY(-3px); }
+
         /* 3D PSP MACHINE SECTION */
         .machine {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            background-color: #05070a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: relative; width: 100%; height: 100vh;
+            background-color: #020305; display: flex;
+            align-items: center; justify-content: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            overflow: hidden;
         }
-        .machine__stage {
-            position: relative;
-            width: 100%;
-            height: 100%;
+        .machine__stage { position: relative; width: 100%; height: 100%; }
+        #pspCanvas { width: 100%; height: 100%; display: block; outline: none; cursor: grab; }
+        #pspCanvas:active { cursor: grabbing; }
+        
+        /* Drag Hints */
+        .drag-hint {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            color: rgba(255,255,255,0.2); font-size: 0.8rem; letter-spacing: 4px;
+            pointer-events: none; text-transform: uppercase;
         }
-        #pspCanvas {
-            width: 100%;
-            height: 100%;
-            display: block;
-            outline: none;
-            cursor: grab;
-        }
-        #pspCanvas:active {
-            cursor: grabbing;
-        }
+        .drag-hint.left { left: 40px; writing-mode: vertical-rl; transform: translateY(-50%) rotate(180deg); }
+        .drag-hint.right { right: 40px; writing-mode: vertical-rl; }
+
         .machine-hint {
-            position: absolute;
-            bottom: 30px;
-            width: 100%;
-            text-align: center;
-            pointer-events: none;
-            color: rgba(255,255,255,0.4);
-            font-size: 0.9rem;
-            letter-spacing: 2px;
+            position: absolute; bottom: 30px; width: 100%;
+            text-align: center; pointer-events: none;
+            color: rgba(255,255,255,0.5); font-size: 0.9rem; letter-spacing: 2px;
         }
+        .machine-hint i { color: #7fe3ff; margin-right: 5px; }
         .machine-hint kbd {
-            background: rgba(255,255,255,0.1);
-            padding: 4px 8px;
-            border-radius: 4px;
-            margin: 0 5px;
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            padding: 2px 8px; border-radius: 4px; margin: 0 5px; color: #7fe3ff;
             font-family: inherit;
         }
 
-        /* FALLBACK GRID SECTION */
-        .projects-section {
-            padding: 100px 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 60px;
-            font-weight: 300;
-        }
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-        }
+        /* PROJECTS GRID */
+        .projects-section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; }
+        .section-title { font-size: 2.5rem; text-align: center; margin-bottom: 60px; font-weight: 300; color: #fff;}
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        
         .project-card {
-            background-color: #0a0e14;
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 8px;
-            text-decoration: none;
-            color: #ddd;
-            overflow: hidden;
-            transition: transform 0.3s, border-color 0.3s;
+            background-color: #0a0e14; border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px; text-decoration: none; color: #ddd;
+            overflow: hidden; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
             display: block;
         }
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: #7fe3ff;
+        .project-card:hover { transform: translateY(-5px); border-color: #7fe3ff; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .card-image-container { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #000; }
+        .card-image-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .project-card:hover .card-image-container img { transform: scale(1.05); }
+        
+        .card-details { padding: 25px; }
+        .card-details h3 { margin: 0 0 10px 0; color: #fff; font-size: 1.4rem; }
+        .card-details p { margin: 0 0 15px 0; font-size: 0.95rem; color: #aaa; line-height: 1.6; }
+        
+        .tech-tags { margin-bottom: 15px; display: flex; gap: 5px; flex-wrap: wrap; }
+        .tag {
+            display: inline-block; padding: 4px 10px; border-radius: 4px;
+            font-size: 11px; font-weight: bold; color: #fff; letter-spacing: 1px; text-transform: uppercase;
         }
-        .card-image {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .card-info { padding: 25px; }
-        .card-info h3 { margin: 0 0 10px 0; color: #fff; font-size: 1.4rem; }
-        .card-info p { margin: 0; font-size: 0.95rem; color: #888; line-height: 1.6; }
+        .tag.blue { background-color: rgba(74, 105, 189, 0.3); border: 1px solid #4a69bd; color: #a2baf5;}
+        .tag.red { background-color: rgba(229, 80, 57, 0.3); border: 1px solid #e55039; color: #ff9f8e;}
+        .tag.purple { background-color: rgba(142, 68, 173, 0.3); border: 1px solid #8e44ad; color: #d69df0;}
+        .tag.gold { background-color: rgba(243, 156, 18, 0.3); border: 1px solid #f39c12; color: #ffc966;}
 
         /* CONTACT SECTION */
         .contact-section {
-            padding: 80px 20px;
-            text-align: center;
-            background-color: #020305;
+            padding: 80px 20px; text-align: center; background-color: #020305;
             border-top: 1px solid rgba(255,255,255,0.05);
         }
-        .contact-section h2 { font-weight: 300; margin-bottom: 40px; }
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
+        .contact-section h2 { font-weight: 300; margin-bottom: 40px; color: #fff;}
+        .contact-links { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         .contact-btn {
-            background-color: transparent;
-            color: #fff;
-            padding: 12px 30px;
-            text-decoration: none;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 30px;
-            transition: all 0.3s ease;
+            background-color: transparent; color: #fff; padding: 12px 25px;
+            text-decoration: none; font-size: 1rem; letter-spacing: 1px;
+            border: 1px solid rgba(255,255,255,0.2); border-radius: 4px;
+            transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;
         }
-        .contact-btn:hover {
-            background-color: #7fe3ff;
-            color: #000;
-            border-color: #7fe3ff;
-        }
+        .contact-btn:hover { background-color: #7fe3ff; color: #000; border-color: #7fe3ff; }
     </style>
 </head>
 <body>
 
     <!-- NAVIGATION -->
     <nav>
-        <a href="#hero">Home</a>
-        <a href="#interactive">Interactive OS</a>
-        <a href="#archive">Archive</a>
-        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#psp-os">Interactive OS</a>
+        <a href="#featured">Tech Art</a>
+        <a href="#projects">Projects</a>
     </nav>
 
-    <!-- CINEMATIC HERO -->
+    <!-- HERO -->
     <div id="hero" class="hero">
-        <!-- Dimmed background loop -->
         <video autoplay loop muted playsinline>
             <source src="lumen_showcase.mp4" type="video/mp4">
         </video>
@@ -227,71 +199,173 @@
         </div>
     </div>
 
-    <!-- 3D INTERACTIVE PSP SECTION -->
-    <div id="interactive" class="machine">
-        <div class="machine__stage">
-            <canvas id="pspCanvas"></canvas>
-            <div id="pspLoading" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#7fe3ff; font-family:'VT323', monospace; font-size: 1.5rem; pointer-events: none;">
-                BOOTING OS...
+    <!-- ABOUT -->
+    <div id="about" class="about-section">
+        <div class="about-content">
+            <h2>About Me</h2>
+            <p>Hi! I am Nitant, a Technical Artist and Game Programmer. I specialize in bridging the gap between engineering and art, heavily focusing on Unity, custom C# tool development, and mobile optimization.</p>
+            <p>Currently pursuing a B.Design in Game Design and Development and serving as a GDAI Student Ambassador. I have a strong perseverance for learning new rendering techniques and building tight, optimized systems for both visual fidelity and gameplay performance.</p>
+        </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div id="skills" class="skills-section">
+        <h2>Technical Arsenal</h2>
+        
+        <div class="skill-category">
+            <h3>Engines & Tools</h3>
+            <div class="bubble-container">
+                <div class="bubble"><i class="devicon-unity-original"></i> Unity</div>
+                <div class="bubble"><i class="devicon-unrealengine-original"></i> Unreal Engine</div>
+                <div class="bubble"><i class="devicon-maya-plain"></i> Maya</div>
+                <div class="bubble"><i class="fa-solid fa-code-branch"></i> Visual Scripting</div>
             </div>
         </div>
+
+        <div class="skill-category">
+            <h3>Programming</h3>
+            <div class="bubble-container">
+                <div class="bubble"><i class="devicon-csharp-plain"></i> OOP in C#</div>
+                <div class="bubble"><i class="fa-solid fa-robot"></i> AI Implementation</div>
+                <div class="bubble"><i class="devicon-git-plain"></i> Git Version Control</div>
+            </div>
+        </div>
+
+        <div class="skill-category">
+            <h3>Technical Art</h3>
+            <div class="bubble-container">
+                <div class="bubble"><i class="fa-solid fa-wand-magic-sparkles"></i> Shader Development</div>
+                <div class="bubble"><i class="fa-solid fa-fire-flame-curved"></i> VFX Graph & Shuriken</div>
+                <div class="bubble"><i class="fa-solid fa-mobile-screen-button"></i> Game Optimization</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3D PSP -->
+    <div id="psp-os" class="machine">
+        <div class="drag-hint left"><span>DRAG TO ROTATE</span></div>
+        <div class="machine__stage">
+            <canvas id="pspCanvas"></canvas>
+        </div>
+        <div class="drag-hint right"><span>DRAG TO ROTATE</span></div>
         <div class="machine-hint">
-            <kbd>W</kbd> <kbd>S</kbd> to change category · <kbd>A</kbd> <kbd>D</kbd> to navigate · <kbd>X</kbd> to select
+            <i class="fa-solid fa-caret-up"></i><i class="fa-solid fa-caret-down"></i> Category &nbsp;&nbsp;&nbsp;
+            <i class="fa-solid fa-caret-left"></i><i class="fa-solid fa-caret-right"></i> Navigate &nbsp;&nbsp;&nbsp;
+            <kbd>X</kbd> Select
         </div>
     </div>
 
-    <!-- FALLBACK PROJECT ARCHIVE -->
-    <div id="archive" class="projects-section">
-        <h2 class="section-title">The Archive</h2>
-        
+    <!-- FEATURED TECH ART -->
+    <div id="featured" class="projects-section">
+        <h2 class="section-title">Featured Tech Art</h2>
         <div class="project-grid">
-            <a href="project-lumen.html" class="project-card">
-                <img src="lumen_square.jpg" alt="Lumen" class="card-image">
-                <div class="card-info">
-                    <h3>Lumen AI Integration</h3>
-                    <p>Real-time LLM chat systems bridging the gap between Gemini API backend logic and Unity UI.</p>
-                </div>
-            </a>
-            
-            <a href="project-knuckle.html" class="project-card">
-                <img src="knuckle_square.jpg" alt="Knuckle-House" class="card-image">
-                <div class="card-info">
-                    <h3>Knuckle-House</h3>
-                    <p>Node-based custom combo pipeline tools and high-impact VFX for a 3D brawler.</p>
-                </div>
-            </a>
-
+            <!-- SHADERS -->
             <a href="showcase-shaders.html" class="project-card">
-                <img src="showcase_shader.jpg" alt="Shaders" class="card-image">
-                <div class="card-info">
+                <div class="card-image-container">
+                    <img src="showcase_shader.jpg" alt="Shader Showcase">
+                </div>
+                <div class="card-details">
+                    <div class="tech-tags">
+                        <span class="tag red">HLSL</span>
+                        <span class="tag gold">Shader Graph</span>
+                    </div>
                     <h3>Shader Development</h3>
-                    <p>Custom rendering solutions including Sobel edge-detection and thermal vision.</p>
+                    <p>Custom rendering solutions including thermal vision, stylized Sobel outlines, and interactive environmental materials.</p>
                 </div>
             </a>
-            
+            <!-- VFX -->
+            <a href="showcase-vfx.html" class="project-card">
+                <div class="card-image-container">
+                    <img src="showcase_vfx.jpg" alt="VFX Showcase">
+                </div>
+                <div class="card-details">
+                    <div class="tech-tags">
+                        <span class="tag purple">VFX Graph</span>
+                        <span class="tag blue">Shuriken</span>
+                    </div>
+                    <h3>VFX & Particles</h3>
+                    <p>Dynamic combat impact frames, lava simulations, and optimized particle systems for mobile and PC.</p>
+                </div>
+            </a>
+            <!-- TOOLS -->
+            <a href="showcase-tools.html" class="project-card">
+                <div class="card-image-container">
+                    <img src="showcase_tools.jpg" alt="Tools Showcase">
+                </div>
+                <div class="card-details">
+                    <div class="tech-tags">
+                        <span class="tag blue">C#</span>
+                        <span class="tag red">Pipelines</span>
+                    </div>
+                    <h3>Custom Editor Tools</h3>
+                    <p>Node-based graph editors and modular pipelines designed to accelerate workflows for designers and artists.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div id="projects" class="projects-section" style="padding-top: 0;">
+        <h2 class="section-title">Personal Projects</h2>
+        <div class="project-grid">
+            <!-- KNUCKLE -->
+            <a href="project-knuckle.html" class="project-card">
+                <div class="card-image-container">
+                    <img src="knuckle_square.jpg" alt="Knuckle">
+                </div>
+                <div class="card-details">
+                    <div class="tech-tags">
+                        <span class="tag blue">Pipeline Tools</span>
+                        <span class="tag purple">VFX Graph</span>
+                    </div>
+                    <h3>Knuckle</h3>
+                    <p>A custom node-based graph pipeline allowing designers to rapidly create combat combos.</p>
+                </div>
+            </a>
+            <!-- LUMEN -->
+            <a href="project-lumen.html" class="project-card">
+                <div class="card-image-container">
+                    <img src="lumen_square.jpg" alt="Lumen API Integration">
+                </div>
+                <div class="card-details">
+                    <div class="tech-tags">
+                        <span class="tag blue">Systems Engineering</span>
+                        <span class="tag red">API Integration</span>
+                    </div>
+                    <h3>Lumen</h3>
+                    <p>Integrated the Gemini API to power dynamic narrative systems and real-time NPC UI chat.</p>
+                </div>
+            </a>
+            <!-- ROTOR -->
             <a href="project-heli.html" class="project-card">
-                <img src="heli_square.jpg" alt="Rotor Warfare" class="card-image">
-                <div class="card-info">
+                <div class="card-image-container">
+                    <img src="heli_square.jpg" alt="Rotor Warfare Game">
+                </div>
+                <div class="card-details">
+                    <div class="tech-tags">
+                        <span class="tag blue">Netcode</span>
+                        <span class="tag red">Custom Shaders</span>
+                    </div>
                     <h3>Rotor Warfare</h3>
-                    <p>Cross-platform asymmetric multiplayer architecture built with Unity Netcode.</p>
+                    <p>An asymmetric cross-platform multiplayer game featuring thermal vision and optimized VFX.</p>
                 </div>
             </a>
         </div>
     </div>
 
-    <!-- CONTACT SECTION -->
+    <!-- CONTACT -->
     <div id="contact" class="contact-section">
-        <h2>End of Transmission.</h2>
+        <h2>Contact Me</h2>
         <div class="contact-links">
-            <a href="mailto:nitantnamdeo03@gmail.com" class="contact-btn">EMAIL</a>
-            <a href="https://github.com/CCCDEADPOOLXD" target="_blank" class="contact-btn">GITHUB</a>
-            <a href="https://www.linkedin.com/in/nitant-namdeo-a04566270/" target="_blank" class="contact-btn">LINKEDIN</a>
-            <a href="https://cccdeadpool-xd.itch.io/" target="_blank" class="contact-btn">ITCH.IO</a>
-            <a href="resume.pdf" target="_blank" class="contact-btn" style="background:#7fe3ff; color:#000;">RESUME</a>
+            <a href="mailto:nitantnamdeo03@gmail.com" class="contact-btn"><i class="fa-solid fa-envelope"></i> EMAIL</a>
+            <a href="https://github.com/CCCDEADPOOLXD" target="_blank" class="contact-btn"><i class="devicon-github-original"></i> GITHUB</a>
+            <a href="https://www.linkedin.com/in/nitant-namdeo-a04566270/" target="_blank" class="contact-btn"><i class="devicon-linkedin-plain"></i> LINKEDIN</a>
+            <a href="https://cccdeadpool-xd.itch.io/" target="_blank" class="contact-btn"><i class="fa-brands fa-itch-io"></i> ITCH.IO</a>
+            <a href="resume.pdf" target="_blank" class="contact-btn" style="background:#7fe3ff; color:#000; border-color:#7fe3ff;"><i class="fa-solid fa-file-pdf"></i> RESUME</a>
         </div>
     </div>
 
-    <!-- THREE.JS IMPORT MAP (REQUIRED FOR psp.js TO WORK) -->
+    <!-- THREE.JS IMPORT MAP -->
     <script type="importmap">
     { 
         "imports": {
@@ -301,7 +375,7 @@
     }
     </script>
     
-    <!-- LOAD DATA THEN LOAD THE PSP MODULE -->
+    <!-- SCRIPTS -->
     <script src="data.js"></script>
     <script type="module" src="psp.js"></script>
 
