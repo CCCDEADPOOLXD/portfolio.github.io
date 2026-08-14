@@ -1,6 +1,6 @@
 /* ============================================================
    THE MACHINE — Modified 3D PSP for Tech Art Portfolio
-   Assumes ALL files (psp.glb, videos, etc.) are in the root directory.
+   Persona UI Integration & Dynamic Contextual Actions
    ============================================================ */
 
 import * as THREE from 'three';
@@ -17,7 +17,6 @@ const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const canvas = document.getElementById('pspCanvas');
 const stage = document.querySelector('.machine__stage');
 const section = document.querySelector('.machine');
-const loadingEl = document.getElementById('pspLoading');
 
 if (canvas && CATEGORIES.length) init();
 
@@ -80,7 +79,7 @@ function init() {
     uniforms: {
       uTex:     { value: screenTex },
       uTime:    { value: 0 },
-      uPower:   { value: 0.05 }, // Dim glow for Idle state
+      uPower:   { value: 0.05 },
       uWarp:    { value: 0 },
       uGrid:    { value: new THREE.Vector2(240, 136) },
       uBright:  { value: 0.92 }
@@ -139,14 +138,12 @@ function init() {
   const pressable = [];
   let modelReady = false;
 
-  // DIRECT ROOT PATH LOAD
   new GLTFLoader().load(
     'psp.glb',
     (gltf) => { setup(gltf.scene); },
     undefined,
     (err) => {
       console.error('[psp] model failed', err);
-      if (loadingEl) loadingEl.textContent = 'HARDWARE UNAVAILABLE — psp.glb missing from root folder';
       SK.fireReady();
     }
   );
@@ -254,9 +251,8 @@ function init() {
     pressable.push(screenMesh);
 
     modelReady = true;
-    if (loadingEl) loadingEl.classList.add('is-off');
     SK.fireReady();
-    drawIdleScreen(); // Draw the initial "Press X to start" screen
+    drawIdleScreen(); 
   }
 
   function largestFaceNormal(mesh) {
@@ -365,8 +361,8 @@ function init() {
     return p;
   }
 
-  // UPDATED NAVIGATION STATE
   let isStarted = false;
+  let isBooting = false;
   let currentCatIdx = 0;
   let currentItemIdx = 0;
   
@@ -395,13 +391,10 @@ function init() {
     bgctx.filter = 'none';
   }
 
-  // IDLE SCREEN LOGIC
   function drawIdleScreen() {
     sctx.save();
     sctx.fillStyle = '#000000';
     sctx.fillRect(0, 0, SW, SH);
-    
-    // Blinking Text
     if (Math.floor(Date.now() / 600) % 2 === 0) {
         sctx.textBaseline = 'middle';
         sctx.textAlign = 'center';
@@ -413,9 +406,8 @@ function init() {
     screenTex.needsUpdate = true;
   }
 
-  // ACTIVE SCREEN LOGIC
   function drawFrame(work, img) {
-    if (!isStarted) return;
+    if (!isStarted || isBooting) return;
     
     sctx.save();
     sctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -438,23 +430,14 @@ function init() {
       sctx.strokeRect(fx + 1, fy + 1, fw - 2, fh - 2);
     }
 
-    // DRAW UI
     sctx.textBaseline = 'middle';
     sctx.font = '30px "VT323", monospace';
-    
-    // Category Name (Top Center)
-    sctx.textAlign = 'center';
-    sctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-    sctx.fillText(CATEGORIES[currentCatIdx].name, SW / 2, 32);
-
-    // Numbering
     sctx.textAlign = 'left';
     sctx.fillStyle = 'rgba(127,227,255,.92)';
     sctx.fillText(String(currentItemIdx + 1).padStart(2, '0'), 26, 32);
     sctx.fillStyle = 'rgba(154,169,187,.55)';
     sctx.fillText('/ ' + String(CATEGORIES[currentCatIdx].items.length).padStart(2, '0'), 62, 32);
 
-    // Progress Pips
     const px0 = SW - 26;
     for (let i = 0; i < CATEGORIES[currentCatIdx].items.length; i++) {
       const on = i === currentItemIdx;
@@ -463,9 +446,50 @@ function init() {
       sctx.fillStyle = on ? '#7fe3ff' : 'rgba(154,169,187,.38)';
       sctx.fillRect(x, SH - 30, w, 3);
     }
-
     sctx.restore();
     screenTex.needsUpdate = true;
+  }
+
+  // UPDATES THE HTML PERSONA UI SHELL
+  function updateHTMLUI(catIdx, itemIdx) {
+    // 1. Highlight Left Menu Category
+    for (let i = 0; i < CATEGORIES.length; i++) {
+      const menuEl = document.getElementById('cat-' + i);
+      if (menuEl) {
+        if (i === catIdx) menuEl.classList.add('active');
+        else menuEl.classList.remove('active');
+      }
+    }
+
+    // 2. Update Top Right Counters
+    const cat = CATEGORIES[catIdx];
+    const elIdx = document.getElementById('uiCountIdx');
+    const elTot = document.getElementById('uiCountTot');
+    if (elIdx) elIdx.innerText = String(itemIdx + 1).padStart(2, '0');
+    if (elTot) elTot.innerText = '/' + String(cat.items.length).padStart(2, '0');
+
+    // 3. Render Dynamic Instructions
+    const instructions = cat.items[itemIdx].instructions || [];
+    const instContainer = document.getElementById('uiInstructions');
+    if (instContainer) {
+      instContainer.innerHTML = '';
+      instructions.forEach((inst, index) => {
+        const row = document.createElement('div');
+        row.className = 'instruction-row';
+        
+        let iconHtml = '';
+        if (inst.btn === 'X') iconHtml = '<i class="fa-solid fa-xmark"></i>';
+        else if (inst.btn === 'O') iconHtml = '<i class="fa-regular fa-circle"></i>';
+        else if (inst.btn === '△') iconHtml = '<i class="fa-solid fa-caret-up"></i>';
+        else iconHtml = inst.btn;
+
+        row.innerHTML = `<span class="btn-icon">${iconHtml}</span> <span class="btn-text">${inst.text}</span>`;
+        instContainer.appendChild(row);
+        
+        // Staggered animation entrance
+        setTimeout(() => row.classList.add('visible'), 100 * index);
+      });
+    }
   }
 
   let spillDue = 0;
@@ -505,8 +529,9 @@ function init() {
     const category = CATEGORIES[currentCatIdx];
     const w = category.items[currentItemIdx];
 
-    if (!instant && !reduce) warpT = 1;
+    updateHTMLUI(currentCatIdx, currentItemIdx);
 
+    if (!instant && !reduce) warpT = 1;
     if (live) { try { live.pause(); } catch (e) {} live = null; }
 
     const token = ++selectToken;
@@ -530,16 +555,20 @@ function init() {
 
   function powerOn() { 
       powerTarget = 1; 
-      // Add a slight boot sound/interaction logic here if desired
   }
 
-  function openLink() {
-    const w = CATEGORIES[currentCatIdx].items[currentItemIdx];
-    if (!w || w.link === '#') return;
-    window.open(w.link, '_blank', 'noopener');
+  // EXECUTES THE ACTION BOUND TO A BUTTON IN DATA.JS
+  function executeAction(actionString) {
+    if (!actionString) return;
+    if (actionString.startsWith('scroll:')) {
+        const targetId = actionString.split(':')[1];
+        const el = document.querySelector(targetId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        window.open(actionString, '_blank', 'noopener');
+    }
   }
 
-  // BUTTON PRESS LOGIC (UPDATED FOR D-PAD GRID)
   const PRESS_DEPTH = 0.17;
   function press(role) {
     const b = buttons[role];
@@ -551,53 +580,57 @@ function init() {
       pressLightLife = 1;
     }
 
-    // Start Sequence with Boot Delay
     if (!isStarted) {
         if (role === 'cross' || role === 'screen' || role === 'start') {
             isStarted = true;
+            isBooting = true;
             powerOn();
             
-            // Draw a temporary booting screen directly on the canvas
             sctx.fillStyle = '#000000';
-            sctx.fillRect(0, 0, 960, 544);
+            sctx.fillRect(0, 0, SW, SH);
             sctx.textBaseline = 'middle';
             sctx.textAlign = 'center';
             sctx.font = '40px "VT323", monospace';
             sctx.fillStyle = '#7fe3ff';
-            sctx.fillText("> BOOTING SHUTTERKIF OS...", 480, 272);
+            sctx.fillText("> BOOTING SHUTTERKIF OS...", SW / 2, SH / 2);
             screenTex.needsUpdate = true;
 
-            // Wait 2 seconds, then load the actual first project
             setTimeout(() => {
-                select(0, 0); // Start at Tech Art, First Item
+                isBooting = false;
+                select(0, 0); 
             }, 2000);
         }
         return;
     }
+    
+    if (isBooting) return; // Ignore inputs while booting
 
-    // Navigation Sequence
-    const currentCategoryItems = CATEGORIES[currentCatIdx].items;
-    let nextCat = currentCatIdx;
-    let nextItem = currentItemIdx;
+    const currentItem = CATEGORIES[currentCatIdx].items[currentItemIdx];
 
-    if (role === 'left' || role === 'circle') {
-        nextItem = ((currentItemIdx - 1) % currentCategoryItems.length + currentCategoryItems.length) % currentCategoryItems.length;
+    if (role === 'left' || role === 'left_bumper') {
+        let nextItem = ((currentItemIdx - 1) % CATEGORIES[currentCatIdx].items.length + CATEGORIES[currentCatIdx].items.length) % CATEGORIES[currentCatIdx].items.length;
         select(currentCatIdx, nextItem);
     }
-    else if (role === 'right' || role === 'triangle') {
-        nextItem = (currentItemIdx + 1) % currentCategoryItems.length;
+    else if (role === 'right' || role === 'right_bumper') {
+        let nextItem = (currentItemIdx + 1) % CATEGORIES[currentCatIdx].items.length;
         select(currentCatIdx, nextItem);
     }
     else if (role === 'up') {
-        nextCat = ((currentCatIdx - 1) % CATEGORIES.length + CATEGORIES.length) % CATEGORIES.length;
-        select(nextCat, 0); // Reset to first item of new category
+        let nextCat = ((currentCatIdx - 1) % CATEGORIES.length + CATEGORIES.length) % CATEGORIES.length;
+        select(nextCat, 0); 
     }
     else if (role === 'down') {
-        nextCat = (currentCatIdx + 1) % CATEGORIES.length;
+        let nextCat = (currentCatIdx + 1) % CATEGORIES.length;
         select(nextCat, 0);
     }
     else if (role === 'cross' || role === 'start' || role === 'screen') {
-        openLink();
+        executeAction(currentItem.actionX);
+    }
+    else if (role === 'circle') {
+        executeAction(currentItem.actionO);
+    }
+    else if (role === 'triangle') {
+        executeAction(currentItem.actionTriangle);
     }
   }
 
@@ -693,7 +726,8 @@ function init() {
     if (!modelBox()) return;
     const b = modelBox();
     const size = b.getSize(new THREE.Vector3());
-    const fill = window.innerWidth < 720 ? 0.94 : 0.72;
+    // Adjusted fill to make the PSP physically larger on the web page.
+    const fill = window.innerWidth < 720 ? 0.85 : 0.55; 
     const vFov = THREE.MathUtils.degToRad(camera.fov);
     const distH = (size.y / 2) / Math.tan(vFov / 2);
     const distW = (size.x / 2) / (Math.tan(vFov / 2) * camera.aspect);
@@ -701,6 +735,7 @@ function init() {
     camera.lookAt(0, 0, 0);
     camera.updateProjectionMatrix();
   }
+  
   function modelBox() {
     if (!modelReady && !model.children.length) return null;
     return new THREE.Box3().setFromObject(model);
@@ -787,7 +822,7 @@ function init() {
 
     if (!isStarted) {
         drawIdleScreen();
-    } else if (live && !live.paused && !live.ended && live.readyState >= 2) {
+    } else if (!isBooting && live && !live.paused && !live.ended && live.readyState >= 2) {
       drawFrame(CATEGORIES[currentCatIdx].items[currentItemIdx], live);
       updateSpillThrottled(t);
     }
