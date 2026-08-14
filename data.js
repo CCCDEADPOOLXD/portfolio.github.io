@@ -1,5 +1,5 @@
 /* ============================================================
-   DATA.JS — The content library for the 3D PSP Console
+   DATA.JS — 4-Category Persona OS Structure
    ============================================================ */
 
 window.SK_CATEGORIES = [
@@ -11,9 +11,9 @@ window.SK_CATEGORIES = [
         title: 'Nitant Namdeo',
         sub: 'Technical Artist & Systems Programmer',
         meta: 'INDORE, INDIA · GDAI AMBASSADOR',
-        img: 'lumen_square.jpg', // Replace with a profile pic or cool graphic if you want!
-        vid: '', // No video needed for the about screen
-        link: '#about', // Used for scrolling
+        img: 'lumen_square.jpg', 
+        vid: '', 
+        link: '#about', 
         instructions: [
           { btn: 'X', text: 'OPEN RESUME' },
           { btn: 'O', text: 'SCROLL TO ABOUT' },
@@ -26,12 +26,59 @@ window.SK_CATEGORIES = [
     ]
   },
   {
-    name: "02 TECH ART & PROJECTS",
+    name: "02 TECH ART",
+    items: [
+      {
+        id: 'sobel',
+        title: 'Shader Development',
+        sub: 'Custom Edge-Detection & Thermal',
+        meta: 'SHADERS · HLSL · TECH ART',
+        img: 'showcase_shader.jpg',
+        vid: 'sobel_outline_video.mp4',
+        link: 'showcase-shaders.html',
+        instructions: [
+          { btn: 'X', text: 'VIEW DETAILS' }
+        ],
+        actionX: 'showcase-shaders.html',
+        actionO: null
+      },
+      {
+        id: 'explosion',
+        title: 'VFX & Particles',
+        sub: 'Mobile-Ready Particle Systems',
+        meta: 'VFX · SHURIKEN · MOBILE',
+        img: 'showcase_vfx.jpg',
+        vid: 'explosion_vfx_video.mp4',
+        link: 'showcase-vfx.html',
+        instructions: [
+          { btn: 'X', text: 'VIEW DETAILS' }
+        ],
+        actionX: 'showcase-vfx.html',
+        actionO: null
+      },
+      {
+        id: 'tools',
+        title: 'Editor Tools',
+        sub: 'Node-Based Combat Graph',
+        meta: 'TOOLS · C# · UNITY',
+        img: 'showcase_tools.jpg',
+        vid: 'combo_graph_video.mp4',
+        link: 'showcase-tools.html',
+        instructions: [
+          { btn: 'X', text: 'VIEW DETAILS' }
+        ],
+        actionX: 'showcase-tools.html',
+        actionO: null
+      }
+    ]
+  },
+  {
+    name: "03 PROJECTS",
     items: [
       {
         id: 'knuckle',
-        title: 'Knuckle-House',
-        sub: '3D Roguelike Brawler Prototype',
+        title: 'Knuckle',
+        sub: 'Frame-perfect fighting engine & FSM',
         meta: 'PROJECT · UNITY · C#',
         img: 'knuckle_square.jpg',
         vid: 'knuckle_trailer.mp4',
@@ -41,13 +88,13 @@ window.SK_CATEGORIES = [
           { btn: 'O', text: 'PLAY ON ITCH.IO' }
         ],
         actionX: 'project-knuckle.html',
-        actionO: 'https://cccdeadpool-xd.itch.io/knuckle'
+        actionO: 'https://cccdeadpool-xd.itch.io/'
       },
       {
-        id: 'lumen',
-        title: 'LUMEN',
-        sub: 'Dynamic LLM Chat System',
-        meta: 'PROJECT · GEMINI API · C#',
+        id: 'lumin',
+        title: 'Lumin',
+        sub: 'IGDC 2025 Best Groups Selection',
+        meta: 'PROJECT · GEMINI API · AI NPC',
         img: 'lumen_square.jpg',
         vid: 'lumen_showcase.mp4',
         link: 'project-lumen.html',
@@ -56,12 +103,12 @@ window.SK_CATEGORIES = [
           { btn: 'O', text: 'PLAY ON ITCH.IO' }
         ],
         actionX: 'project-lumen.html',
-        actionO: 'https://cccdeadpool-xd.itch.io/lumen' // Update if you have a specific link
+        actionO: 'https://cccdeadpool-xd.itch.io/' 
       },
       {
         id: 'rotor',
         title: 'Rotor Warfare',
-        sub: 'Asymmetric Multiplayer',
+        sub: 'Asymmetric Multiplayer Netcode',
         meta: 'PROJECT · NETCODE · PC/MOBILE',
         img: 'heli_square.jpg',
         vid: 'trails_video.mp4',
@@ -71,25 +118,11 @@ window.SK_CATEGORIES = [
         ],
         actionX: 'project-heli.html',
         actionO: null
-      },
-      {
-        id: 'sobel',
-        title: 'Sobel Outline',
-        sub: 'Custom Edge-Detection Shader',
-        meta: 'SHADERS · HLSL · TECH ART',
-        img: 'showcase_shader.jpg',
-        vid: 'sobel_outline_video.mp4',
-        link: 'showcase-shaders.html',
-        instructions: [
-          { btn: 'X', text: 'VIEW SHADER GRAPH' }
-        ],
-        actionX: 'showcase-shaders.html',
-        actionO: null
       }
     ]
   },
   {
-    name: "03 VIDEOS",
+    name: "04 VIDEOS",
     items: [
       {
         id: 'vfx_reel',
