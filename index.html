@@ -14,7 +14,6 @@
     <style>
         :root { --persona-red: #e60012; --persona-black: #0a0a0a; --persona-white: #ffffff; }
 
-        /* CUSTOM CURSOR & SCROLLBAR */
         * { cursor: none !important; }
         body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #050505; color: #e0e0e0; overflow-x: hidden; scroll-behavior: smooth; }
         
@@ -35,7 +34,6 @@
         .hero-text p { font-size: 1.2rem; color: var(--persona-red); letter-spacing: 4px; text-transform: uppercase; margin-top: 10px; font-weight: 700; }
         @keyframes fadeIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
 
-        /* PERSONA FLASHCARD CSS */
         .persona-box { position: relative; transform: skewX(-15deg); margin-bottom: 15px; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); clear: both; }
         .persona-box::before { content: ''; position: absolute; top: 4px; left: -4px; width: 100%; height: 100%; background-color: #000; transform: skewX(10deg); z-index: -1; transition: all 0.3s ease; box-shadow: 0 0 10px rgba(0,0,0,0.8); }
         .persona-content { background-color: var(--persona-white); color: var(--persona-black); padding: 8px 20px; font-weight: 900; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; display: inline-block; transition: all 0.3s ease; }
@@ -55,11 +53,8 @@
         .bubble i { font-size: 1.2rem; color: #fff; }
         .bubble:hover { border-color: var(--persona-red); color: #fff; background-color: rgba(230, 0, 18, 0.1); transform: translateY(-2px); }
 
-        /* PSP MACHINE & BACKDROP */
         .machine { position: relative; width: 100%; height: 110vh; background-color: #020202; display: flex; align-items: center; justify-content: center; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); overflow: hidden; }
-        
         .psp-backdrop { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) skewX(-15deg); width: 80vw; height: 60vh; background: #fff; z-index: 1; opacity: 0.05; pointer-events: none; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); }
-
         .machine__stage { position: relative; width: 100%; height: 100%; z-index: 5; }
         #pspCanvas { width: 100%; height: 100%; display: block; outline: none; }
         
@@ -79,14 +74,12 @@
         .ui-right-instructions .persona-box::before { background-color: var(--persona-red); transform: skewX(5deg); top: 3px; left: -3px;}
         .btn-icon { color: var(--persona-red); font-size: 1.2rem; margin-right: 8px; }
 
-        /* FAKE BUTTON POPUP */
         .fake-btn-tooltip { position: absolute; right: 110%; top: 50%; transform: translateY(-50%) skewX(-15deg); background: var(--persona-red); color: white; padding: 10px 15px; font-weight: 900; font-size: 0.9rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: 0.3s; box-shadow: 0 0 15px rgba(230,0,18,0.8); }
         .fake-btn-tooltip.show { opacity: 1; right: 115%; }
 
         .ui-counter { position: absolute; top: 40px; right: 40px; z-index: 10; font-family: 'VT323', monospace; font-size: 3.5rem; color: var(--persona-red); text-shadow: 2px 2px 0 #000; }
         .ui-counter span { color: rgba(255,255,255,0.5); font-size: 2rem; text-shadow: none; }
 
-        /* MOBILE LAYOUT TWEAKS */
         @media (max-width: 768px) {
             .ui-left-menu { top: 15%; left: 50%; transform: translateX(-50%); flex-direction: row; gap: 5px; width: 90%; justify-content: center; flex-wrap: wrap;}
             .ui-left-menu .persona-box { transform: skewX(-10deg) scale(0.7); margin-bottom: 5px;}
@@ -97,7 +90,6 @@
             .fake-btn-tooltip.show { top: -60px; left: 50%; }
         }
 
-        /* MARVEL RIVALS CARD TILT */
         .projects-section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; text-align: center;}
         .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; text-align: left;}
         
@@ -240,12 +232,12 @@
                     <p>Dynamic combat impact frames, lava simulations, and optimized particle systems for mobile and PC.</p>
                 </div>
             </a>
-            <a href="#" class="project-card hoverable">
-                <div class="card-image-container"><img src="substance_square.jpg" alt="Substance Generation"></div>
+            <a href="showcase-tools.html" class="project-card hoverable">
+                <div class="card-image-container"><img src="showcase_tools.jpg" alt="Tools Showcase"></div>
                 <div class="card-details">
-                    <div class="tech-tags"><span class="tag red">Procedural</span><span class="tag gold">Designer</span></div>
-                    <h3>Material Generation</h3>
-                    <p>Procedural node-based generation of realistic brick and tile textures using Substance Designer.</p>
+                    <div class="tech-tags"><span class="tag blue">C#</span><span class="tag red">Pipelines</span></div>
+                    <h3>Custom Editor Tools</h3>
+                    <p>Node-based graph editors and modular pipelines designed to accelerate workflows.</p>
                 </div>
             </a>
         </div>
@@ -310,13 +302,12 @@
         </div>
     </div>
 
-    <!-- UX SCRIPTS (Cursor, Scrollbar, Marvel Tilt, Fake Button) -->
+    <!-- UX SCRIPTS -->
     <script>
         // Custom Cursor
         const cursor = document.getElementById('customCursor');
         document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
+            cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
         });
         document.querySelectorAll('.hoverable, a').forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
@@ -334,10 +325,8 @@
         document.querySelectorAll('.project-card').forEach(card => {
             card.addEventListener('mousemove', e => {
                 let rect = card.getBoundingClientRect();
-                let x = e.clientX - rect.left; 
-                let y = e.clientY - rect.top;
-                let rotateX = ((y / rect.height) - 0.5) * -15; 
-                let rotateY = ((x / rect.width) - 0.5) * 15;
+                let x = e.clientX - rect.left; let y = e.clientY - rect.top;
+                let rotateX = ((y / rect.height) - 0.5) * -15; let rotateY = ((x / rect.width) - 0.5) * 15;
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
             });
             card.addEventListener('mouseleave', () => {
@@ -348,9 +337,18 @@
         // Fake Button Popup Trigger
         function triggerFakeButton() {
             const tooltip = document.getElementById('fakeTooltip');
-            tooltip.classList.add('show');
-            setTimeout(() => tooltip.classList.remove('show'), 3000);
+            tooltip.classList.add('show'); setTimeout(() => tooltip.classList.remove('show'), 3000);
         }
+
+        // Pause hero video when out of view to save RAM!
+        const heroVideo = document.getElementById('hero-video');
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) heroVideo.play().catch(e => {});
+                else heroVideo.pause();
+            });
+        }, { threshold: 0.1 });
+        heroObserver.observe(document.getElementById('hero'));
     </script>
 
     <!-- 3D IMPORTS -->
