@@ -12,70 +12,40 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 
     <style>
-        :root {
-            --persona-red: #e60012;
-            --persona-black: #0a0a0a;
-            --persona-white: #ffffff;
-        }
+        :root { --persona-red: #e60012; --persona-black: #0a0a0a; --persona-white: #ffffff; }
 
-        body {
-            margin: 0; padding: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: #050505; color: #e0e0e0;
-            overflow-x: hidden; scroll-behavior: smooth;
-        }
+        /* CUSTOM CURSOR & SCROLLBAR */
+        * { cursor: none !important; }
+        body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #050505; color: #e0e0e0; overflow-x: hidden; scroll-behavior: smooth; }
+        
+        .custom-cursor { position: fixed; top: 0; left: 0; width: 24px; height: 24px; border: 2px solid var(--persona-red); border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; z-index: 10000; transition: width 0.2s, height 0.2s, background 0.2s; mix-blend-mode: difference; }
+        .custom-cursor::after { content: ''; position: absolute; top: 50%; left: 50%; width: 4px; height: 4px; background: var(--persona-red); border-radius: 50%; transform: translate(-50%, -50%); }
+        .custom-cursor.hover { width: 40px; height: 40px; background: rgba(230,0,18,0.2); }
 
-        nav {
-            position: fixed; top: 0; width: 100%;
-            background-color: rgba(5, 5, 5, 0.9);
-            backdrop-filter: blur(10px); padding: 15px 0; text-align: center;
-            z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        nav a {
-            color: #fff; text-decoration: none; margin: 0 15px; font-size: 13px;
-            text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s;
-        }
+        .scroll-progress-bar { position: fixed; top: 0; left: 0; height: 5px; background: var(--persona-red); z-index: 9999; width: 0%; box-shadow: 0 0 10px var(--persona-red); }
+
+        nav { position: fixed; top: 0; width: 100%; background-color: rgba(5, 5, 5, 0.9); backdrop-filter: blur(10px); padding: 15px 0; text-align: center; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        nav a { color: #fff; text-decoration: none; margin: 0 15px; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s; }
         nav a:hover { color: var(--persona-red); }
 
-        .hero {
-            position: relative; width: 100%; height: 100vh;
-            display: flex; align-items: center; justify-content: center;
-            background-color: #000; overflow: hidden;
-        }
-        .hero video {
-            position: absolute; width: 100%; height: 100%;
-            object-fit: cover; opacity: 0.3; pointer-events: none;
-        }
+        .hero { position: relative; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; background-color: #000; overflow: hidden; }
+        .hero video { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.3; pointer-events: none; }
         .hero-text { position: relative; z-index: 1; text-align: center; animation: fadeIn 2s ease-out; }
         .hero-text h1 { font-size: 4.5rem; margin: 0; font-weight: 900; letter-spacing: -2px; color: #fff; text-transform: uppercase; }
         .hero-text p { font-size: 1.2rem; color: var(--persona-red); letter-spacing: 4px; text-transform: uppercase; margin-top: 10px; font-weight: 700; }
-
         @keyframes fadeIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
 
         /* PERSONA FLASHCARD CSS */
-        .persona-box {
-            position: relative; transform: skewX(-15deg); margin-bottom: 15px;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); clear: both;
-        }
-        .persona-box::before {
-            content: ''; position: absolute; top: 4px; left: -4px; width: 100%; height: 100%;
-            background-color: #000; transform: skewX(10deg); z-index: -1;
-            transition: all 0.3s ease; box-shadow: 0 0 10px rgba(0,0,0,0.8);
-        }
-        .persona-content {
-            background-color: var(--persona-white); color: var(--persona-black);
-            padding: 8px 20px; font-weight: 900; font-size: 1.2rem; text-transform: uppercase;
-            letter-spacing: 1px; display: inline-block; transition: all 0.3s ease;
-        }
+        .persona-box { position: relative; transform: skewX(-15deg); margin-bottom: 15px; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); clear: both; }
+        .persona-box::before { content: ''; position: absolute; top: 4px; left: -4px; width: 100%; height: 100%; background-color: #000; transform: skewX(10deg); z-index: -1; transition: all 0.3s ease; box-shadow: 0 0 10px rgba(0,0,0,0.8); }
+        .persona-content { background-color: var(--persona-white); color: var(--persona-black); padding: 8px 20px; font-weight: 900; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; display: inline-block; transition: all 0.3s ease; }
         
-        /* Applying Persona Style to HTML Headers */
         .section-header-box { display: inline-block; margin-bottom: 40px; }
         .section-header-box .persona-content { font-size: 2.5rem; padding: 10px 30px; background: var(--persona-red); color: white;}
         .section-header-box::before { background: white; transform: skewX(5deg); top: 6px; left: -6px; }
 
         .about-section { background-color: #080808; padding: 80px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .about-content { max-width: 800px; margin: 0 auto; line-height: 1.8; font-size: 1.1rem; color: #ccc; }
-        .about-section h2 { font-size: 2.5rem; margin-top: 0; color: #fff; font-weight: 900; margin-bottom: 20px; text-transform: uppercase;}
 
         .skills-section { padding: 60px 20px; background-color: #050505; text-align: center; }
         .skill-category { max-width: 1100px; margin: 0 auto 30px auto; text-align: left; background: rgba(255,255,255,0.02); padding: 20px; border-radius: 8px; border-left: 4px solid var(--persona-red);}
@@ -84,38 +54,58 @@
         .bubble { background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 8px 12px; transition: all 0.2s ease; color: #bbb; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.85rem; }
         .bubble i { font-size: 1.2rem; color: #fff; }
         .bubble:hover { border-color: var(--persona-red); color: #fff; background-color: rgba(230, 0, 18, 0.1); transform: translateY(-2px); }
-        .bubble:hover i { color: var(--persona-red); }
 
+        /* PSP MACHINE & BACKDROP */
         .machine { position: relative; width: 100%; height: 110vh; background-color: #020202; display: flex; align-items: center; justify-content: center; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); overflow: hidden; }
+        
+        .psp-backdrop { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) skewX(-15deg); width: 80vw; height: 60vh; background: #fff; z-index: 1; opacity: 0.05; pointer-events: none; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); }
+
         .machine__stage { position: relative; width: 100%; height: 100%; z-index: 5; }
-        #pspCanvas { width: 100%; height: 100%; display: block; outline: none; cursor: grab; }
-        #pspCanvas:active { cursor: grabbing; }
+        #pspCanvas { width: 100%; height: 100%; display: block; outline: none; }
+        
+        #pspLoading { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) skewX(-15deg); z-index: 20; pointer-events: none; transition: opacity 0.5s ease; }
+        #pspLoading .persona-content { font-size: 1.5rem; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
 
         .ui-left-menu { position: absolute; left: 40px; top: 50%; transform: translateY(-50%); z-index: 10; display: flex; flex-direction: column; align-items: flex-start; pointer-events: none; }
         .ui-left-menu .persona-box { opacity: 0.4; transform: skewX(-15deg) scale(0.8); transform-origin: left center; }
         .ui-left-menu .persona-box.active { opacity: 1; transform: skewX(-15deg) scale(1.2); }
         .ui-left-menu .persona-box.active .persona-content { background-color: var(--persona-red); color: #fff; }
-        .ui-left-menu .persona-box.active::before { top: 8px; left: -8px; transform: skewX(15deg); }
 
-        .ui-right-instructions { position: absolute; right: 40px; bottom: 60px; z-index: 10; display: flex; flex-direction: column; align-items: flex-end; pointer-events: none; }
-        .ui-right-instructions .persona-box { opacity: 0; transform: translateX(20px) skewX(-15deg); }
+        .ui-right-instructions { position: absolute; right: 40px; bottom: 60px; z-index: 10; display: flex; flex-direction: column; align-items: flex-end; }
+        .ui-right-instructions .persona-box { opacity: 0; transform: translateX(20px) skewX(-15deg); pointer-events: auto;}
         .ui-right-instructions .persona-box.visible { opacity: 1; transform: translateX(0) skewX(-15deg); }
         .ui-right-instructions .persona-box .persona-content { background-color: var(--persona-black); color: #fff; border: 2px solid var(--persona-red); font-size: 0.9rem; }
         .ui-right-instructions .persona-box::before { background-color: var(--persona-red); transform: skewX(5deg); top: 3px; left: -3px;}
         .btn-icon { color: var(--persona-red); font-size: 1.2rem; margin-right: 8px; }
 
+        /* FAKE BUTTON POPUP */
+        .fake-btn-tooltip { position: absolute; right: 110%; top: 50%; transform: translateY(-50%) skewX(-15deg); background: var(--persona-red); color: white; padding: 10px 15px; font-weight: 900; font-size: 0.9rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: 0.3s; box-shadow: 0 0 15px rgba(230,0,18,0.8); }
+        .fake-btn-tooltip.show { opacity: 1; right: 115%; }
+
         .ui-counter { position: absolute; top: 40px; right: 40px; z-index: 10; font-family: 'VT323', monospace; font-size: 3.5rem; color: var(--persona-red); text-shadow: 2px 2px 0 #000; }
         .ui-counter span { color: rgba(255,255,255,0.5); font-size: 2rem; text-shadow: none; }
 
+        /* MOBILE LAYOUT TWEAKS */
+        @media (max-width: 768px) {
+            .ui-left-menu { top: 15%; left: 50%; transform: translateX(-50%); flex-direction: row; gap: 5px; width: 90%; justify-content: center; flex-wrap: wrap;}
+            .ui-left-menu .persona-box { transform: skewX(-10deg) scale(0.7); margin-bottom: 5px;}
+            .ui-left-menu .persona-box.active { transform: skewX(-10deg) scale(1); }
+            .ui-right-instructions { bottom: 10%; right: 50%; transform: translateX(50%); align-items: center; width: 100%;}
+            .ui-counter { top: 100px; right: 20px; font-size: 2.5rem;}
+            .fake-btn-tooltip { right: auto; top: -50px; left: 50%; transform: translateX(-50%) skewX(-15deg); }
+            .fake-btn-tooltip.show { top: -60px; left: 50%; }
+        }
+
+        /* MARVEL RIVALS CARD TILT */
         .projects-section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; text-align: center;}
         .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; text-align: left;}
         
-        .project-card { background-color: #0a0a0a; border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; text-decoration: none; color: #ddd; overflow: hidden; transition: transform 0.3s, border-color 0.3s; display: block; }
-        .project-card:hover { transform: translateY(-5px); border-color: var(--persona-red); }
-        .card-image-container { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #000; }
-        .card-image-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-        .project-card:hover .card-image-container img { transform: scale(1.05); }
-        .card-details { padding: 25px; }
+        .project-card { background-color: #0a0a0a; border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; text-decoration: none; color: #ddd; display: block; transform-style: preserve-3d; will-change: transform; transition: border-color 0.3s; }
+        .project-card:hover { border-color: var(--persona-red); box-shadow: 0 20px 40px rgba(230,0,18,0.2); z-index: 10;}
+        .card-image-container { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #000; transform: translateZ(20px); }
+        .card-image-container img { width: 100%; height: 100%; object-fit: cover; }
+        .card-details { padding: 25px; transform: translateZ(30px); }
         .card-details h3 { margin: 0 0 10px 0; color: #fff; font-size: 1.4rem; font-weight: 900; text-transform: uppercase;}
         .card-details p { margin: 0 0 15px 0; font-size: 0.95rem; color: #aaa; line-height: 1.6; }
         .tech-tags { margin-bottom: 15px; display: flex; gap: 5px; flex-wrap: wrap; }
@@ -134,6 +124,9 @@
     </style>
 </head>
 <body>
+    
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="scroll-progress-bar" id="scrollBar"></div>
 
     <nav>
         <a href="#about">About</a>
@@ -165,39 +158,42 @@
         <div class="skill-category">
             <h3>Engines & Tools</h3>
             <div class="bubble-container">
-                <div class="bubble"><i class="devicon-unity-original"></i> Unity Engine</div>
-                <div class="bubble"><i class="devicon-unrealengine-original"></i> Unreal Engine</div>
-                <div class="bubble"><i class="devicon-maya-plain"></i> Maya</div>
-                <div class="bubble"><i class="fa-solid fa-code-branch"></i> Visual Scripting</div>
+                <div class="bubble hoverable"><i class="devicon-unity-original"></i> Unity Engine</div>
+                <div class="bubble hoverable"><i class="devicon-unrealengine-original"></i> Unreal Engine</div>
+                <div class="bubble hoverable"><i class="devicon-maya-plain"></i> Maya</div>
+                <div class="bubble hoverable"><i class="fa-solid fa-code-branch"></i> Visual Scripting</div>
+                <div class="bubble hoverable"><i class="devicon-substance-plain"></i> Substance Designer</div>
             </div>
         </div>
 
         <div class="skill-category">
             <h3>Programming & Systems</h3>
             <div class="bubble-container">
-                <div class="bubble"><i class="devicon-csharp-plain"></i> OOP (C#)</div>
-                <div class="bubble"><i class="fa-solid fa-robot"></i> AI Implementation</div>
-                <div class="bubble"><i class="fa-solid fa-cubes"></i> Modular Architecture</div>
-                <div class="bubble"><i class="fa-solid fa-diagram-project"></i> Finite State Machines</div>
-                <div class="bubble"><i class="devicon-git-plain"></i> Git Version Control</div>
+                <div class="bubble hoverable"><i class="devicon-csharp-plain"></i> OOP (C#)</div>
+                <div class="bubble hoverable"><i class="fa-solid fa-robot"></i> AI Implementation</div>
+                <div class="bubble hoverable"><i class="fa-solid fa-cubes"></i> Modular Architecture</div>
+                <div class="bubble hoverable"><i class="fa-solid fa-diagram-project"></i> Finite State Machines</div>
+                <div class="bubble hoverable"><i class="devicon-git-plain"></i> Git Version Control</div>
             </div>
         </div>
 
         <div class="skill-category">
             <h3>Technical Art</h3>
             <div class="bubble-container">
-                <div class="bubble"><i class="fa-solid fa-wand-magic-sparkles"></i> Shader Development</div>
-                <div class="bubble"><i class="fa-regular fa-lightbulb"></i> Environment Lighting</div>
-                <div class="bubble"><i class="fa-solid fa-fire-flame-curved"></i> Particle Systems</div>
-                <div class="bubble"><i class="fa-solid fa-bolt"></i> VFX Graph</div>
-                <div class="bubble"><i class="fa-solid fa-mobile-screen-button"></i> Game Optimization</div>
-                <div class="bubble"><i class="fa-solid fa-vr-cardboard"></i> XR Development</div>
+                <div class="bubble hoverable"><i class="fa-solid fa-wand-magic-sparkles"></i> Shader Development</div>
+                <div class="bubble hoverable"><i class="fa-regular fa-lightbulb"></i> Environment Lighting</div>
+                <div class="bubble hoverable"><i class="fa-solid fa-fire-flame-curved"></i> Particle Systems</div>
+                <div class="bubble hoverable"><i class="fa-solid fa-bolt"></i> VFX Graph</div>
+                <div class="bubble hoverable"><i class="fa-solid fa-mobile-screen-button"></i> Game Optimization</div>
+                <div class="bubble hoverable"><i class="fa-solid fa-vr-cardboard"></i> XR Development</div>
             </div>
         </div>
     </div>
 
     <!-- 3D PSP OS -->
     <div id="psp-os" class="machine">
+        <div class="psp-backdrop"></div>
+        
         <div class="ui-left-menu" id="uiLeftMenu">
             <div class="persona-box" id="cat-0"><div class="persona-content">01 ABOUT ME</div></div>
             <div class="persona-box" id="cat-1"><div class="persona-content">02 TECH ART</div></div>
@@ -206,7 +202,8 @@
         </div>
 
         <div class="ui-right-instructions" id="uiInstructions">
-            <div class="persona-box visible" id="preboot-inst">
+            <div class="persona-box visible hoverable" id="preboot-inst" onclick="triggerFakeButton()">
+                <div class="fake-btn-tooltip" id="fakeTooltip">Press the X button on Console! I am not a button :(</div>
                 <div class="persona-content"><span class="btn-icon"><i class="fa-solid fa-xmark"></i></span> BOOT OS</div>
             </div>
         </div>
@@ -215,14 +212,19 @@
             <span id="uiCountIdx">01</span><span id="uiCountTot">/01</span>
         </div>
 
-        <div class="machine__stage"><canvas id="pspCanvas"></canvas></div>
+        <div class="machine__stage">
+            <div id="pspLoading" class="persona-box">
+                <div class="persona-content">LOADING 3D MODULE... <span id="loadPct" style="color:var(--persona-red);">0%</span></div>
+            </div>
+            <canvas id="pspCanvas"></canvas>
+        </div>
     </div>
 
     <!-- FEATURED TECH ART -->
     <div id="featured" class="projects-section">
         <div class="persona-box section-header-box"><div class="persona-content">FEATURED TECH ART</div></div>
         <div class="project-grid">
-            <a href="showcase-shaders.html" class="project-card">
+            <a href="showcase-shaders.html" class="project-card hoverable">
                 <div class="card-image-container"><img src="showcase_shader.jpg" alt="Shader Showcase"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag red">HLSL</span><span class="tag gold">Shader Graph</span></div>
@@ -230,7 +232,7 @@
                     <p>Custom rendering solutions including thermal vision, stylized Sobel outlines, and interactive materials.</p>
                 </div>
             </a>
-            <a href="showcase-vfx.html" class="project-card">
+            <a href="showcase-vfx.html" class="project-card hoverable">
                 <div class="card-image-container"><img src="showcase_vfx.jpg" alt="VFX Showcase"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag purple">VFX Graph</span><span class="tag blue">Shuriken</span></div>
@@ -238,12 +240,12 @@
                     <p>Dynamic combat impact frames, lava simulations, and optimized particle systems for mobile and PC.</p>
                 </div>
             </a>
-            <a href="showcase-tools.html" class="project-card">
-                <div class="card-image-container"><img src="showcase_tools.jpg" alt="Tools Showcase"></div>
+            <a href="#" class="project-card hoverable">
+                <div class="card-image-container"><img src="substance_square.jpg" alt="Substance Generation"></div>
                 <div class="card-details">
-                    <div class="tech-tags"><span class="tag blue">C#</span><span class="tag red">Pipelines</span></div>
-                    <h3>Custom Editor Tools</h3>
-                    <p>Node-based graph editors and modular pipelines designed to accelerate workflows.</p>
+                    <div class="tech-tags"><span class="tag red">Procedural</span><span class="tag gold">Designer</span></div>
+                    <h3>Material Generation</h3>
+                    <p>Procedural node-based generation of realistic brick and tile textures using Substance Designer.</p>
                 </div>
             </a>
         </div>
@@ -253,7 +255,7 @@
     <div id="projects" class="projects-section" style="padding-top: 0;">
         <div class="persona-box section-header-box"><div class="persona-content">PERSONAL PROJECTS</div></div>
         <div class="project-grid">
-            <a href="project-knuckle.html" class="project-card">
+            <a href="project-knuckle.html" class="project-card hoverable">
                 <div class="card-image-container"><img src="knuckle_square.jpg" alt="Knuckle"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag blue">Pipeline Tools</span><span class="tag purple">VFX Graph</span></div>
@@ -261,15 +263,15 @@
                     <p>A custom node-based graph pipeline allowing designers to rapidly create combat combos.</p>
                 </div>
             </a>
-            <a href="project-lumen.html" class="project-card">
+            <a href="project-lumen.html" class="project-card hoverable">
                 <div class="card-image-container"><img src="lumen_square.jpg" alt="Lumen API Integration"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag blue">Systems Engineering</span><span class="tag red">API Integration</span></div>
-                    <h3>Lumen</h3>
+                    <h3>Lumin</h3>
                     <p>Integrated the Gemini API to power dynamic narrative systems and real-time NPC UI chat.</p>
                 </div>
             </a>
-            <a href="project-unreal.html" class="project-card">
+            <a href="project-unreal.html" class="project-card hoverable">
                 <div class="card-image-container"><img src="unreal_square.jpg" alt="Unreal PCG Environment"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag green">PCG</span><span class="tag purple">Lighting</span></div>
@@ -277,7 +279,7 @@
                     <p>A high-fidelity environment built in Unreal Engine utilizing Procedural Content Generation.</p>
                 </div>
             </a>
-            <a href="project-film.html" class="project-card">
+            <a href="project-film.html" class="project-card hoverable">
                 <div class="card-image-container"><img src="film_square.jpg" alt="Cinematic Lighting"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag purple">Lighting</span><span class="tag blue">Art Direction</span></div>
@@ -285,7 +287,7 @@
                     <p>Supervised the lighting and visual vibe for a cinematic short film for high-fidelity renders.</p>
                 </div>
             </a>
-            <a href="project-heli.html" class="project-card">
+            <a href="project-heli.html" class="project-card hoverable">
                 <div class="card-image-container"><img src="heli_square.jpg" alt="Rotor Warfare Game"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag blue">Netcode</span><span class="tag red">Custom Shaders</span></div>
@@ -300,21 +302,61 @@
     <div id="contact" class="contact-section">
         <div class="persona-box section-header-box"><div class="persona-content">CONTACT ME</div></div>
         <div class="contact-links">
-            <a href="mailto:nitantnamdeo03@gmail.com" class="contact-btn"><span><i class="fa-solid fa-envelope"></i> EMAIL</span></a>
-            <a href="https://github.com/CCCDEADPOOLXD" target="_blank" class="contact-btn"><span><i class="devicon-github-original"></i> GITHUB</span></a>
-            <a href="https://www.linkedin.com/in/nitant-namdeo-a04566270/" target="_blank" class="contact-btn"><span><i class="devicon-linkedin-plain"></i> LINKEDIN</span></a>
-            <a href="https://cccdeadpool-xd.itch.io/" target="_blank" class="contact-btn"><span><i class="fa-brands fa-itch-io"></i> ITCH.IO</span></a>
-            <a href="resume.pdf" target="_blank" class="contact-btn" style="background:var(--persona-red); border-color:var(--persona-red);"><span><i class="fa-solid fa-file-pdf"></i> RESUME</span></a>
+            <a href="mailto:nitantnamdeo03@gmail.com" class="contact-btn hoverable"><span><i class="fa-solid fa-envelope"></i> EMAIL</span></a>
+            <a href="https://github.com/CCCDEADPOOLXD" target="_blank" class="contact-btn hoverable"><span><i class="devicon-github-original"></i> GITHUB</span></a>
+            <a href="https://www.linkedin.com/in/nitant-namdeo-a04566270/" target="_blank" class="contact-btn hoverable"><span><i class="devicon-linkedin-plain"></i> LINKEDIN</span></a>
+            <a href="https://cccdeadpool-xd.itch.io/" target="_blank" class="contact-btn hoverable"><span><i class="fa-brands fa-itch-io"></i> ITCH.IO</span></a>
+            <a href="resume.pdf" target="_blank" class="contact-btn hoverable" style="background:var(--persona-red); border-color:var(--persona-red);"><span><i class="fa-solid fa-file-pdf"></i> RESUME</span></a>
         </div>
     </div>
 
+    <!-- UX SCRIPTS (Cursor, Scrollbar, Marvel Tilt, Fake Button) -->
+    <script>
+        // Custom Cursor
+        const cursor = document.getElementById('customCursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        document.querySelectorAll('.hoverable, a').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById("scrollBar").style.width = (winScroll / height) * 100 + "%";
+        });
+
+        // Marvel Rivals 3D Card Tilt
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                let rect = card.getBoundingClientRect();
+                let x = e.clientX - rect.left; 
+                let y = e.clientY - rect.top;
+                let rotateX = ((y / rect.height) - 0.5) * -15; 
+                let rotateY = ((x / rect.width) - 0.5) * 15;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+            });
+        });
+
+        // Fake Button Popup Trigger
+        function triggerFakeButton() {
+            const tooltip = document.getElementById('fakeTooltip');
+            tooltip.classList.add('show');
+            setTimeout(() => tooltip.classList.remove('show'), 3000);
+        }
+    </script>
+
+    <!-- 3D IMPORTS -->
+    <script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
     <script type="importmap">
-    { 
-        "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js",
-            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/"
-        } 
-    }
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/" } }
     </script>
     
     <script src="data.js"></script>
