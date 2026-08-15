@@ -15,7 +15,7 @@ window.SK_CATEGORIES = [
             "THAT MAKES PEOPLE SAY:",
             "'HOW DID YOU DO THAT?'"
         ],
-        instructions: [{ btn: 'X', text: 'OPEN RESUME' }, { btn: 'O', text: 'SCROLL TO ABOUT' }, { btn: '➡️', text: 'NEXT SLIDE' }],
+        instructions: [{ btn: 'X', text: 'OPEN RESUME' }, { btn: 'O', text: 'SCROLL TO ABOUT' }, { btn: '►', text: 'NEXT SLIDE' }],
         actionX: 'resume.pdf', actionO: 'scroll:#about', actionTriangle: null
       },
       {
@@ -27,7 +27,7 @@ window.SK_CATEGORIES = [
             "ACAD, INDORE",
             "AUG 2023 - PRESENT"
         ],
-        instructions: [{ btn: 'X', text: 'OPEN RESUME' }, { btn: '⬅️', text: 'PREV SLIDE' }, { btn: '➡️', text: 'NEXT SLIDE' }],
+        instructions: [{ btn: 'X', text: 'OPEN RESUME' }, { btn: '◄', text: 'PREV SLIDE' }, { btn: '►', text: 'NEXT SLIDE' }],
         actionX: 'resume.pdf', actionO: null, actionTriangle: null
       },
       {
@@ -39,7 +39,7 @@ window.SK_CATEGORIES = [
             "& PROMOTING GAME DEV",
             "RESOURCES TO STUDENTS."
         ],
-        instructions: [{ btn: 'X', text: 'OPEN RESUME' }, { btn: '⬅️', text: 'PREV SLIDE' }, { btn: '➡️', text: 'NEXT SLIDE' }],
+        instructions: [{ btn: 'X', text: 'OPEN RESUME' }, { btn: '◄', text: 'PREV SLIDE' }, { btn: '►', text: 'NEXT SLIDE' }],
         actionX: 'resume.pdf', actionO: null, actionTriangle: null
       },
       {
@@ -51,7 +51,7 @@ window.SK_CATEGORIES = [
             "GUITAR, AND STUDYING",
             "LANGUAGES (EN/HI/DE)."
         ],
-        instructions: [{ btn: 'X', text: 'OPEN RESUME' }, { btn: '⬅️', text: 'PREV SLIDE' }, { btn: '△', text: 'VIEW SKILLS' }],
+        instructions: [{ btn: 'X', text: 'OPEN RESUME' }, { btn: '◄', text: 'PREV SLIDE' }, { btn: '△', text: 'VIEW SKILLS' }],
         actionX: 'resume.pdf', actionO: null, actionTriangle: 'scroll:#skills'
       }
     ]
@@ -73,11 +73,6 @@ window.SK_CATEGORIES = [
         id: 'tools', title: 'Editor Tools', sub: 'Node-Based Combat Graph', meta: 'TOOLS · C#',
         img: 'showcase_tools.jpg', vid: '', link: 'showcase-tools.html',
         instructions: [{ btn: 'X', text: 'VIEW DETAILS' }], actionX: 'showcase-tools.html', actionO: null
-      },
-      {
-        id: 'substance', title: 'Material Generation', sub: 'Procedural Brick & Tile', meta: 'SUBSTANCE DESIGNER',
-        img: 'substance_square.jpg', vid: '', link: '#', // REPLACE WITH YOUR SUBSTANCE IMAGE
-        instructions: [{ btn: 'X', text: 'VIEW DETAILS' }], actionX: '#', actionO: null
       }
     ]
   },
