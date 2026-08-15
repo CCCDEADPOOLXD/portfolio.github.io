@@ -1,5 +1,5 @@
 /* ============================================================
-   THE MACHINE — Persona XMB Edition (Audio, Size, & Pulse)
+   THE MACHINE — Persona XMB Edition (Reduced Blur & Fixed Icons)
    ============================================================ */
 
 import * as THREE from 'three';
@@ -13,7 +13,6 @@ const CATEGORIES = window.SK_CATEGORIES || [];
 const SK = window.SK || { fireReady() {}, onReady(f) { f(); } };
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// AUDIO SETUP (Make sure these exist in your folder!)
 const sndTick = new Audio('tick.mp3'); sndTick.volume = 0.3;
 const sndBoot = new Audio('boot.mp3'); sndBoot.volume = 0.6;
 
@@ -63,7 +62,7 @@ function init() {
         vec2 uv = vUv; vec2 c = uv - 0.5; float r2 = dot(c, c); uv = 0.5 + c * (1.0 + 0.032 * r2);
         float band = step(0.5, hash(vec2(floor(uv.y * 26.0), floor(uTime * 22.0)))); uv.x += uWarp * (band - 0.5) * 0.09;
         if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) { gl_FragColor = vec4(0.005, 0.008, 0.013, 1.0); return; }
-        vec2 g = uGrid; vec2 quv = (floor(uv * g) + 0.5) / g; float ab = (0.0005 + 0.0035 * r2) * (1.0 + uWarp * 6.0);
+        vec2 g = uGrid; vec2 quv = (floor(uv * g) + 0.5) / g; float ab = (0.0005 + 0.0020 * r2) * (1.0 + uWarp * 6.0); // Reduced Aberration
         float rr = texture2D(uTex, vec2(quv.x + ab, quv.y)).r; float gg = texture2D(uTex, quv).g; float bb = texture2D(uTex, vec2(quv.x - ab, quv.y)).b; vec3 col = vec3(rr, gg, bb);
         float sub = mod(floor(uv.x * g.x * 3.0), 3.0); vec3 mask = vec3(sub < 1.0 ? 1.0 : 0.90, (sub >= 1.0 && sub < 2.0) ? 1.0 : 0.90, sub >= 2.0 ? 1.0 : 0.90); col *= mask;
         float scan = 0.93 + 0.07 * cos(uv.y * g.y * 6.28318); col *= scan; col += vec3(0.05, 0.075, 0.10) * pow(1.0 - uv.y, 3.0) * 0.45; col *= 1.0 - 0.30 * pow(r2 * 1.55, 1.6);
@@ -153,7 +152,7 @@ function init() {
   function paintBackdrop(img) {
     bgctx.fillStyle = '#0a0a0a'; bgctx.fillRect(0, 0, SW, SH); if (!img) return;
     const ar = (img.videoWidth || img.width) / (img.videoHeight || img.height), sar = SW / SH;
-    bgctx.save(); try { bgctx.filter = 'blur(34px) saturate(1.5) brightness(0.62)'; } catch (e) {}
+    bgctx.save(); try { bgctx.filter = 'blur(16px) saturate(1.5) brightness(0.62)'; } catch (e) {} // Reduced blur
     let cw, ch; if (ar > sar) { ch = SH * 1.28; cw = ch * ar; } else { cw = SW * 1.28; ch = cw / ar; }
     bgctx.drawImage(img, (SW - cw) / 2, (SH - ch) / 2, cw, ch); bgctx.restore();
   }
@@ -198,11 +197,18 @@ function init() {
       instContainer.innerHTML = '';
       instructions.forEach((inst, index) => {
         const row = document.createElement('div'); row.className = 'persona-box hoverable';
-        row.innerHTML = `<div class="persona-content"><span class="btn-icon">${inst.btn.length === 1 ? '<i class="fa-solid fa-xmark"></i>'.replace('xmark', inst.btn === 'X' ? 'xmark' : inst.btn === 'O' ? 'circle' : 'caret-up') : inst.btn}</span> ${inst.text}</div>`;
+        // Better icon parsing so left and right arrows show up!
+        let iconHtml = inst.btn;
+        if (inst.btn === 'X') iconHtml = '<i class="fa-solid fa-xmark"></i>';
+        else if (inst.btn === 'O') iconHtml = '<i class="fa-regular fa-circle"></i>';
+        else if (inst.btn === '△') iconHtml = '<i class="fa-solid fa-caret-up"></i>';
+        else if (inst.btn === '►') iconHtml = '<i class="fa-solid fa-caret-right"></i>';
+        else if (inst.btn === '◄') iconHtml = '<i class="fa-solid fa-caret-left"></i>';
+
+        row.innerHTML = `<div class="persona-content"><span class="btn-icon">${iconHtml}</span> ${inst.text}</div>`;
         instContainer.appendChild(row); setTimeout(() => row.classList.add('visible'), 100 * index);
-        // Add fake button trigger to dynamically generated instructions
         row.onclick = () => {
-            const tooltip = document.createElement('div'); tooltip.className = 'fake-btn-tooltip show'; tooltip.innerText = "Use the physical console buttons! I am just a display :(";
+            const tooltip = document.createElement('div'); tooltip.className = 'fake-btn-tooltip show'; tooltip.innerText = "Press the X button on Console! I am not a button :(";
             row.appendChild(tooltip); setTimeout(() => tooltip.remove(), 3000);
         };
       });
@@ -256,7 +262,7 @@ function init() {
     }
     if (isBooting) return;
 
-    try { sndTick.currentTime=0; sndTick.play(); } catch(e){} // Play nav tick
+    try { sndTick.currentTime=0; sndTick.play(); } catch(e){} 
     const items = CATEGORIES[currentCatIdx].items;
     if (role === 'left') select(currentCatIdx, ((currentItemIdx - 1) % items.length + items.length) % items.length);
     else if (role === 'right') select(currentCatIdx, (currentItemIdx + 1) % items.length);
@@ -293,7 +299,7 @@ function init() {
   function fitToView() {
     if (!modelReady && !model.children.length) return;
     const b = new THREE.Box3().setFromObject(model), size = b.getSize(new THREE.Vector3());
-    const fill = window.innerWidth < 720 ? 0.95 : 0.70; // Made even bigger!
+    const fill = window.innerWidth < 720 ? 0.95 : 0.70; 
     const vFov = THREE.MathUtils.degToRad(camera.fov);
     const distH = (size.y / 2) / Math.tan(vFov / 2), distW = (size.x / 2) / (Math.tan(vFov / 2) * camera.aspect);
     camera.position.set(0, 0, Math.max(distH, distW) / fill + size.z); camera.lookAt(0, 0, 0); camera.updateProjectionMatrix();
@@ -322,11 +328,9 @@ function init() {
     spillA.color.lerp(spillTargetColor, 0.12); spillB.color.copy(spillA.color); spillC.color.copy(spillA.color);
     spillA.intensity += ((spillTargetIntensity * powerT) - spillA.intensity) * 0.14; spillB.intensity = spillA.intensity * 0.42; spillC.intensity = spillA.intensity * 0.42;
 
-    // PULSING X BUTTON LIGHT
     if (!isStarted) {
         pressLight.position.copy(new THREE.Box3().setFromObject(buttons['cross'].mesh).getCenter(new THREE.Vector3())).add(new THREE.Vector3(0, 0, 1.4));
-        pressLight.color.set(0xe60012);
-        pressLight.intensity = (Math.sin(t * 3) + 1) * 10; // Throbs red
+        pressLight.color.set(0xe60012); pressLight.intensity = (Math.sin(t * 3) + 1) * 10; 
     } else {
         if (pressLightLife > 0) { pressLightLife -= dt * 3.4; pressLight.intensity = Math.max(0, pressLightLife) * 26; } else pressLight.intensity = 0;
     }
