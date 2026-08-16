@@ -3,122 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Editor Tools - Featured Tech Art</title>
+    <title>Editor Tools & Pipelines | Tech Art</title>
     <style>
-        /* ITCH.IO STYLE THEME */
+        /* BASE THEME (Persona / Noir Aesthetic) */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #111;
+            background-color: #050505;
             color: #ddd;
+            border-top: 6px solid #e60012;
+            line-height: 1.6;
         }
-        
-        .project-container {
-            max-width: 800px;
+
+        /* CUSTOM RED SCROLLBAR */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #050505; border-left: 1px solid #222; }
+        ::-webkit-scrollbar-thumb { background: #e60012; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff2a3b; }
+        ::selection { background: #e60012; color: #fff; }
+
+        .page-wrapper {
+            max-width: 1400px;
             margin: 40px auto;
-            background-color: #222;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            padding: 0 20px;
+        }
+
+        .header-container {
+            margin-bottom: 50px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
         }
 
         .back-link {
             display: inline-block;
-            color: #ff4757;
+            color: #e60012;
             text-decoration: none;
             margin-bottom: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: #fff; }
+
+        h1 { 
+            color: #fff; 
+            margin: 0; 
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .intro-text {
+            color: #aaa;
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+
+        /* SPLIT PANEL GRID */
+        .tool-article {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 100px;
+            background-color: #0a0a0a;
+            border: 1px solid #222;
+            padding: 40px;
+            box-shadow: 8px 8px 0px rgba(230,0,18,0.1);
+        }
+
+        /* LEFT SIDE: DOCUMENTATION */
+        .article-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 { 
+            color: #e60012; 
+            margin-top: 0; 
+            font-size: 2rem; 
+            text-transform: uppercase;
+            border-bottom: 2px solid #222;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* BULLET POINT STYLING */
+        .tech-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0 20px 0;
+        }
+        
+        .tech-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            color: #ccc;
+        }
+        
+        .tech-list li::before {
+            content: "■";
+            position: absolute;
+            left: 0;
+            color: #e60012;
+            font-size: 0.8rem;
+            top: 3px;
+        }
+
+        .highlight {
+            color: #fff;
             font-weight: bold;
         }
-        .back-link:hover { text-decoration: underline; }
 
-        h1 { color: #fff; margin-top: 0; border-bottom: 2px solid #333; padding-bottom: 10px; }
-        
-        h2 { color: #ff4757; margin-top: 40px; font-size: 1.8rem; }
-        
-        p { line-height: 1.6; font-size: 1.05rem; margin-bottom: 15px; }
-
-        /* Media styling */
-        .showcase-media {
-            width: 100%;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            background: #000;
+        /* RIGHT SIDE: MEDIA SHOWCASE */
+        .article-media {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .image-full {
+        .media-item {
             width: 100%;
-            border-radius: 4px;
-            margin: 10px 0;
             background-color: #000;
             border: 1px solid #333;
+            box-sizing: border-box;
         }
 
-        .section-divider {
-            margin: 60px auto;
-            border: 0;
-            border-top: 2px dashed #444;
+        .image-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
 
-        /* Project Link Button */
-        .project-link {
+        /* SKEWED BUTTON */
+        .btn-link {
             display: inline-block;
-            background-color: #333;
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 4px;
+            background-color: transparent;
+            color: #ffffff;
+            padding: 12px 25px;
+            border: 2px solid #e60012;
+            transform: skewX(-10deg);
             text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: bold;
-            transition: background 0.2s;
-            margin-bottom: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-top: auto; 
+            align-self: flex-start;
         }
-        .project-link:hover {
-            background-color: #ff4757;
+        .btn-link:hover {
+            background-color: #e60012;
+            color: #000;
+            box-shadow: 4px 4px 0px rgba(255,255,255,0.8);
+        }
+        .btn-link span {
+            display: inline-block;
+            transform: skewX(10deg);
+        }
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 1024px) {
+            .tool-article {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+                padding: 25px;
+            }
+            .btn-link {
+                margin-top: 30px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="project-container">
-        <!-- Back Link -->
-        <a href="index.html" class="back-link">← Back to Portfolio</a>
-
-        <h1>Custom Editor Tools & Pipelines</h1>
-        <p>A Technical Artist's job is to remove friction. These tools were engineered to empower designers to rapidly iterate on complex systems without needing to touch the underlying C# codebase.</p>
+    <div class="page-wrapper">
+        <div class="header-container">
+            <a href="index.html" class="back-link">← Return to Main OS</a>
+            <h1>Custom Tools & Pipelines</h1>
+            <p class="intro-text">A Technical Artist's job is to remove friction. These tools were engineered to empower designers to rapidly iterate on complex systems without needing to touch the underlying C# codebase.</p>
+        </div>
 
         <!-- TOOL 1: COMBO GRAPH -->
-        <h2>Node-Based Combat Graph Pipeline</h2>
-        
-        <video class="showcase-media" controls autoplay loop muted>
-            <source src="combo_graph_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <article class="tool-article">
+            <div class="article-content">
+                <h2>Node-Based Combat Graph</h2>
+                
+                <h3>The Goal</h3>
+                <p>Hardcoding combo logic is a nightmare for iteration. I needed to create a system that allowed game designers to visually map out complex, stance-based attack sequences and adjust frame data purely through a drag-and-drop UI interface.</p>
+                
+                <h3>How It Works</h3>
+                <p>I engineered a highly modular, node-based graph editor natively inside Unity.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Visual Scripting:</span> Allows designers to branch combo paths and define hitbox timing visually, cutting iteration time from hours to seconds.</li>
+                    <li><span class="highlight">Logic Translation:</span> The tool automatically serializes the visual node connections and translates them directly into the game's underlying Finite State Machine (FSM).</li>
+                    <li><span class="highlight">Designer Autonomy:</span> Completely decouples the combat logic from the core C# architecture, ensuring safe, bug-free data entry by non-programmers.</li>
+                </ul>
 
-        <p>Hardcoding combo logic is a nightmare for iteration. To solve this, I engineered a highly modular, node-based graph editor inside Unity. This tool allows game designers to visually map out complex, stance-based attack sequences, branch combo paths, and adjust frame data purely through a drag-and-drop UI interface. It translates visual node connections directly into the game's underlying Finite State Machine, cutting down iteration time from hours to seconds.</p>
-        
-        <a href="project-knuckle.html" class="project-link">🎮 See it in action: Knuckle</a>
-
-        <hr class="section-divider">
+                <a href="project-knuckle.html" class="btn-link"><span>🎮 View Project: Knuckle</span></a>
+            </div>
+            <div class="article-media">
+                <video class="media-item" controls autoplay loop muted>
+                    <source src="combo_graph_video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </article>
 
         <!-- TOOL 2: LLM CHAT SYSTEM -->
-        <h2>Dynamic LLM Chat & Prompt System</h2>
-        
-        <!-- Reusing the Lumen Chat Video -->
-        <video class="showcase-media" controls autoplay loop muted>
-            <source src="lumen_chat_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <article class="tool-article">
+            <div class="article-content">
+                <h2>Dynamic LLM Prompt System</h2>
+                
+                <h3>The Goal</h3>
+                <p>To move beyond hardcoded text boxes and create fully dynamic, AI-powered NPC behaviors by integrating Google's Gemini API directly into the engine, while providing narrative designers a clean interface to control it.</p>
+                
+                <h3>How It Works</h3>
+                <p>I built a robust backend pipeline and a custom designer-facing inspector tool to manage the API calls.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Designer Interface:</span> A custom tool allowing narrative designers to easily input system prompts, manage API keys, and define NPC personality weights without touching code.</li>
+                    <li><span class="highlight">Asynchronous Architecture:</span> The backend handles web requests asynchronously, parsing the JSON response data safely without stalling or blocking the main gameplay thread.</li>
+                    <li><span class="highlight">Dynamic UI Binding:</span> Seamlessly feeds the parsed string data directly into the in-game UI Canvas to generate real-time conversations.</li>
+                </ul>
 
-        <p>To create fully dynamic, AI-powered NPC behaviors, I built a robust pipeline to integrate Google's Gemini API directly into the engine. Instead of a hardcoded text box, I created a custom designer-facing tool where narrative designers can input system prompts, manage API keys, and define NPC personality weights. The backend system handles the asynchronous web requests, parses the JSON response data without stalling the main thread, and seamlessly dynamically populates the in-game UI.</p>
-        
-        <!-- Reusing the Lumen Images -->
-        <img src="lumen_ui.jpg" alt="Dynamic Chat System UI Interface" class="image-full">
-        <img src="lumen_api_code.jpg" alt="API Integration Backend Code" class="image-full">
-        
-        <a href="project-lumen.html" class="project-link">🎮 See it in action: Lumen</a>
+                <a href="project-lumen.html" class="btn-link"><span>🎮 View Project: Lumen</span></a>
+            </div>
+            <div class="article-media">
+                <video class="media-item" controls autoplay loop muted>
+                    <source src="lumen_chat_video.mp4" type="video/mp4">
+                </video>
+                <div class="image-row">
+                    <img src="lumen_ui.jpg" alt="Dynamic Chat System UI Interface" class="media-item">
+                    <img src="lumen_api_code.jpg" alt="API Integration Backend Code" class="media-item">
+                </div>
+            </div>
+        </article>
 
     </div>
-
 </body>
 </html>
