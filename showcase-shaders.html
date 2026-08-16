@@ -3,91 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shader Development - Featured Tech Art</title>
+    <title>Shader Development - Tech Art</title>
     <style>
-        /* ITCH.IO STYLE THEME */
+        /* BASE THEME (Persona / Noir Aesthetic) */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #111;
+            background-color: #050505;
             color: #ddd;
+            border-top: 6px solid #e60012;
         }
-        
+
+        /* CUSTOM RED SCROLLBAR */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #050505; border-left: 1px solid #222; }
+        ::-webkit-scrollbar-thumb { background: #e60012; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff2a3b; }
+        ::selection { background: #e60012; color: #fff; }
+
         .project-container {
-            max-width: 800px;
+            max-width: 1100px; /* Widened for split layout */
             margin: 40px auto;
-            background-color: #222;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            padding: 40px;
+            box-shadow: 8px 8px 0px rgba(230,0,18,0.15);
         }
 
         .back-link {
             display: inline-block;
-            color: #ff4757;
+            color: #e60012;
             text-decoration: none;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: #fff; }
+
+        /* TYPOGRAPHY */
+        h1 { 
+            color: #fff; 
+            margin-top: 0; 
+            border-bottom: 2px solid #333; 
+            padding-bottom: 15px; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        h2 { 
+            color: #e60012; 
+            margin-top: 0; 
+            font-size: 2rem; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        p { line-height: 1.6; font-size: 1.05rem; margin-bottom: 20px; color: #bbb; }
+
+        /* SPLIT PANEL LAYOUT */
+        .shader-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+            margin-bottom: 60px;
+        }
+
+        /* LEFT SIDE: TECHNICAL DOCUMENTATION */
+        .info-panel {
+            background-color: #111;
+            padding: 25px;
+            border-left: 4px solid #e60012;
+        }
+
+        .tech-list {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+        
+        .tech-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 12px;
+            line-height: 1.5;
+            color: #ccc;
+        }
+        
+        .tech-list li::before {
+            content: "■";
+            position: absolute;
+            left: 0;
+            color: #e60012;
+            font-size: 0.8rem;
+            top: 2px;
+        }
+
+        .highlight {
+            color: #fff;
             font-weight: bold;
         }
-        .back-link:hover { text-decoration: underline; }
 
-        h1 { color: #fff; margin-top: 0; border-bottom: 2px solid #333; padding-bottom: 10px; }
-        
-        h2 { color: #ff4757; margin-top: 40px; font-size: 1.8rem; }
-        
-        p { line-height: 1.6; font-size: 1.05rem; margin-bottom: 15px; }
-
-        /* Media styling */
-        .showcase-media {
-            width: 100%;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            background: #000;
+        /* SKEWED BUTTON */
+        .project-link {
+            display: inline-block;
+            background-color: transparent;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: 2px solid #e60012;
+            transform: skewX(-10deg);
+            text-decoration: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+        .project-link:hover {
+            background-color: #e60012;
+            color: #000;
+            box-shadow: 4px 4px 0px rgba(255,255,255,0.8);
+        }
+        .project-link span {
+            display: inline-block;
+            transform: skewX(10deg); /* Un-skews the text */
         }
 
-        .image-full {
+        /* RIGHT SIDE: MEDIA & GRAPHS */
+        .media-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .showcase-media, .image-full {
             width: 100%;
-            border-radius: 4px;
-            margin: 10px 0;
+            border-radius: 0;
             background-color: #000;
             border: 1px solid #333;
+            transition: border-color 0.3s ease;
+        }
+        
+        .showcase-media:hover, .image-full:hover {
+            border-color: #e60012;
         }
 
         .image-gallery {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            margin: 10px 0;
         }
         .image-gallery img {
             width: 100%;
-            border-radius: 4px;
-            background-color: #000;
             border: 1px solid #333;
+            background-color: #000;
         }
 
         .section-divider {
             margin: 60px auto;
             border: 0;
-            border-top: 2px dashed #444;
+            border-top: 2px dashed #333;
         }
 
-        /* Project Link Button */
-        .project-link {
-            display: inline-block;
-            background-color: #333;
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: bold;
-            transition: background 0.2s;
-            margin-bottom: 20px;
-        }
-        .project-link:hover {
-            background-color: #ff4757;
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 900px) {
+            .shader-section { grid-template-columns: 1fr; }
+            .info-panel { border-left: none; border-top: 4px solid #e60012; }
         }
     </style>
 </head>
@@ -95,74 +177,104 @@
 
     <div class="project-container">
         <!-- Back Link -->
-        <a href="index.html" class="back-link">← Back to Portfolio</a>
+        <a href="index.html" class="back-link">← Return to OS</a>
 
         <h1>Shader Development Showcase</h1>
-        <p>A collection of custom rendering solutions and Shader Graph implementations built to enhance visual feedback, optimize performance, and drive core gameplay mechanics.</p>
-
-        <!-- SHADER 1: THERMAL VISION -->
-        <h2>Thermal Vision (X-Ray)</h2>
+        <p>A technical breakdown of custom rendering solutions, Shader Graph implementations, and post-processing logic built to optimize performance and drive core visual mechanics.</p>
         
-        <video class="showcase-media" controls autoplay loop muted>
-            <source src="thermal_vision_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-        <p>Developed specifically for the gunner role in an asymmetric multiplayer setup. This full-screen post-processing shader translates object tags and world data into a high-contrast thermal image. It features an X-ray effect that allows the player to spot enemy heat signatures dynamically through physical cover and walls, providing a crucial tactical advantage.</p>
-        
-        <a href="project-heli.html" class="project-link">🎮 See it in action: Rotor Warfare</a>
-
-        <img src="thermal_graph.jpg" alt="Thermal Vision Shader Graph" class="image-full">
-
         <hr class="section-divider">
 
-        <!-- SHADER 2: SOBEL OUTLINE -->
-        <h2>Sobel Outline Shader</h2>
-        
-        <video class="showcase-media" controls autoplay loop muted>
-            <source src="sobel_outline_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-        <p>To achieve a striking, comic-book aesthetic for intense melee combat, I built a custom Sobel filter edge-detection shader. It analyzes scene depth and normal data to draw thick, stylized outlines around characters and environmental hazards, vastly improving visual readability during chaotic, fast-paced brawls.</p>
-        
-        <a href="project-knuckle.html" class="project-link">🎮 See it in action: Knuckle</a>
-
-        <div class="image-gallery">
-            <img src="sobel_graph_1.jpg" alt="Sobel Outline Shader Graph Part 1">
-            <img src="sobel_graph_2.jpg" alt="Sobel Outline Shader Graph Part 2">
+        <!-- SHADER 1: THERMAL VISION -->
+        <div class="shader-section">
+            <div class="info-panel">
+                <h2>Thermal Vision (X-Ray)</h2>
+                <p>Developed specifically for the gunner role in an asymmetric multiplayer setup, providing a crucial tactical advantage through geometry.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Full Screen Render Feature:</span> Built using URP's custom render passes to apply post-processing logic globally across the camera view.</li>
+                    <li><span class="highlight">Layer Masking & Tags:</span> Implements strict layer and tag separation to accurately identify and isolate enemy data from environmental geometry.</li>
+                    <li><span class="highlight">X-Ray Depth Logic:</span> Bypasses standard depth culling for designated layers, allowing enemy heat signatures to render flawlessly through physical walls and cover.</li>
+                </ul>
+                <a href="project-heli.html" class="project-link"><span>🎮 View Project: Rotor Warfare</span></a>
+            </div>
+            
+            <div class="media-panel">
+                <video class="showcase-media" controls autoplay loop muted>
+                    <source src="thermal_vision_video.mp4" type="video/mp4">
+                </video>
+                <img src="thermal_graph.jpg" alt="Thermal Vision Shader Graph" class="image-full">
+            </div>
         </div>
 
         <hr class="section-divider">
 
-        <!-- SHADER 3: IMPACT FRAMES (UPDATED TO USE GIF) -->
-        <h2>Impact Frame Shader</h2>
-        
-        <img src="combat_action.gif" alt="Impact Frame Showcase Action" class="image-full">
+        <!-- SHADER 2: SOBEL OUTLINE -->
+        <div class="shader-section">
+            <div class="info-panel">
+                <h2>Sobel Outline Shader</h2>
+                <p>A custom edge-detection solution designed to achieve a striking, comic-book aesthetic that improves readability during fast-paced melee combat.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Dual-Shader Approach:</span> Combines two distinct shader logics. One relies on a custom HLSL Sobel function, while the other processes depth buffers.</li>
+                    <li><span class="highlight">Normal-Based Detection:</span> Samples the URP Normal Buffer using screen position data to accurately trace hard geometric edges and creases.</li>
+                    <li><span class="highlight">Full Screen Post-Process:</span> Calculates outlines dynamically as a full-screen render pass, keeping performance costs low regardless of scene complexity.</li>
+                </ul>
+                <a href="project-knuckle.html" class="project-link"><span>🎮 View Project: Knuckle</span></a>
+            </div>
+            
+            <div class="media-panel">
+                <video class="showcase-media" controls autoplay loop muted>
+                    <source src="sobel_outline_video.mp4" type="video/mp4">
+                </video>
+                <div class="image-gallery">
+                    <img src="sobel_graph_1.jpg" alt="Custom HLSL Sobel Function Node setup">
+                    <img src="sobel_graph_2.jpg" alt="Normal Buffer Sampling and Edge Logic">
+                </div>
+            </div>
+        </div>
 
-        <p>Designed to give heavy attacks a devastating sense of weight. This shader overrides standard materials during hit-stop (time freeze) moments, flashing the screen with high-contrast, stylized impact colors. It works in tandem with the combat animation state machine to maximize the "punchiness" of physical hits.</p>
-        
-        <a href="project-knuckle.html" class="project-link">🎮 See it in action: Knuckle</a>
+        <hr class="section-divider">
 
-        <img src="impact_graph.jpg" alt="Impact Frame Shader Graph" class="image-full">
+        <!-- SHADER 3: IMPACT FRAMES -->
+        <div class="shader-section">
+            <div class="info-panel">
+                <h2>Impact Frame Shader</h2>
+                <p>Designed to give heavy attacks a devastating sense of weight by syncing rendering overrides with combat animation logic.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">C# Integration:</span> Triggered dynamically via C# scripts during specific hit-stop (time freeze) animation frames.</li>
+                    <li><span class="highlight">Material Overrides:</span> Overrides standard materials momentarily to flash the screen with high-contrast, stylized impact colors.</li>
+                    <li><span class="highlight">Artistic Control:</span> Exposes color clamping properties to the inspector, allowing artists to easily tweak the "punchiness" of physical hits.</li>
+                </ul>
+                <a href="project-knuckle.html" class="project-link"><span>🎮 View Project: Knuckle</span></a>
+            </div>
+            
+            <div class="media-panel">
+                <img src="combat_action.gif" alt="Impact Frame Showcase Action" class="image-full">
+                <img src="impact_graph.jpg" alt="Impact Frame Shader Graph" class="image-full">
+            </div>
+        </div>
 
         <hr class="section-divider">
 
         <!-- SHADER 4: 2D WIND -->
-        <h2>2D Wind Shader</h2>
-        
-        <video class="showcase-media" controls autoplay loop muted>
-            <source src="wind_shader_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-        <p>A lightweight vertex displacement shader created to breathe life into 2D environments. By manipulating the vertices of sprite assets using time and noise nodes, this shader simulates organic, rolling wind effects on foliage and cloth without the need for expensive physical simulations or skeletal animations.</p>
-        
-        <a href="project-lumen.html" class="project-link">🎮 See it in action: Lumen</a>
-
-        <img src="wind_graph.jpg" alt="2D Wind Shader Graph" class="image-full">
+        <div class="shader-section">
+            <div class="info-panel">
+                <h2>2D Wind Shader</h2>
+                <p>A highly optimized solution created to breathe life into 2D environments without relying on expensive physical simulations.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Vertex Displacement:</span> Manipulates the geometry of 2D sprite assets in real-time.</li>
+                    <li><span class="highlight">Procedural Noise:</span> Driven by a combination of Time and Noise nodes to simulate organic, rolling wind patterns across foliage and cloth.</li>
+                    <li><span class="highlight">GPU Performance:</span> Moves all wind calculation entirely to the GPU, ensuring zero overhead on the CPU logic thread.</li>
+                </ul>
+                <a href="project-lumen.html" class="project-link"><span>🎮 View Project: Lumen</span></a>
+            </div>
+            
+            <div class="media-panel">
+                <video class="showcase-media" controls autoplay loop muted>
+                    <source src="wind_shader_video.mp4" type="video/mp4">
+                </video>
+                <img src="wind_graph.jpg" alt="2D Wind Shader Graph" class="image-full">
+            </div>
+        </div>
 
     </div>
-
 </body>
 </html>
