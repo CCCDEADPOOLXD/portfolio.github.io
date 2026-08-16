@@ -73,6 +73,17 @@
             box-shadow: 8px 8px 0px rgba(230,0,18,0.1);
         }
 
+        /* FULL WIDTH GRID FOR PIPELINE */
+        .full-article {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+        .full-article .tech-list {
+            text-align: left;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
         /* LEFT SIDE: DOCUMENTATION */
         .article-content {
             display: flex;
@@ -189,7 +200,7 @@
         <div class="header-container">
             <a href="index.html" class="back-link">← Return to Main OS</a>
             <h1>Knuckle-House</h1>
-            <p class="intro-text">A stylized myth-tech boxing roguelike blending Greek mythology, "Punch-Out!!" style cinematic fights, and RPS (rock paper scissors) mechanics[cite: 1]. Currently in the prototype phase, built in Unity 6.3 for PC[cite: 1].</p>
+            <p class="intro-text">A stylized myth-tech boxing roguelike blending Greek mythology, "Punch-Out!!" style cinematic fights, and RPS (rock paper scissors) mechanics. Currently in the prototype phase, built in Unity 6.3 for PC.</p>
         </div>
 
         <!-- SECTION 1: HIGHLIGHTS & NARRATIVE -->
@@ -198,11 +209,11 @@
                 <h2>The World & Loop</h2>
                 
                 <h3>Project Highlights</h3>
-                <p>Designed to satisfy the high market demand for technical, physics-based melee combat (similar to titles like Sifu)[cite: 1].</p>
+                <p>Designed to satisfy the high market demand for technical, physics-based melee combat (similar to titles like Sifu).</p>
                 <ul class="tech-list">
-                    <li><span class="highlight">The Roguelike Loop:</span> Players navigate procedural node maps, challenge bosses on each floor, manage persistent health, and unlock meta-progression upgrades[cite: 1].</li>
-                    <li><span class="highlight">Myth-Tech Setting:</span> The visual identity blends ancient pantheon aesthetics with futuristic sci-fi and heavy cybernetic enhancements[cite: 1].</li>
-                    <li><span class="highlight">The Narrative:</span> Set in a dystopian future where the Gods of Olympus compete for the throne every year in a "fair" Rock-Paper-Scissors tournament[cite: 1]. Representatives fight to make their God the most popular, securing the throne for the next 5 years[cite: 1].</li>
+                    <li><span class="highlight">The Roguelike Loop:</span> Players navigate procedural node maps, challenge bosses on each floor, manage persistent health, and unlock meta-progression upgrades.</li>
+                    <li><span class="highlight">Myth-Tech Setting:</span> The visual identity blends ancient pantheon aesthetics with futuristic sci-fi and heavy cybernetic enhancements.</li>
+                    <li><span class="highlight">The Narrative:</span> Set in a dystopian future where the Gods of Olympus compete for the throne every year in a "fair" Rock-Paper-Scissors tournament. Representatives fight to make their God the most popular, securing the throne for the next 5 years.</li>
                 </ul>
 
                 <a href="https://cccdeadpool-xd.itch.io/knuckle" class="btn-link" target="_blank"><span>🎮 Play the Prototype</span></a>
@@ -211,18 +222,31 @@
                 <img src="combat_action.gif" alt="Knuckle-House Gameplay Action" class="media-item">
             </div>
         </article>
+        
+        <!-- SECTION 2: PIPELINE & COLLABORATION -->
+        <article class="project-article full-article">
+            <div class="article-content">
+                <h2>Pipeline & Collaboration</h2>
+                <p>As a Technical Artist, my core responsibility on Knuckle-House is bridging the gap between art and engineering to remove friction from the development process.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Cross-Discipline Teamwork:</span> I collaborate directly with 3D animators, riggers, 2D artists, sound designers, and game designers to ensure a seamless integration of all assets into the engine.</li>
+                    <li><span class="highlight">Blender to Unity Workflow:</span> I manage and optimize our primary art pipeline, establishing strict export/import standards between Blender and Unity to prevent scaling, rotation, or normal data issues.</li>
+                    <li><span class="highlight">Rigging & 3D Fundamentals:</span> Beyond shader and tool development, my strong foundation in rigging, skin weight painting, and 3D modeling allows me to troubleshoot skeletal issues and hierarchy breaks before they ever hit the engine, ensuring animations translate perfectly into the combat state machine.</li>
+                </ul>
+            </div>
+        </article>
 
-        <!-- SECTION 2: COMBAT MECHANICS -->
+        <!-- SECTION 3: COMBAT MECHANICS -->
         <article class="project-article">
             <div class="article-content">
                 <h2>Combat & AI Systems</h2>
                 
                 <h3>Frame-Precise Brawling</h3>
-                <p>The moment-to-moment combat is built on traditional 3D fighting game fundamentals[cite: 1].</p>
+                <p>The moment-to-moment combat is built on traditional 3D fighting game fundamentals.</p>
                 <ul class="tech-list">
-                    <li><span class="highlight">RPS to 3D Brawling:</span> Encounters initiate with a strategic Rock-Paper-Scissors entry phase that dictates the opening momentum before seamlessly transitioning into real-time combat[cite: 1].</li>
-                    <li><span class="highlight">Group AI Director:</span> To handle the chaos of group fights, a central AI director coordinates 1 vs Many encounters, ensuring one enemy attacks while others dynamically flank and stall[cite: 1].</li>
-                    <li><span class="highlight">Mechanical Depth:</span> The gameplay emphasizes strict frame data, precise parry windows, orbital spacing, and heavy hit-stop with slow-mo KO pings[cite: 1].</li>
+                    <li><span class="highlight">RPS to 3D Brawling:</span> Encounters initiate with a strategic Rock-Paper-Scissors entry phase that dictates the opening momentum before seamlessly transitioning into real-time combat.</li>
+                    <li><span class="highlight">Group AI Director:</span> To handle the chaos of group fights, a central AI director coordinates 1 vs Many encounters, ensuring one enemy attacks while others dynamically flank and stall.</li>
+                    <li><span class="highlight">Mechanical Depth:</span> The gameplay emphasizes strict frame data, precise parry windows, orbital spacing, and heavy hit-stop with slow-mo KO pings.</li>
                 </ul>
             </div>
             <div class="article-media">
@@ -230,15 +254,15 @@
             </div>
         </article>
 
-        <!-- SECTION 3: COMBAT DECK TOOL -->
+        <!-- SECTION 4: COMBAT DECK TOOL -->
         <article class="project-article">
             <div class="article-content">
                 <h2>The Combat Deck</h2>
                 
                 <h3>Custom Node-Based Pipeline</h3>
-                <p>To allow for deep customization, I built a modular pipeline tool allowing players to mix and match martial arts techniques to create highly personalized, stance-based fighting styles tailored to their preferred rhythm[cite: 1].</p>
+                <p>To allow for deep customization, I built a modular pipeline tool allowing players to mix and match martial arts techniques to create highly personalized, stance-based fighting styles tailored to their preferred rhythm.</p>
                 <ul class="tech-list">
-                    <li><span class="highlight">Stealing Abilities:</span> Players build their custom kit with passive and active abilities by stealing one of their enemies' many abilities after beating them in a fight[cite: 1].</li>
+                    <li><span class="highlight">Stealing Abilities:</span> Players build their custom kit with passive and active abilities by stealing one of their enemies' many abilities after beating them in a fight.</li>
                     <li><span class="highlight">Visual Pipeline:</span> The node-based editor translates visual node connections directly into the game's underlying Finite State Machine, ensuring robust scalability.</li>
                 </ul>
             </div>
@@ -247,16 +271,16 @@
             </div>
         </article>
 
-        <!-- SECTION 4: TECH ART & SHADERS -->
+        <!-- SECTION 5: TECH ART & SHADERS -->
         <article class="project-article">
             <div class="article-content">
                 <h2>Tech Art: Sobel Rendering</h2>
                 
                 <h3>Comic-Book Edge Detection</h3>
-                <p>The visual identity utilizes simple, low-poly graphics enhanced by a custom Sobel shader to create thick, comic-book-style outlines[cite: 1].</p>
+                <p>The visual identity utilizes simple, low-poly graphics enhanced by a custom Sobel shader to create thick, comic-book-style outlines.</p>
                 <ul class="tech-list">
-                    <li><span class="highlight">Cel-Shaded Aesthetics:</span> Analyzes scene depth and normal data to draw stylized outlines around characters and environmental hazards, creating a vibrant, cel-shaded look[cite: 1].</li>
-                    <li><span class="highlight">Visual Readability:</span> This approach drastically maximizes visual readability during chaotic, fast-paced combat, pairing perfectly with stylized 2D hit-sparks and dynamic camera snaps[cite: 1].</li>
+                    <li><span class="highlight">Cel-Shaded Aesthetics:</span> Analyzes scene depth and normal data to draw stylized outlines around characters and environmental hazards, creating a vibrant, cel-shaded look.</li>
+                    <li><span class="highlight">Visual Readability:</span> This approach drastically maximizes visual readability during chaotic, fast-paced combat, pairing perfectly with stylized 2D hit-sparks and dynamic camera snaps.</li>
                 </ul>
             </div>
             <div class="article-media">
