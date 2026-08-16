@@ -3,153 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VFX & Particles - Featured Tech Art</title>
+    <title>VFX & Particles | Tech Art</title>
     <style>
-        /* ITCH.IO STYLE THEME */
-        html, body {
+        /* BASE THEME (Persona / Noir Aesthetic) */
+        body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #111;
+            background-color: #050505;
             color: #ddd;
-            min-height: 100vh;
+            border-top: 6px solid #e60012;
+            line-height: 1.6;
         }
-        
-        .project-container {
-            max-width: 800px;
+
+        /* CUSTOM RED SCROLLBAR */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #050505; border-left: 1px solid #222; }
+        ::-webkit-scrollbar-thumb { background: #e60012; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff2a3b; }
+        ::selection { background: #e60012; color: #fff; }
+
+        .page-wrapper {
+            max-width: 1400px;
             margin: 40px auto;
-            background-color: #222;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
-            overflow: hidden;
+            padding: 0 20px;
+        }
+
+        .header-container {
+            margin-bottom: 50px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
         }
 
         .back-link {
             display: inline-block;
-            color: #ff4757;
+            color: #e60012;
             text-decoration: none;
             margin-bottom: 20px;
-            font-weight: bold;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s;
         }
-        
-        .back-link:hover { 
-            text-decoration: underline; 
-        }
+        .back-link:hover { color: #fff; }
 
         h1 { 
             color: #fff; 
-            margin-top: 0; 
-            border-bottom: 2px solid #333; 
-            padding-bottom: 10px; 
+            margin: 0; 
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
+        .intro-text {
+            color: #aaa;
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+
+        /* SPLIT PANEL GRID */
+        .vfx-article {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 100px;
+            background-color: #0a0a0a;
+            border: 1px solid #222;
+            padding: 40px;
+            box-shadow: 8px 8px 0px rgba(230,0,18,0.1);
+        }
+
+        /* LEFT SIDE: DOCUMENTATION */
+        .article-content {
+            display: flex;
+            flex-direction: column;
+        }
+
         h2 { 
-            color: #ff4757; 
-            margin-top: 40px; 
-            font-size: 1.8rem; 
+            color: #e60012; 
+            margin-top: 0; 
+            font-size: 2rem; 
+            text-transform: uppercase;
+            border-bottom: 2px solid #222;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* BULLET POINT STYLING */
+        .tech-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0 20px 0;
         }
         
-        p { 
-            line-height: 1.6; 
-            font-size: 1.05rem; 
-            margin-bottom: 15px; 
+        .tech-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            color: #ccc;
+        }
+        
+        .tech-list li::before {
+            content: "■";
+            position: absolute;
+            left: 0;
+            color: #e60012;
+            font-size: 0.8rem;
+            top: 3px;
         }
 
-        /* Media styling */
-        .showcase-media {
-            display: block;
-            width: 100%;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            background-color: #000;
+        .highlight {
+            color: #fff;
+            font-weight: bold;
         }
 
-        .image-full {
-            display: block;
+        /* RIGHT SIDE: MEDIA SHOWCASE */
+        .article-media {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .media-item {
             width: 100%;
-            border-radius: 4px;
-            margin: 15px 0;
             background-color: #000;
             border: 1px solid #333;
+            box-sizing: border-box;
         }
 
-        .section-divider {
-            margin: 60px auto;
-            border: 0;
-            border-top: 2px dashed #444;
-        }
-
-        /* Project Link Button */
-        .project-link {
+        /* SKEWED BUTTON */
+        .btn-link {
             display: inline-block;
-            background-color: #333;
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 4px;
+            background-color: transparent;
+            color: #ffffff;
+            padding: 12px 25px;
+            border: 2px solid #e60012;
+            transform: skewX(-10deg);
             text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: bold;
-            transition: background 0.2s;
-            margin-bottom: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-top: auto; 
+            align-self: flex-start;
         }
-        
-        .project-link:hover {
-            background-color: #ff4757;
+        .btn-link:hover {
+            background-color: #e60012;
+            color: #000;
+            box-shadow: 4px 4px 0px rgba(255,255,255,0.8);
+        }
+        .btn-link span {
+            display: inline-block;
+            transform: skewX(10deg);
+        }
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 1024px) {
+            .vfx-article {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+                padding: 25px;
+            }
+            .btn-link {
+                margin-top: 30px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="project-container">
-        <!-- Back Link -->
-        <a href="index.html" class="back-link">← Back to Portfolio</a>
-
-        <h1>VFX & Particles Showcase</h1>
-        <p>Focusing on combat "juice" and game feel, these systems tie together Unity's particle engines, custom shaders, and C# state machines to deliver satisfying and highly optimized visual feedback.</p>
+    <div class="page-wrapper">
+        <div class="header-container">
+            <a href="index.html" class="back-link">← Return to Main OS</a>
+            <h1>VFX & Particles Showcase</h1>
+            <p class="intro-text">Focusing on combat "juice" and game feel, these systems tie together particle engines, custom shaders, and C# state machines to deliver satisfying and highly optimized visual feedback.</p>
+        </div>
 
         <!-- VFX 1: HIT SYSTEM -->
-        <h2>Combat Hit Feedback System</h2>
-        
-        <img src="combat_action.gif" alt="Combat Hit Feedback Action" class="image-full">
+        <article class="vfx-article">
+            <div class="article-content">
+                <h2>Combat Hit Feedback System</h2>
+                
+                <h3>The Goal</h3>
+                <p>Creating satisfying melee combat requires more than just a simple particle pop. The goal was to engineer a unified hit-reaction system that maximizes game feel the exact frame a hitbox connects.</p>
+                
+                <h3>How It Works</h3>
+                <p>I built a synchronized event system that triggers multiple feedback layers simultaneously upon collision.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Visual Impact:</span> Spawns directional hit sparks and triggers physical mesh vibrations on the enemy model.</li>
+                    <li><span class="highlight">Game Feel:</span> Initiates camera hit-stop (time freezing) and haptic controller feedback to give physical weight to the strike.</li>
+                    <li><span class="highlight">UI Integration:</span> Communicates with the UI canvas to trigger localized reactions, such as the health bar glowing and bleeding.</li>
+                </ul>
 
-        <p>Creating satisfying melee combat requires more than just a particle pop. I engineered a unified hit-reaction system that triggers multiple synchronized events the exact frame a hitbox connects. This includes directional hit sparks, physical mesh vibrations on the enemy, weapon joint trails, camera hit-stop (time freezing), haptic controller feedback, and UI reactions (health bar glowing and bleeding).</p>
-        
-        <a href="project-knuckle.html" class="project-link">🎮 See it in action: Knuckle</a>
-
-        <img src="hit_system_breakdown.jpg" alt="Hit System Logic Breakdown" class="image-full">
-
-        <hr class="section-divider">
+                <a href="project-knuckle.html" class="btn-link"><span>🎮 View Project: Knuckle</span></a>
+            </div>
+            <div class="article-media">
+                <img src="combat_action.gif" alt="Combat Hit Feedback Action" class="media-item">
+                <img src="hit_system_breakdown.jpg" alt="Hit System Logic Breakdown" class="media-item">
+            </div>
+        </article>
 
         <!-- VFX 2: EXPLOSIONS -->
-        <h2>Optimized Battlefield Explosions</h2>
-        
-        <video class="showcase-media" controls autoplay loop muted>
-            <source src="explosion_vfx_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <article class="vfx-article">
+            <div class="article-content">
+                <h2>Optimized Battlefield Explosions</h2>
+                
+                <h3>The Goal</h3>
+                <p>Rotor Warfare requires smooth performance across both PC and mobile Android devices. Environmental VFX had to be highly optimized while still providing clear, impactful tactical feedback on the battlefield.</p>
+                
+                <h3>How It Works</h3>
+                <p>These explosion systems were heavily profiled and tuned to maintain strict performance budgets.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Layered Emitters:</span> Utilizes meticulously layered particle emitters to separate smoke, fire, and debris logic.</li>
+                    <li><span class="highlight">Low Overdraw:</span> Specifically tuned to minimize transparency overlap, ensuring mobile GPUs don't bottleneck during heavy combat.</li>
+                    <li><span class="highlight">Memory Footprint:</span> Engineered to maintain a minimal texture memory footprint without sacrificing visual fidelity.</li>
+                </ul>
 
-        <p>Because Rotor Warfare requires smooth performance across both PC and mobile Android devices simultaneously, environmental VFX had to be highly optimized. These explosion systems utilize layered particle emitters for smoke and fire, tuned to maintain low overdraw and minimal texture memory footprint while still providing clear tactical feedback on the battlefield.</p>
-        
-        <a href="project-heli.html" class="project-link">🎮 See it in action: Rotor Warfare</a>
-
-        <img src="explosion_particle_setup.jpg" alt="Explosion Particle System Inspector" class="image-full">
-
-        <hr class="section-divider">
+                <a href="project-heli.html" class="btn-link"><span>🎮 View Project: Rotor Warfare</span></a>
+            </div>
+            <div class="article-media">
+                <video class="media-item" controls autoplay loop muted>
+                    <source src="explosion_vfx_video.mp4" type="video/mp4">
+                </video>
+                <img src="explosion_particle_setup.jpg" alt="Explosion Particle System Inspector" class="media-item">
+            </div>
+        </article>
 
         <!-- VFX 3: DYNAMIC TRAILS -->
-        <h2>Dynamic Weapon Trails</h2>
-        
-        <video class="showcase-media" controls autoplay loop muted>
-            <source src="trails_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-        <p>To help players read attack arcs and understand hitboxes during fast-paced encounters, I implemented a dynamic trail system. These trails are cast directly from the attacking character's weapon joints, strictly bound to the active frames of the attack animation to ensure the visual effect matches the underlying collision logic perfectly.</p>
-
-        <img src="trail_setup.jpg" alt="Weapon Trail Setup" class="image-full">
+        <article class="vfx-article">
+            <div class="article-content">
+                <h2>Dynamic Weapon Trails</h2>
+                
+                <h3>The Goal</h3>
+                <p>To help players read attack arcs and clearly understand hitbox boundaries during fast-paced encounters, without relying on static, pre-animated meshes.</p>
+                
+                <h3>How It Works</h3>
+                <p>I implemented a dynamic trail system that responds directly to the character's movement in world-space.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Joint Casting:</span> Trails are cast directly from the attacking character's weapon joints in real-time.</li>
+                    <li><span class="highlight">Animation Sync:</span> The rendering logic is strictly bound to the active frames of the attack animation to ensure the visual effect perfectly matches the underlying collision data.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <video class="media-item" controls autoplay loop muted>
+                    <source src="trails_video.mp4" type="video/mp4">
+                </video>
+                <img src="trail_setup.jpg" alt="Weapon Trail Setup" class="media-item">
+            </div>
+        </article>
 
     </div>
-
 </body>
 </html>
