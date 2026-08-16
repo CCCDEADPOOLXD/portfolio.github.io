@@ -60,13 +60,6 @@
             font-size: 1.1rem;
             max-width: 800px;
         }
-        
-        .warning-text {
-            color: #ff4757;
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-top: 10px;
-        }
 
         /* SPLIT PANEL GRID */
         .project-article {
@@ -78,6 +71,17 @@
             border: 1px solid #222;
             padding: 40px;
             box-shadow: 8px 8px 0px rgba(230,0,18,0.1);
+        }
+
+        /* FULL WIDTH GRID FOR PIPELINE */
+        .full-article {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+        .full-article .tech-list {
+            text-align: left;
+            max-width: 800px;
+            margin: 20px auto;
         }
 
         /* LEFT SIDE: DOCUMENTATION */
@@ -197,7 +201,6 @@
             <a href="index.html" class="back-link">← Return to Main OS</a>
             <h1>Lumin</h1>
             <p class="intro-text">A 2D narrative prototype driven by dynamic AI interactions, casting you as a survivor navigating a mysterious post-apocalyptic cryo-disaster.</p>
-            <p class="warning-text">Note: Initial loading on WebGL may take a moment to initialize the AI backend.</p>
         </div>
 
         <!-- SECTION 1: NARRATIVE & GAMEPLAY -->
@@ -221,7 +224,37 @@
             </div>
         </article>
 
-        <!-- SECTION 2: AI & API INTEGRATION -->
+        <!-- SECTION 2: COLLABORATION & PIPELINE -->
+        <article class="project-article full-article">
+            <div class="article-content">
+                <h2>Team Collaboration & Art Pipeline</h2>
+                <p>Bringing Lumen's 2D world to life required close cross-disciplinary teamwork to ensure environmental fidelity matched the narrative tone.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Cross-Discipline Teamwork:</span> Collaborated directly with 2D artists and animators to integrate asset packs, character sprites, and environmental animations cleanly into the engine.</li>
+                    <li><span class="highlight">Asset Pipeline:</span> Standardized sprite imports and structural configurations to maintain crisp visual quality across various display aspect ratios.</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- SECTION 3: TECH ART - 2D WIND SHADER -->
+        <article class="project-article">
+            <div class="article-content">
+                <h2>Tech Art: 2D Wind Shader</h2>
+                
+                <h3>Vertex Displacement & Atmosphere</h3>
+                <p>To give the post-apocalyptic 2D environments an organic, breathing feel without relying on expensive physical simulations, I implemented a custom vertex wind shader.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Procedural Noise:</span> Driven by a Gradient Noise node combined with Time and Speed parameters to generate rolling foliage sway.</li>
+                    <li><span class="highlight">UV Masking:</span> Split UV coordinates to create a vertical gradient mask, ensuring the roots/bases of environmental assets remain firmly anchored while the tops sway freely.</li>
+                    <li><span class="highlight">GPU Optimization:</span> Calculations run entirely on the GPU via vertex position offsets, ensuring zero CPU overhead.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <img src="wind_graph.jpg" alt="2D Wind Shader Graph Logic" class="media-item">
+            </div>
+        </article>
+
+        <!-- SECTION 4: AI & API INTEGRATION -->
         <article class="project-article">
             <div class="article-content">
                 <h2>LLM Chat & Systems</h2>
