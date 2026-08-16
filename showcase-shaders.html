@@ -24,7 +24,7 @@
         ::selection { background: #e60012; color: #fff; }
 
         .page-wrapper {
-            max-width: 1400px; /* Wide layout for the split design */
+            max-width: 1400px;
             margin: 40px auto;
             padding: 0 20px;
         }
@@ -64,7 +64,7 @@
         /* SPLIT PANEL GRID */
         .shader-article {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 50/50 Split on Desktop */
+            grid-template-columns: 1fr 1fr;
             gap: 60px;
             margin-bottom: 100px;
             background-color: #0a0a0a;
@@ -91,21 +91,38 @@
         h3 {
             color: #fff;
             font-size: 1.2rem;
-            margin-top: 30px;
+            margin-top: 25px;
             margin-bottom: 10px;
             text-transform: uppercase;
         }
 
-        .tech-tag {
-            display: inline-block;
-            background: #222;
-            color: #fff;
-            padding: 4px 10px;
-            font-size: 0.85rem;
-            font-family: monospace;
-            margin-right: 8px;
+        /* BULLET POINT STYLING */
+        .tech-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0 20px 0;
+        }
+        
+        .tech-list li {
+            position: relative;
+            padding-left: 20px;
             margin-bottom: 15px;
-            border-left: 2px solid #e60012;
+            line-height: 1.5;
+            color: #ccc;
+        }
+        
+        .tech-list li::before {
+            content: "■";
+            position: absolute;
+            left: 0;
+            color: #e60012;
+            font-size: 0.8rem;
+            top: 3px;
+        }
+
+        .highlight {
+            color: #fff;
+            font-weight: bold;
         }
 
         /* RIGHT SIDE: MEDIA SHOWCASE */
@@ -140,7 +157,7 @@
             font-weight: 900;
             text-transform: uppercase;
             transition: all 0.2s ease;
-            margin-top: auto; /* Pushes button to bottom of text column */
+            margin-top: auto; 
             align-self: flex-start;
         }
         .btn-link:hover {
@@ -156,7 +173,7 @@
         /* MOBILE RESPONSIVENESS */
         @media (max-width: 1024px) {
             .shader-article {
-                grid-template-columns: 1fr; /* Stacks to single column on mobile */
+                grid-template-columns: 1fr; 
                 gap: 40px;
                 padding: 25px;
             }
@@ -179,18 +196,18 @@
         <article class="shader-article">
             <div class="article-content">
                 <h2>2D Wind Vertex Shader</h2>
-                <div>
-                    <span class="tech-tag">Vertex Displacement</span>
-                    <span class="tech-tag">GPU Optimization</span>
-                    <span class="tech-tag">Procedural Noise</span>
-                </div>
                 
                 <h3>The Goal</h3>
                 <p>To breathe life into 2D environments (foliage, cloth) without relying on expensive CPU-based physical simulations or heavy skeletal animations. The solution needed to be fully processed on the GPU.</p>
                 
                 <h3>How It Works</h3>
-                <p>Instead of animating the sprite, I built a Shader Graph that manipulates the object's vertices in real-time. By driving a <strong>Gradient Noise</strong> node with a <strong>Time</strong> and <strong>Speed</strong> parameter, I created an organic waving pattern.</p>
-                <p>The core challenge was keeping the bottom of the plants attached to the ground. To solve this, I split the <strong>UV coordinates</strong> and used the vertical gradient as a mathematical mask. By multiplying the noise output by this UV mask, the displacement force drops to zero at the root, while the top of the sprite receives the full sway effect. Finally, this data is added directly to the X-axis of the object's Vertex Position.</p>
+                <p>Instead of animating the sprite, I built a Shader Graph that manipulates the object's vertices in real-time to simulate organic, rolling wind patterns.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Procedural Noise:</span> Driven by a Gradient Noise node combined with Time and Speed parameters to generate the waving force.</li>
+                    <li><span class="highlight">UV Masking (The Anchor):</span> The core challenge was keeping the bottom of the plants attached to the ground. I split the UV coordinates and used the vertical gradient as a mathematical mask.</li>
+                    <li><span class="highlight">Vertex Displacement:</span> By multiplying the noise output by the UV mask, the displacement force drops to zero at the root, while the top receives the full sway. This data is injected into the X-axis of the Vertex Position.</li>
+                    <li><span class="highlight">GPU Performance:</span> Moves all wind calculations entirely to the GPU, ensuring zero overhead on the CPU logic thread.</li>
+                </ul>
 
                 <a href="project-lumen.html" class="btn-link"><span>🎮 View Project: Lumen</span></a>
             </div>
@@ -206,18 +223,17 @@
         <article class="shader-article">
             <div class="article-content">
                 <h2>Sobel Outline & Edge Detection</h2>
-                <div>
-                    <span class="tech-tag">HLSL Function</span>
-                    <span class="tech-tag">Normal/Depth Buffer</span>
-                    <span class="tech-tag">Full-Screen Post-Process</span>
-                </div>
                 
                 <h3>The Goal</h3>
                 <p>Fast-paced melee combat requires excellent visual readability. The goal was to create a striking, comic-book aesthetic that draws thick, stylized outlines around characters and environmental hazards to make silhouettes pop.</p>
                 
                 <h3>How It Works</h3>
-                <p>I utilized a Full-Screen Render Feature to apply the effect globally across the camera view. The system relies on a dual-shader approach.</p>
-                <p>One part of the logic handles depth, while the other samples the <strong>URP Normal Buffer</strong> based on screen position. I integrated a custom HLSL Sobel function to trace the hard geometric edges and creases detected in the buffers. Because it is calculated as a full-screen post-process pass, the performance cost remains stable regardless of the physical polycount in the scene.</p>
+                <p>I utilized a Full-Screen Render Feature to apply the effect globally across the camera view, utilizing a custom dual-shader approach.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">HLSL Integration:</span> Relies on a custom HLSL Sobel function node setup to mathematically trace hard geometric edges and creases.</li>
+                    <li><span class="highlight">Normal & Depth Sampling:</span> Samples the URP Normal Buffer and depth data based on screen position to accurately detect where object silhouettes begin and end.</li>
+                    <li><span class="highlight">Full Screen Post-Process:</span> Because outlines are calculated dynamically as a full-screen pass, the performance cost remains stable regardless of the physical polycount in the scene.</li>
+                </ul>
 
                 <a href="project-knuckle.html" class="btn-link"><span>🎮 View Project: Knuckle</span></a>
             </div>
@@ -236,18 +252,17 @@
         <article class="shader-article">
             <div class="article-content">
                 <h2>Thermal Vision (X-Ray)</h2>
-                <div>
-                    <span class="tech-tag">Custom Render Pass</span>
-                    <span class="tech-tag">Layer Masking</span>
-                    <span class="tech-tag">Depth Culling</span>
-                </div>
                 
                 <h3>The Goal</h3>
                 <p>Developed specifically for the gunner role in an asymmetric multiplayer game. The gunner needed a high-contrast thermal view capable of spotting enemy heat signatures through physical walls and geometry.</p>
                 
                 <h3>How It Works</h3>
-                <p>I built a URP Full Screen Render Feature that relies heavily on strict Layer and Tag separation. By separating the enemy data from the environmental geometry layers, the shader can accurately isolate targets.</p>
-                <p>To achieve the "X-Ray" effect, the shader modifies the standard depth logic. It intentionally bypasses depth culling for the specific enemy layers, allowing their silhouettes to render flawlessly on top of the environment, regardless of the physical walls standing between them and the camera.</p>
+                <p>Built as a URP Full Screen Render Feature, this shader processes object tags and world data into a high-contrast thermal image.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Layer Masking:</span> Implements strict layer and tag separation to accurately identify and isolate enemy data from the surrounding environmental geometry.</li>
+                    <li><span class="highlight">X-Ray Depth Logic:</span> Intentionally bypasses standard depth culling for designated layers. This allows enemy heat signatures to render flawlessly on top of physical walls and cover.</li>
+                    <li><span class="highlight">Global Rendering:</span> Applying the post-processing logic globally ensures visual consistency across the entire viewport without attaching scripts to individual enemies.</li>
+                </ul>
 
                 <a href="project-heli.html" class="btn-link"><span>🎮 View Project: Rotor Warfare</span></a>
             </div>
@@ -263,17 +278,17 @@
         <article class="shader-article">
             <div class="article-content">
                 <h2>Dynamic Impact Frames</h2>
-                <div>
-                    <span class="tech-tag">C# Integration</span>
-                    <span class="tech-tag">Material Overrides</span>
-                </div>
                 
                 <h3>The Goal</h3>
                 <p>To drastically improve the sense of weight and "punchiness" during heavy combat. The visual feedback needed to sync perfectly with the game's mechanical hit-stop (time freeze) logic.</p>
                 
                 <h3>How It Works</h3>
-                <p>Unlike continuous ambient shaders, this is a highly targeted event. It is triggered dynamically via C# scripts tied directly to the combat animation state machine.</p>
-                <p>Upon a successful heavy hit, the logic temporarily overrides the character materials, flashing the screen with a high-contrast, stylized color palette. Once the hit-stop frames conclude, the system seamlessly returns the materials to their standard rendering state.</p>
+                <p>Unlike continuous ambient shaders, this is a highly targeted event tied directly to the combat state machine.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">C# Integration:</span> Triggered dynamically via C# scripts during specific hit-stop animation frames upon a successful heavy attack.</li>
+                    <li><span class="highlight">Material Overrides:</span> Overrides standard materials momentarily to flash the screen with high-contrast, stylized impact colors, before seamlessly returning materials to their standard state.</li>
+                    <li><span class="highlight">Artistic Control:</span> Exposes color clamping properties to the inspector, allowing artists to easily tweak the intensity of physical hits without editing code.</li>
+                </ul>
 
                 <a href="project-knuckle.html" class="btn-link"><span>🎮 View Project: Knuckle</span></a>
             </div>
