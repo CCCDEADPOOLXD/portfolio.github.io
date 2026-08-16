@@ -138,6 +138,12 @@
             border: 1px solid #333;
             box-sizing: border-box;
         }
+        
+        .image-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
 
         /* SKEWED BUTTON */
         .btn-link {
@@ -255,8 +261,13 @@
                 <a href="project-heli.html" class="btn-link"><span>🎮 View Project: Rotor Warfare</span></a>
             </div>
             <div class="article-media">
-                <img src="image_ac5739.jpg" alt="Missile Smoke Trail VFX" class="media-item">
-                <img src="trail_setup.jpg" alt="Trail Emission Setup" class="media-item">
+                <video class="media-item" controls autoplay loop muted>
+                    <source src="trails_video.mp4" type="video/mp4">
+                </video>
+                <div class="image-row">
+                    <img src="image_ac5739.jpg" alt="Missile Smoke Trail VFX" class="media-item">
+                    <img src="trail_setup.jpg" alt="Trail Emission Setup" class="media-item">
+                </div>
             </div>
         </article>
 
