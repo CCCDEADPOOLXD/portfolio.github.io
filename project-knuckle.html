@@ -3,134 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knuckle-House - Project Details</title>
+    <title>Knuckle-House | Game Details</title>
     <style>
-        /* ITCH.IO STYLE THEME */
+        /* BASE THEME (Persona / Noir Aesthetic) */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #111; 
+            background-color: #050505;
             color: #ddd;
+            border-top: 6px solid #e60012;
+            line-height: 1.6;
         }
-        
-        .project-container {
-            max-width: 800px;
+
+        /* CUSTOM RED SCROLLBAR */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #050505; border-left: 1px solid #222; }
+        ::-webkit-scrollbar-thumb { background: #e60012; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff2a3b; }
+        ::selection { background: #e60012; color: #fff; }
+
+        .page-wrapper {
+            max-width: 1400px;
             margin: 40px auto;
-            background-color: #222; 
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            padding: 0 20px;
+        }
+
+        .header-container {
+            margin-bottom: 50px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
         }
 
         .back-link {
             display: inline-block;
-            color: #ff4757;
+            color: #e60012;
             text-decoration: none;
             margin-bottom: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: #fff; }
+
+        h1 { 
+            color: #fff; 
+            margin: 0; 
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .intro-text {
+            color: #aaa;
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+
+        /* SPLIT PANEL GRID */
+        .project-article {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 100px;
+            background-color: #0a0a0a;
+            border: 1px solid #222;
+            padding: 40px;
+            box-shadow: 8px 8px 0px rgba(230,0,18,0.1);
+        }
+
+        /* LEFT SIDE: DOCUMENTATION */
+        .article-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 { 
+            color: #e60012; 
+            margin-top: 0; 
+            font-size: 2rem; 
+            text-transform: uppercase;
+            border-bottom: 2px solid #222;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* BULLET POINT STYLING */
+        .tech-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0 20px 0;
+        }
+        
+        .tech-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            color: #ccc;
+        }
+        
+        .tech-list li::before {
+            content: "■";
+            position: absolute;
+            left: 0;
+            color: #e60012;
+            font-size: 0.8rem;
+            top: 3px;
+        }
+
+        .highlight {
+            color: #fff;
             font-weight: bold;
         }
-        .back-link:hover { text-decoration: underline; }
 
-        h1 { color: #fff; margin-top: 0; border-bottom: 2px solid #333; padding-bottom: 10px; }
-        
-        /* Main showcase media */
-        .showcase-media {
-            width: 100%;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            background: #000;
+        /* RIGHT SIDE: MEDIA SHOWCASE */
+        .article-media {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        h2 { color: #fff; margin-top: 35px; font-size: 1.5rem; border-bottom: 1px solid #444; padding-bottom: 5px; }
-        h3 { color: #ff4757; margin-top: 25px; font-size: 1.2rem; }
-        
-        p { line-height: 1.6; font-size: 1.05rem; }
-
-        .image-full {
+        .media-item {
             width: 100%;
-            border-radius: 4px;
-            margin: 15px 0;
             background-color: #000;
+            border: 1px solid #333;
+            box-sizing: border-box;
         }
-
-        /* Image Gallery for Side-by-Side Shader Graphs */
-        .image-gallery {
+        
+        .image-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            margin: 15px 0;
-        }
-        .image-gallery img {
-            width: 100%;
-            border-radius: 4px;
-            background-color: #000;
-            border: 1px solid #333;
         }
 
-        .action-button {
-            display: block;
-            width: 100%;
-            background-color: #ff4757;
-            color: white;
-            text-align: center;
-            padding: 15px;
+        /* SKEWED BUTTON */
+        .btn-link {
+            display: inline-block;
+            background-color: transparent;
+            color: #ffffff;
+            padding: 12px 25px;
+            border: 2px solid #e60012;
+            transform: skewX(-10deg);
             text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 4px;
-            margin-top: 30px;
-            transition: background 0.2s;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-top: auto; 
+            align-self: flex-start;
         }
-        .action-button:hover { background-color: #e03e4d; }
+        .btn-link:hover {
+            background-color: #e60012;
+            color: #000;
+            box-shadow: 4px 4px 0px rgba(255,255,255,0.8);
+        }
+        .btn-link span {
+            display: inline-block;
+            transform: skewX(10deg);
+        }
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 1024px) {
+            .project-article {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+                padding: 25px;
+            }
+            .btn-link {
+                margin-top: 30px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="project-container">
-        <!-- Back Link -->
-        <a href="index.html" class="back-link">← Back to Portfolio</a>
-
-        <h1>Knuckle-House: Combat & Tools</h1>
-
-        <!-- 1. GAMEPLAY TRAILER (GIF) -->
-        <img src="combat_action.gif" alt="Knuckle-House Gameplay Action" class="showcase-media">
-
-        <!-- 2. ABOUT THE GAME -->
-        <h2>About The Game</h2>
-        <p>Knuckle-House is a 3D roguelike brawler that blends intense arena combat with tactical, run-based progression. Fight your way through a branching map of challenging encounters, taking on groups of intelligent enemies in brutal, martial-arts-style brawls. Every fight tests your reflexes and crowd-control skills as you survive waves of attackers. Manage your persistent health between rounds, spend your rewards to grow stronger, and see how far you can survive the gauntlet.</p>
-        <a href="https://cccdeadpool-xd.itch.io/knuckle" class="action-button" target="_blank">Play the Prototype on Itch.io</a>
-
-        <!-- 3. COMBAT MECHANICS INFO -->
-        <h2>Systems: Frame-Precise Combat & AI</h2>
-        <p>The moment-to-moment combat is built on traditional 3D fighting game fundamentals, emphasizing strict frame data, precise parry windows, and heavy hit-stop. Fights initiate with a strategic Rock-Paper-Scissors phase that dictates the opening momentum. To handle the chaos of group fights, I engineered a central director AI that coordinates 1 vs Many encounters, ensuring one enemy attacks while others dynamically flank and stall.</p>
-
-        <!-- 4. COMBO GRAPH SCREENSHOT -->
-        <img src="combo_graph.jpg" alt="Node-based Combo Graph Pipeline" class="image-full">
-
-        <!-- 5. COMBO GRAPH EXPLANATION -->
-        <h3>The "Combat Deck" Pipeline Tool</h3>
-        <p>To allow for rapid iteration and deep customization, I built a modular pipeline tool. Players build and modify their own attack sequences using a customizable "Combat Deck". This node-based system allows players (and designers) to mix and match martial arts techniques to create highly personalized, stance-based fighting styles without touching hardcoded logic.</p>
-
-        <!-- 6. GAMEPLAY SCREENSHOT -->
-        <img src="knuckle_gameplay_ss.jpg" alt="Knuckle-House Gameplay" class="image-full">
-
-        <!-- 7. SOBEL OUTLINE SHADER REUSE -->
-        <h2>Tech Art: Sobel Outline Shader</h2>
-        
-        <video class="showcase-media" controls autoplay loop muted>
-            <source src="sobel_outline_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-        <p>To achieve a striking, comic-book aesthetic for intense melee combat, I built a custom Sobel filter edge-detection shader. It analyzes scene depth and normal data to draw thick, stylized outlines around characters and environmental hazards, vastly improving visual readability during chaotic, fast-paced brawls.</p>
-        
-        <div class="image-gallery">
-            <img src="sobel_graph_1.jpg" alt="Sobel Outline Shader Graph Part 1">
-            <img src="sobel_graph_2.jpg" alt="Sobel Outline Shader Graph Part 2">
+    <div class="page-wrapper">
+        <div class="header-container">
+            <a href="index.html" class="back-link">← Return to Main OS</a>
+            <h1>Knuckle-House</h1>
+            <p class="intro-text">A stylized myth-tech boxing roguelike blending Greek mythology, "Punch-Out!!" style cinematic fights, and RPS (rock paper scissors) mechanics[cite: 1]. Currently in the prototype phase, built in Unity 6.3 for PC[cite: 1].</p>
         </div>
 
-    </div>
+        <!-- SECTION 1: HIGHLIGHTS & NARRATIVE -->
+        <article class="project-article">
+            <div class="article-content">
+                <h2>The World & Loop</h2>
+                
+                <h3>Project Highlights</h3>
+                <p>Designed to satisfy the high market demand for technical, physics-based melee combat (similar to titles like Sifu)[cite: 1].</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">The Roguelike Loop:</span> Players navigate procedural node maps, challenge bosses on each floor, manage persistent health, and unlock meta-progression upgrades[cite: 1].</li>
+                    <li><span class="highlight">Myth-Tech Setting:</span> The visual identity blends ancient pantheon aesthetics with futuristic sci-fi and heavy cybernetic enhancements[cite: 1].</li>
+                    <li><span class="highlight">The Narrative:</span> Set in a dystopian future where the Gods of Olympus compete for the throne every year in a "fair" Rock-Paper-Scissors tournament[cite: 1]. Representatives fight to make their God the most popular, securing the throne for the next 5 years[cite: 1].</li>
+                </ul>
 
+                <a href="https://cccdeadpool-xd.itch.io/knuckle" class="btn-link" target="_blank"><span>🎮 Play the Prototype</span></a>
+            </div>
+            <div class="article-media">
+                <img src="combat_action.gif" alt="Knuckle-House Gameplay Action" class="media-item">
+            </div>
+        </article>
+
+        <!-- SECTION 2: COMBAT MECHANICS -->
+        <article class="project-article">
+            <div class="article-content">
+                <h2>Combat & AI Systems</h2>
+                
+                <h3>Frame-Precise Brawling</h3>
+                <p>The moment-to-moment combat is built on traditional 3D fighting game fundamentals[cite: 1].</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">RPS to 3D Brawling:</span> Encounters initiate with a strategic Rock-Paper-Scissors entry phase that dictates the opening momentum before seamlessly transitioning into real-time combat[cite: 1].</li>
+                    <li><span class="highlight">Group AI Director:</span> To handle the chaos of group fights, a central AI director coordinates 1 vs Many encounters, ensuring one enemy attacks while others dynamically flank and stall[cite: 1].</li>
+                    <li><span class="highlight">Mechanical Depth:</span> The gameplay emphasizes strict frame data, precise parry windows, orbital spacing, and heavy hit-stop with slow-mo KO pings[cite: 1].</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <img src="knuckle_gameplay_ss.jpg" alt="Knuckle-House Gameplay" class="media-item">
+            </div>
+        </article>
+
+        <!-- SECTION 3: COMBAT DECK TOOL -->
+        <article class="project-article">
+            <div class="article-content">
+                <h2>The Combat Deck</h2>
+                
+                <h3>Custom Node-Based Pipeline</h3>
+                <p>To allow for deep customization, I built a modular pipeline tool allowing players to mix and match martial arts techniques to create highly personalized, stance-based fighting styles tailored to their preferred rhythm[cite: 1].</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Stealing Abilities:</span> Players build their custom kit with passive and active abilities by stealing one of their enemies' many abilities after beating them in a fight[cite: 1].</li>
+                    <li><span class="highlight">Visual Pipeline:</span> The node-based editor translates visual node connections directly into the game's underlying Finite State Machine, ensuring robust scalability.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <img src="combo_graph.jpg" alt="Node-based Combo Graph Pipeline" class="media-item">
+            </div>
+        </article>
+
+        <!-- SECTION 4: TECH ART & SHADERS -->
+        <article class="project-article">
+            <div class="article-content">
+                <h2>Tech Art: Sobel Rendering</h2>
+                
+                <h3>Comic-Book Edge Detection</h3>
+                <p>The visual identity utilizes simple, low-poly graphics enhanced by a custom Sobel shader to create thick, comic-book-style outlines[cite: 1].</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Cel-Shaded Aesthetics:</span> Analyzes scene depth and normal data to draw stylized outlines around characters and environmental hazards, creating a vibrant, cel-shaded look[cite: 1].</li>
+                    <li><span class="highlight">Visual Readability:</span> This approach drastically maximizes visual readability during chaotic, fast-paced combat, pairing perfectly with stylized 2D hit-sparks and dynamic camera snaps[cite: 1].</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <video class="media-item" controls autoplay loop muted>
+                    <source src="sobel_outline_video.mp4" type="video/mp4">
+                </video>
+                <div class="image-row">
+                    <img src="sobel_graph_1.jpg" alt="Sobel Outline Shader Graph Part 1" class="media-item">
+                    <img src="sobel_graph_2.jpg" alt="Sobel Outline Shader Graph Part 2" class="media-item">
+                </div>
+            </div>
+        </article>
+
+    </div>
 </body>
 </html>
