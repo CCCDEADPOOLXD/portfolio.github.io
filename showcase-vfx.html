@@ -236,26 +236,27 @@
             </div>
         </article>
 
-        <!-- VFX 3: DYNAMIC TRAILS -->
+        <!-- VFX 3: PROJECTILE TRAILS (UPDATED) -->
         <article class="vfx-article">
             <div class="article-content">
-                <h2>Dynamic Weapon Trails</h2>
+                <h2>Projectile Smoke Trails</h2>
                 
                 <h3>The Goal</h3>
-                <p>To help players read attack arcs and clearly understand hitbox boundaries during fast-paced encounters, without relying on static, pre-animated meshes.</p>
+                <p>To provide clear, readable directional feedback for high-velocity ordnance (missiles and rockets) without cluttering the screen or tanking performance during heavy vehicle firefights.</p>
                 
                 <h3>How It Works</h3>
-                <p>I implemented a dynamic trail system that responds directly to the character's movement in world-space.</p>
+                <p>I designed a performance-friendly smoke trail system that scales dynamically with the projectile's extreme velocities.</p>
                 <ul class="tech-list">
-                    <li><span class="highlight">Joint Casting:</span> Trails are cast directly from the attacking character's weapon joints in real-time.</li>
-                    <li><span class="highlight">Animation Sync:</span> The rendering logic is strictly bound to the active frames of the attack animation to ensure the visual effect perfectly matches the underlying collision data.</li>
+                    <li><span class="highlight">World-Space Simulation:</span> Particles are simulated in world-space rather than local-space, allowing the thick smoke puffs to linger naturally in the air long after the missile has passed.</li>
+                    <li><span class="highlight">Distance-Based Emission:</span> To prevent unsightly gaps in the trail when a missile travels at high speeds, particles are emitted based on distance traveled rather than strictly by time.</li>
+                    <li><span class="highlight">Optimized Dissipation:</span> The smoke utilizes size and color-over-lifetime curves to simulate realistic dissipation while keeping the overdraw budget strictly managed for mobile limits.</li>
                 </ul>
+                
+                <a href="project-heli.html" class="btn-link"><span>🎮 View Project: Rotor Warfare</span></a>
             </div>
             <div class="article-media">
-                <video class="media-item" controls autoplay loop muted>
-                    <source src="trails_video.mp4" type="video/mp4">
-                </video>
-                <img src="trail_setup.jpg" alt="Weapon Trail Setup" class="media-item">
+                <img src="image_ac5739.jpg" alt="Missile Smoke Trail VFX" class="media-item">
+                <img src="trail_setup.jpg" alt="Trail Emission Setup" class="media-item">
             </div>
         </article>
 
