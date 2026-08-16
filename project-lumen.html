@@ -3,111 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumen - Project Details</title>
+    <title>Lumen | Game Details</title>
     <style>
-        /* ITCH.IO STYLE THEME */
+        /* BASE THEME (Persona / Noir Aesthetic) */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #111; 
+            background-color: #050505;
             color: #ddd;
+            border-top: 6px solid #e60012;
+            line-height: 1.6;
         }
-        
-        .project-container {
-            max-width: 800px;
+
+        /* CUSTOM RED SCROLLBAR */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #050505; border-left: 1px solid #222; }
+        ::-webkit-scrollbar-thumb { background: #e60012; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff2a3b; }
+        ::selection { background: #e60012; color: #fff; }
+
+        .page-wrapper {
+            max-width: 1400px;
             margin: 40px auto;
-            background-color: #222; 
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            padding: 0 20px;
+        }
+
+        .header-container {
+            margin-bottom: 50px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
         }
 
         .back-link {
             display: inline-block;
-            color: #ff4757;
+            color: #e60012;
             text-decoration: none;
             margin-bottom: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: #fff; }
+
+        h1 { 
+            color: #fff; 
+            margin: 0; 
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .intro-text {
+            color: #aaa;
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+        
+        .warning-text {
+            color: #ff4757;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* SPLIT PANEL GRID */
+        .project-article {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 100px;
+            background-color: #0a0a0a;
+            border: 1px solid #222;
+            padding: 40px;
+            box-shadow: 8px 8px 0px rgba(230,0,18,0.1);
+        }
+
+        /* LEFT SIDE: DOCUMENTATION */
+        .article-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 { 
+            color: #e60012; 
+            margin-top: 0; 
+            font-size: 2rem; 
+            text-transform: uppercase;
+            border-bottom: 2px solid #222;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* BULLET POINT STYLING */
+        .tech-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0 20px 0;
+        }
+        
+        .tech-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            color: #ccc;
+        }
+        
+        .tech-list li::before {
+            content: "■";
+            position: absolute;
+            left: 0;
+            color: #e60012;
+            font-size: 0.8rem;
+            top: 3px;
+        }
+
+        .highlight {
+            color: #fff;
             font-weight: bold;
         }
-        .back-link:hover { text-decoration: underline; }
 
-        h1 { color: #fff; margin-top: 0; border-bottom: 2px solid #333; padding-bottom: 10px; }
-        
-        /* Main showcase media */
-        .showcase-media {
-            width: 100%;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            background: #000;
+        /* RIGHT SIDE: MEDIA SHOWCASE */
+        .article-media {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .image-full {
+        .media-item {
             width: 100%;
-            border-radius: 4px;
-            margin: 15px 0;
             background-color: #000;
             border: 1px solid #333;
+            box-sizing: border-box;
         }
-
-        h2 { color: #fff; margin-top: 35px; font-size: 1.5rem; border-bottom: 1px solid #444; padding-bottom: 5px; }
-        h3 { color: #ff4757; margin-top: 20px; font-size: 1.2rem; }
         
-        p { line-height: 1.6; font-size: 1.05rem; margin-bottom: 15px; }
-
-        .mechanics-list {
-            list-style-type: disc;
-            margin-left: 20px;
-            line-height: 1.6;
-            font-size: 1.05rem;
+        .image-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
-        .mechanics-list li { margin-bottom: 10px; }
-        .mechanics-list strong { color: #ff4757; }
+
+        /* SKEWED BUTTON */
+        .btn-link {
+            display: inline-block;
+            background-color: transparent;
+            color: #ffffff;
+            padding: 12px 25px;
+            border: 2px solid #e60012;
+            transform: skewX(-10deg);
+            text-decoration: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-top: auto; 
+            align-self: flex-start;
+        }
+        .btn-link:hover {
+            background-color: #e60012;
+            color: #000;
+            box-shadow: 4px 4px 0px rgba(255,255,255,0.8);
+        }
+        .btn-link span {
+            display: inline-block;
+            transform: skewX(10deg);
+        }
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 1024px) {
+            .project-article {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+                padding: 25px;
+            }
+            .btn-link {
+                margin-top: 30px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="project-container">
-        <!-- Back Link -->
-        <a href="index.html" class="back-link">← Back to Portfolio</a>
+    <div class="page-wrapper">
+        <div class="header-container">
+            <a href="index.html" class="back-link">← Return to Main OS</a>
+            <h1>Lumin</h1>
+            <p class="intro-text">A 2D narrative prototype driven by dynamic AI interactions, casting you as a survivor navigating a mysterious post-apocalyptic cryo-disaster.</p>
+            <p class="warning-text">Note: Initial loading on WebGL may take a moment to initialize the AI backend.</p>
+        </div>
 
-        <h1>LUMIN: API Integration & Systems</h1>
+        <!-- SECTION 1: NARRATIVE & GAMEPLAY -->
+        <article class="project-article">
+            <div class="article-content">
+                <h2>The World & Mechanics</h2>
+                
+                <h3>Narrative Driven Investigation</h3>
+                <p>Lumin casts you as Aquilo, a young man whose college commute turns into an impossible, decades-long journey after waking up in a desolate landscape that bears little resemblance to home.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Clue Gathering:</span> The heart of the game lies in its conversational mechanics. Every line of dialogue is a potential clue to piece together the events that destroyed civilization.</li>
+                    <li><span class="highlight">Mission System:</span> Progress is heavily driven by conversational outcomes. NPCs provide essential tasks that unlock new areas, reveal deep lore, and directly impact Aquilo’s core objective.</li>
+                </ul>
 
-        <!-- 1. GAMEPLAY TRAILER (Top Video) -->
-        <video class="showcase-media" controls autoplay loop muted>
-            <source src="lumen_showcase.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+                <a href="#" class="btn-link" target="_blank"><span>🎮 Play the Prototype</span></a>
+            </div>
+            <div class="article-media">
+                <video class="media-item" controls autoplay loop muted>
+                    <source src="lumen_showcase.mp4" type="video/mp4">
+                </video>
+            </div>
+        </article>
 
-        <!-- ABOUT THE GAME -->
-        <h2>About The Game</h2>
-        <p>Playing 1st time in Web might take time. LUMIN is a compelling 2D narrative prototype that casts you as Aquilo, a young man whose college commute turns into an impossible, decades-long journey. A mysterious cryo-disaster overtakes the world, forcing Aquilo into deep sleep only to awaken in a desolate, post-apocalyptic landscape that bears little resemblance to home.</p>
-
-        <!-- CORE NARRATIVE AND MECHANICS -->
-        <h2>Core Narrative and Mechanics</h2>
-        <p>The heart of LUMIN lies in its conversational mechanics. The player must actively engage with the environment and its inhabitants to drive the story forward.</p>
-        
-        <ul class="mechanics-list">
-            <li><strong>Dynamic AI Interaction:</strong> Converse with NPCs featuring AI-generated dialogue and voice implementation, ensuring that conversations are unique, responsive, and often unpredictable.</li>
-            <li><strong>Clue Gathering:</strong> Every line of dialogue is a potential clue. Players must focus on extracting critical clues and historical information to piece together the events that destroyed civilization.</li>
-            <li><strong>Mission System:</strong> Progress is driven by conversational outcomes. NPCs provide essential tasks that unlock new areas, reveal deep lore, and directly impact Aquilo’s core objective: saving the world.</li>
-        </ul>
-
-        <!-- AI NPC SYSTEM & TOOLS (Second Video & Images) -->
-        <h2>Dynamic LLM Chat & Prompt System</h2>
-        <p>To support these mechanics, I engineered a fully interactive NPC chat system from scratch by integrating Google's Gemini API directly into the game. This backend pipeline handles secure web requests, parses the JSON responses, and drives the real-time UI without stalling the main thread.</p>
-        
-        <!-- 2. AI CHAT SYSTEM SHOWCASE (Second Video) -->
-        <video class="showcase-media" controls autoplay loop muted>
-            <source src="lumen_chat_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        
-        <!-- API & UI Screenshots -->
-        <img src="lumen_ui.jpg" alt="Dynamic Chat System UI Interface" class="image-full">
-        <img src="lumen_api_code.jpg" alt="API Integration Backend Code" class="image-full">
+        <!-- SECTION 2: AI & API INTEGRATION -->
+        <article class="project-article">
+            <div class="article-content">
+                <h2>LLM Chat & Systems</h2>
+                
+                <h3>Dynamic API Integration</h3>
+                <p>To support truly unpredictable conversations, I engineered a fully interactive NPC chat system from scratch by integrating Google's Gemini API directly into the game engine.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Generative Dialogue & Voice:</span> NPCs feature AI-generated dialogue paired with real-time voice implementation, ensuring every playthrough and conversation is unique and responsive.</li>
+                    <li><span class="highlight">Asynchronous Architecture:</span> The backend pipeline handles secure web requests and parses complex JSON responses asynchronously, preventing the main thread from stalling during gameplay.</li>
+                    <li><span class="highlight">Dynamic UI Binding:</span> The parsed response data seamlessly drives the in-game UI, populating dialogue boxes and providing fluid player-to-AI conversational loops.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <video class="media-item" controls autoplay loop muted>
+                    <source src="lumen_chat_video.mp4" type="video/mp4">
+                </video>
+                <div class="image-row">
+                    <img src="lumen_ui.jpg" alt="Dynamic Chat System UI Interface" class="media-item">
+                    <img src="lumen_api_code.jpg" alt="API Integration Backend Code" class="media-item">
+                </div>
+            </div>
+        </article>
 
     </div>
-
 </body>
 </html>
