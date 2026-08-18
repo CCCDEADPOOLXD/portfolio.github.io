@@ -3,69 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unreal Environment Design - Project Details</title>
+    <title>Unreal Environment | Tech Art</title>
     <style>
-        /* ITCH.IO STYLE THEME */
+        /* BASE THEME (Persona / Noir Aesthetic) */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #111;
+            background-color: #050505;
             color: #ddd;
+            border-top: 6px solid #e60012;
+            line-height: 1.6;
         }
-        
-        .project-container {
-            max-width: 800px;
+
+        /* CUSTOM RED SCROLLBAR */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #050505; border-left: 1px solid #222; }
+        ::-webkit-scrollbar-thumb { background: #e60012; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff2a3b; }
+        ::selection { background: #e60012; color: #fff; }
+
+        .page-wrapper {
+            max-width: 1400px;
             margin: 40px auto;
-            background-color: #222;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            padding: 0 20px;
+        }
+
+        .header-container {
+            margin-bottom: 40px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
         }
 
         .back-link {
             display: inline-block;
-            color: #ff4757;
+            color: #e60012;
             text-decoration: none;
             margin-bottom: 20px;
-            font-weight: bold;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s;
         }
-        .back-link:hover { text-decoration: underline; }
+        .back-link:hover { color: #fff; }
 
-        h1 { color: #fff; margin-top: 0; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        h1 { 
+            color: #fff; 
+            margin: 0; 
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
         
-        /* Main showcase video/image */
-        .showcase-media {
+        .intro-text {
+            color: #aaa;
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+
+        /* HERO VIDEO SECTION */
+        .hero-video-container {
             width: 100%;
-            border-radius: 4px;
-            margin-bottom: 20px;
+            background-color: #0a0a0a;
+            border: 1px solid #222;
+            padding: 20px;
+            box-shadow: 8px 8px 0px rgba(230,0,18,0.1);
+            margin-bottom: 60px;
+            box-sizing: border-box;
+        }
+
+        .hero-video-container iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: 1px solid #333;
             background: #000;
         }
 
-        h2 { color: #fff; margin-top: 30px; font-size: 1.5rem; }
+        /* SPLIT PANEL GRID */
+        .project-article {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+            background-color: #0a0a0a;
+            border: 1px solid #222;
+            padding: 40px;
+            box-shadow: 8px 8px 0px rgba(230,0,18,0.1);
+        }
+
+        /* FULL WIDTH GRID FOR GALLERY */
+        .full-article {
+            grid-template-columns: 1fr;
+        }
+
+        /* LEFT SIDE: DOCUMENTATION */
+        .article-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 { 
+            color: #e60012; 
+            margin-top: 0; 
+            font-size: 2rem; 
+            text-transform: uppercase;
+            border-bottom: 2px solid #222;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* BULLET POINT STYLING */
+        .tech-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0 20px 0;
+        }
         
-        p { line-height: 1.6; font-size: 1.05rem; margin-bottom: 15px; }
+        .tech-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            color: #ccc;
+        }
+        
+        .tech-list li::before {
+            content: "■";
+            position: absolute;
+            left: 0;
+            color: #e60012;
+            font-size: 0.8rem;
+            top: 3px;
+        }
+
+        .highlight {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* RIGHT SIDE: MEDIA SHOWCASE */
+        .article-media {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .media-item {
+            width: 100%;
+            background-color: #000;
+            border: 1px solid #333;
+            box-sizing: border-box;
+        }
+
+        /* 4-COLUMN PORTRAIT GALLERY */
+        .portrait-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .portrait-gallery img {
+            width: 100%;
+            aspect-ratio: 1432 / 1794; /* Enforces your specific aspect ratio */
+            object-fit: cover;
+            border: 1px solid #333;
+            background-color: #000;
+            transition: border-color 0.3s;
+        }
+        .portrait-gallery img:hover {
+            border-color: #e60012;
+        }
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 1024px) {
+            .project-article {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+                padding: 25px;
+            }
+            .portrait-gallery {
+                grid-template-columns: repeat(2, 1fr); /* 2x2 grid on tablets */
+            }
+        }
+        @media (max-width: 600px) {
+            .portrait-gallery {
+                grid-template-columns: 1fr; /* Single column on phones */
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="project-container">
-        <!-- Link to go back to the main portfolio -->
-        <a href="index.html" class="back-link">← Back to Portfolio</a>
+    <div class="page-wrapper">
+        <div class="header-container">
+            <a href="index.html" class="back-link">← Return to Main OS</a>
+            <h1>Unreal Environment Design</h1>
+            <p class="intro-text">A high-fidelity environment built in Unreal Engine showcasing advanced technical art workflows, Procedural Content Generation (PCG), and strong cinematic composition.</p>
+        </div>
 
-        <h1>Unreal Engine Environment Design</h1>
+        <!-- HERO VIDEO (Full Width & Prominent) -->
+        <div class="hero-video-container">
+            <iframe src="https://www.youtube.com/embed/sT5RvVO5O5I" title="Unreal Environment Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
 
-        <!-- YouTube Embed -->
-        <iframe class="showcase-media" style="aspect-ratio: 16/9;" src="https://www.youtube.com/embed/sT5RvVO5O5I" title="Unreal Environment Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <!-- SECTION 1: COMPOSITION -->
+        <article class="project-article">
+            <div class="article-content">
+                <h2>Cinematic Composition</h2>
+                
+                <h3>Guiding the Viewer's Eye</h3>
+                <p>The primary goal of this environment was to establish a strong visual narrative through meticulous layout design, utilizing classic photography and cinematography techniques.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">The Golden Ratio:</span> The scene layout strictly follows the Fibonacci spiral (Golden Ratio), naturally drawing the viewer's eye from the foreground statue, across the midground village, and up toward the focal point of the tallest tower.</li>
+                    <li><span class="highlight">Depth & Scale:</span> Carefully separated the foreground, midground, and background elements using dynamic lighting, atmospheric fog, and contrasting values to create a massive sense of scale.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <img src="HighresScreenshot00011.jpg" alt="Golden Ratio Composition Overlay" class="media-item">
+            </div>
+        </article>
 
-        <h2>Project Overview</h2>
-        <p>This project is a high-fidelity environment built in Unreal Engine, showcasing advanced technical art workflows. The primary goal was to establish a strong visual narrative through environmental storytelling while optimizing scene assembly and rendering.</p>
+        <!-- SECTION 2: PCG PIPELINE -->
+        <article class="project-article">
+            <div class="article-content">
+                <h2>Procedural Content Generation (PCG)</h2>
+                
+                <h3>Scalable Node-Based Instancing</h3>
+                <p>Instead of manually hand-placing thousands of environmental props, I engineered a highly scalable, non-destructive PCG pipeline directly within Unreal Engine.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Modular Layering:</span> The PCG graph is cleanly segmented into logic blocks handling Additional Props, Rocks, Grass, and Trees, utilizing Surface Samplers and Transform nodes to apply organic scale and rotation randomization.</li>
+                    <li><span class="highlight">Spatial Filtering:</span> To prevent mesh clipping, I heavily utilized <strong>Difference Binary</strong> nodes. For example, the Grass generator automatically removes points from areas where Trees or Rocks have already spawned, creating clean, realistic borders.</li>
+                    <li><span class="highlight">Self-Pruning:</span> Integrated Bounds Modifiers and Self-Pruning nodes to maintain strict density control, keeping draw calls optimized without sacrificing the dense, lush look of the foliage.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <img src="Screenshot 2026-08-18 112828.jpg" alt="Unreal Engine PCG Node Graph" class="media-item">
+            </div>
+        </article>
 
-        <h2>Technical Implementation</h2>
-        <p>Instead of manually placing every prop, I heavily utilized <strong>Procedural Content Generation (PCG)</strong> tools within Unreal. This allowed for a highly scalable, non-destructive workflow to generate complex environmental details organically.</p>
-        <p>To bring the scene to life, I focused on dynamic lighting setups, carefully balancing light and shadow to guide the viewer's eye. Finally, I applied advanced post-processing and color grading techniques to unify the visual composition and achieve a polished, cinematic look.</p>
+        <!-- SECTION 3: VERTICAL RENDER GALLERY -->
+        <article class="project-article full-article">
+            <div class="article-content">
+                <h2>Vertical Vignettes & Details</h2>
+                <p>A closer look at the environmental detailing, material blending, and post-processing color grades.</p>
+                
+                <!-- 4-Column Portrait Gallery -->
+                <div class="portrait-gallery">
+                    <!-- Replace these src filenames with the actual names of your 4 images -->
+                    <img src="vertical_render_1.jpg" alt="Environment Detail Shot 1">
+                    <img src="vertical_render_2.jpg" alt="Environment Detail Shot 2">
+                    <img src="vertical_render_3.jpg" alt="Environment Detail Shot 3">
+                    <img src="vertical_render_4.jpg" alt="Environment Detail Shot 4">
+                </div>
+            </div>
+        </article>
 
     </div>
-
 </body>
 </html>
