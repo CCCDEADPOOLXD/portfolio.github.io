@@ -141,9 +141,9 @@ const canvas = document.getElementById('pspCanvas');
 const stage = document.querySelector('.machine__stage');
 const section = document.querySelector('.machine');
 
-let activeHints = [];
 let scrollRotationY = 0;
 let isHoveringConsole = false;
+let hintData = {}; // Stores active hints to make 3D buttons pulse
 
 if (canvas && CATEGORIES.length) init();
 
@@ -215,7 +215,10 @@ function init() {
       if (n.indexOf('ground') === 0) { bin.push(o); return; }
       if (n.indexOf('screen') === 0) screenMesh = o;
       const m = n.match(/^button(\d+)/); if (m) parts['b' + m[1]] = o;
-      if (o.material) o.material = o.material.clone();
+      
+      if (o.material) {
+          o.material = o.material.clone();
+      }
     });
     bin.forEach((o) => { o.parent && o.parent.remove(o); }); if (!screenMesh) { SK.fireReady(); return; }
 
@@ -245,7 +248,7 @@ function init() {
     screenMesh.userData.role = 'screen'; pressable.push(screenMesh); modelReady = true; SK.fireReady(); drawIdleScreen(); 
     
     // Auto-trigger boot hint on load
-    setTimeout(() => { showPrebootHint(); }, 1500);
+    setTimeout(() => { if (window.triggerBootHint) window.triggerBootHint(); }, 1500);
   }
 
   function largestFaceNormal(mesh) { 
@@ -318,65 +321,31 @@ function init() {
     } screenTex.needsUpdate = true;
   }
 
-  // --- NATIVE SCROLL, HOVER & HINT LOGIC ---
-  let idleHintTimer;
-  section.addEventListener('mouseenter', () => { isHoveringConsole = true; });
-  section.addEventListener('mouseleave', () => { isHoveringConsole = false; });
+  // --- NATIVE 3D HINT SYSTEM (SONAR PULSE) ---
+  window.triggerBootHint = function() {
+      if (!isStarted) hintData['cross'] = { life: 2.0 };
+  };
+
+  window.triggerLeftHint = function() {
+      if (!isStarted) return;
+      hintData['up'] = { life: 2.0 };
+      hintData['down'] = { life: 2.0 };
+  };
+
+  window.triggerRightHint = function(sourceId, role) {
+      if (!isStarted) return;
+      hintData[role] = { life: 2.0 };
+  };
   
-  window.addEventListener('scroll', () => {
-      const rect = section.getBoundingClientRect();
-      const distFromCenter = (rect.top + rect.height / 2) - (window.innerHeight / 2);
-      scrollRotationY = (distFromCenter / window.innerHeight) * 1.5; 
-      
-      clearHints();
-      clearTimeout(idleHintTimer);
-      idleHintTimer = setTimeout(() => {
-          if (!isStarted) showPrebootHint();
-      }, 800);
-  });
-
-  function clearHints() {
-      document.querySelectorAll('.guide-line').forEach(el => el.classList.remove('show'));
-      activeHints = [];
-  }
-
-  function showPrebootHint() {
-      if (!isStarted) {
-          activeHints = [{ sourceId: 'preboot-inst', targetRole: 'cross', pathId: 'guidePathMain', life: 3.0 }];
-          clearHints();
-          document.getElementById('guidePathMain').classList.add('show');
-      }
-  }
-
-  function showLeftHint() {
-      if (!isStarted) return;
-      activeHints = [
-          { sourceId: 'uiLeftMenu', targetRole: 'up', pathId: 'guidePathUp', life: 3.0 },
-          { sourceId: 'uiLeftMenu', targetRole: 'down', pathId: 'guidePathDown', life: 3.0 }
-      ];
-      clearHints();
-      document.getElementById('guidePathUp').classList.add('show');
-      document.getElementById('guidePathDown').classList.add('show');
-  }
-
-  function showRightHint(sourceId, role) {
-      if (!isStarted) return;
-      activeHints = [{ sourceId: sourceId, targetRole: role, pathId: 'guidePathMain', life: 3.0 }];
-      clearHints();
-      document.getElementById('guidePathMain').classList.add('show');
-  }
+  window.clearHints = function() {
+      hintData = {};
+  };
 
   // BIND LEFT UI HTML CLICKS TO SHOW HINTS
   document.querySelectorAll('.left-ui-element').forEach(el => {
-      el.addEventListener('click', showLeftHint);
+      el.addEventListener('click', () => window.triggerLeftHint());
   });
   
-  // BIND PREBOOT HTML CLICK TO SHOW HINT
-  const prebootEl = document.getElementById('preboot-inst');
-  if(prebootEl) {
-      prebootEl.addEventListener('click', showPrebootHint);
-  }
-
   function updateHTMLUI(catIdx, itemIdx) {
     for (let i = 0; i < CATEGORIES.length; i++) { const menuEl = document.getElementById('cat-' + i); if (menuEl) { if (i === catIdx) menuEl.classList.add('active'); else menuEl.classList.remove('active'); } }
     document.getElementById('uiCounterWrap').style.opacity = '1'; document.getElementById('uiCountIdx').innerText = String(itemIdx + 1).padStart(2, '0'); document.getElementById('uiCountTot').innerText = '/' + String(CATEGORIES[catIdx].items.length).padStart(2, '0');
@@ -398,7 +367,7 @@ function init() {
         row.innerHTML = `<div class="persona-content"><span class="btn-icon">${iconHtml}</span> ${inst.text}</div>`;
         instContainer.appendChild(row); setTimeout(() => row.classList.add('visible'), 100 * index);
         
-        row.onclick = () => { showRightHint(row.id, roleMapping); };
+        row.onclick = () => { window.triggerRightHint(row.id, roleMapping); };
       });
     }
   }
@@ -441,7 +410,7 @@ function init() {
     if (!isStarted) {
         try { sndBoot.play(); } catch(e){}
         isStarted = true; isBooting = true; powerTarget = 1; 
-        clearHints();
+        window.clearHints();
         document.getElementById('uiInstructions').innerHTML = '';
         sctx.fillStyle = '#000000'; sctx.fillRect(0, 0, SW, SH); sctx.textBaseline = 'middle'; sctx.textAlign = 'center'; sctx.font = '40px "VT323", monospace'; sctx.fillStyle = '#e60012'; sctx.fillText("> BOOTING SHUTTERKIF OS...", SW / 2, SH / 2); screenTex.needsUpdate = true;
         setTimeout(() => { isBooting = false; select(0, 0); }, 2000);
@@ -463,6 +432,10 @@ function init() {
   const ray = new THREE.Raycaster(); const ptr = new THREE.Vector2(); let hovered = null, dragging = false, dragged = false, lastX = 0, lastY = 0, spinY = 0, spinX = 0, spinVY = 0, spinVX = 0;
   function toNDC(e) { const r = canvas.getBoundingClientRect(), t = e.touches ? e.touches[0] : e; ptr.x = ((t.clientX - r.left) / r.width) * 2 - 1; ptr.y = -((t.clientY - r.top) / r.height) * 2 + 1; }
   function pick() { if (!modelReady) return null; ray.setFromCamera(ptr, camera); const hit = ray.intersectObjects(pressable, false)[0]; return hit ? hit.object : null; }
+  
+  section.addEventListener('mouseenter', () => { isHoveringConsole = true; });
+  section.addEventListener('mouseleave', () => { isHoveringConsole = false; });
+  
   canvas.addEventListener('pointerdown', (e) => { toNDC(e); dragging = true; dragged = false; lastX = e.clientX; lastY = e.clientY; canvas.setPointerCapture && canvas.setPointerCapture(e.pointerId); });
   canvas.addEventListener('pointermove', (e) => {
     toNDC(e);
@@ -476,7 +449,7 @@ function init() {
         toNDC(e); 
         const o = pick(); 
         if (o) {
-            clearHints(); // clear lines on any successful 3d click
+            window.clearHints(); 
             if (!isStarted) press('cross'); else if (o.userData.role) press(o.userData.role); 
         }
     } 
@@ -489,8 +462,9 @@ function init() {
     if (k === 'ArrowLeft') { press('left'); e.preventDefault(); } else if (k === 'ArrowRight') { press('right'); e.preventDefault(); } else if (k === 'ArrowUp') { press('up'); e.preventDefault(); } else if (k === 'ArrowDown') { press('down'); e.preventDefault(); } else if (k === 'Enter' || k === 'x' || k === 'X') { press('cross'); }
   });
 
+  // MASSIVELY INCREASED BLOOM TO MAKE THE RED HALO POP
   const composer = new EffectComposer(renderer); const renderPass = new RenderPass(scene, camera); renderPass.clearColor = new THREE.Color(0x000000); renderPass.clearAlpha = 0; composer.addPass(renderPass);
-  const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.42, 0.45, 0.55);
+  const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 1.2, 0.45, 0.55);
   Object.keys(bloom).forEach((k) => { const m = bloom[k]; if (m && m.isMaterial && m.blending === THREE.AdditiveBlending) { m.blending = THREE.CustomBlending; m.blendEquation = THREE.AddEquation; m.blendSrc = THREE.OneFactor; m.blendDst = THREE.OneFactor; m.blendEquationAlpha = THREE.AddEquation; m.blendSrcAlpha = THREE.ZeroFactor; m.blendDstAlpha = THREE.OneFactor; } });
   composer.addPass(bloom); composer.addPass(new OutputPass());
 
@@ -521,7 +495,7 @@ function init() {
     // SMOOTH SCROLL ROTATION VS HOVER LOGIC
     if (!dragging) {
         if (!isHoveringConsole) {
-            spinY += (scrollRotationY - spinY) * Math.min(1, dt * 5.0);
+            spinY += ((window.scrollTiltY || 0) - spinY) * Math.min(1, dt * 5.0);
         } else {
             spinY += (0 - spinY) * Math.min(1, dt * 8.0); 
         }
@@ -543,60 +517,45 @@ function init() {
         if (pressLightLife > 0) { pressLightLife -= dt * 3.4; pressLight.intensity = Math.max(0, pressLightLife) * 26; } else pressLight.intensity = 0;
     }
 
+    // --- APPLY SONAR GLOW TO HINTED BUTTONS ---
     for (const k in buttons) {
-      const b = buttons[k]; if (b.t <= 0.0005 && b.mesh.position.equals(b.home)) continue;
-      b.t *= Math.pow(0.004, dt); if (b.t < 0.0005) b.t = 0; b.mesh.position.copy(b.home).add(b.axis.clone().multiplyScalar(-PRESS_DEPTH * b.t));
+      const b = buttons[k];
+      let isHinted = false;
+
+      // Handle the glowing pulse
+      if (hintData[k]) {
+          hintData[k].life -= dt;
+          if (hintData[k].life > 0) {
+              isHinted = true;
+              // Create an aggressive fading pulse
+              const pulse = Math.abs(Math.sin(t * 12)) * Math.min(hintData[k].life, 1.0); 
+              if (b.mesh.material) {
+                  b.mesh.material.emissive.setHex(0xe60012); 
+                  b.mesh.material.emissiveIntensity = pulse * 10.0; // Cranked up for bloom
+              }
+          } else {
+              delete hintData[k];
+          }
+      }
+
+      // Reset material if not hinted
+      if (!isHinted && b.mesh.material) {
+          b.mesh.material.emissive.setHex(0x000000);
+          b.mesh.material.emissiveIntensity = 0;
+      }
+
+      // Handle normal press depression
+      if (b.t > 0.0005) {
+          b.t *= Math.pow(0.004, dt); if (b.t < 0.0005) b.t = 0; 
+          b.mesh.position.copy(b.home).add(b.axis.clone().multiplyScalar(-PRESS_DEPTH * b.t));
+      } else {
+          b.mesh.position.copy(b.home);
+      }
     }
 
     if (!isStarted) drawIdleScreen();
     else if (!isBooting && live && !live.paused && !live.ended && live.readyState >= 2) { drawFrame(CATEGORIES[currentCatIdx].items[currentItemIdx], live); updateSpillThrottled(t); }
     else if (!isBooting && CATEGORIES[currentCatIdx].items[currentItemIdx].isText) { drawFrame(CATEGORIES[currentCatIdx].items[currentItemIdx], null); }
-    
-    // RENDER HINT LINES DYNAMICALLY TO 3D BUTTONS
-    if (activeHints && activeHints.length > 0) {
-        const cRect = canvas.getBoundingClientRect();
-        const sRect = section.getBoundingClientRect();
-
-        activeHints.forEach(hint => {
-            hint.life -= dt;
-            const pathEl = document.getElementById(hint.pathId);
-            if (hint.life <= 0) {
-                if(pathEl) pathEl.classList.remove('show');
-            } else if (pathEl) {
-                const sourceEl = document.getElementById(hint.sourceId);
-                const targetMesh = buttons[hint.targetRole] ? buttons[hint.targetRole].mesh : null;
-                
-                if (sourceEl && targetMesh) {
-                    const elRect = sourceEl.getBoundingClientRect();
-                    
-                    // Coordinates relative to the section (.machine)
-                    let startX = elRect.left - sRect.left;
-                    let startY = elRect.top - sRect.top + (elRect.height / 2);
-                    
-                    if (hint.sourceId === 'uiLeftMenu') {
-                        startX = elRect.right - sRect.left;
-                        if(hint.targetRole === 'up') startY = elRect.top - sRect.top + 20;
-                        if(hint.targetRole === 'down') startY = elRect.bottom - sRect.top - 20;
-                    } else if (elRect.left > window.innerWidth / 2) {
-                        startX = elRect.left - sRect.left;
-                    }
-
-                    // Project 3D coordinate to 2D
-                    const pos = new THREE.Vector3();
-                    targetMesh.getWorldPosition(pos);
-                    pos.project(camera);
-                    
-                    const endX = (cRect.left - sRect.left) + (pos.x * 0.5 + 0.5) * cRect.width;
-                    const endY = (cRect.top - sRect.top) + (pos.y * -0.5 + 0.5) * cRect.height;
-                    
-                    // The "Elbow" logic
-                    const midX = startX + (endX - startX) * 0.5;
-                    pathEl.setAttribute('d', `M${startX},${startY} L${midX},${startY} L${midX},${endY} L${endX},${endY}`);
-                }
-            }
-        });
-        activeHints = activeHints.filter(h => h.life > 0);
-    }
 
     composer.render();
   }
