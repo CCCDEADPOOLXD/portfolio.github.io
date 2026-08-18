@@ -3,105 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rotor Warfare - Project Details</title>
+    <title>Rotor Warfare | Game Details</title>
     <style>
-        /* ITCH.IO STYLE THEME */
+        /* BASE THEME (Persona / Noir Aesthetic) */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #111; 
+            background-color: #050505;
             color: #ddd;
+            border-top: 6px solid #e60012;
+            line-height: 1.6;
         }
-        
-        .project-container {
-            max-width: 800px;
+
+        /* CUSTOM RED SCROLLBAR */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #050505; border-left: 1px solid #222; }
+        ::-webkit-scrollbar-thumb { background: #e60012; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff2a3b; }
+        ::selection { background: #e60012; color: #fff; }
+
+        .page-wrapper {
+            max-width: 1400px;
             margin: 40px auto;
-            background-color: #222; 
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            padding: 0 20px;
+        }
+
+        .header-container {
+            margin-bottom: 50px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
         }
 
         .back-link {
             display: inline-block;
-            color: #ff4757;
+            color: #e60012;
             text-decoration: none;
             margin-bottom: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: #fff; }
+
+        h1 { 
+            color: #fff; 
+            margin: 0; 
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .intro-text {
+            color: #aaa;
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+
+        /* SPLIT PANEL GRID */
+        .project-article {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 100px;
+            background-color: #0a0a0a;
+            border: 1px solid #222;
+            padding: 40px;
+            box-shadow: 8px 8px 0px rgba(230,0,18,0.1);
+        }
+
+        /* FULL WIDTH GRID FOR ARCHITECTURE */
+        .full-article {
+            grid-template-columns: 1fr;
+        }
+        .full-article .tech-list {
+            max-width: 900px;
+        }
+
+        /* LEFT SIDE: DOCUMENTATION */
+        .article-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 { 
+            color: #e60012; 
+            margin-top: 0; 
+            font-size: 2rem; 
+            text-transform: uppercase;
+            border-bottom: 2px solid #222;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* BULLET POINT STYLING */
+        .tech-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0 20px 0;
+        }
+        
+        .tech-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            color: #ccc;
+        }
+        
+        .tech-list li::before {
+            content: "■";
+            position: absolute;
+            left: 0;
+            color: #e60012;
+            font-size: 0.8rem;
+            top: 3px;
+        }
+
+        .highlight {
+            color: #fff;
             font-weight: bold;
         }
-        .back-link:hover { text-decoration: underline; }
 
-        h1 { color: #fff; margin-top: 0; border-bottom: 2px solid #333; padding-bottom: 10px; }
-        
-        /* Main showcase media */
-        .showcase-media {
-            width: 100%;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            background: #000;
+        /* RIGHT SIDE: MEDIA SHOWCASE */
+        .article-media {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .image-full {
+        .media-item {
             width: 100%;
-            border-radius: 4px;
-            margin: 15px 0;
             background-color: #000;
             border: 1px solid #333;
+            box-sizing: border-box;
         }
 
-        h2 { color: #fff; margin-top: 40px; font-size: 1.5rem; border-bottom: 1px solid #444; padding-bottom: 5px; }
-        
-        p { line-height: 1.6; font-size: 1.05rem; margin-bottom: 15px; }
-
-        .section-divider {
-            margin: 40px auto;
-            border: 0;
-            border-top: 2px dashed #444;
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 1024px) {
+            .project-article {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+                padding: 25px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="project-container">
-        <!-- Back Link -->
-        <a href="index.html" class="back-link">← Back to Portfolio</a>
+    <div class="page-wrapper">
+        <div class="header-container">
+            <a href="index.html" class="back-link">← Return to Main OS</a>
+            <h1>Rotor Warfare</h1>
+            <p class="intro-text">An asymmetric, cross-platform multiplayer game that pits PC players against mobile Android users in intense, real-time tactical combat. Developed entirely solo, balancing networking infrastructure with highly optimized rendering.</p>
+        </div>
 
-        <h1>Rotor Warfare: Systems & Tech Art</h1>
+        <article class="project-article full-article">
+            <div class="article-content">
+                <h2>Technical Architecture & Multiplayer</h2>
+                
+                <h3>Cross-Platform Backend Engineering</h3>
+                <p>Building a seamless asymmetric experience required a highly optimized backend capable of supporting real-time coordination across vastly different hardware environments.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Asymmetric Combat:</span> One player commands the skies taking on the role of a heavily armed gunner on PC, while the opposing mobile force manages ground defense systems.</li>
+                    <li><span class="highlight">Unity Netcode Integration:</span> Architected the core multiplayer framework using Unity Netcode to support stable, real-time co-op and PvP directly between Windows and Android devices.</li>
+                    <li><span class="highlight">Server Authority:</span> To prevent desync and cheating across platforms, I developed a server-authoritative mission management system.</li>
+                    <li><span class="highlight">AI Targeting Systems:</span> Implemented custom AI-driven 3D targeting logic to handle the procedurally generated mission objectives dynamically during live matches.</li>
+                </ul>
+            </div>
+        </article>
 
-        <!-- ABOUT THE GAME -->
-        <h2>About The Game</h2>
-        <p>Rotor Warfare is an asymmetric, cross-platform multiplayer game that pits PC players against mobile Android users in intense, real-time tactical combat. One player commands the skies taking on the role of a heavily armed gunner, while the opposing force manages ground defense systems. It requires sharp reflexes, strategic coordination, and a solid understanding of the battlefield layout.</p>
+        <article class="project-article">
+            <div class="article-content">
+                <h2>Tech Art: Battlefield Explosions</h2>
+                
+                <h3>Mobile-Friendly Particle Systems</h3>
+                <p>Because the game needs to run smoothly on both high-end PCs and mobile Android devices simultaneously, environmental VFX had to be subjected to strict optimization budgets.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Layered Emitters:</span> Built custom explosion systems utilizing meticulously layered particle emitters to separate smoke, fire, and debris.</li>
+                    <li><span class="highlight">Overdraw Management:</span> The systems are strictly tuned to maintain exceptionally low overdraw, preventing transparent geometry from bottlenecking mobile GPUs during heavy combat.</li>
+                    <li><span class="highlight">Memory Footprint:</span> Engineered the textures to maintain a minimal memory footprint while still delivering clear, impactful tactical feedback to the players.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <video class="media-item" controls autoplay loop muted>
+                    <source src="explosion_vfx_video.mp4" type="video/mp4">
+                </video>
+                <img src="explosion_particle_setup.jpg" alt="Explosion Particle System Inspector" class="media-item">
+            </div>
+        </article>
 
-        <!-- TECHNICAL SYSTEMS -->
-        <h2>Technical Architecture & Multiplayer</h2>
-        <p>Building a seamless cross-platform experience required a highly optimized backend. I architected the multiplayer framework using Unity Netcode to support stable, real-time asymmetric co-op and PvP between Windows and Android devices. To prevent desync and cheating, I developed a server-authoritative mission management system alongside AI-driven 3D targeting logic for procedurally generated mission objectives.</p>
-
-        <!-- TECH ART: EXPLOSIONS (Reusing VFX assets) -->
-        <h2>Tech Art: Optimized Battlefield Explosions</h2>
-        <p>Because Rotor Warfare needs to run smoothly on both PC and mobile devices simultaneously, environmental VFX had to be highly optimized. I built explosion systems utilizing layered particle emitters for smoke and fire. These are strictly tuned to maintain low overdraw and a minimal texture memory footprint, ensuring clear tactical feedback without bottlenecking mobile GPUs.</p>
-        
-        <video class="showcase-media" controls autoplay loop muted>
-            <source src="explosion_vfx_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-        <img src="explosion_particle_setup.jpg" alt="Explosion Particle System Inspector" class="image-full">
-
-        <hr class="section-divider">
-
-        <!-- TECH ART: WEAPON TRAILS (Reusing VFX assets) -->
-        <h2>Tech Art: Dynamic Weapon Trails</h2>
-        <p>To help players read incoming attacks and understand combat arcs during fast-paced encounters, I implemented a highly performant dynamic trail system. These trails are cast directly from active weapon joints and are strictly bound to the active frames of the combat logic, guaranteeing that the visual effects match the underlying server hitboxes perfectly.</p>
-        
-        <video class="showcase-media" controls autoplay loop muted>
-            <source src="trails_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-        <img src="trail_setup.jpg" alt="Weapon Trail Setup" class="image-full">
+        <article class="project-article">
+            <div class="article-content">
+                <h2>Tech Art: Dynamic Weapon Trails</h2>
+                
+                <h3>Server-Synced Visual Feedback</h3>
+                <p>To help players read incoming attacks and understand combat arcs during fast-paced encounters, I implemented a highly performant dynamic trail system.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Real-Time Joint Casting:</span> Instead of pre-baked animations, these trails are cast dynamically and directly from the active weapon joints.</li>
+                    <li><span class="highlight">Server Synchronization:</span> The rendering logic is strictly bound to the active frames of the combat system, guaranteeing that the visual effects exactly match the underlying server hitboxes to prevent unfair hits.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <video class="media-item" controls autoplay loop muted>
+                    <source src="trails_video.mp4" type="video/mp4">
+                </video>
+                <img src="trail_setup.jpg" alt="Weapon Trail Setup" class="media-item">
+            </div>
+        </article>
 
     </div>
-
 </body>
 </html>
