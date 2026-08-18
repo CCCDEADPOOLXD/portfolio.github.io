@@ -17,6 +17,10 @@
         * { cursor: none !important; }
         body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #050505; color: #e0e0e0; overflow-x: hidden; scroll-behavior: smooth; }
         
+        /* Scroll Reveal Animations */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
         .custom-cursor { position: fixed; top: 0; left: 0; width: 24px; height: 24px; border: 2px solid var(--persona-red); border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; z-index: 10000; transition: width 0.2s, height 0.2s, background 0.2s; mix-blend-mode: difference; }
         .custom-cursor::after { content: ''; position: absolute; top: 50%; left: 50%; width: 4px; height: 4px; background: var(--persona-red); border-radius: 50%; transform: translate(-50%, -50%); }
         .custom-cursor.hover { width: 40px; height: 40px; background: rgba(230,0,18,0.2); }
@@ -42,18 +46,26 @@
         .section-header-box .persona-content { font-size: 2.5rem; padding: 10px 30px; background: var(--persona-red); color: white;}
         .section-header-box::before { background: white; transform: skewX(5deg); top: 6px; left: -6px; }
 
-        .about-section { background-color: #080808; padding: 80px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        /* Timeline / Waypoints */
+        .about-section { background-color: #080808; padding: 100px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .about-content { max-width: 800px; margin: 0 auto; line-height: 1.8; font-size: 1.1rem; color: #ccc; }
+        
+        .timeline { border-left: 2px solid var(--persona-red); padding-left: 30px; margin-top: 40px; margin-bottom: 60px; text-align: left; }
+        .timeline-item { position: relative; margin-bottom: 30px; }
+        .timeline-item::before { content: ''; position: absolute; left: -37px; top: 5px; width: 12px; height: 12px; background: var(--persona-red); border-radius: 50%; box-shadow: 0 0 10px var(--persona-red); }
+        .timeline-date { font-size: 0.85rem; color: var(--persona-red); font-weight: 900; letter-spacing: 1px; margin-bottom: 5px; text-transform: uppercase; }
+        .timeline-title { font-size: 1.2rem; color: #fff; font-weight: bold; margin-bottom: 5px; }
 
-        .skills-section { padding: 60px 20px; background-color: #050505; text-align: center; }
-        .skill-category { max-width: 1100px; margin: 0 auto 30px auto; text-align: left; background: rgba(255,255,255,0.02); padding: 20px; border-radius: 8px; border-left: 4px solid var(--persona-red);}
+        .skills-section { padding: 80px 20px; background-color: #050505; text-align: center; }
+        .skill-category { max-width: 1100px; margin: 0 auto 30px auto; text-align: left; background: rgba(255,255,255,0.02); padding: 25px; border-radius: 8px; border-left: 4px solid var(--persona-red);}
         .skill-category h3 { color: #fff; font-size: 1.1rem; margin-top: 0; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;}
         .bubble-container { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 12px; }
         .bubble { background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 8px 12px; transition: all 0.2s ease; color: #bbb; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.85rem; }
         .bubble i { font-size: 1.2rem; color: #fff; }
-        .bubble:hover { border-color: var(--persona-red); color: #fff; background-color: rgba(230, 0, 18, 0.1); transform: translateY(-2px); }
+        .bubble:hover { border-color: var(--persona-red); color: #fff; background-color: rgba(230, 0, 18, 0.1); transform: translateY(-3px); box-shadow: 0 4px 10px rgba(230,0,18,0.2);}
 
-        .machine { position: relative; width: 100%; height: 110vh; background-color: #020202; display: flex; align-items: center; justify-content: center; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); overflow: hidden; }
+        /* PSP SECTION */
+        .machine { position: relative; width: 100%; height: 110vh; background-color: #0d0d0d; display: flex; align-items: center; justify-content: center; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); overflow: hidden; }
         .psp-backdrop { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) skewX(-15deg); width: 80vw; height: 60vh; background: #fff; z-index: 1; opacity: 0.05; pointer-events: none; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); }
         .machine__stage { position: relative; width: 100%; height: 100%; z-index: 5; }
         #pspCanvas { width: 100%; height: 100%; display: block; outline: none; }
@@ -67,7 +79,7 @@
         .ui-left-menu .persona-box.active { opacity: 1; transform: skewX(-15deg) scale(1.2); }
         .ui-left-menu .persona-box.active .persona-content { background-color: var(--persona-red); color: #fff; }
 
-        .ui-right-instructions { position: absolute; right: 40px; bottom: 60px; z-index: 10; display: flex; flex-direction: column; align-items: flex-end; }
+        .ui-right-instructions { position: absolute; right: 40px; bottom: 80px; z-index: 10; display: flex; flex-direction: column; align-items: flex-end; }
         .ui-right-instructions .persona-box { opacity: 0; transform: translateX(20px) skewX(-15deg); pointer-events: auto;}
         .ui-right-instructions .persona-box.visible { opacity: 1; transform: translateX(0) skewX(-15deg); }
         .ui-right-instructions .persona-box .persona-content { background-color: var(--persona-black); color: #fff; border: 2px solid var(--persona-red); font-size: 0.9rem; }
@@ -77,7 +89,13 @@
         .fake-btn-tooltip { position: absolute; right: 110%; top: 50%; transform: translateY(-50%) skewX(-15deg); background: var(--persona-red); color: white; padding: 10px 15px; font-weight: 900; font-size: 0.9rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: 0.3s; box-shadow: 0 0 15px rgba(230,0,18,0.8); }
         .fake-btn-tooltip.show { opacity: 1; right: 115%; }
 
-        .ui-counter { position: absolute; top: 40px; right: 40px; z-index: 10; font-family: 'VT323', monospace; font-size: 3.5rem; color: var(--persona-red); text-shadow: 2px 2px 0 #000; }
+        /* Sci-Fi Guide Line */
+        .sci-fi-guide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 6; pointer-events: none; }
+        .guide-line { fill: none; stroke: var(--persona-red); stroke-width: 2; stroke-dasharray: 10, 5; animation: dash 1s linear infinite; opacity: 0; transition: opacity 0.3s ease; filter: drop-shadow(0 0 5px var(--persona-red));}
+        .guide-line.show { opacity: 0.8; }
+        @keyframes dash { to { stroke-dashoffset: -15; } }
+
+        .ui-counter { position: absolute; top: 80px; right: 40px; z-index: 10; font-family: 'VT323', monospace; font-size: 3.5rem; color: var(--persona-red); text-shadow: 2px 2px 0 #000; transition: opacity 0.3s ease;}
         .ui-counter span { color: rgba(255,255,255,0.5); font-size: 2rem; text-shadow: none; }
 
         @media (max-width: 768px) {
@@ -85,21 +103,41 @@
             .ui-left-menu .persona-box { transform: skewX(-10deg) scale(0.7); margin-bottom: 5px;}
             .ui-left-menu .persona-box.active { transform: skewX(-10deg) scale(1); }
             .ui-right-instructions { bottom: 10%; right: 50%; transform: translateX(50%); align-items: center; width: 100%;}
-            .ui-counter { top: 100px; right: 20px; font-size: 2.5rem;}
+            .ui-counter { top: 80px; right: 20px; font-size: 2.5rem;}
             .fake-btn-tooltip { right: auto; top: -50px; left: 50%; transform: translateX(-50%) skewX(-15deg); }
             .fake-btn-tooltip.show { top: -60px; left: 50%; }
         }
 
+        /* PROJECTS GRID & CARDS (FIXED CSS FOR RED BOX CLIPPING) */
         .projects-section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; text-align: center;}
         .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; text-align: left;}
         
-        .project-card { background-color: #0a0a0a; border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; text-decoration: none; color: #ddd; display: block; transform-style: preserve-3d; will-change: transform; transition: border-color 0.3s; }
-        .project-card:hover { border-color: var(--persona-red); box-shadow: 0 20px 40px rgba(230,0,18,0.2); z-index: 10;}
-        .card-image-container { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #000; transform: translateZ(20px); }
-        .card-image-container img { width: 100%; height: 100%; object-fit: cover; }
-        .card-details { padding: 25px; transform: translateZ(30px); }
+        .project-card { 
+            position: relative; 
+            background-color: #0a0a0a; 
+            border: 1px solid rgba(255,255,255,0.05); 
+            border-radius: 4px; 
+            text-decoration: none; 
+            color: #ddd; 
+            display: block; 
+            overflow: hidden; /* This firmly clips the image to the border radius! */
+            will-change: transform; 
+            transition: border-color 0.3s, box-shadow 0.3s; 
+        }
+        .project-card:hover { 
+            border-color: var(--persona-red); 
+            box-shadow: 0 20px 40px rgba(230,0,18,0.2); 
+            z-index: 10; 
+        }
+        
+        .card-image-container { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; }
+        .card-image-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .project-card:hover .card-image-container img { transform: scale(1.05); } /* Nice inner zoom effect */
+
+        .card-details { padding: 25px; }
         .card-details h3 { margin: 0 0 10px 0; color: #fff; font-size: 1.4rem; font-weight: 900; text-transform: uppercase;}
         .card-details p { margin: 0 0 15px 0; font-size: 0.95rem; color: #aaa; line-height: 1.6; }
+        
         .tech-tags { margin-bottom: 15px; display: flex; gap: 5px; flex-wrap: wrap; }
         .tag { display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; color: #fff; letter-spacing: 1px; text-transform: uppercase; }
         .tag.blue { background-color: rgba(74, 105, 189, 0.3); border: 1px solid #4a69bd; color: #a2baf5;}
@@ -126,10 +164,12 @@
         <a href="#psp-os">Interactive OS</a>
         <a href="#featured">Tech Art</a>
         <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
     </nav>
 
+    <!-- Starting video at 6 seconds using #t=6 -->
     <div id="hero" class="hero">
-        <video id="hero-video" autoplay loop muted playsinline><source src="lumen_showcase.mp4" type="video/mp4"></video>
+        <video id="hero-video" autoplay loop muted playsinline><source src="lumen_showcase.mp4#t=6" type="video/mp4"></video>
         <div class="hero-text">
             <h1>NITANT NAMDEO</h1>
             <p>Technical Artist · Systems Programmer</p>
@@ -137,17 +177,53 @@
     </div>
 
     <div id="about" class="about-section">
-        <div class="about-content">
+        <div class="about-content reveal">
             <div class="persona-box section-header-box"><div class="persona-content">ABOUT ME</div></div>
             <p>Hi! I am Nitant, a Technical Artist and Game Programmer. I specialize in bridging the gap between engineering and art, heavily focusing on Unity, custom C# tool development, and mobile optimization.</p>
-            <p>Currently pursuing a B.Design in Game Design and Development and serving as a GDAI Student Ambassador. I have a strong perseverance for learning new rendering techniques and building tight, optimized systems for both visual fidelity and gameplay performance.</p>
+            <p>I have a strong perseverance for learning new rendering techniques and building tight, optimized systems for both visual fidelity and gameplay performance.</p>
+            
+            <div class="timeline">
+                <div class="timeline-item reveal">
+                    <div class="timeline-date">2023 — Present</div>
+                    <div class="timeline-title">GDAI Student Ambassador</div>
+                    <p style="margin:0; font-size:0.95rem;">Game Developer Association of India. Bridging communities and organizing development workshops.</p>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-date">2023 — Present</div>
+                    <div class="timeline-title">B.Design in Game Design & Development</div>
+                    <p style="margin:0; font-size:0.95rem;">Focusing on technical systems, architecture, and rendering pipelines.</p>
+                </div>
+            </div>
+
+            <div class="persona-box section-header-box reveal" style="margin-top: 40px;"><div class="persona-content">EXPERIENCE</div></div>
+            
+            <div class="timeline">
+                <div class="timeline-item reveal">
+                    <div class="timeline-date">Aug 2026 — Present</div>
+                    <div class="timeline-title">Avshesh (Short Film)</div>
+                    <p style="margin:0; font-size:0.95rem; color: var(--persona-red); font-weight: bold;">Lighting Supervisor</p>
+                    <p style="margin:5px 0 0 0; font-size:0.95rem;">Supervising cinematic lighting, rendering optimization, and maintaining art direction for high-fidelity outputs.</p>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-date">Feb 2026 — Present</div>
+                    <div class="timeline-title">Knuckle</div>
+                    <p style="margin:0; font-size:0.95rem; color: var(--persona-red); font-weight: bold;">Lead Programmer & Tools Developer</p>
+                    <p style="margin:5px 0 0 0; font-size:0.95rem;">Developing custom node-based pipeline tools, core combat systems, and handling engine architecture.</p>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-date">Feb 2025 — Oct 2025</div>
+                    <div class="timeline-title">Lumin</div>
+                    <p style="margin:0; font-size:0.95rem; color: var(--persona-red); font-weight: bold;">Gameplay Programmer & Technical Artist</p>
+                    <p style="margin:5px 0 0 0; font-size:0.95rem;">Engineered the LLM API integration, built dynamic UI systems, and developed custom 2D vertex wind shaders.</p>
+                </div>
+            </div>
         </div>
     </div>
 
     <div id="skills" class="skills-section">
-        <div class="persona-box section-header-box"><div class="persona-content">TECHNICAL ARSENAL</div></div>
+        <div class="persona-box section-header-box reveal"><div class="persona-content">TECHNICAL ARSENAL</div></div>
         
-        <div class="skill-category">
+        <div class="skill-category reveal">
             <h3>Engines & Tools</h3>
             <div class="bubble-container">
                 <div class="bubble hoverable"><i class="devicon-unity-original"></i> Unity Engine</div>
@@ -155,29 +231,39 @@
                 <div class="bubble hoverable"><i class="devicon-maya-plain"></i> Maya</div>
                 <div class="bubble hoverable"><i class="fa-solid fa-code-branch"></i> Visual Scripting</div>
                 <div class="bubble hoverable"><i class="devicon-substance-plain"></i> Substance Designer</div>
-            </div>
-        </div>
-
-        <div class="skill-category">
-            <h3>Programming & Systems</h3>
-            <div class="bubble-container">
-                <div class="bubble hoverable"><i class="devicon-csharp-plain"></i> OOP (C#)</div>
-                <div class="bubble hoverable"><i class="fa-solid fa-robot"></i> AI Implementation</div>
-                <div class="bubble hoverable"><i class="fa-solid fa-cubes"></i> Modular Architecture</div>
-                <div class="bubble hoverable"><i class="fa-solid fa-diagram-project"></i> Finite State Machines</div>
                 <div class="bubble hoverable"><i class="devicon-git-plain"></i> Git Version Control</div>
             </div>
         </div>
 
-        <div class="skill-category">
+        <div class="skill-category reveal">
+            <h3>Programming & Systems</h3>
+            <div class="bubble-container">
+                <div class="bubble hoverable"><i class="devicon-csharp-plain"></i> OOP (C#)</div>
+                <div class="bubble hoverable"><i class="fa-solid fa-cubes"></i> Modular Architecture</div>
+                <div class="bubble hoverable"><i class="fa-solid fa-diagram-project"></i> Finite State Machines</div>
+                <div class="bubble hoverable"><i class="fa-solid fa-microchip"></i> Game Optimization</div>
+                <div class="bubble hoverable"><i class="fa-solid fa-bug-slash"></i> Profiling & Debugging</div>
+                <div class="bubble hoverable"><i class="fa-solid fa-file-code"></i> Technical Documentation</div>
+            </div>
+        </div>
+
+        <div class="skill-category reveal">
             <h3>Technical Art</h3>
             <div class="bubble-container">
                 <div class="bubble hoverable"><i class="fa-solid fa-wand-magic-sparkles"></i> Shader Development</div>
                 <div class="bubble hoverable"><i class="fa-regular fa-lightbulb"></i> Environment Lighting</div>
                 <div class="bubble hoverable"><i class="fa-solid fa-fire-flame-curved"></i> Particle Systems</div>
                 <div class="bubble hoverable"><i class="fa-solid fa-bolt"></i> VFX Graph</div>
-                <div class="bubble hoverable"><i class="fa-solid fa-mobile-screen-button"></i> Game Optimization</div>
                 <div class="bubble hoverable"><i class="fa-solid fa-vr-cardboard"></i> XR Development</div>
+            </div>
+        </div>
+
+        <div class="skill-category reveal">
+            <h3>Languages</h3>
+            <div class="bubble-container">
+                <div class="bubble hoverable"><i class="fa-solid fa-earth-americas"></i> English</div>
+                <div class="bubble hoverable"><i class="fa-solid fa-earth-asia"></i> Hindi</div>
+                <div class="bubble hoverable"><i class="fa-solid fa-earth-europe"></i> German</div>
             </div>
         </div>
     </div>
@@ -186,6 +272,11 @@
     <div id="psp-os" class="machine">
         <div class="psp-backdrop"></div>
         
+        <!-- SVG Guide Line -->
+        <svg class="sci-fi-guide">
+            <path id="guidePath" class="guide-line" d="M0,0 L0,0" />
+        </svg>
+
         <div class="ui-left-menu" id="uiLeftMenu">
             <div class="persona-box" id="cat-0"><div class="persona-content">01 ABOUT ME</div></div>
             <div class="persona-box" id="cat-1"><div class="persona-content">02 TECH ART</div></div>
@@ -194,9 +285,10 @@
         </div>
 
         <div class="ui-right-instructions" id="uiInstructions">
-            <div class="persona-box visible hoverable" id="preboot-inst" onclick="triggerFakeButton()">
-                <div class="fake-btn-tooltip" id="fakeTooltip">Press the X button on Console! I am not a button :(</div>
-                <div class="persona-content"><span class="btn-icon"><i class="fa-solid fa-xmark"></i></span> BOOT OS</div>
+            <!-- Clicking the box triggers the line drawing function -->
+            <div class="persona-box visible hoverable" id="preboot-inst" onclick="triggerGuideLine()">
+                <div class="fake-btn-tooltip" id="fakeTooltip">Press any button on the 3D console!</div>
+                <div class="persona-content"><span class="btn-icon"><i class="fa-solid fa-power-off"></i></span> BOOT OS</div>
             </div>
         </div>
 
@@ -214,9 +306,9 @@
 
     <!-- FEATURED TECH ART -->
     <div id="featured" class="projects-section">
-        <div class="persona-box section-header-box"><div class="persona-content">FEATURED TECH ART</div></div>
+        <div class="persona-box section-header-box reveal"><div class="persona-content">FEATURED TECH ART</div></div>
         <div class="project-grid">
-            <a href="showcase-shaders.html" class="project-card hoverable">
+            <a href="showcase-shaders.html" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="showcase_shader.jpg" alt="Shader Showcase"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag red">HLSL</span><span class="tag gold">Shader Graph</span></div>
@@ -224,7 +316,7 @@
                     <p>Custom rendering solutions including thermal vision, stylized Sobel outlines, and interactive materials.</p>
                 </div>
             </a>
-            <a href="showcase-vfx.html" class="project-card hoverable">
+            <a href="showcase-vfx.html" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="showcase_vfx.jpg" alt="VFX Showcase"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag purple">VFX Graph</span><span class="tag blue">Shuriken</span></div>
@@ -232,7 +324,7 @@
                     <p>Dynamic combat impact frames, lava simulations, and optimized particle systems for mobile and PC.</p>
                 </div>
             </a>
-            <a href="showcase-tools.html" class="project-card hoverable">
+            <a href="showcase-tools.html" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="showcase_tools.jpg" alt="Tools Showcase"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag blue">C#</span><span class="tag red">Pipelines</span></div>
@@ -245,9 +337,9 @@
 
     <!-- PROJECTS -->
     <div id="projects" class="projects-section" style="padding-top: 0;">
-        <div class="persona-box section-header-box"><div class="persona-content">PERSONAL PROJECTS</div></div>
+        <div class="persona-box section-header-box reveal"><div class="persona-content">PERSONAL PROJECTS</div></div>
         <div class="project-grid">
-            <a href="project-knuckle.html" class="project-card hoverable">
+            <a href="project-knuckle.html" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="knuckle_square.jpg" alt="Knuckle"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag blue">Pipeline Tools</span><span class="tag purple">VFX Graph</span></div>
@@ -255,7 +347,7 @@
                     <p>A custom node-based graph pipeline allowing designers to rapidly create combat combos.</p>
                 </div>
             </a>
-            <a href="project-lumen.html" class="project-card hoverable">
+            <a href="project-lumen.html" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="lumen_square.jpg" alt="Lumen API Integration"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag blue">Systems Engineering</span><span class="tag red">API Integration</span></div>
@@ -263,7 +355,7 @@
                     <p>Integrated the Gemini API to power dynamic narrative systems and real-time NPC UI chat.</p>
                 </div>
             </a>
-            <a href="project-unreal.html" class="project-card hoverable">
+            <a href="project-unreal.html" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="unreal_square.jpg" alt="Unreal PCG Environment"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag green">PCG</span><span class="tag purple">Lighting</span></div>
@@ -271,7 +363,7 @@
                     <p>A high-fidelity environment built in Unreal Engine utilizing Procedural Content Generation.</p>
                 </div>
             </a>
-            <a href="project-film.html" class="project-card hoverable">
+            <a href="project-film.html" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="film_square.jpg" alt="Cinematic Lighting"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag purple">Lighting</span><span class="tag blue">Art Direction</span></div>
@@ -279,7 +371,7 @@
                     <p>Supervised the lighting and visual vibe for a cinematic short film for high-fidelity renders.</p>
                 </div>
             </a>
-            <a href="project-heli.html" class="project-card hoverable">
+            <a href="project-heli.html" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="heli_square.jpg" alt="Rotor Warfare Game"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag blue">Netcode</span><span class="tag red">Custom Shaders</span></div>
@@ -292,8 +384,8 @@
 
     <!-- CONTACT -->
     <div id="contact" class="contact-section">
-        <div class="persona-box section-header-box"><div class="persona-content">CONTACT ME</div></div>
-        <div class="contact-links">
+        <div class="persona-box section-header-box reveal"><div class="persona-content">CONTACT ME</div></div>
+        <div class="contact-links reveal">
             <a href="mailto:nitantnamdeo03@gmail.com" class="contact-btn hoverable"><span><i class="fa-solid fa-envelope"></i> EMAIL</span></a>
             <a href="https://github.com/CCCDEADPOOLXD" target="_blank" class="contact-btn hoverable"><span><i class="devicon-github-original"></i> GITHUB</span></a>
             <a href="https://www.linkedin.com/in/nitant-namdeo-a04566270/" target="_blank" class="contact-btn hoverable"><span><i class="devicon-linkedin-plain"></i> LINKEDIN</span></a>
@@ -321,23 +413,53 @@
             document.getElementById("scrollBar").style.width = (winScroll / height) * 100 + "%";
         });
 
-        // Marvel Rivals 3D Card Tilt
+        // Scroll Reveal Animations
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Unified 3D Card Tilt (Fixes the Red Box Overflow Bug!)
         document.querySelectorAll('.project-card').forEach(card => {
             card.addEventListener('mousemove', e => {
                 let rect = card.getBoundingClientRect();
                 let x = e.clientX - rect.left; let y = e.clientY - rect.top;
                 let rotateX = ((y / rect.height) - 0.5) * -15; let rotateY = ((x / rect.width) - 0.5) * 15;
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                // Simplified transform stops the image from punching through the border!
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
             });
             card.addEventListener('mouseleave', () => {
-                card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+                card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
             });
         });
 
-        // Fake Button Popup Trigger
-        function triggerFakeButton() {
+        // Fake Button & Sci-Fi Line Trigger
+        function triggerGuideLine() {
             const tooltip = document.getElementById('fakeTooltip');
-            tooltip.classList.add('show'); setTimeout(() => tooltip.classList.remove('show'), 3000);
+            tooltip.classList.add('show'); 
+            setTimeout(() => tooltip.classList.remove('show'), 3000);
+
+            // Draw SVG Line from Instruction box to middle of the screen
+            const guidePath = document.getElementById('guidePath');
+            const instBox = document.getElementById('preboot-inst').getBoundingClientRect();
+            
+            // Calculate starting point (left edge of the BOOT OS box)
+            const startX = instBox.left; 
+            const startY = instBox.top + (instBox.height / 2);
+            
+            // Calculate end point (roughly where the 3D console buttons are)
+            const endX = window.innerWidth * 0.7; 
+            const endY = window.innerHeight * 0.5;
+
+            // Update SVG Path dynamically
+            guidePath.setAttribute('d', `M${startX},${startY} L${endX},${endY}`);
+            guidePath.classList.add('show');
+            setTimeout(() => guidePath.classList.remove('show'), 3000);
         }
 
         // Pause hero video when out of view to save RAM!
