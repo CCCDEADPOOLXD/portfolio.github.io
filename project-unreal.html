@@ -172,7 +172,7 @@
         }
         .portrait-gallery img {
             width: 100%;
-            aspect-ratio: 1432 / 1794; /* Enforces your specific aspect ratio */
+            aspect-ratio: 1432 / 1794; 
             object-fit: cover;
             border: 1px solid #333;
             background-color: #000;
@@ -190,12 +190,12 @@
                 padding: 25px;
             }
             .portrait-gallery {
-                grid-template-columns: repeat(2, 1fr); /* 2x2 grid on tablets */
+                grid-template-columns: repeat(2, 1fr); 
             }
         }
         @media (max-width: 600px) {
             .portrait-gallery {
-                grid-template-columns: 1fr; /* Single column on phones */
+                grid-template-columns: 1fr; 
             }
         }
     </style>
@@ -209,12 +209,10 @@
             <p class="intro-text">A high-fidelity environment built in Unreal Engine showcasing advanced technical art workflows, Procedural Content Generation (PCG), and strong cinematic composition.</p>
         </div>
 
-        <!-- HERO VIDEO (Full Width & Prominent) -->
         <div class="hero-video-container">
             <iframe src="https://www.youtube.com/embed/sT5RvVO5O5I" title="Unreal Environment Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
 
-        <!-- SECTION 1: COMPOSITION -->
         <article class="project-article">
             <div class="article-content">
                 <h2>Cinematic Composition</h2>
@@ -227,11 +225,10 @@
                 </ul>
             </div>
             <div class="article-media">
-                <img src="HighresScreenshot00011.jpg" alt="Golden Ratio Composition Overlay" class="media-item">
+                <img src="golden_ratio_comp.jpg" alt="Golden Ratio Composition Overlay" class="media-item">
             </div>
         </article>
 
-        <!-- SECTION 2: PCG PIPELINE -->
         <article class="project-article">
             <div class="article-content">
                 <h2>Procedural Content Generation (PCG)</h2>
@@ -245,19 +242,16 @@
                 </ul>
             </div>
             <div class="article-media">
-                <img src="Screenshot 2026-08-18 112828.jpg" alt="Unreal Engine PCG Node Graph" class="media-item">
+                <img src="pcg_node_graph.jpg" alt="Unreal Engine PCG Node Graph" class="media-item">
             </div>
         </article>
 
-        <!-- SECTION 3: VERTICAL RENDER GALLERY -->
         <article class="project-article full-article">
             <div class="article-content">
-                <h2>Vertical Vignettes & Details</h2>
+                <h2>Environment Details</h2>
                 <p>A closer look at the environmental detailing, material blending, and post-processing color grades.</p>
                 
-                <!-- 4-Column Portrait Gallery -->
                 <div class="portrait-gallery">
-                    <!-- Replace these src filenames with the actual names of your 4 images -->
                     <img src="vertical_render_1.jpg" alt="Environment Detail Shot 1">
                     <img src="vertical_render_2.jpg" alt="Environment Detail Shot 2">
                     <img src="vertical_render_3.jpg" alt="Environment Detail Shot 3">
