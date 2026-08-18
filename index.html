@@ -74,7 +74,7 @@
         #pspLoading .persona-content { font-size: 1.5rem; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
 
-        .ui-left-menu { position: absolute; left: 40px; top: 50%; transform: translateY(-50%); z-index: 10; display: flex; flex-direction: column; align-items: flex-start; pointer-events: none; }
+        .ui-left-menu { position: absolute; left: 40px; top: 50%; transform: translateY(-50%); z-index: 10; display: flex; flex-direction: column; align-items: flex-start; pointer-events: auto; }
         .ui-left-menu .persona-box { opacity: 0.4; transform: skewX(-15deg) scale(0.8); transform-origin: left center; }
         .ui-left-menu .persona-box.active { opacity: 1; transform: skewX(-15deg) scale(1.2); }
         .ui-left-menu .persona-box.active .persona-content { background-color: var(--persona-red); color: #fff; }
@@ -86,13 +86,10 @@
         .ui-right-instructions .persona-box::before { background-color: var(--persona-red); transform: skewX(5deg); top: 3px; left: -3px;}
         .btn-icon { color: var(--persona-red); font-size: 1.2rem; margin-right: 8px; }
 
-        .fake-btn-tooltip { position: absolute; right: 110%; top: 50%; transform: translateY(-50%) skewX(-15deg); background: var(--persona-red); color: white; padding: 10px 15px; font-weight: 900; font-size: 0.9rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: 0.3s; box-shadow: 0 0 15px rgba(230,0,18,0.8); }
-        .fake-btn-tooltip.show { opacity: 1; right: 115%; }
-
         /* Sci-Fi Guide Line */
         .sci-fi-guide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 6; pointer-events: none; }
-        .guide-line { fill: none; stroke: var(--persona-red); stroke-width: 2; stroke-dasharray: 10, 5; animation: dash 1s linear infinite; opacity: 0; transition: opacity 0.3s ease; filter: drop-shadow(0 0 5px var(--persona-red));}
-        .guide-line.show { opacity: 0.8; }
+        .guide-line { fill: none; stroke: var(--persona-red); stroke-width: 2.5; stroke-dasharray: 10, 5; animation: dash 1s linear infinite; opacity: 0; transition: opacity 0.3s ease; filter: drop-shadow(0 0 6px var(--persona-red));}
+        .guide-line.show { opacity: 0.9; }
         @keyframes dash { to { stroke-dashoffset: -15; } }
 
         .ui-counter { position: absolute; top: 80px; right: 40px; z-index: 10; font-family: 'VT323', monospace; font-size: 3.5rem; color: var(--persona-red); text-shadow: 2px 2px 0 #000; transition: opacity 0.3s ease;}
@@ -104,8 +101,6 @@
             .ui-left-menu .persona-box.active { transform: skewX(-10deg) scale(1); }
             .ui-right-instructions { bottom: 10%; right: 50%; transform: translateX(50%); align-items: center; width: 100%;}
             .ui-counter { top: 80px; right: 20px; font-size: 2.5rem;}
-            .fake-btn-tooltip { right: auto; top: -50px; left: 50%; transform: translateX(-50%) skewX(-15deg); }
-            .fake-btn-tooltip.show { top: -60px; left: 50%; }
         }
 
         /* PROJECTS GRID & CARDS (FIXED CSS FOR RED BOX CLIPPING) */
@@ -120,7 +115,7 @@
             text-decoration: none; 
             color: #ddd; 
             display: block; 
-            overflow: hidden; /* This firmly clips the image to the border radius! */
+            overflow: hidden; 
             will-change: transform; 
             transition: border-color 0.3s, box-shadow 0.3s; 
         }
@@ -132,7 +127,7 @@
         
         .card-image-container { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; }
         .card-image-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
-        .project-card:hover .card-image-container img { transform: scale(1.05); } /* Nice inner zoom effect */
+        .project-card:hover .card-image-container img { transform: scale(1.05); } 
 
         .card-details { padding: 25px; }
         .card-details h3 { margin: 0 0 10px 0; color: #fff; font-size: 1.4rem; font-weight: 900; text-transform: uppercase;}
@@ -167,7 +162,6 @@
         <a href="#contact">Contact</a>
     </nav>
 
-    <!-- Starting video at 6 seconds using #t=6 -->
     <div id="hero" class="hero">
         <video id="hero-video" autoplay loop muted playsinline><source src="lumen_showcase.mp4#t=6" type="video/mp4"></video>
         <div class="hero-text">
@@ -272,22 +266,25 @@
     <div id="psp-os" class="machine">
         <div class="psp-backdrop"></div>
         
-        <!-- SVG Guide Line -->
+        <!-- SVG Sci-Fi Guide Lines -->
         <svg class="sci-fi-guide">
-            <path id="guidePath" class="guide-line" d="M0,0 L0,0" />
+            <path id="guidePathMain" class="guide-line" d="M0,0 L0,0" />
+            <path id="guidePathUp" class="guide-line" d="M0,0 L0,0" />
+            <path id="guidePathDown" class="guide-line" d="M0,0 L0,0" />
         </svg>
 
         <div class="ui-left-menu" id="uiLeftMenu">
-            <div class="persona-box" id="cat-0"><div class="persona-content">01 ABOUT ME</div></div>
-            <div class="persona-box" id="cat-1"><div class="persona-content">02 TECH ART</div></div>
-            <div class="persona-box" id="cat-2"><div class="persona-content">03 PROJECTS</div></div>
-            <div class="persona-box" id="cat-3"><div class="persona-content">04 VIDEOS</div></div>
+            <div class="persona-box hoverable" id="nav-up" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content"><i class="fa-solid fa-caret-up"></i></div></div>
+            <div class="persona-box hoverable" id="cat-0" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content">01 ABOUT ME</div></div>
+            <div class="persona-box hoverable" id="cat-1" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content">02 TECH ART</div></div>
+            <div class="persona-box hoverable" id="cat-2" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content">03 PROJECTS</div></div>
+            <div class="persona-box hoverable" id="cat-3" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content">04 VIDEOS</div></div>
+            <div class="persona-box hoverable" id="nav-down" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content"><i class="fa-solid fa-caret-down"></i></div></div>
         </div>
 
         <div class="ui-right-instructions" id="uiInstructions">
             <!-- Clicking the box triggers the line drawing function -->
-            <div class="persona-box visible hoverable" id="preboot-inst" onclick="triggerGuideLine()">
-                <div class="fake-btn-tooltip" id="fakeTooltip">Press any button on the 3D console!</div>
+            <div class="persona-box visible hoverable" id="preboot-inst" onclick="if(window.triggerBootHint) window.triggerBootHint();">
                 <div class="persona-content"><span class="btn-icon"><i class="fa-solid fa-power-off"></i></span> BOOT OS</div>
             </div>
         </div>
@@ -396,7 +393,6 @@
 
     <!-- UX SCRIPTS -->
     <script>
-        // Custom Cursor
         const cursor = document.getElementById('customCursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
@@ -406,14 +402,12 @@
             el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
         });
 
-        // Scroll Progress Bar
         window.addEventListener('scroll', () => {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             document.getElementById("scrollBar").style.width = (winScroll / height) * 100 + "%";
         });
 
-        // Scroll Reveal Animations
         const revealElements = document.querySelectorAll('.reveal');
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -424,13 +418,11 @@
         }, { threshold: 0.1 });
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // Unified 3D Card Tilt (Fixes the Red Box Overflow Bug!)
         document.querySelectorAll('.project-card').forEach(card => {
             card.addEventListener('mousemove', e => {
                 let rect = card.getBoundingClientRect();
                 let x = e.clientX - rect.left; let y = e.clientY - rect.top;
                 let rotateX = ((y / rect.height) - 0.5) * -15; let rotateY = ((x / rect.width) - 0.5) * 15;
-                // Simplified transform stops the image from punching through the border!
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
             });
             card.addEventListener('mouseleave', () => {
@@ -438,31 +430,6 @@
             });
         });
 
-        // Fake Button & Sci-Fi Line Trigger
-        function triggerGuideLine() {
-            const tooltip = document.getElementById('fakeTooltip');
-            tooltip.classList.add('show'); 
-            setTimeout(() => tooltip.classList.remove('show'), 3000);
-
-            // Draw SVG Line from Instruction box to middle of the screen
-            const guidePath = document.getElementById('guidePath');
-            const instBox = document.getElementById('preboot-inst').getBoundingClientRect();
-            
-            // Calculate starting point (left edge of the BOOT OS box)
-            const startX = instBox.left; 
-            const startY = instBox.top + (instBox.height / 2);
-            
-            // Calculate end point (roughly where the 3D console buttons are)
-            const endX = window.innerWidth * 0.7; 
-            const endY = window.innerHeight * 0.5;
-
-            // Update SVG Path dynamically
-            guidePath.setAttribute('d', `M${startX},${startY} L${endX},${endY}`);
-            guidePath.classList.add('show');
-            setTimeout(() => guidePath.classList.remove('show'), 3000);
-        }
-
-        // Pause hero video when out of view to save RAM!
         const heroVideo = document.getElementById('hero-video');
         const heroObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -471,6 +438,29 @@
             });
         }, { threshold: 0.1 });
         heroObserver.observe(document.getElementById('hero'));
+        
+        // Scroll Tilt Variables exported for psp.js
+        window.scrollTiltY = 0;
+        const pspSection = document.getElementById('psp-os');
+        let idleHintTimer;
+        window.addEventListener('scroll', () => {
+            if(pspSection) {
+                const rect = pspSection.getBoundingClientRect();
+                const center = rect.top + rect.height / 2;
+                const offset = (center - window.innerHeight / 2) / window.innerHeight;
+                window.scrollTiltY = offset * 2.0; 
+            }
+            
+            // Hide lines on scroll
+            document.querySelectorAll('.guide-line').forEach(el => el.classList.remove('show'));
+            if(window.activeHints) window.activeHints = [];
+            
+            // Re-trigger preboot hint if idle and not booted
+            clearTimeout(idleHintTimer);
+            idleHintTimer = setTimeout(() => {
+                if (window.triggerBootHint) window.triggerBootHint();
+            }, 600);
+        });
     </script>
 
     <!-- 3D IMPORTS -->
