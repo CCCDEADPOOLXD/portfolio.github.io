@@ -17,7 +17,6 @@
         * { cursor: none !important; }
         body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #050505; color: #e0e0e0; overflow-x: hidden; scroll-behavior: smooth; }
         
-        /* Scroll Reveal Animations */
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -46,7 +45,6 @@
         .section-header-box .persona-content { font-size: 2.5rem; padding: 10px 30px; background: var(--persona-red); color: white;}
         .section-header-box::before { background: white; transform: skewX(5deg); top: 6px; left: -6px; }
 
-        /* Timeline / Waypoints */
         .about-section { background-color: #080808; padding: 100px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .about-content { max-width: 800px; margin: 0 auto; line-height: 1.8; font-size: 1.1rem; color: #ccc; }
         
@@ -86,7 +84,7 @@
         .ui-right-instructions .persona-box::before { background-color: var(--persona-red); transform: skewX(5deg); top: 3px; left: -3px;}
         .btn-icon { color: var(--persona-red); font-size: 1.2rem; margin-right: 8px; }
 
-        /* Sci-Fi Guide Line */
+        /* Sci-Fi Guide Line (Overlaying the Machine section) */
         .sci-fi-guide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 6; pointer-events: none; }
         .guide-line { fill: none; stroke: var(--persona-red); stroke-width: 2.5; stroke-dasharray: 10, 5; animation: dash 1s linear infinite; opacity: 0; transition: opacity 0.3s ease; filter: drop-shadow(0 0 6px var(--persona-red));}
         .guide-line.show { opacity: 0.9; }
@@ -103,27 +101,13 @@
             .ui-counter { top: 80px; right: 20px; font-size: 2.5rem;}
         }
 
-        /* PROJECTS GRID & CARDS (FIXED CSS FOR RED BOX CLIPPING) */
         .projects-section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; text-align: center;}
         .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; text-align: left;}
         
         .project-card { 
-            position: relative; 
-            background-color: #0a0a0a; 
-            border: 1px solid rgba(255,255,255,0.05); 
-            border-radius: 4px; 
-            text-decoration: none; 
-            color: #ddd; 
-            display: block; 
-            overflow: hidden; 
-            will-change: transform; 
-            transition: border-color 0.3s, box-shadow 0.3s; 
+            position: relative; background-color: #0a0a0a; border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; text-decoration: none; color: #ddd; display: block; overflow: hidden; will-change: transform; transition: border-color 0.3s, box-shadow 0.3s; 
         }
-        .project-card:hover { 
-            border-color: var(--persona-red); 
-            box-shadow: 0 20px 40px rgba(230,0,18,0.2); 
-            z-index: 10; 
-        }
+        .project-card:hover { border-color: var(--persona-red); box-shadow: 0 20px 40px rgba(230,0,18,0.2); z-index: 10; }
         
         .card-image-container { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; }
         .card-image-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
@@ -162,6 +146,7 @@
         <a href="#contact">Contact</a>
     </nav>
 
+    <!-- Starting video at 6 seconds using #t=6 -->
     <div id="hero" class="hero">
         <video id="hero-video" autoplay loop muted playsinline><source src="lumen_showcase.mp4#t=6" type="video/mp4"></video>
         <div class="hero-text">
@@ -267,24 +252,24 @@
         <div class="psp-backdrop"></div>
         
         <!-- SVG Sci-Fi Guide Lines -->
-        <svg class="sci-fi-guide">
-            <path id="guidePathMain" class="guide-line" d="M0,0 L0,0" />
-            <path id="guidePathUp" class="guide-line" d="M0,0 L0,0" />
-            <path id="guidePathDown" class="guide-line" d="M0,0 L0,0" />
+        <svg class="sci-fi-guide" id="svgGuide">
+            <path id="guidePathMain" class="guide-line" d="" />
+            <path id="guidePathUp" class="guide-line" d="" />
+            <path id="guidePathDown" class="guide-line" d="" />
         </svg>
 
         <div class="ui-left-menu" id="uiLeftMenu">
-            <div class="persona-box hoverable" id="nav-up" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content"><i class="fa-solid fa-caret-up"></i></div></div>
-            <div class="persona-box hoverable" id="cat-0" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content">01 ABOUT ME</div></div>
-            <div class="persona-box hoverable" id="cat-1" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content">02 TECH ART</div></div>
-            <div class="persona-box hoverable" id="cat-2" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content">03 PROJECTS</div></div>
-            <div class="persona-box hoverable" id="cat-3" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content">04 VIDEOS</div></div>
-            <div class="persona-box hoverable" id="nav-down" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content"><i class="fa-solid fa-caret-down"></i></div></div>
+            <!-- Added specific IDs to Left UI arrows for hint targeting -->
+            <div class="persona-box hoverable left-ui-element" id="nav-up"><div class="persona-content"><i class="fa-solid fa-caret-up"></i></div></div>
+            <div class="persona-box hoverable left-ui-element" id="cat-0"><div class="persona-content">01 ABOUT ME</div></div>
+            <div class="persona-box hoverable left-ui-element" id="cat-1"><div class="persona-content">02 TECH ART</div></div>
+            <div class="persona-box hoverable left-ui-element" id="cat-2"><div class="persona-content">03 PROJECTS</div></div>
+            <div class="persona-box hoverable left-ui-element" id="cat-3"><div class="persona-content">04 VIDEOS</div></div>
+            <div class="persona-box hoverable left-ui-element" id="nav-down"><div class="persona-content"><i class="fa-solid fa-caret-down"></i></div></div>
         </div>
 
         <div class="ui-right-instructions" id="uiInstructions">
-            <!-- Clicking the box triggers the line drawing function -->
-            <div class="persona-box visible hoverable" id="preboot-inst" onclick="if(window.triggerBootHint) window.triggerBootHint();">
+            <div class="persona-box visible hoverable" id="preboot-inst">
                 <div class="persona-content"><span class="btn-icon"><i class="fa-solid fa-power-off"></i></span> BOOT OS</div>
             </div>
         </div>
@@ -438,29 +423,6 @@
             });
         }, { threshold: 0.1 });
         heroObserver.observe(document.getElementById('hero'));
-        
-        // Scroll Tilt Variables exported for psp.js
-        window.scrollTiltY = 0;
-        const pspSection = document.getElementById('psp-os');
-        let idleHintTimer;
-        window.addEventListener('scroll', () => {
-            if(pspSection) {
-                const rect = pspSection.getBoundingClientRect();
-                const center = rect.top + rect.height / 2;
-                const offset = (center - window.innerHeight / 2) / window.innerHeight;
-                window.scrollTiltY = offset * 2.0; 
-            }
-            
-            // Hide lines on scroll
-            document.querySelectorAll('.guide-line').forEach(el => el.classList.remove('show'));
-            if(window.activeHints) window.activeHints = [];
-            
-            // Re-trigger preboot hint if idle and not booted
-            clearTimeout(idleHintTimer);
-            idleHintTimer = setTimeout(() => {
-                if (window.triggerBootHint) window.triggerBootHint();
-            }, 600);
-        });
     </script>
 
     <!-- 3D IMPORTS -->
@@ -469,7 +431,6 @@
     { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/" } }
     </script>
     
-    <script src="data.js"></script>
     <script type="module" src="psp.js"></script>
 </body>
 </html>
