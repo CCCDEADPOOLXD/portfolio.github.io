@@ -1,6 +1,127 @@
 /* ============================================================
-   THE MACHINE — Persona XMB Edition (Reduced Blur & Fixed Icons)
+   DATA.JS & PSP.JS — The Persona OS Portfolio Database (MERGED)
    ============================================================ */
+
+window.SK_CATEGORIES = [
+  {
+    name: "01 ABOUT ME",
+    items: [
+      {
+        id: 'about_1', title: 'The Hook', sub: 'Technical Artist', meta: 'INTRO',
+        isText: true,
+        textLines: [
+            "HI, I AM NITANT.",
+            "I MAKE COOL STUFF",
+            "THAT MAKES PEOPLE SAY:",
+            "'HOW DID YOU DO THAT?'"
+        ],
+        instructions: [{ btn: 'X', text: 'OPEN RESUME' }, { btn: 'O', text: 'SCROLL TO ABOUT' }, { btn: '►', text: 'NEXT SLIDE' }],
+        actionX: 'resume.pdf', actionO: 'scroll:#about', actionTriangle: null
+      },
+      {
+        id: 'about_2', title: 'Education', sub: 'B.Design', meta: 'ACAD',
+        isText: true,
+        textLines: [
+            "EDUCATION:",
+            "B.DESIGN GAME DESIGN",
+            "ACAD, INDORE",
+            "AUG 2023 - PRESENT"
+        ],
+        instructions: [{ btn: 'X', text: 'OPEN RESUME' }, { btn: '◄', text: 'PREV SLIDE' }, { btn: '►', text: 'NEXT SLIDE' }],
+        actionX: 'resume.pdf', actionO: null, actionTriangle: null
+      },
+      {
+        id: 'about_3', title: 'Leadership', sub: 'GDAI', meta: 'COMMUNITY',
+        isText: true,
+        textLines: [
+            "GDAI AMBASSADOR:",
+            "ASSISTING IN LOCAL EVENTS",
+            "& PROMOTING GAME DEV",
+            "RESOURCES TO STUDENTS."
+        ],
+        instructions: [{ btn: 'X', text: 'OPEN RESUME' }, { btn: '◄', text: 'PREV SLIDE' }, { btn: '►', text: 'NEXT SLIDE' }],
+        actionX: 'resume.pdf', actionO: null, actionTriangle: null
+      },
+      {
+        id: 'about_4', title: 'Hobbies', sub: 'Beyond Code', meta: 'MUSIC & LANG',
+        isText: true,
+        textLines: [
+            "BEYOND THE SCREEN:",
+            "I LOVE MUSIC, AM LEARNING",
+            "GUITAR, AND STUDYING",
+            "LANGUAGES (EN/HI/DE)."
+        ],
+        instructions: [{ btn: 'X', text: 'OPEN RESUME' }, { btn: '◄', text: 'PREV SLIDE' }, { btn: '△', text: 'VIEW SKILLS' }],
+        actionX: 'resume.pdf', actionO: null, actionTriangle: 'scroll:#skills'
+      }
+    ]
+  },
+  {
+    name: "02 TECH ART",
+    items: [
+      {
+        id: 'sobel', title: 'Shader Development', sub: 'Custom Edge-Detection', meta: 'SHADERS · HLSL',
+        img: 'showcase_shader.jpg', vid: '', link: 'showcase-shaders.html',
+        instructions: [{ btn: 'X', text: 'VIEW DETAILS' }], actionX: 'showcase-shaders.html', actionO: null
+      },
+      {
+        id: 'explosion', title: 'VFX & Particles', sub: 'Mobile-Ready Systems', meta: 'VFX · SHURIKEN',
+        img: 'showcase_vfx.jpg', vid: '', link: 'showcase-vfx.html',
+        instructions: [{ btn: 'X', text: 'VIEW DETAILS' }], actionX: 'showcase-vfx.html', actionO: null
+      },
+      {
+        id: 'tools', title: 'Editor Tools', sub: 'Node-Based Combat Graph', meta: 'TOOLS · C#',
+        img: 'showcase_tools.jpg', vid: '', link: 'showcase-tools.html',
+        instructions: [{ btn: 'X', text: 'VIEW DETAILS' }], actionX: 'showcase-tools.html', actionO: null
+      }
+    ]
+  },
+  {
+    name: "03 PROJECTS",
+    items: [
+      {
+        id: 'knuckle', title: 'Knuckle', sub: 'Frame-perfect fighting engine & FSM', meta: 'PROJECT · UNITY · C#',
+        img: 'knuckle_square.jpg', vid: '', link: 'project-knuckle.html',
+        instructions: [{ btn: 'X', text: 'VIEW DETAILS' }, { btn: 'O', text: 'PLAY ON ITCH.IO' }], actionX: 'project-knuckle.html', actionO: 'https://cccdeadpool-xd.itch.io/'
+      },
+      {
+        id: 'lumen', title: 'Lumin', sub: 'IGDC 2025 Best Groups Selection', meta: 'PROJECT · GEMINI API',
+        img: 'lumen_square.jpg', vid: '', link: 'project-lumen.html',
+        instructions: [{ btn: 'X', text: 'VIEW DETAILS' }, { btn: 'O', text: 'PLAY ON ITCH.IO' }], actionX: 'project-lumen.html', actionO: 'https://cccdeadpool-xd.itch.io/' 
+      },
+      {
+        id: 'unreal', title: 'Unreal Environment', sub: 'Procedural Content Generation', meta: 'PROJECT · UNREAL',
+        img: 'unreal_square.jpg', vid: '', link: 'project-unreal.html',
+        instructions: [{ btn: 'X', text: 'VIEW DETAILS' }], actionX: 'project-unreal.html', actionO: null
+      },
+      {
+        id: 'film', title: 'Cinematic Film', sub: 'Lighting Supervision', meta: 'PROJECT · LIGHTING',
+        img: 'film_square.jpg', vid: '', link: 'project-film.html',
+        instructions: [{ btn: 'X', text: 'VIEW DETAILS' }], actionX: 'project-film.html', actionO: null
+      },
+      {
+        id: 'rotor', title: 'Rotor Warfare', sub: 'Asymmetric Multiplayer Netcode', meta: 'PROJECT · NETCODE',
+        img: 'heli_square.jpg', vid: '', link: 'project-heli.html',
+        instructions: [{ btn: 'X', text: 'VIEW DETAILS' }], actionX: 'project-heli.html', actionO: null
+      }
+    ]
+  },
+  {
+    name: "04 VIDEOS",
+    items: [
+      {
+        id: 'vfx_reel', title: 'VFX & Combat Juice', sub: 'Raw Gameplay Capture', meta: 'VIDEO · VFX GRAPH',
+        img: 'showcase_vfx.jpg', vid: 'explosion_vfx_video.mp4', link: '#',
+        instructions: [{ btn: 'X', text: 'FULLSCREEN VIDEO' }], actionX: 'explosion_vfx_video.mp4', actionO: null
+      },
+      {
+        id: 'shader_reel', title: 'Myth-Tech Shaders', sub: 'Raw Gameplay Capture', meta: 'VIDEO · HLSL',
+        img: 'showcase_shader.jpg', vid: 'sobel_outline_video.mp4', link: '#',
+        instructions: [{ btn: 'X', text: 'FULLSCREEN VIDEO' }], actionX: 'sobel_outline_video.mp4', actionO: null
+      }
+    ]
+  }
+];
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -20,6 +141,8 @@ const canvas = document.getElementById('pspCanvas');
 const stage = document.querySelector('.machine__stage');
 const section = document.querySelector('.machine');
 
+window.activeHints = [];
+
 if (canvas && CATEGORIES.length) init();
 
 function init() {
@@ -35,8 +158,10 @@ function init() {
   camera.position.set(0, 0, 30);
 
   const root = new THREE.Group(); const model = new THREE.Group(); root.add(model); scene.add(root);
-  scene.add(new THREE.HemisphereLight(0x2a3a4d, 0x05070a, 0.55));
-  const keyLight = new THREE.DirectionalLight(0xbcd4e8, 0.85); keyLight.position.set(-8, 9, 12); scene.add(keyLight);
+  
+  // INCREASED LIGHTING FOR BETTER VISIBILITY
+  scene.add(new THREE.HemisphereLight(0x3a4a5d, 0x15171a, 1.0));
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.5); keyLight.position.set(-8, 9, 12); scene.add(keyLight);
   const rimIce = new THREE.DirectionalLight(0xe60012, 1.15); rimIce.position.set(11, 4, -9); scene.add(rimIce);
   const rimHot = new THREE.DirectionalLight(0xff2e7e, 0.75); rimHot.position.set(-12, -5, -7); scene.add(rimHot);
 
@@ -62,7 +187,7 @@ function init() {
         vec2 uv = vUv; vec2 c = uv - 0.5; float r2 = dot(c, c); uv = 0.5 + c * (1.0 + 0.032 * r2);
         float band = step(0.5, hash(vec2(floor(uv.y * 26.0), floor(uTime * 22.0)))); uv.x += uWarp * (band - 0.5) * 0.09;
         if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) { gl_FragColor = vec4(0.005, 0.008, 0.013, 1.0); return; }
-        vec2 g = uGrid; vec2 quv = (floor(uv * g) + 0.5) / g; float ab = (0.0005 + 0.0020 * r2) * (1.0 + uWarp * 6.0); // Reduced Aberration
+        vec2 g = uGrid; vec2 quv = (floor(uv * g) + 0.5) / g; float ab = (0.0005 + 0.0020 * r2) * (1.0 + uWarp * 6.0);
         float rr = texture2D(uTex, vec2(quv.x + ab, quv.y)).r; float gg = texture2D(uTex, quv).g; float bb = texture2D(uTex, vec2(quv.x - ab, quv.y)).b; vec3 col = vec3(rr, gg, bb);
         float sub = mod(floor(uv.x * g.x * 3.0), 3.0); vec3 mask = vec3(sub < 1.0 ? 1.0 : 0.90, (sub >= 1.0 && sub < 2.0) ? 1.0 : 0.90, sub >= 2.0 ? 1.0 : 0.90); col *= mask;
         float scan = 0.93 + 0.07 * cos(uv.y * g.y * 6.28318); col *= scan; col += vec3(0.05, 0.075, 0.10) * pow(1.0 - uv.y, 3.0) * 0.45; col *= 1.0 - 0.30 * pow(r2 * 1.55, 1.6);
@@ -117,6 +242,9 @@ function init() {
     const sb = new THREE.Box3().setFromObject(screenMesh), sc2 = sb.getCenter(new THREE.Vector3()), halfW = (sb.max.x - sb.min.x) / 2;
     spillA.position.set(sc2.x, sc2.y, sc2.z + 2.2); spillB.position.set(sc2.x - halfW * 1.5, sc2.y, sc2.z + 1.5); spillC.position.set(sc2.x + halfW * 1.5, sc2.y, sc2.z + 1.5);
     screenMesh.userData.role = 'screen'; pressable.push(screenMesh); modelReady = true; SK.fireReady(); drawIdleScreen(); 
+    
+    // Auto-trigger boot hint on load
+    setTimeout(() => { if (window.triggerBootHint) window.triggerBootHint(); }, 1500);
   }
 
   function largestFaceNormal(mesh) { 
@@ -150,9 +278,9 @@ function init() {
 
   const bg = document.createElement('canvas'); bg.width = SW; bg.height = SH; const bgctx = bg.getContext('2d');
   function paintBackdrop(img) {
-    bgctx.fillStyle = '#0a0a0a'; bgctx.fillRect(0, 0, SW, SH); if (!img) return;
+    bgctx.fillStyle = '#151515'; bgctx.fillRect(0, 0, SW, SH); if (!img) return; // BRIGHTER BACKGROUND
     const ar = (img.videoWidth || img.width) / (img.videoHeight || img.height), sar = SW / SH;
-    bgctx.save(); try { bgctx.filter = 'blur(16px) saturate(1.5) brightness(0.62)'; } catch (e) {} // Reduced blur
+    bgctx.save(); try { bgctx.filter = 'blur(16px) saturate(1.5) brightness(0.9)'; } catch (e) {}
     let cw, ch; if (ar > sar) { ch = SH * 1.28; cw = ch * ar; } else { cw = SW * 1.28; ch = cw / ar; }
     bgctx.drawImage(img, (SW - cw) / 2, (SH - ch) / 2, cw, ch); bgctx.restore();
   }
@@ -161,7 +289,7 @@ function init() {
     sctx.fillStyle = '#000000'; sctx.fillRect(0, 0, SW, SH);
     if (Math.floor(Date.now() / 600) % 2 === 0) {
         sctx.textBaseline = 'middle'; sctx.textAlign = 'center'; sctx.font = '40px "VT323", monospace'; sctx.fillStyle = '#e60012';
-        sctx.fillText("> PRESS X TO START", SW / 2, SH / 2);
+        sctx.fillText("> PRESS ANY BUTTON TO START", SW / 2, SH / 2);
     }
     screenTex.needsUpdate = true;
   }
@@ -189,6 +317,33 @@ function init() {
     } screenTex.needsUpdate = true;
   }
 
+  // GLOBAL HINT SYSTEM EXPOSED TO HTML
+  window.triggerBootHint = function() {
+    if (!isStarted) {
+        window.activeHints = [{ sourceId: 'preboot-inst', targetRole: 'cross', pathId: 'guidePathMain', life: 3.0 }];
+        document.querySelectorAll('.guide-line').forEach(el => el.classList.remove('show'));
+        document.getElementById('guidePathMain').classList.add('show');
+    }
+  };
+
+  window.triggerLeftHint = function() {
+    if (!isStarted) return;
+    window.activeHints = [
+        { sourceId: 'uiLeftMenu', targetRole: 'up', pathId: 'guidePathUp', life: 3.0 },
+        { sourceId: 'uiLeftMenu', targetRole: 'down', pathId: 'guidePathDown', life: 3.0 }
+    ];
+    document.querySelectorAll('.guide-line').forEach(el => el.classList.remove('show'));
+    document.getElementById('guidePathUp').classList.add('show');
+    document.getElementById('guidePathDown').classList.add('show');
+  };
+
+  window.triggerRightHint = function(sourceId, role) {
+    if (!isStarted) return;
+    window.activeHints = [{ sourceId: sourceId, targetRole: role, pathId: 'guidePathMain', life: 3.0 }];
+    document.querySelectorAll('.guide-line').forEach(el => el.classList.remove('show'));
+    document.getElementById('guidePathMain').classList.add('show');
+  };
+
   function updateHTMLUI(catIdx, itemIdx) {
     for (let i = 0; i < CATEGORIES.length; i++) { const menuEl = document.getElementById('cat-' + i); if (menuEl) { if (i === catIdx) menuEl.classList.add('active'); else menuEl.classList.remove('active'); } }
     document.getElementById('uiCounterWrap').style.opacity = '1'; document.getElementById('uiCountIdx').innerText = String(itemIdx + 1).padStart(2, '0'); document.getElementById('uiCountTot').innerText = '/' + String(CATEGORIES[catIdx].items.length).padStart(2, '0');
@@ -197,19 +352,21 @@ function init() {
       instContainer.innerHTML = '';
       instructions.forEach((inst, index) => {
         const row = document.createElement('div'); row.className = 'persona-box hoverable';
-        // Better icon parsing so left and right arrows show up!
+        row.id = 'inst-row-' + index;
+
         let iconHtml = inst.btn;
-        if (inst.btn === 'X') iconHtml = '<i class="fa-solid fa-xmark"></i>';
-        else if (inst.btn === 'O') iconHtml = '<i class="fa-regular fa-circle"></i>';
-        else if (inst.btn === '△') iconHtml = '<i class="fa-solid fa-caret-up"></i>';
-        else if (inst.btn === '►') iconHtml = '<i class="fa-solid fa-caret-right"></i>';
-        else if (inst.btn === '◄') iconHtml = '<i class="fa-solid fa-caret-left"></i>';
+        let roleMapping = 'cross';
+        if (inst.btn === 'X') { iconHtml = '<i class="fa-solid fa-xmark"></i>'; roleMapping = 'cross'; }
+        else if (inst.btn === 'O') { iconHtml = '<i class="fa-regular fa-circle"></i>'; roleMapping = 'circle'; }
+        else if (inst.btn === '△') { iconHtml = '<i class="fa-solid fa-caret-up"></i>'; roleMapping = 'triangle'; }
+        else if (inst.btn === '►') { iconHtml = '<i class="fa-solid fa-caret-right"></i>'; roleMapping = 'right'; }
+        else if (inst.btn === '◄') { iconHtml = '<i class="fa-solid fa-caret-left"></i>'; roleMapping = 'left'; }
 
         row.innerHTML = `<div class="persona-content"><span class="btn-icon">${iconHtml}</span> ${inst.text}</div>`;
         instContainer.appendChild(row); setTimeout(() => row.classList.add('visible'), 100 * index);
+        
         row.onclick = () => {
-            const tooltip = document.createElement('div'); tooltip.className = 'fake-btn-tooltip show'; tooltip.innerText = "Press the X button on Console! I am not a button :(";
-            row.appendChild(tooltip); setTimeout(() => tooltip.remove(), 3000);
+            window.triggerRightHint(row.id, roleMapping);
         };
       });
     }
@@ -251,13 +408,11 @@ function init() {
     }
 
     if (!isStarted) {
-        if (role === 'cross' || role === 'screen' || role === 'start') {
-            try { sndBoot.play(); } catch(e){}
-            isStarted = true; isBooting = true; powerTarget = 1; 
-            document.getElementById('uiInstructions').innerHTML = '';
-            sctx.fillStyle = '#000000'; sctx.fillRect(0, 0, SW, SH); sctx.textBaseline = 'middle'; sctx.textAlign = 'center'; sctx.font = '40px "VT323", monospace'; sctx.fillStyle = '#e60012'; sctx.fillText("> BOOTING SHUTTERKIF OS...", SW / 2, SH / 2); screenTex.needsUpdate = true;
-            setTimeout(() => { isBooting = false; select(0, 0); }, 2000);
-        }
+        try { sndBoot.play(); } catch(e){}
+        isStarted = true; isBooting = true; powerTarget = 1; 
+        document.getElementById('uiInstructions').innerHTML = '';
+        sctx.fillStyle = '#000000'; sctx.fillRect(0, 0, SW, SH); sctx.textBaseline = 'middle'; sctx.textAlign = 'center'; sctx.font = '40px "VT323", monospace'; sctx.fillStyle = '#e60012'; sctx.fillText("> BOOTING SHUTTERKIF OS...", SW / 2, SH / 2); screenTex.needsUpdate = true;
+        setTimeout(() => { isBooting = false; select(0, 0); }, 2000);
         return;
     }
     if (isBooting) return;
@@ -283,7 +438,22 @@ function init() {
     const o = pick(); if (o !== hovered) { hovered = o; }
   });
   function endDrag() { dragging = false; }
-  canvas.addEventListener('pointerup', (e) => { if (!dragged) { toNDC(e); const o = pick(); if (o && o.userData.role) press(o.userData.role); } endDrag(); });
+  
+  // ANY BUTTON BOOT LOGIC
+  canvas.addEventListener('pointerup', (e) => { 
+    if (!dragged) { 
+        toNDC(e); 
+        const o = pick(); 
+        if (o) {
+            if (!isStarted) {
+                press('cross'); // Any click boots!
+            } else if (o.userData.role) {
+                press(o.userData.role); 
+            }
+        }
+    } 
+    endDrag(); 
+  });
   canvas.addEventListener('pointercancel', endDrag); canvas.addEventListener('pointerleave', () => { endDrag(); hovered = null; });
 
   window.addEventListener('keydown', (e) => {
@@ -319,7 +489,18 @@ function init() {
   function tick() {
     requestAnimationFrame(tick); const dt = Math.min(0.05, clock.getDelta()), t = clock.elapsedTime; if (!inView) return;
     spinVY *= 0.90; spinVX *= 0.90; spinY += spinVY; spinX += spinVX; spinX = Math.max(-0.55, Math.min(0.55, spinX));
-    if (!dragging) { spinY += (0 - spinY) * Math.min(1, dt * 3.2); spinX += (0 - spinX) * Math.min(1, dt * 3.2); if (Math.abs(spinY) < 0.0008) spinY = 0; if (Math.abs(spinX) < 0.0008) spinX = 0; }
+    
+    if (!dragging) {
+        if (!hovered) {
+            // SCROLL ROTATION
+            spinY += ((window.scrollTiltY || 0) - spinY) * Math.min(1, dt * 3.2);
+        } else {
+            // SNAP TO CENTER ON HOVER
+            spinY += (0 - spinY) * Math.min(1, dt * 6.0); 
+        }
+        spinX += (0 - spinX) * Math.min(1, dt * 3.2); 
+    }
+    
     root.rotation.y = spinY; root.rotation.x = spinX;
 
     powerT += (powerTarget - powerT) * Math.min(1, dt * 2.4); crtMat.uniforms.uPower.value = powerT;
@@ -344,6 +525,47 @@ function init() {
     else if (!isBooting && live && !live.paused && !live.ended && live.readyState >= 2) { drawFrame(CATEGORIES[currentCatIdx].items[currentItemIdx], live); updateSpillThrottled(t); }
     else if (!isBooting && CATEGORIES[currentCatIdx].items[currentItemIdx].isText) { drawFrame(CATEGORIES[currentCatIdx].items[currentItemIdx], null); }
     
+    // UPDATE HINT LINES TO FOLLOW 3D BUTTONS
+    if (window.activeHints && window.activeHints.length > 0) {
+        const cRect = canvas.getBoundingClientRect();
+        window.activeHints.forEach(hint => {
+            hint.life -= dt;
+            const pathEl = document.getElementById(hint.pathId);
+            if (hint.life <= 0) {
+                if(pathEl) pathEl.classList.remove('show');
+            } else if (pathEl) {
+                const sourceEl = document.getElementById(hint.sourceId);
+                const targetMesh = buttons[hint.targetRole] ? buttons[hint.targetRole].mesh : null;
+                if (sourceEl && targetMesh) {
+                    const sRect = sourceEl.getBoundingClientRect();
+                    
+                    let startX = sRect.left;
+                    let startY = sRect.top + sRect.height / 2;
+                    
+                    if (hint.sourceId === 'uiLeftMenu') {
+                        startX = sRect.right;
+                        if(hint.targetRole === 'up') startY = sRect.top + 20;
+                        if(hint.targetRole === 'down') startY = sRect.bottom - 20;
+                    } else if (sRect.left > window.innerWidth / 2) {
+                        startX = sRect.left;
+                    }
+
+                    const pos = new THREE.Vector3();
+                    targetMesh.getWorldPosition(pos);
+                    pos.project(camera);
+                    
+                    const endX = cRect.left + (pos.x * 0.5 + 0.5) * cRect.width;
+                    const endY = cRect.top + (pos.y * -0.5 + 0.5) * cRect.height;
+                    
+                    // ELBOW JOINT MATH (Horizontal then Vertical)
+                    const midX = startX + (endX - startX) * 0.5;
+                    pathEl.setAttribute('d', `M${startX},${startY} L${midX},${startY} L${midX},${endY} L${endX},${endY}`);
+                }
+            }
+        });
+        window.activeHints = window.activeHints.filter(h => h.life > 0);
+    }
+
     composer.render();
   }
   tick();
