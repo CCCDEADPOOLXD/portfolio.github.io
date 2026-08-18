@@ -143,7 +143,7 @@ const section = document.querySelector('.machine');
 
 let scrollRotationY = 0;
 let isHoveringConsole = false;
-let hintData = {}; // Stores active hints to make 3D buttons pulse
+let activeHints = {}; // Tracks active glowing hint lights targeting specific buttons
 
 if (canvas && CATEGORIES.length) init();
 
@@ -168,6 +168,10 @@ function init() {
 
   const spillA = new THREE.PointLight(0xffffff, 0, 26, 2); const spillB = new THREE.PointLight(0xffffff, 0, 20, 2); const spillC = new THREE.PointLight(0xffffff, 0, 20, 2);
   scene.add(spillA, spillB, spillC);
+
+  // Dual Hint Lights for D-Pad or Single Button guidance
+  const hintLight1 = new THREE.PointLight(0xe60012, 0, 10, 2); scene.add(hintLight1);
+  const hintLight2 = new THREE.PointLight(0xe60012, 0, 10, 2); scene.add(hintLight2);
 
   const pressLight = new THREE.PointLight(0xe60012, 0, 9, 2); scene.add(pressLight);
   let pressLightLife = 0;
@@ -215,10 +219,7 @@ function init() {
       if (n.indexOf('ground') === 0) { bin.push(o); return; }
       if (n.indexOf('screen') === 0) screenMesh = o;
       const m = n.match(/^button(\d+)/); if (m) parts['b' + m[1]] = o;
-      
-      if (o.material) {
-          o.material = o.material.clone();
-      }
+      if (o.material) o.material = o.material.clone();
     });
     bin.forEach((o) => { o.parent && o.parent.remove(o); }); if (!screenMesh) { SK.fireReady(); return; }
 
@@ -321,27 +322,26 @@ function init() {
     } screenTex.needsUpdate = true;
   }
 
-  // --- NATIVE 3D HINT SYSTEM (SONAR PULSE) ---
+  // --- DUAL-LIGHT HINT SYSTEM ---
   window.triggerBootHint = function() {
-      if (!isStarted) hintData['cross'] = { life: 2.0 };
+      if (!isStarted) activeHints['cross'] = { life: 2.5 };
   };
 
   window.triggerLeftHint = function() {
       if (!isStarted) return;
-      hintData['up'] = { life: 2.0 };
-      hintData['down'] = { life: 2.0 };
+      activeHints['up'] = { life: 2.5 };
+      activeHints['down'] = { life: 2.5 };
   };
 
   window.triggerRightHint = function(sourceId, role) {
       if (!isStarted) return;
-      hintData[role] = { life: 2.0 };
+      activeHints[role] = { life: 2.5 };
   };
   
   window.clearHints = function() {
-      hintData = {};
+      activeHints = {};
   };
 
-  // BIND LEFT UI HTML CLICKS TO SHOW HINTS
   document.querySelectorAll('.left-ui-element').forEach(el => {
       el.addEventListener('click', () => window.triggerLeftHint());
   });
@@ -462,7 +462,6 @@ function init() {
     if (k === 'ArrowLeft') { press('left'); e.preventDefault(); } else if (k === 'ArrowRight') { press('right'); e.preventDefault(); } else if (k === 'ArrowUp') { press('up'); e.preventDefault(); } else if (k === 'ArrowDown') { press('down'); e.preventDefault(); } else if (k === 'Enter' || k === 'x' || k === 'X') { press('cross'); }
   });
 
-  // MASSIVELY INCREASED BLOOM TO MAKE THE RED HALO POP
   const composer = new EffectComposer(renderer); const renderPass = new RenderPass(scene, camera); renderPass.clearColor = new THREE.Color(0x000000); renderPass.clearAlpha = 0; composer.addPass(renderPass);
   const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 1.2, 0.45, 0.55);
   Object.keys(bloom).forEach((k) => { const m = bloom[k]; if (m && m.isMaterial && m.blending === THREE.AdditiveBlending) { m.blending = THREE.CustomBlending; m.blendEquation = THREE.AddEquation; m.blendSrc = THREE.OneFactor; m.blendDst = THREE.OneFactor; m.blendEquationAlpha = THREE.AddEquation; m.blendSrcAlpha = THREE.ZeroFactor; m.blendDstAlpha = THREE.OneFactor; } });
@@ -492,7 +491,6 @@ function init() {
     requestAnimationFrame(tick); const dt = Math.min(0.05, clock.getDelta()), t = clock.elapsedTime; if (!inView) return;
     spinVY *= 0.90; spinVX *= 0.90; spinY += spinVY; spinX += spinVX; spinX = Math.max(-0.55, Math.min(0.55, spinX));
     
-    // SMOOTH SCROLL ROTATION VS HOVER LOGIC
     if (!dragging) {
         if (!isHoveringConsole) {
             spinY += ((window.scrollTiltY || 0) - spinY) * Math.min(1, dt * 5.0);
@@ -511,40 +509,66 @@ function init() {
     spillA.intensity += ((spillTargetIntensity * powerT) - spillA.intensity) * 0.14; spillB.intensity = spillA.intensity * 0.42; spillC.intensity = spillA.intensity * 0.42;
 
     if (!isStarted) {
-        pressLight.position.copy(new THREE.Box3().setFromObject(buttons['cross'].mesh).getCenter(new THREE.Vector3())).add(new THREE.Vector3(0, 0, 1.4));
-        pressLight.color.set(0xe60012); pressLight.intensity = (Math.sin(t * 3) + 1) * 10; 
+        if (!activeHints['cross']) {
+            pressLight.position.copy(new THREE.Box3().setFromObject(buttons['cross'].mesh).getCenter(new THREE.Vector3())).add(new THREE.Vector3(0, 0, 1.4));
+            pressLight.color.set(0xe60012); pressLight.intensity = (Math.sin(t * 3) + 1) * 10; 
+        } else {
+            pressLight.intensity = 0;
+        }
     } else {
         if (pressLightLife > 0) { pressLightLife -= dt * 3.4; pressLight.intensity = Math.max(0, pressLightLife) * 26; } else pressLight.intensity = 0;
     }
 
-    // --- APPLY SONAR GLOW TO HINTED BUTTONS ---
+    // --- HANDLE DUAL HINT LIGHTS & BUTTON GLOW ---
+    const activeRoles = Object.keys(activeHints);
+    
+    // Light 1 update
+    if (activeRoles[0] && buttons[activeRoles[0]]) {
+        const b = buttons[activeRoles[0]];
+        activeHints[activeRoles[0]].life -= dt;
+        if (activeHints[activeRoles[0]].life > 0) {
+            const center = new THREE.Box3().setFromObject(b.mesh).getCenter(new THREE.Vector3());
+            hintLight1.position.copy(center).add(new THREE.Vector3(0, 0, 1.4));
+            hintLight1.intensity = (Math.sin(t * 12) + 1) * 12;
+            
+            if (b.mesh.material) {
+                b.mesh.material.emissive.setHex(0xe60012);
+                b.mesh.material.emissiveIntensity = Math.abs(Math.sin(t * 12)) * 8.0;
+            }
+        } else {
+            delete activeHints[activeRoles[0]];
+        }
+    } else {
+        hintLight1.intensity = 0;
+    }
+
+    // Light 2 update (for dual D-Pad prompts)
+    if (activeRoles[1] && buttons[activeRoles[1]]) {
+        const b = buttons[activeRoles[1]];
+        activeHints[activeRoles[1]].life -= dt;
+        if (activeHints[activeRoles[1]].life > 0) {
+            const center = new THREE.Box3().setFromObject(b.mesh).getCenter(new THREE.Vector3());
+            hintLight2.position.copy(center).add(new THREE.Vector3(0, 0, 1.4));
+            hintLight2.intensity = (Math.sin(t * 12) + 1) * 12;
+            
+            if (b.mesh.material) {
+                b.mesh.material.emissive.setHex(0xe60012);
+                b.mesh.material.emissiveIntensity = Math.abs(Math.sin(t * 12)) * 8.0;
+            }
+        } else {
+            delete activeHints[activeRoles[1]];
+        }
+    } else {
+        hintLight2.intensity = 0;
+    }
+
+    // Clear emissions for buttons not currently hinted
     for (const k in buttons) {
       const b = buttons[k];
-      let isHinted = false;
-
-      // Handle the glowing pulse
-      if (hintData[k]) {
-          hintData[k].life -= dt;
-          if (hintData[k].life > 0) {
-              isHinted = true;
-              // Create an aggressive fading pulse
-              const pulse = Math.abs(Math.sin(t * 12)) * Math.min(hintData[k].life, 1.0); 
-              if (b.mesh.material) {
-                  b.mesh.material.emissive.setHex(0xe60012); 
-                  b.mesh.material.emissiveIntensity = pulse * 10.0; // Cranked up for bloom
-              }
-          } else {
-              delete hintData[k];
-          }
-      }
-
-      // Reset material if not hinted
-      if (!isHinted && b.mesh.material) {
+      if (!activeHints[k] && b.mesh.material) {
           b.mesh.material.emissive.setHex(0x000000);
           b.mesh.material.emissiveIntensity = 0;
       }
-
-      // Handle normal press depression
       if (b.t > 0.0005) {
           b.t *= Math.pow(0.004, dt); if (b.t < 0.0005) b.t = 0; 
           b.mesh.position.copy(b.home).add(b.axis.clone().multiplyScalar(-PRESS_DEPTH * b.t));
