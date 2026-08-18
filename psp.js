@@ -141,7 +141,9 @@ const canvas = document.getElementById('pspCanvas');
 const stage = document.querySelector('.machine__stage');
 const section = document.querySelector('.machine');
 
-window.activeHints = [];
+let activeHints = [];
+let scrollRotationY = 0;
+let isHoveringConsole = false;
 
 if (canvas && CATEGORIES.length) init();
 
@@ -159,7 +161,6 @@ function init() {
 
   const root = new THREE.Group(); const model = new THREE.Group(); root.add(model); scene.add(root);
   
-  // INCREASED LIGHTING FOR BETTER VISIBILITY
   scene.add(new THREE.HemisphereLight(0x3a4a5d, 0x15171a, 1.0));
   const keyLight = new THREE.DirectionalLight(0xffffff, 1.5); keyLight.position.set(-8, 9, 12); scene.add(keyLight);
   const rimIce = new THREE.DirectionalLight(0xe60012, 1.15); rimIce.position.set(11, 4, -9); scene.add(rimIce);
@@ -244,7 +245,7 @@ function init() {
     screenMesh.userData.role = 'screen'; pressable.push(screenMesh); modelReady = true; SK.fireReady(); drawIdleScreen(); 
     
     // Auto-trigger boot hint on load
-    setTimeout(() => { if (window.triggerBootHint) window.triggerBootHint(); }, 1500);
+    setTimeout(() => { showPrebootHint(); }, 1500);
   }
 
   function largestFaceNormal(mesh) { 
@@ -278,7 +279,7 @@ function init() {
 
   const bg = document.createElement('canvas'); bg.width = SW; bg.height = SH; const bgctx = bg.getContext('2d');
   function paintBackdrop(img) {
-    bgctx.fillStyle = '#151515'; bgctx.fillRect(0, 0, SW, SH); if (!img) return; // BRIGHTER BACKGROUND
+    bgctx.fillStyle = '#151515'; bgctx.fillRect(0, 0, SW, SH); if (!img) return;
     const ar = (img.videoWidth || img.width) / (img.videoHeight || img.height), sar = SW / SH;
     bgctx.save(); try { bgctx.filter = 'blur(16px) saturate(1.5) brightness(0.9)'; } catch (e) {}
     let cw, ch; if (ar > sar) { ch = SH * 1.28; cw = ch * ar; } else { cw = SW * 1.28; ch = cw / ar; }
@@ -317,32 +318,64 @@ function init() {
     } screenTex.needsUpdate = true;
   }
 
-  // GLOBAL HINT SYSTEM EXPOSED TO HTML
-  window.triggerBootHint = function() {
-    if (!isStarted) {
-        window.activeHints = [{ sourceId: 'preboot-inst', targetRole: 'cross', pathId: 'guidePathMain', life: 3.0 }];
-        document.querySelectorAll('.guide-line').forEach(el => el.classList.remove('show'));
-        document.getElementById('guidePathMain').classList.add('show');
-    }
-  };
+  // --- NATIVE SCROLL, HOVER & HINT LOGIC ---
+  let idleHintTimer;
+  section.addEventListener('mouseenter', () => { isHoveringConsole = true; });
+  section.addEventListener('mouseleave', () => { isHoveringConsole = false; });
+  
+  window.addEventListener('scroll', () => {
+      const rect = section.getBoundingClientRect();
+      const distFromCenter = (rect.top + rect.height / 2) - (window.innerHeight / 2);
+      scrollRotationY = (distFromCenter / window.innerHeight) * 1.5; 
+      
+      clearHints();
+      clearTimeout(idleHintTimer);
+      idleHintTimer = setTimeout(() => {
+          if (!isStarted) showPrebootHint();
+      }, 800);
+  });
 
-  window.triggerLeftHint = function() {
-    if (!isStarted) return;
-    window.activeHints = [
-        { sourceId: 'uiLeftMenu', targetRole: 'up', pathId: 'guidePathUp', life: 3.0 },
-        { sourceId: 'uiLeftMenu', targetRole: 'down', pathId: 'guidePathDown', life: 3.0 }
-    ];
-    document.querySelectorAll('.guide-line').forEach(el => el.classList.remove('show'));
-    document.getElementById('guidePathUp').classList.add('show');
-    document.getElementById('guidePathDown').classList.add('show');
-  };
+  function clearHints() {
+      document.querySelectorAll('.guide-line').forEach(el => el.classList.remove('show'));
+      activeHints = [];
+  }
 
-  window.triggerRightHint = function(sourceId, role) {
-    if (!isStarted) return;
-    window.activeHints = [{ sourceId: sourceId, targetRole: role, pathId: 'guidePathMain', life: 3.0 }];
-    document.querySelectorAll('.guide-line').forEach(el => el.classList.remove('show'));
-    document.getElementById('guidePathMain').classList.add('show');
-  };
+  function showPrebootHint() {
+      if (!isStarted) {
+          activeHints = [{ sourceId: 'preboot-inst', targetRole: 'cross', pathId: 'guidePathMain', life: 3.0 }];
+          clearHints();
+          document.getElementById('guidePathMain').classList.add('show');
+      }
+  }
+
+  function showLeftHint() {
+      if (!isStarted) return;
+      activeHints = [
+          { sourceId: 'uiLeftMenu', targetRole: 'up', pathId: 'guidePathUp', life: 3.0 },
+          { sourceId: 'uiLeftMenu', targetRole: 'down', pathId: 'guidePathDown', life: 3.0 }
+      ];
+      clearHints();
+      document.getElementById('guidePathUp').classList.add('show');
+      document.getElementById('guidePathDown').classList.add('show');
+  }
+
+  function showRightHint(sourceId, role) {
+      if (!isStarted) return;
+      activeHints = [{ sourceId: sourceId, targetRole: role, pathId: 'guidePathMain', life: 3.0 }];
+      clearHints();
+      document.getElementById('guidePathMain').classList.add('show');
+  }
+
+  // BIND LEFT UI HTML CLICKS TO SHOW HINTS
+  document.querySelectorAll('.left-ui-element').forEach(el => {
+      el.addEventListener('click', showLeftHint);
+  });
+  
+  // BIND PREBOOT HTML CLICK TO SHOW HINT
+  const prebootEl = document.getElementById('preboot-inst');
+  if(prebootEl) {
+      prebootEl.addEventListener('click', showPrebootHint);
+  }
 
   function updateHTMLUI(catIdx, itemIdx) {
     for (let i = 0; i < CATEGORIES.length; i++) { const menuEl = document.getElementById('cat-' + i); if (menuEl) { if (i === catIdx) menuEl.classList.add('active'); else menuEl.classList.remove('active'); } }
@@ -365,9 +398,7 @@ function init() {
         row.innerHTML = `<div class="persona-content"><span class="btn-icon">${iconHtml}</span> ${inst.text}</div>`;
         instContainer.appendChild(row); setTimeout(() => row.classList.add('visible'), 100 * index);
         
-        row.onclick = () => {
-            window.triggerRightHint(row.id, roleMapping);
-        };
+        row.onclick = () => { showRightHint(row.id, roleMapping); };
       });
     }
   }
@@ -410,6 +441,7 @@ function init() {
     if (!isStarted) {
         try { sndBoot.play(); } catch(e){}
         isStarted = true; isBooting = true; powerTarget = 1; 
+        clearHints();
         document.getElementById('uiInstructions').innerHTML = '';
         sctx.fillStyle = '#000000'; sctx.fillRect(0, 0, SW, SH); sctx.textBaseline = 'middle'; sctx.textAlign = 'center'; sctx.font = '40px "VT323", monospace'; sctx.fillStyle = '#e60012'; sctx.fillText("> BOOTING SHUTTERKIF OS...", SW / 2, SH / 2); screenTex.needsUpdate = true;
         setTimeout(() => { isBooting = false; select(0, 0); }, 2000);
@@ -439,17 +471,13 @@ function init() {
   });
   function endDrag() { dragging = false; }
   
-  // ANY BUTTON BOOT LOGIC
   canvas.addEventListener('pointerup', (e) => { 
     if (!dragged) { 
         toNDC(e); 
         const o = pick(); 
         if (o) {
-            if (!isStarted) {
-                press('cross'); // Any click boots!
-            } else if (o.userData.role) {
-                press(o.userData.role); 
-            }
+            clearHints(); // clear lines on any successful 3d click
+            if (!isStarted) press('cross'); else if (o.userData.role) press(o.userData.role); 
         }
     } 
     endDrag(); 
@@ -490,13 +518,12 @@ function init() {
     requestAnimationFrame(tick); const dt = Math.min(0.05, clock.getDelta()), t = clock.elapsedTime; if (!inView) return;
     spinVY *= 0.90; spinVX *= 0.90; spinY += spinVY; spinX += spinVX; spinX = Math.max(-0.55, Math.min(0.55, spinX));
     
+    // SMOOTH SCROLL ROTATION VS HOVER LOGIC
     if (!dragging) {
-        if (!hovered) {
-            // SCROLL ROTATION
-            spinY += ((window.scrollTiltY || 0) - spinY) * Math.min(1, dt * 3.2);
+        if (!isHoveringConsole) {
+            spinY += (scrollRotationY - spinY) * Math.min(1, dt * 5.0);
         } else {
-            // SNAP TO CENTER ON HOVER
-            spinY += (0 - spinY) * Math.min(1, dt * 6.0); 
+            spinY += (0 - spinY) * Math.min(1, dt * 8.0); 
         }
         spinX += (0 - spinX) * Math.min(1, dt * 3.2); 
     }
@@ -525,10 +552,12 @@ function init() {
     else if (!isBooting && live && !live.paused && !live.ended && live.readyState >= 2) { drawFrame(CATEGORIES[currentCatIdx].items[currentItemIdx], live); updateSpillThrottled(t); }
     else if (!isBooting && CATEGORIES[currentCatIdx].items[currentItemIdx].isText) { drawFrame(CATEGORIES[currentCatIdx].items[currentItemIdx], null); }
     
-    // UPDATE HINT LINES TO FOLLOW 3D BUTTONS
-    if (window.activeHints && window.activeHints.length > 0) {
+    // RENDER HINT LINES DYNAMICALLY TO 3D BUTTONS
+    if (activeHints && activeHints.length > 0) {
         const cRect = canvas.getBoundingClientRect();
-        window.activeHints.forEach(hint => {
+        const sRect = section.getBoundingClientRect();
+
+        activeHints.forEach(hint => {
             hint.life -= dt;
             const pathEl = document.getElementById(hint.pathId);
             if (hint.life <= 0) {
@@ -536,34 +565,37 @@ function init() {
             } else if (pathEl) {
                 const sourceEl = document.getElementById(hint.sourceId);
                 const targetMesh = buttons[hint.targetRole] ? buttons[hint.targetRole].mesh : null;
+                
                 if (sourceEl && targetMesh) {
-                    const sRect = sourceEl.getBoundingClientRect();
+                    const elRect = sourceEl.getBoundingClientRect();
                     
-                    let startX = sRect.left;
-                    let startY = sRect.top + sRect.height / 2;
+                    // Coordinates relative to the section (.machine)
+                    let startX = elRect.left - sRect.left;
+                    let startY = elRect.top - sRect.top + (elRect.height / 2);
                     
                     if (hint.sourceId === 'uiLeftMenu') {
-                        startX = sRect.right;
-                        if(hint.targetRole === 'up') startY = sRect.top + 20;
-                        if(hint.targetRole === 'down') startY = sRect.bottom - 20;
-                    } else if (sRect.left > window.innerWidth / 2) {
-                        startX = sRect.left;
+                        startX = elRect.right - sRect.left;
+                        if(hint.targetRole === 'up') startY = elRect.top - sRect.top + 20;
+                        if(hint.targetRole === 'down') startY = elRect.bottom - sRect.top - 20;
+                    } else if (elRect.left > window.innerWidth / 2) {
+                        startX = elRect.left - sRect.left;
                     }
 
+                    // Project 3D coordinate to 2D
                     const pos = new THREE.Vector3();
                     targetMesh.getWorldPosition(pos);
                     pos.project(camera);
                     
-                    const endX = cRect.left + (pos.x * 0.5 + 0.5) * cRect.width;
-                    const endY = cRect.top + (pos.y * -0.5 + 0.5) * cRect.height;
+                    const endX = (cRect.left - sRect.left) + (pos.x * 0.5 + 0.5) * cRect.width;
+                    const endY = (cRect.top - sRect.top) + (pos.y * -0.5 + 0.5) * cRect.height;
                     
-                    // ELBOW JOINT MATH (Horizontal then Vertical)
+                    // The "Elbow" logic
                     const midX = startX + (endX - startX) * 0.5;
                     pathEl.setAttribute('d', `M${startX},${startY} L${midX},${startY} L${midX},${endY} L${endX},${endY}`);
                 }
             }
         });
-        window.activeHints = window.activeHints.filter(h => h.life > 0);
+        activeHints = activeHints.filter(h => h.life > 0);
     }
 
     composer.render();
