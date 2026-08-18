@@ -17,6 +17,7 @@
         * { cursor: none !important; }
         body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #050505; color: #e0e0e0; overflow-x: hidden; scroll-behavior: smooth; }
         
+        /* Scroll Reveal Animations */
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -84,12 +85,6 @@
         .ui-right-instructions .persona-box::before { background-color: var(--persona-red); transform: skewX(5deg); top: 3px; left: -3px;}
         .btn-icon { color: var(--persona-red); font-size: 1.2rem; margin-right: 8px; }
 
-        /* Sci-Fi Guide Line (Overlaying the Machine section) */
-        .sci-fi-guide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 6; pointer-events: none; }
-        .guide-line { fill: none; stroke: var(--persona-red); stroke-width: 2.5; stroke-dasharray: 10, 5; animation: dash 1s linear infinite; opacity: 0; transition: opacity 0.3s ease; filter: drop-shadow(0 0 6px var(--persona-red));}
-        .guide-line.show { opacity: 0.9; }
-        @keyframes dash { to { stroke-dashoffset: -15; } }
-
         .ui-counter { position: absolute; top: 80px; right: 40px; z-index: 10; font-family: 'VT323', monospace; font-size: 3.5rem; color: var(--persona-red); text-shadow: 2px 2px 0 #000; transition: opacity 0.3s ease;}
         .ui-counter span { color: rgba(255,255,255,0.5); font-size: 2rem; text-shadow: none; }
 
@@ -146,7 +141,6 @@
         <a href="#contact">Contact</a>
     </nav>
 
-    <!-- Starting video at 6 seconds using #t=6 -->
     <div id="hero" class="hero">
         <video id="hero-video" autoplay loop muted playsinline><source src="lumen_showcase.mp4#t=6" type="video/mp4"></video>
         <div class="hero-text">
@@ -250,26 +244,19 @@
     <!-- 3D PSP OS -->
     <div id="psp-os" class="machine">
         <div class="psp-backdrop"></div>
-        
-        <!-- SVG Sci-Fi Guide Lines -->
-        <svg class="sci-fi-guide" id="svgGuide">
-            <path id="guidePathMain" class="guide-line" d="" />
-            <path id="guidePathUp" class="guide-line" d="" />
-            <path id="guidePathDown" class="guide-line" d="" />
-        </svg>
 
         <div class="ui-left-menu" id="uiLeftMenu">
-            <!-- Added specific IDs to Left UI arrows for hint targeting -->
-            <div class="persona-box hoverable left-ui-element" id="nav-up"><div class="persona-content"><i class="fa-solid fa-caret-up"></i></div></div>
-            <div class="persona-box hoverable left-ui-element" id="cat-0"><div class="persona-content">01 ABOUT ME</div></div>
-            <div class="persona-box hoverable left-ui-element" id="cat-1"><div class="persona-content">02 TECH ART</div></div>
-            <div class="persona-box hoverable left-ui-element" id="cat-2"><div class="persona-content">03 PROJECTS</div></div>
-            <div class="persona-box hoverable left-ui-element" id="cat-3"><div class="persona-content">04 VIDEOS</div></div>
-            <div class="persona-box hoverable left-ui-element" id="nav-down"><div class="persona-content"><i class="fa-solid fa-caret-down"></i></div></div>
+            <div class="persona-box hoverable left-ui-element" id="nav-up" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content"><i class="fa-solid fa-caret-up"></i></div></div>
+            <div class="persona-box hoverable left-ui-element" id="cat-0" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content">01 ABOUT ME</div></div>
+            <div class="persona-box hoverable left-ui-element" id="cat-1" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content">02 TECH ART</div></div>
+            <div class="persona-box hoverable left-ui-element" id="cat-2" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content">03 PROJECTS</div></div>
+            <div class="persona-box hoverable left-ui-element" id="cat-3" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content">04 VIDEOS</div></div>
+            <div class="persona-box hoverable left-ui-element" id="nav-down" onclick="if(window.triggerLeftHint) window.triggerLeftHint();"><div class="persona-content"><i class="fa-solid fa-caret-down"></i></div></div>
         </div>
 
         <div class="ui-right-instructions" id="uiInstructions">
-            <div class="persona-box visible hoverable" id="preboot-inst">
+            <!-- Clicking the box triggers the 3D Sonar Pulse on the button -->
+            <div class="persona-box visible hoverable" id="preboot-inst" onclick="if(window.triggerBootHint) window.triggerBootHint();">
                 <div class="persona-content"><span class="btn-icon"><i class="fa-solid fa-power-off"></i></span> BOOT OS</div>
             </div>
         </div>
@@ -423,6 +410,29 @@
             });
         }, { threshold: 0.1 });
         heroObserver.observe(document.getElementById('hero'));
+        
+        // Scroll Tilt Variables exported for psp.js
+        window.scrollTiltY = 0;
+        const pspSection = document.getElementById('psp-os');
+        let idleHintTimer;
+        
+        window.addEventListener('scroll', () => {
+            if(pspSection) {
+                const rect = pspSection.getBoundingClientRect();
+                const center = rect.top + rect.height / 2;
+                const offset = (center - window.innerHeight / 2) / window.innerHeight;
+                window.scrollTiltY = offset * 2.0; 
+            }
+            
+            // Clear visual hints if user starts scrolling
+            if(window.clearHints) window.clearHints();
+            
+            // Re-trigger preboot hint if idle and not booted
+            clearTimeout(idleHintTimer);
+            idleHintTimer = setTimeout(() => {
+                if (window.triggerBootHint) window.triggerBootHint();
+            }, 800);
+        });
     </script>
 
     <!-- 3D IMPORTS -->
