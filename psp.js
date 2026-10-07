@@ -19,7 +19,8 @@ window.SK_CATEGORIES = [
                 isText: true,
                 textLines: [
                     "HI, I AM NITANT.",
-                    "I MAKE COOL STUFF"
+                    "I MAKE COOL TECH STUFF"
+                    
                 ],
                 instructions: [{ btn: 'X', text: 'OPEN RESUME' }, { btn: 'O', text: 'SCROLL TO ABOUT' }, { btn: '►', text: 'NEXT SLIDE' }],
                 actionX: 'resume.pdf', actionO: 'scroll:#about', actionTriangle: null
@@ -129,6 +130,26 @@ window.SK_CATEGORIES = [
                 id: 'shader_reel', title: 'Myth-Tech Shaders', sub: 'Raw Gameplay Capture', meta: 'VIDEO · HLSL',
                 img: 'showcase_shader.jpg', vid: 'sobel_outline_video.mp4', link: '#',
                 instructions: [{ btn: 'X', text: 'FULLSCREEN VIDEO' }], actionX: 'sobel_outline_video.mp4', actionO: null
+            },
+            {
+                id: 'sightless_mech', title: 'Sightless Mechanics', sub: 'Sensory Deprivation & AI', meta: 'VIDEO · GAMEPLAY',
+                img: 'sightless_square.jpg', vid: 'sightless_mechanics_video.mp4', link: '#',
+                instructions: [{ btn: 'X', text: 'FULLSCREEN VIDEO' }], actionX: 'sightless_mechanics_video.mp4', actionO: null
+            },
+            {
+                id: 'sightless_sonar', title: 'Sonar Echolocation', sub: 'Mic-Driven Shader', meta: 'VIDEO · HLSL',
+                img: 'sightless_square.jpg', vid: 'sightless_sonar_video.mp4', link: '#',
+                instructions: [{ btn: 'X', text: 'FULLSCREEN VIDEO' }], actionX: 'sightless_sonar_video.mp4', actionO: null
+            },
+            {
+                id: 'combo_tool', title: 'Combo Graph Editor', sub: 'Custom C# Tooling', meta: 'VIDEO · PIPELINE',
+                img: 'showcase_tools.jpg', vid: 'combo_graph_video.mp4', link: '#',
+                instructions: [{ btn: 'X', text: 'FULLSCREEN VIDEO' }], actionX: 'combo_graph_video.mp4', actionO: null
+            },
+            {
+                id: 'lumen_chat', title: 'Dynamic LLM Chat', sub: 'Gemini API Integration', meta: 'VIDEO · SYSTEMS',
+                img: 'lumen_square.jpg', vid: 'lumen_chat_video.mp4', link: '#',
+                instructions: [{ btn: 'X', text: 'FULLSCREEN VIDEO' }], actionX: 'lumen_chat_video.mp4', actionO: null
             }
         ]
     }
