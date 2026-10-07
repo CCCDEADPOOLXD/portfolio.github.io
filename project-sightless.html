@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sightless | Game Details</title>
+    <style>
+        /* BASE THEME (Persona / Noir Aesthetic) */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #050505;
+            color: #ddd;
+            border-top: 6px solid #e60012;
+            line-height: 1.6;
+        }
+
+        /* CUSTOM RED SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #050505;
+            border-left: 1px solid #222;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #e60012;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #ff2a3b;
+            }
+
+        ::selection {
+            background: #e60012;
+            color: #fff;
+        }
+
+        .page-wrapper {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .header-container {
+            margin-bottom: 50px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #e60012;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+
+            .back-link:hover {
+                color: #fff;
+            }
+
+        h1 {
+            color: #fff;
+            margin: 0;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .intro-text {
+            color: #aaa;
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+
+        /* SPLIT PANEL GRID */
+        .project-article {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 100px;
+            background-color: #0a0a0a;
+            border: 1px solid #222;
+            padding: 40px;
+            box-shadow: 8px 8px 0px rgba(230,0,18,0.1);
+        }
+
+        /* FULL WIDTH GRID FOR PIPELINE */
+        .full-article {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
+            .full-article .tech-list {
+                text-align: left;
+                max-width: 800px;
+                margin: 20px auto;
+            }
+
+        /* LEFT SIDE: DOCUMENTATION */
+        .article-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            color: #e60012;
+            margin-top: 0;
+            font-size: 2rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid #222;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* BULLET POINT STYLING */
+        .tech-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0 20px 0;
+        }
+
+            .tech-list li {
+                position: relative;
+                padding-left: 20px;
+                margin-bottom: 15px;
+                line-height: 1.5;
+                color: #ccc;
+            }
+
+                .tech-list li::before {
+                    content: "■";
+                    position: absolute;
+                    left: 0;
+                    color: #e60012;
+                    font-size: 0.8rem;
+                    top: 3px;
+                }
+
+        .highlight {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* RIGHT SIDE: MEDIA SHOWCASE */
+        .article-media {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .media-item {
+            width: 100%;
+            background-color: #000;
+            border: 1px solid #333;
+            box-sizing: border-box;
+        }
+
+        .image-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 1024px) {
+            .project-article {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-wrapper">
+        <div class="header-container">
+            <a href="index.html" class="back-link">← Return to Main OS</a>
+            <h1>Sightless</h1>
+            <p class="intro-text">A sensory horror game developed in 48 hours for the BYOG game jam. Players must navigate a pitch-black procedural maze using real-world microphone input to cast sonar waves, avoiding an AI that hunts based on shifting rules.</p>
+        </div>
+
+        <!-- SECTION 1: GAMEPLAY & AI -->
+        <article class="project-article">
+            <div class="article-content">
+                <h2>The Mechanics</h2>
+
+                <h3>Sensory Deprivation & AI Flipping</h3>
+                <p>The core gameplay loop is built entirely around risk versus reward through sound generation.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Mic-Driven Echolocation:</span> Players are completely blind. They must physically speak into their microphone (or use RMB) to cast sonar waves and reveal the environment.</li>
+                    <li><span class="highlight">NavMesh AI Rules:</span> Initially, the enemy can only move inside the illuminated echolocation waves, forcing the player to be careful with how much they reveal.</li>
+                    <li><span class="highlight">The Flip:</span> Halfway through the game, upon collecting the objective, the rules invert. The enemy now hunts the player *within* the echolocation rings and freezes in the dark, making every sound a massive risk.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <video class="media-item" controls autoplay loop muted>
+                    <!-- Change 'sightless_mechanics_video.mp4' to your actual new video file name -->
+                    <source src="sightless_mechanics_video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </article>
+
+        <!-- SECTION 2: SHADERS -->
+        <article class="project-article">
+            <div class="article-content">
+                <h2>Tech Art: Sonar Shader</h2>
+
+                <h3>Illuminating the Dark</h3>
+                <p>To achieve the blindness effect, I engineered a custom HLSL echolocation shader that remains entirely black until triggered by an external audio event.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">World-Space Masking:</span> The shader calculates the world-space distance from the sound's origin. It illuminates only the physical geometry that falls inside the active acoustic ring, keeping the rest of the maze hidden.</li>
+                    <li><span class="highlight">C# Integration:</span> A custom manager actively monitors the player's microphone amplitude and passes that volume data directly to the shader to spawn the expanding sphere.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <video class="media-item" controls autoplay loop muted>
+                    <source src="sightless_sonar_video.mp4" type="video/mp4">
+                </video>
+                <img src="sonar_shader_graph.jpg" alt="Echolocation Shader Graph" class="media-item">
+            </div>
+        </article>
+
+        <!-- SECTION 3: PROCEDURAL GEN & TOOLS -->
+        <article class="project-article">
+            <div class="article-content">
+                <h2>Procedural Gen & Editor Tools</h2>
+
+                <h3>Automating the Pipeline</h3>
+                <p>With only 48 hours to build the game, manually building a massive backrooms maze and assigning shaders was not an option.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Procedural Backrooms:</span> I developed a procedural level generator that pieces together given assets to create a vast, unpredictable maze on initialization.</li>
+                    <li><span class="highlight">Material Batch Converter:</span> To apply the echolocation shader to the thousands of generated assets, I engineered a C# Editor tool that recursively scans standard materials, swaps them to the Sonar shader, and automatically reassigns the original Albedo/Normal maps.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <img src="material_tool_inspector.jpg" alt="Custom Unity Editor Tool Interface" class="media-item">
+                <img src="sightless_procedural_maze.jpg" alt="Procedural Backroom Generation" class="media-item">
+            </div>
+        </article>
+
+    </div>
+</body>
+</html>

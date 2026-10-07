@@ -17,11 +17,27 @@
         }
 
         /* CUSTOM RED SCROLLBAR */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #050505; border-left: 1px solid #222; }
-        ::-webkit-scrollbar-thumb { background: #e60012; }
-        ::-webkit-scrollbar-thumb:hover { background: #ff2a3b; }
-        ::selection { background: #e60012; color: #fff; }
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #050505;
+            border-left: 1px solid #222;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #e60012;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #ff2a3b;
+            }
+
+        ::selection {
+            background: #e60012;
+            color: #fff;
+        }
 
         .page-wrapper {
             max-width: 1400px;
@@ -45,16 +61,19 @@
             letter-spacing: 1px;
             transition: color 0.2s;
         }
-        .back-link:hover { color: #fff; }
 
-        h1 { 
-            color: #fff; 
-            margin: 0; 
+            .back-link:hover {
+                color: #fff;
+            }
+
+        h1 {
+            color: #fff;
+            margin: 0;
             font-size: 2.5rem;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-        
+
         .intro-text {
             color: #aaa;
             font-size: 1.1rem;
@@ -79,10 +98,10 @@
             flex-direction: column;
         }
 
-        h2 { 
-            color: #e60012; 
-            margin-top: 0; 
-            font-size: 2rem; 
+        h2 {
+            color: #e60012;
+            margin-top: 0;
+            font-size: 2rem;
             text-transform: uppercase;
             border-bottom: 2px solid #222;
             padding-bottom: 10px;
@@ -102,23 +121,23 @@
             padding: 0;
             margin: 10px 0 20px 0;
         }
-        
-        .tech-list li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 15px;
-            line-height: 1.5;
-            color: #ccc;
-        }
-        
-        .tech-list li::before {
-            content: "■";
-            position: absolute;
-            left: 0;
-            color: #e60012;
-            font-size: 0.8rem;
-            top: 3px;
-        }
+
+            .tech-list li {
+                position: relative;
+                padding-left: 20px;
+                margin-bottom: 15px;
+                line-height: 1.5;
+                color: #ccc;
+            }
+
+                .tech-list li::before {
+                    content: "■";
+                    position: absolute;
+                    left: 0;
+                    color: #e60012;
+                    font-size: 0.8rem;
+                    top: 3px;
+                }
 
         .highlight {
             color: #fff;
@@ -157,26 +176,29 @@
             font-weight: 900;
             text-transform: uppercase;
             transition: all 0.2s ease;
-            margin-top: auto; 
+            margin-top: auto;
             align-self: flex-start;
         }
-        .btn-link:hover {
-            background-color: #e60012;
-            color: #000;
-            box-shadow: 4px 4px 0px rgba(255,255,255,0.8);
-        }
-        .btn-link span {
-            display: inline-block;
-            transform: skewX(10deg);
-        }
+
+            .btn-link:hover {
+                background-color: #e60012;
+                color: #000;
+                box-shadow: 4px 4px 0px rgba(255,255,255,0.8);
+            }
+
+            .btn-link span {
+                display: inline-block;
+                transform: skewX(10deg);
+            }
 
         /* MOBILE RESPONSIVENESS */
         @media (max-width: 1024px) {
             .shader-article {
-                grid-template-columns: 1fr; 
+                grid-template-columns: 1fr;
                 gap: 40px;
                 padding: 25px;
             }
+
             .btn-link {
                 margin-top: 30px;
             }
@@ -196,10 +218,10 @@
         <article class="shader-article">
             <div class="article-content">
                 <h2>2D Wind Vertex Shader</h2>
-                
+
                 <h3>The Goal</h3>
                 <p>To breathe life into 2D environments (foliage, cloth) without relying on expensive CPU-based physical simulations or heavy skeletal animations. The solution needed to be fully processed on the GPU.</p>
-                
+
                 <h3>How It Works</h3>
                 <p>Instead of animating the sprite, I built a Shader Graph that manipulates the object's vertices in real-time to simulate organic, rolling wind patterns.</p>
                 <ul class="tech-list">
@@ -223,10 +245,10 @@
         <article class="shader-article">
             <div class="article-content">
                 <h2>Sobel Outline & Edge Detection</h2>
-                
+
                 <h3>The Goal</h3>
                 <p>Fast-paced melee combat requires excellent visual readability. The goal was to create a striking, comic-book aesthetic that draws thick, stylized outlines around characters and environmental hazards to make silhouettes pop.</p>
-                
+
                 <h3>How It Works</h3>
                 <p>I utilized a Full-Screen Render Feature to apply the effect globally across the camera view, utilizing a custom dual-shader approach.</p>
                 <ul class="tech-list">
@@ -252,10 +274,10 @@
         <article class="shader-article">
             <div class="article-content">
                 <h2>Thermal Vision (X-Ray)</h2>
-                
+
                 <h3>The Goal</h3>
                 <p>Developed specifically for the gunner role in an asymmetric multiplayer game. The gunner needed a high-contrast thermal view capable of spotting enemy heat signatures through physical walls and geometry.</p>
-                
+
                 <h3>How It Works</h3>
                 <p>Built as a URP Full Screen Render Feature, this shader processes object tags and world data into a high-contrast thermal image.</p>
                 <ul class="tech-list">
@@ -278,10 +300,10 @@
         <article class="shader-article">
             <div class="article-content">
                 <h2>Dynamic Impact Frames</h2>
-                
+
                 <h3>The Goal</h3>
                 <p>To drastically improve the sense of weight and "punchiness" during heavy combat. The visual feedback needed to sync perfectly with the game's mechanical hit-stop (time freeze) logic.</p>
-                
+
                 <h3>How It Works</h3>
                 <p>Unlike continuous ambient shaders, this is a highly targeted event tied directly to the combat state machine.</p>
                 <ul class="tech-list">
@@ -295,6 +317,32 @@
             <div class="article-media">
                 <img src="combat_action.gif" alt="Impact Frame Gameplay" class="media-item">
                 <img src="impact_graph.jpg" alt="Impact Frame Shader Logic" class="media-item">
+            </div>
+        </article>
+
+        <!-- ARTICLE 5: SIGHTLESS ECHOLOCATION -->
+        <article class="shader-article">
+            <div class="article-content">
+                <h2>Microphone-Driven Echolocation</h2>
+
+                <h3>The Goal</h3>
+                <p>To create a tense sensory horror experience where the player is completely blind. The environment had to remain pitch black, only momentarily revealing its layout when struck by an expanding sonar wave generated by the player's real-world microphone input.</p>
+
+                <h3>How It Works</h3>
+                <p>Unlike standard lighting, this shader remains completely dark until triggered by an external audio event.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">C# Integration:</span> A custom manager actively monitors the player's real-world microphone amplitude and passes that volume data directly to the shader to spawn an expanding sphere of influence.</li>
+                    <li><span class="highlight">World-Space Masking:</span> The shader calculates the world-space distance from the sound's origin. It illuminates only the physical geometry that falls inside the active acoustic ring, keeping the rest of the maze hidden.</li>
+                    <li><span class="highlight">Artistic Control:</span> Exposes properties like ring width, edge distortion, and emission color to the inspector, allowing for quick tuning to make the wave feel like organic sound rather than a rigid laser.</li>
+                </ul>
+
+                <a href="project-sightless.html" class="btn-link"><span>🎮 View Project: Sightless</span></a>
+            </div>
+            <div class="article-media">
+                <video class="media-item" controls autoplay loop muted>
+                    <source src="sightless_sonar_video.mp4" type="video/mp4">
+                </video>
+                <img src="sonar_shader_graph.jpg" alt="Echolocation Shader Graph Logic" class="media-item">
             </div>
         </article>
 

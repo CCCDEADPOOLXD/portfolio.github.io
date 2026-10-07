@@ -196,10 +196,10 @@
         <article class="tool-article">
             <div class="article-content">
                 <h2>Node-Based Combat Graph</h2>
-                
+
                 <h3>The Goal</h3>
                 <p>Hardcoding combo logic is a nightmare for iteration. I needed to create a system that allowed game designers to visually map out complex, stance-based attack sequences and adjust frame data purely through a drag-and-drop UI interface.</p>
-                
+
                 <h3>How It Works</h3>
                 <p>I engineered a highly modular, node-based graph editor natively inside Unity.</p>
                 <ul class="tech-list">
@@ -221,10 +221,10 @@
         <article class="tool-article">
             <div class="article-content">
                 <h2>Dynamic LLM Prompt System</h2>
-                
+
                 <h3>The Goal</h3>
                 <p>To move beyond hardcoded text boxes and create fully dynamic, AI-powered NPC behaviors by integrating Google's Gemini API directly into the engine, while providing narrative designers a clean interface to control it.</p>
-                
+
                 <h3>How It Works</h3>
                 <p>I built a robust backend pipeline and a custom designer-facing inspector tool to manage the API calls.</p>
                 <ul class="tech-list">
@@ -243,6 +243,45 @@
                     <img src="lumen_ui.jpg" alt="Dynamic Chat System UI Interface" class="media-item">
                     <img src="lumen_api_code.jpg" alt="API Integration Backend Code" class="media-item">
                 </div>
+            </div>
+        </article>
+        <!-- SECTION 3: PROCEDURAL GENERATION -->
+        <article class="tool-article">
+            <div class="article-content">
+                <h2>Procedural Generation</h2>
+
+                <h3>The Goal</h3>
+                <p>With only 48 hours to build the game, manually designing a massive, disorienting maze was not an option. The environment needed to be vast and unpredictable on every playthrough.</p>
+
+                <h3>How It Works</h3>
+                <p>I developed a dynamic level generator that builds the map at runtime.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Asset Assembly:</span> Dynamically pieces together given environmental assets to create a vast, unpredictable backrooms maze on initialization.</li>
+                    <li><span class="highlight">Endless Disorientation:</span> Ensures the player is always lost in a new layout, drastically increasing replayability and tension.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <img src="sightless_procedural_maze.jpg" alt="Procedural Backroom Generation" class="media-item">
+            </div>
+        </article>
+
+        <!-- SECTION 4: EDITOR TOOLS -->
+        <article class="tool-article">
+            <div class="article-content">
+                <h2>Material Batch Converter</h2>
+
+                <h3>The Goal</h3>
+                <p>The procedural generator utilized thousands of standard Unity assets. Manually replacing all of their materials with my custom Sonar shader would have wasted precious game jam hours.</p>
+
+                <h3>How It Works</h3>
+                <p>I engineered a custom C# Editor tool to automate the tedious material replacement process.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Automated Pipeline:</span> Recursively scans project folders and automatically swaps any standard materials to the custom Sonar shader.</li>
+                    <li><span class="highlight">Texture Preservation:</span> Safely extracts the Albedo from the old material and automatically assigns them to the correct texture slots in the new material.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <img src="material_tool_inspector.jpg" alt="Custom Unity Editor Tool Interface" class="media-item">
             </div>
         </article>
 
