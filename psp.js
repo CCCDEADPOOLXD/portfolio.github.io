@@ -19,9 +19,7 @@ window.SK_CATEGORIES = [
                 isText: true,
                 textLines: [
                     "HI, I AM NITANT.",
-                    "I MAKE COOL STUFF",
-                    "THAT MAKES PEOPLE SAY:",
-                    "'HOW DID YOU DO THAT?'"
+                    "I MAKE COOL STUFF"
                 ],
                 instructions: [{ btn: 'X', text: 'OPEN RESUME' }, { btn: 'O', text: 'SCROLL TO ABOUT' }, { btn: '►', text: 'NEXT SLIDE' }],
                 actionX: 'resume.pdf', actionO: 'scroll:#about', actionTriangle: null
