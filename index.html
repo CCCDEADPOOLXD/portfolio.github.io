@@ -14,8 +14,12 @@
     <style>
         :root {
             --persona-red: #e60012;
-            --persona-black: #0a0a0a;
+            --persona-black: #050505;
             --persona-white: #ffffff;
+            --card-bg: #121212;
+            --card-border: rgba(255,255,255,0.2);
+            --text-primary: #f0f0f0;
+            --text-secondary: #c0c0c0;
         }
 
         * {
@@ -26,8 +30,8 @@
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
-            background-color: #050505;
-            color: #e0e0e0;
+            background-color: var(--persona-black);
+            color: var(--text-primary);
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
@@ -547,13 +551,18 @@
             text-align: left;
         }
 
+        /* New modifier for 4-item grid (Tech Art) to sit perfectly 2x2 */
+        .tech-art-grid {
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+        }
+
         .project-card {
             position: relative;
-            background-color: #111111;
-            border: 1px solid rgba(255,255,255,0.12);
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
             border-radius: 4px;
             text-decoration: none;
-            color: #ddd;
+            color: var(--text-primary);
             display: block;
             overflow: hidden;
             will-change: transform;
@@ -562,8 +571,8 @@
 
             .project-card:hover {
                 border-color: var(--persona-red);
-                background-color: #151515;
-                box-shadow: 0 20px 40px rgba(230,0,18,0.2);
+                background-color: #1a1a1a;
+                box-shadow: 0 20px 40px rgba(230,0,18,0.25);
                 z-index: 10;
             }
 
@@ -591,16 +600,17 @@
 
             .card-details h3 {
                 margin: 0 0 10px 0;
-                color: #fff;
+                color: var(--persona-white);
                 font-size: 1.4rem;
                 font-weight: 900;
                 text-transform: uppercase;
+                letter-spacing: 0.5px;
             }
 
             .card-details p {
                 margin: 0 0 15px 0;
                 font-size: 0.95rem;
-                color: #aaa;
+                color: var(--text-secondary);
                 line-height: 1.6;
             }
 
@@ -623,33 +633,33 @@
         }
 
             .tag.blue {
-                background-color: rgba(74, 105, 189, 0.3);
+                background-color: rgba(74, 105, 189, 0.4);
                 border: 1px solid #4a69bd;
-                color: #a2baf5;
+                color: #b5caff;
             }
 
             .tag.red {
-                background-color: rgba(229, 80, 57, 0.3);
+                background-color: rgba(229, 80, 57, 0.4);
                 border: 1px solid #e55039;
-                color: #ff9f8e;
+                color: #ffb8ad;
             }
 
             .tag.purple {
-                background-color: rgba(142, 68, 173, 0.3);
+                background-color: rgba(142, 68, 173, 0.4);
                 border: 1px solid #8e44ad;
-                color: #d69df0;
+                color: #e5bafc;
             }
 
             .tag.gold {
-                background-color: rgba(243, 156, 18, 0.3);
+                background-color: rgba(243, 156, 18, 0.4);
                 border: 1px solid #f39c12;
-                color: #ffc966;
+                color: #ffd894;
             }
 
             .tag.green {
-                background-color: rgba(39, 174, 96, 0.3);
+                background-color: rgba(39, 174, 96, 0.4);
                 border: 1px solid #27ae60;
-                color: #82cc9f;
+                color: #a4e8c0;
             }
 
         .contact-section {
@@ -845,8 +855,18 @@
     <!-- FEATURED TECH ART -->
     <div id="featured" class="projects-section">
         <div class="persona-box section-header-box reveal"><div class="persona-content">FEATURED TECH ART</div></div>
-        <div class="project-grid">
-            <a href="showcase-shaders.html" class="project-card reveal hoverable">
+
+        <!-- Added specific tech-art-grid class for perfect 2x2 layout -->
+        <div class="project-grid tech-art-grid">
+            <a href="showcase-integration.html" target="_blank" class="project-card reveal hoverable">
+                <div class="card-image-container"><img src="animator_graph.png" alt="Asset Integration"></div>
+                <div class="card-details">
+                    <div class="tech-tags"><span class="tag blue">Integration</span><span class="tag green">Optimization</span></div>
+                    <h3>Asset Implementation & Optimization</h3>
+                    <p>Engineered technical pipelines for 2D/3D asset integration, UI engineering, and memory management.</p>
+                </div>
+            </a>
+            <a href="showcase-shaders.html" target="_blank" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="showcase_shader.jpg" alt="Shader Showcase"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag red">HLSL</span><span class="tag gold">Shader Graph</span></div>
@@ -854,7 +874,7 @@
                     <p>Custom rendering solutions including thermal vision, stylized Sobel outlines, and interactive materials.</p>
                 </div>
             </a>
-            <a href="showcase-vfx.html" class="project-card reveal hoverable">
+            <a href="showcase-vfx.html" target="_blank" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="showcase_vfx.jpg" alt="VFX Showcase"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag purple">VFX Graph</span><span class="tag blue">Shuriken</span></div>
@@ -862,7 +882,7 @@
                     <p>Dynamic combat impact frames, lava simulations, and optimized particle systems for mobile and PC.</p>
                 </div>
             </a>
-            <a href="showcase-tools.html" class="project-card reveal hoverable">
+            <a href="showcase-tools.html" target="_blank" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="showcase_tools.jpg" alt="Tools Showcase"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag blue">C#</span><span class="tag red">Pipelines</span></div>
@@ -876,8 +896,10 @@
     <!-- PROJECTS -->
     <div id="projects" class="projects-section" style="padding-top: 0;">
         <div class="persona-box section-header-box reveal"><div class="persona-content">PERSONAL PROJECTS</div></div>
+
+        <!-- Standard 3x2 Grid for Projects -->
         <div class="project-grid">
-            <a href="project-knuckle.html" class="project-card reveal hoverable">
+            <a href="project-knuckle.html" target="_blank" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="knuckle_square.jpg" alt="Knuckle"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag blue">Pipeline Tools</span><span class="tag purple">VFX Graph</span></div>
@@ -885,7 +907,7 @@
                     <p>A fast-paced 2D fighter featuring precise, frame-perfect combat mechanics, fluid combo chains, and striking comic-style visuals.</p>
                 </div>
             </a>
-            <a href="project-lumen.html" class="project-card reveal hoverable">
+            <a href="project-lumen.html" target="_blank" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="lumen_square.jpg" alt="Lumen API Integration"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag blue">Systems Engineering</span><span class="tag red">API Integration</span></div>
@@ -893,7 +915,7 @@
                     <p>An immersive narrative-driven adventure where players converse with fully AI-powered NPCs to unravel a deep, dynamic story.</p>
                 </div>
             </a>
-            <a href="project-unreal.html" class="project-card reveal hoverable">
+            <a href="project-unreal.html" target="_blank" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="unreal_square.jpg" alt="Unreal PCG Environment"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag green">PCG</span><span class="tag purple">Lighting</span></div>
@@ -903,7 +925,7 @@
             </a>
 
             <!-- NEW SIGHTLESS CARD -->
-            <a href="project-sightless.html" class="project-card reveal hoverable">
+            <a href="project-sightless.html" target="_blank" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="sightless_square.jpg" alt="Sightless Horror Game"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag red">HLSL</span><span class="tag green">Procedural</span><span class="tag blue">Editor Tools</span></div>
@@ -912,7 +934,7 @@
                 </div>
             </a>
 
-            <a href="project-film.html" class="project-card reveal hoverable">
+            <a href="project-film.html" target="_blank" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="film_square.jpg" alt="Cinematic Lighting"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag purple">Lighting</span><span class="tag blue">Art Direction</span></div>
@@ -920,7 +942,7 @@
                     <p>Supervised the lighting and visual vibe for a cinematic short film for high-fidelity renders.</p>
                 </div>
             </a>
-            <a href="project-heli.html" class="project-card reveal hoverable">
+            <a href="project-heli.html" target="_blank" class="project-card reveal hoverable">
                 <div class="card-image-container"><img src="heli_square.jpg" alt="Rotor Warfare Game"></div>
                 <div class="card-details">
                     <div class="tech-tags"><span class="tag blue">Netcode</span><span class="tag red">Custom Shaders</span></div>
@@ -939,7 +961,7 @@
             <a href="https://github.com/CCCDEADPOOLXD" target="_blank" class="contact-btn hoverable"><span><i class="devicon-github-original"></i> GITHUB</span></a>
             <a href="https://www.linkedin.com/in/nitant-namdeo-a04566270/" target="_blank" class="contact-btn hoverable"><span><i class="devicon-linkedin-plain"></i> LINKEDIN</span></a>
             <a href="https://cccdeadpool-xd.itch.io/" target="_blank" class="contact-btn hoverable"><span><i class="fa-brands fa-itch-io"></i> ITCH.IO</span></a>
-            <a href="resume.pdf" target="_blank" class="contact-btn hoverable" style="background:var(--persona-red); border-color:var(--persona-red);"><span><i class="fa-solid fa-file-pdf"></i> RESUME</span></a>
+            <a href="resume.pdf" download="Nitant_Namdeo_Resume.pdf" target="_blank" class="contact-btn hoverable" style="background:var(--persona-red); border-color:var(--persona-red);"><span><i class="fa-solid fa-file-pdf"></i> RESUME</span></a>
         </div>
     </div>
 

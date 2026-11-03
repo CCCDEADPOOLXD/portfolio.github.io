@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Implementation & Optimization</title>
+    <style>
+        /* BASE THEME (Persona / Noir Aesthetic) */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #050505;
+            color: #ddd;
+            border-top: 6px solid #e60012;
+            line-height: 1.6;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #050505;
+            border-left: 1px solid #222;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #e60012;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #ff2a3b;
+            }
+
+        ::selection {
+            background: #e60012;
+            color: #fff;
+        }
+
+        .page-wrapper {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .header-container {
+            margin-bottom: 50px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #e60012;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+
+            .back-link:hover {
+                color: #fff;
+            }
+
+        h1 {
+            color: #fff;
+            margin: 0;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .intro-text {
+            color: #aaa;
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+
+        /* SPLIT PANEL GRID */
+        .showcase-article {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+            background-color: #0a0a0a;
+            border: 1px solid #222;
+            padding: 40px;
+            box-shadow: 8px 8px 0px rgba(230,0,18,0.1);
+        }
+
+        .article-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            color: #e60012;
+            margin-top: 0;
+            font-size: 2rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid #222;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .tech-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0 20px 0;
+        }
+
+            .tech-list li {
+                position: relative;
+                padding-left: 20px;
+                margin-bottom: 15px;
+                line-height: 1.5;
+                color: #ccc;
+            }
+
+                .tech-list li::before {
+                    content: "■";
+                    position: absolute;
+                    left: 0;
+                    color: #e60012;
+                    font-size: 0.8rem;
+                    top: 3px;
+                }
+
+        .highlight {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .article-media {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .media-item {
+            width: 100%;
+            background-color: #000;
+            border: 1px solid #333;
+            box-sizing: border-box;
+        }
+
+        /* Specific constraint for ultra-wide Knuckle UI video */
+        .ultrawide-video {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            background-color: #050505;
+            border: 1px solid #333;
+        }
+
+        @media (max-width: 1024px) {
+            .showcase-article {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-wrapper">
+        <div class="header-container">
+            <a href="index.html" class="back-link">← Return to Main OS</a>
+            <h1>Asset Implementation & Optimization</h1>
+            <p class="intro-text">Showcasing strict technical pipelines for 2D/3D asset integration, UI engineering, and memory management to bridge the gap between design vision and engine performance.</p>
+        </div>
+
+        <!-- SECTION 1: 3D RIGGING & ANIMATION -->
+        <article class="showcase-article">
+            <div class="article-content">
+                <h2>3D Asset & Animation Integration</h2>
+
+                <h3>The Goal</h3>
+                <p>To establish a flawless pipeline from 3D modeling software into the Unity engine, ensuring diverse characters share scalable animation logic without visual tearing or lost weight data.</p>
+
+                <h3>How It Works</h3>
+                <p>I managed the full technical integration of 3D assets for the fighting game Knuckle.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Cross-Disciplinary Coordination:</span> Collaborated directly with 3D artists to accurately import and implement complex rigged characters and custom models into the engine.</li>
+                    <li><span class="highlight">Animator Architecture:</span> Translated raw animations into Unity's Animator graph using complex state machines and Blend Trees to easily swap distinct character models over shared combat logic.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <video class="media-item" controls autoplay loop muted>
+                    <source src="character_integration_video.mp4" type="video/mp4">
+                </video>
+                <img src="animator_graph.png" alt="Unity Animator State Machine" class="media-item">
+            </div>
+        </article>
+
+        <!-- SECTION 2: UI/UX ENGINEERING -->
+        <article class="showcase-article">
+            <div class="article-content">
+                <h2>Dynamic UI/UX Engineering</h2>
+
+                <h3>The Goal</h3>
+                <p>To build responsive UI prefabs that automatically adapt to dynamic text volumes and aspect ratios, moving beyond static art placements.</p>
+
+                <h3>How It Works</h3>
+                <p>I worked closely with designers to translate mockups into robust engine systems.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">World-Space Dynamic Chat (Lumin):</span> Engineered resizable UI text bubbles that sit directly in the game world. These text boxes automatically scale to fit dynamically generated LLM input alongside interactive input fields and buttons.</li>
+                    <li><span class="highlight">Combat HUD Integration (Knuckle):</span> Built the 2D combat UI to accurately read high-speed game states. The system tracks complex combat logic in real-time, ensuring health bars, combo meters, and character portraits scale flawlessly across diverse screen resolutions without stretching.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <video class="media-item" controls autoplay loop muted>
+                    <source src="lumen_chat_video.mp4" type="video/mp4">
+                </video>
+                <video class="ultrawide-video" controls autoplay loop muted>
+                    <source src="knuckle_health_video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </article>
+
+        <!-- SECTION 3: 2D OPTIMIZATION -->
+        <article class="showcase-article">
+            <div class="article-content">
+                <h2>Texture Packing & Optimization</h2>
+
+                <h3>The Goal</h3>
+                <p>To strictly manage VRAM memory footprints and minimize GPU draw calls for all 2D sprites and UI elements.</p>
+
+                <h3>How It Works</h3>
+                <p>I engineered a strict 2D asset pipeline utilizing Unity Sprite Atlases.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Sprite Atlas Generation:</span> Configured the Scriptable Packer to automate the batching of disparate UI elements and 2D environmental props into unified texture sheets.</li>
+                    <li><span class="highlight">Compression & Padding:</span> Actively managed tight-packing rules, edge padding, and compression formats to drastically reduce memory usage without compromising the art team's visual fidelity.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <img src="sprite_atlas.png" alt="Sprite Atlas Configuration and Packing" class="media-item">
+            </div>
+        </article>
+
+        <!-- SECTION 4: PERFORMANCE & OCCLUSION -->
+        <article class="showcase-article">
+            <div class="article-content">
+                <h2>Performance Profiling</h2>
+
+                <h3>The Goal</h3>
+                <p>To eliminate rendering bottlenecks in 3D environments, ensuring the engine only calculates what the player can actually see.</p>
+
+                <h3>How It Works</h3>
+                <p>I utilized Unity's built-in profiling and rendering tools to enforce strict asset budgets.</p>
+                <ul class="tech-list">
+                    <li><span class="highlight">Geometric Optimization:</span> Successfully reduced unoptimized raw geometry from over a million polygons down to just 159.0k tris and 263.1k verts.</li>
+                    <li><span class="highlight">Occlusion Culling & Frame Rate:</span> Baked occlusion data to dynamically disable the rendering of hidden geometry. Combined with strict draw call batching, this maintained a steady 150.6 FPS while running at QHD (2560x1440) resolution.</li>
+                </ul>
+            </div>
+            <div class="article-media">
+                <img src="occlusion_stats.png" alt="Occlusion Culling and Profiler Stats" class="media-item">
+            </div>
+        </article>
+
+    </div>
+</body>
+</html>
